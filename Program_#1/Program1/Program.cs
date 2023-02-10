@@ -27,7 +27,6 @@ namespace Program1
             double liczba = double.Parse(Console.ReadLine());
             Console.WriteLine("podana liczba do kwadratu to:"+liczba*liczba);
 
-            //This is a change for exercise with git(ad.6)
             //podaj pierwsza liczbe: 2
             //podaj drógą liczbe: 3
 
