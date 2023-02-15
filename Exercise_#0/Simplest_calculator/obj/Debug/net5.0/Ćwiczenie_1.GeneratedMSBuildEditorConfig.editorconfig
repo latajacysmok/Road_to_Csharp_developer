@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net5.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.PublishSingleFile = 
+build_property.IncludeAllContentForSelfExtract = 
+build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+build_property.RootNamespace = Ćwiczenie_1
+build_property.ProjectDir = C:\Users\lemk\Documents\Road to junior developer\Zajęcia\styczeń_2023\Zajęcia_1\Ćwiczenie_1\Ćwiczenie_1\

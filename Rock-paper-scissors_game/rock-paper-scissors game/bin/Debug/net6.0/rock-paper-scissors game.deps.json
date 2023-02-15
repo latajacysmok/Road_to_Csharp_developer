@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "rock-paper-scissors game/1.0.0": {
+        "runtime": {
+          "rock-paper-scissors game.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "rock-paper-scissors game/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

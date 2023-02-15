@@ -1,0 +1,28 @@
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\bin\Debug\netcoreapp3.1\Program_1.exe
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\bin\Debug\netcoreapp3.1\Program_1.deps.json
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\bin\Debug\netcoreapp3.1\Program_1.runtimeconfig.json
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\bin\Debug\netcoreapp3.1\Program_1.runtimeconfig.dev.json
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\bin\Debug\netcoreapp3.1\Program_1.dll
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\bin\Debug\netcoreapp3.1\Program_1.pdb
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.csproj.AssemblyReference.cache
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.AssemblyInfoInputs.cache
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.AssemblyInfo.cs
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.csproj.CoreCompileInputs.cache
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.dll
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.pdb
+C:\Users\lemk\Documents\Road to junior developer\Zajęcia\Program_1\Program_1\obj\Debug\netcoreapp3.1\Program_1.genruntimeconfig.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\bin\Debug\netcoreapp3.1\Hello_World.exe
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\bin\Debug\netcoreapp3.1\Hello_World.deps.json
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\bin\Debug\netcoreapp3.1\Hello_World.runtimeconfig.json
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\bin\Debug\netcoreapp3.1\Hello_World.runtimeconfig.dev.json
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\bin\Debug\netcoreapp3.1\Hello_World.dll
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\bin\Debug\netcoreapp3.1\Hello_World.pdb
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.csproj.AssemblyReference.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.AssemblyInfoInputs.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.AssemblyInfo.cs
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.csproj.CoreCompileInputs.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.dll
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.pdb
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Hello World\Hello_World\obj\Debug\netcoreapp3.1\Hello_World.genruntimeconfig.cache

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Kalkulator z loop/1.0.0": {
+        "runtime": {
+          "Kalkulator z loop.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Kalkulator z loop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

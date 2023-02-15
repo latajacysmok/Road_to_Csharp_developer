@@ -1,0 +1,15 @@
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\bin\Debug\net6.0\Ulepszony kalkulator.exe
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\bin\Debug\net6.0\Ulepszony kalkulator.deps.json
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\bin\Debug\net6.0\Ulepszony kalkulator.runtimeconfig.json
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\bin\Debug\net6.0\Ulepszony kalkulator.dll
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\bin\Debug\net6.0\Ulepszony kalkulator.pdb
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.csproj.AssemblyReference.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.AssemblyInfoInputs.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.AssemblyInfo.cs
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.csproj.CoreCompileInputs.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.dll
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\refint\Ulepszony kalkulator.dll
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.pdb
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\Ulepszony kalkulator.genruntimeconfig.cache
+C:\Users\lemk\Documents\GitHub\Road_to_Csharp_developer\Ulepszony_kalkulator_if_v2\Ulepszony kalkulator\obj\Debug\net6.0\ref\Ulepszony kalkulator.dll

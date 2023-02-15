@@ -20,8 +20,8 @@
 *.tar
 *.zip
 *.vs
-**/bin/*
-**/obj/*
+#**/bin/*
+#**/obj/*
 
 # Logs and databases #
 ######################
