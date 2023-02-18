@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33130.400
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGratClass", "ClassLibrary1\MyGratClass.csproj", "{898508EA-5B13-4D1A-9924-BC18907DDE74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IchangeThisName_Movie", "ClassLibrary1\IchangeThisName_Movie.csproj", "{898508EA-5B13-4D1A-9924-BC18907DDE74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "thisIsSomethingNewForMe", "thisIsSomethingNewForMe\thisIsSomethingNewForMe.csproj", "{3E0779B1-5D74-4817-A7EE-BFB3BEDB2C8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "thisIsSomethingNewForMe", "thisIsSomethingNewForMe\thisIsSomethingNewForMe.csproj", "{3E0779B1-5D74-4817-A7EE-BFB3BEDB2C8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
