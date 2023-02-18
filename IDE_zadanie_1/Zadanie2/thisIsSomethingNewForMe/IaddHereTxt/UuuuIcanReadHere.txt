@@ -1,1 +1,2 @@
 ﻿Lol to po co jest?
+To dodaje po zmianie pola 'Copy to Output Directory'.
