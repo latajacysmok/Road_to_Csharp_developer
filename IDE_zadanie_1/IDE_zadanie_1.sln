@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDE_zadanie_1", "IDE_zadanie_1\IDE_zadanie_1.csproj", "{C159E0A8-EB5A-4E7D-9714-58726F7CDA04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit Test Project", "NUnit Test Project\NUnit Test Project.csproj", "{77340B53-F66C-4903-9537-6D93A1551C1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnit Test Project", "NUnit Test Project\NUnit Test Project.csproj", "{77340B53-F66C-4903-9537-6D93A1551C1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mojaPierwszaBiblioteka", "mojaPierwszaBiblioteka\mojaPierwszaBiblioteka.csproj", "{6F222340-5728-498D-BA6B-24D440239B0B}"
 EndProject
