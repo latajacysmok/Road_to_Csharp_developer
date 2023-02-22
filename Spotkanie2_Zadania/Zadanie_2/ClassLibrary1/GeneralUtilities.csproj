@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="HereAddSomething\FirstClass.cs" />
+    <Compile Include="HereAddSomething\Movie.cs" />
     <Compile Include="HereAddSomething\SecondClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
