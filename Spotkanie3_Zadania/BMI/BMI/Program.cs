@@ -23,14 +23,30 @@ class Program
         {
             Console.Write($"Dear {name}, give me your weight: ");
             int userWeight = int.Parse(Console.ReadLine());
-            Console.Write($"Dear {name}, tell me your height: ");
-            int userHeight = int.Parse(Console.ReadLine());
+            Console.Write($"Dear {name}, tell me your height(in meters): ");
+            double userHeight = double.Parse(Console.ReadLine());
             double bmi = CalculatorBMI(userWeight, userHeight);
-            Console.WriteLine($"Dear {name}, Your BMI is {bmi}. You have {Result(bmi)}");
+            Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {Result(bmi)}");
+            Console.Write($"{name} do you want to continue[y/n]: ");
+            if (Console.ReadLine() == "y")
+            {
+                Console.WriteLine($"So let's get started again {name}.");
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.Write(".");
+                    Thread.Sleep(1000);
+                }
+                Console.Clear();
+            }             
+            else 
+            {
+                Console.WriteLine($"See you soon {name}.");
+                break;
+            }
 
         }
     }
-    public static double CalculatorBMI(int userWeight, int userHeight)
+    public static double CalculatorBMI(int userWeight, double userHeight)
     {
         double bmi = userWeight / (Math.Pow(2.0, (double)userHeight));
         return bmi;
