@@ -48,25 +48,24 @@ namespace Cantor
             char buyOrSell = char.Parse(Console.ReadLine());
             if (buyOrSell == 'b')
             {
-                Console.Write("Dear user, tell me what currency you want to buy: ");
-                foreignCurrency = Console.ReadLine();
                 Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
                 string ifTheyWantsAlone = Console.ReadLine();
                
-                if (ifTheyWantsAlone )
-                {
+                if (ifTheyWantsAlone == "y") exchangeRate = Math.Round(UserCurrency(foreignCurrency), 4);
+                else exchangeRate = Math.Round(PurchaseCurrency(), 4);
 
-                }
-                exchangeRate = Math.Round(PurchaseCurrency(foreignCurrency), 4);
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need: ");
                 DownloadAmount();
                 Console.WriteLine($"{amount} {foreignCurrency} will cost you: {Math.Round(amount * exchangeRate, 2)} PLN.");
             }
             else
             {
-                Console.Write("Dear user, tell me what currency you want to sell: ");
-                foreignCurrency = Console.ReadLine();
-                exchangeRate = Math.Round(SellCurrency(foreignCurrency), 4);
+                Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
+                string ifTheyWantsAlone = Console.ReadLine();
+
+                if (ifTheyWantsAlone == "y") exchangeRate = Math.Round(UserCurrency(foreignCurrency), 4);
+                else exchangeRate = Math.Round(SellCurrency(), 4);
+
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need sell: ");
                 DownloadAmount();
                 Console.WriteLine($"For {amount} {foreignCurrency} you will get: {Math.Round(amount * exchangeRate, 2)} PLN.");
@@ -74,48 +73,78 @@ namespace Cantor
         }
 
 
-        static decimal PurchaseCurrency(string foreignCurrency)
+        static decimal PurchaseCurrency()
         {
-            switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
+            bool isItGoodCurrency = true;
+            while (true)
             {
-                case "Dollar":
-                    exchangeRate = 4.8765m;
-                    break;
-                case "Euro":
-                    exchangeRate = 5.3722m;
-                    break;
-                case "Czech crown":
-                    exchangeRate = 0.2745m;
-                    break;                 
-                default:
-                    Console.WriteLine("No given currency in our exchange office.");
-                    break;
+                Console.Write("Dear user, tell me what currency you want to buy: ");
+                foreignCurrency = Console.ReadLine();
+                switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
+                {
+                    case "Dollar":
+                        exchangeRate = 4.8765m;
+                        break;
+                    case "Euro":
+                        exchangeRate = 5.3722m;
+                        break;
+                    case "Czech crown":
+                        exchangeRate = 0.2745m;
+                        break;
+                    default:
+                        Console.WriteLine($"No given {foreignCurrency} currency in our exchange office.");
+                        isItGoodCurrency = false;
+                        break;
+                }
+                if (isItGoodCurrency) break;
+                else
+                {
+                    Console.WriteLine("Try again, you can choose from among: \n-Dollar,\n-Euro,\n-Czech crown.");
+                    isItGoodCurrency = true;
+                }
             }
+            
             return exchangeRate;
         }
 
-        static decimal SellCurrency(string foreignCurrency)
+        static decimal SellCurrency()
         {
-            switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
+            bool isItGoodCurrency = true;
+            while (true)
             {
-                case "Dollar":
-                    exchangeRate = 4.3888m;
-                    break;
-                case "Euro":
-                    exchangeRate = 4.8349m;
-                    break;
-                case "Czech crown":
-                    exchangeRate = 0.2470m;
-                    break;
-                default:
-                    Console.WriteLine("No given currency in our exchange office.");
-                    break;
+                Console.Write("Dear user, tell me what currency you want to sell: ");
+                foreignCurrency = Console.ReadLine();
+                switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
+                {
+                    case "Dollar":
+                        exchangeRate = 4.3888m;
+                        break;
+                    case "Euro":
+                        exchangeRate = 4.8349m;
+                        break;
+                    case "Czech crown":
+                        exchangeRate = 0.2470m;
+                        break;
+                    default:
+                        Console.WriteLine($"No given {foreignCurrency} currency in our exchange office.");
+                        isItGoodCurrency = false;  
+                        break;
+                }
+                if (isItGoodCurrency) break;
+                else
+                {
+                    Console.WriteLine("Try again, you can choose from among: \n-Dollar,\n-Euro,\n-Czech crown.");
+                    isItGoodCurrency = true;
+                }
             }
+            
             return exchangeRate;
         }
 
         static decimal UserCurrency(string foreignCurrency)
         {
+            Console.Write("Dear user, tell me what currency you want to sell: ");
+            foreignCurrency = Console.ReadLine();
             Console.Write($"Dear user, give me the exchange rate at which I should count the {foreignCurrency}: ");
             while (true)
             {
