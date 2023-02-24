@@ -50,6 +50,13 @@ namespace Cantor
             {
                 Console.Write("Dear user, tell me what currency you want to buy: ");
                 foreignCurrency = Console.ReadLine();
+                Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
+                string ifTheyWantsAlone = Console.ReadLine();
+               
+                if (ifTheyWantsAlone )
+                {
+
+                }
                 exchangeRate = Math.Round(PurchaseCurrency(foreignCurrency), 4);
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need: ");
                 DownloadAmount();
@@ -105,6 +112,17 @@ namespace Cantor
                     break;
             }
             return exchangeRate;
+        }
+
+        static decimal UserCurrency(string foreignCurrency)
+        {
+            Console.Write($"Dear user, give me the exchange rate at which I should count the {foreignCurrency}: ");
+            while (true)
+            {
+                if (decimal.TryParse(Console.ReadLine(), out exchangeRate)) break;
+                else Console.WriteLine($"This is not a number: {exchangeRate.ToString()}. Try again, please.");
+            }            
+            return Math.Round(exchangeRate, 4);
         }
 
         static decimal DownloadAmount()
