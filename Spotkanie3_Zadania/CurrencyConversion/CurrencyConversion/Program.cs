@@ -52,12 +52,10 @@ namespace Cantor
                 foreignCurrency = Console.ReadLine();
                 Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
                 string ifTheyWantsAlone = Console.ReadLine();
-               
-                if (ifTheyWantsAlone )
-                {
+             
+                if (ifTheyWantsAlone.ToLower() == "y") exchangeRate = Math.Round(PurchaseCurrency(foreignCurrency), 4);
+                else exchangeRate = Math.Round(UserCurrency(foreignCurrency), 4);
 
-                }
-                exchangeRate = Math.Round(PurchaseCurrency(foreignCurrency), 4);
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need: ");
                 DownloadAmount();
                 Console.WriteLine($"{amount} {foreignCurrency} will cost you: {Math.Round(amount * exchangeRate, 2)} PLN.");
@@ -66,7 +64,12 @@ namespace Cantor
             {
                 Console.Write("Dear user, tell me what currency you want to sell: ");
                 foreignCurrency = Console.ReadLine();
-                exchangeRate = Math.Round(SellCurrency(foreignCurrency), 4);
+                Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
+                string ifTheyWantsAlone = Console.ReadLine();
+
+                if (ifTheyWantsAlone.ToLower() == "y") exchangeRate = Math.Round(SellCurrency(foreignCurrency), 4);
+                else exchangeRate = Math.Round(UserCurrency(foreignCurrency), 4);
+
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need sell: ");
                 DownloadAmount();
                 Console.WriteLine($"For {amount} {foreignCurrency} you will get: {Math.Round(amount * exchangeRate, 2)} PLN.");
