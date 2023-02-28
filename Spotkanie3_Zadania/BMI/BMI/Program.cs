@@ -26,7 +26,7 @@
                 else Console.WriteLine($"This is not a number: {userWeight.ToString()}. Try again, please.");
             }
 
-            double bmi = CalculatorBMI(userWeight, userHeight);
+            double bmi = BmiCalculation(userWeight, userHeight);
             Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {Result(bmi)}");
             Console.Write($"{name} do you want to continue[y/n]: ");
             if (Console.ReadLine() == "y")
@@ -47,9 +47,9 @@
 
         }
     }
-    public static double CalculatorBMI(int userWeight, double userHeight)
+    public static double BmiCalculation(int weight, double height)
     {
-        double bmi = userWeight / (Math.Pow(2.0, (double)userHeight));
+        double bmi = weight / (Math.Pow(2.0, (double)height));
         return bmi;
     }
 
