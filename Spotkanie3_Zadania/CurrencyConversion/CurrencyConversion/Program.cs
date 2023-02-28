@@ -36,8 +36,16 @@ namespace CurrencyConversion
 
         static void BuyOrSell()
         {
+            char buyOrSell;
             Console.Write("Dear user, tell me what you want? Buy or sell foreign currency[b/s]: ");
-            char buyOrSell = char.Parse(Console.ReadLine());
+
+            while (true)
+            {
+                if (char.TryParse(Console.ReadLine(), out buyOrSell) && (buyOrSell == 'b' || buyOrSell == 's')) break;
+                else Console.WriteLine($"The value given {buyOrSell} is incorrect");
+            }
+            
+            
             if (buyOrSell == 'b')
             {
                 Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
