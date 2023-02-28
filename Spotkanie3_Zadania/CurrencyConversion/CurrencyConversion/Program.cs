@@ -8,6 +8,7 @@ namespace CurrencyConversion
         static decimal amount;
         static decimal exchangeRate;
         static string foreignCurrency;
+
         static void Main(string[] args)
         {
             while (true)
