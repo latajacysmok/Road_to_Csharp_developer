@@ -9,24 +9,24 @@
         string name = Console.ReadLine();
         while (true)
         {
-            int userWeight;
-            double userHeight;
+            int weight;
+            double height;
 
             while (true)
             {
                 Console.Write($"Dear {name}, give me your weight: ");
-                if(int.TryParse(Console.ReadLine(), out userWeight)) break;
-                else Console.WriteLine($"This is not a number: {userWeight.ToString()}. Try again, please.");
+                if(int.TryParse(Console.ReadLine(), out weight)) break;
+                else Console.WriteLine($"This is not a number: {weight.ToString()}. Try again, please.");
             }
 
             while (true)
             {
                 Console.Write($"Dear {name}, tell me your height(in meters): ");
-                if (double.TryParse(Console.ReadLine(), out userHeight)) break;
-                else Console.WriteLine($"This is not a number: {userWeight.ToString()}. Try again, please.");
+                if (double.TryParse(Console.ReadLine(), out height)) break;
+                else Console.WriteLine($"This is not a number: {weight.ToString()}. Try again, please.");
             }
 
-            double bmi = BmiCalculation(userWeight, userHeight);
+            double bmi = BmiCalculation(weight, height);
             Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {Result(bmi)}");
             Console.Write($"{name} do you want to continue[y/n]: ");
             if (Console.ReadLine() == "y")
