@@ -160,8 +160,7 @@ namespace CurrencyConversion
         }
 
         static decimal DownloadAmount()
-        {
-           
+        {        
             while (true)
             {
                 if (decimal.TryParse(Console.ReadLine(), out amount)) break;
