@@ -1,16 +1,4 @@
-﻿/*Zadanie 2 - Aplikacja konsolowa do przeliczania BMI:
-Stwórz nową solucję oraz projekty, które uważasz, że będą potrzebne
-Wymagania aplikacji: 
-użytkownik podaje wagę
-użytkownik podaje wzrost
-skorzystaj ze wzoru do obliczania BMI
-
-BMI = waga / (wzrost)^2
-
-przyjmij zakres : 18,5 – 24,9  jako prawidłowy, a zakres poniżej jako niedowagę, a zakres powyżej jako nadwagę
-wyświetl informacje dla użytkownika*/
-
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
@@ -21,10 +9,23 @@ class Program
         string name = Console.ReadLine();
         while (true)
         {
-            Console.Write($"Dear {name}, give me your weight: ");
-            int userWeight = int.Parse(Console.ReadLine());
-            Console.Write($"Dear {name}, tell me your height(in meters): ");
-            double userHeight = double.Parse(Console.ReadLine());
+            int userWeight;
+            double userHeight;
+
+            while (true)
+            {
+                Console.Write($"Dear {name}, give me your weight: ");
+                if(int.TryParse(Console.ReadLine(), out userWeight)) break;
+                else Console.WriteLine($"This is not a number: {userWeight.ToString()}. Try again, please.");
+            }
+
+            while (true)
+            {
+                Console.Write($"Dear {name}, tell me your height(in meters): ");
+                if (double.TryParse(Console.ReadLine(), out userHeight)) break;
+                else Console.WriteLine($"This is not a number: {userWeight.ToString()}. Try again, please.");
+            }
+
             double bmi = CalculatorBMI(userWeight, userHeight);
             Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {Result(bmi)}");
             Console.Write($"{name} do you want to continue[y/n]: ");
