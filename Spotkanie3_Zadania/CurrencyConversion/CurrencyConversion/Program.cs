@@ -42,16 +42,22 @@ namespace CurrencyConversion
             while (true)
             {
                 if (char.TryParse(Console.ReadLine(), out buyOrSell) && (buyOrSell == 'b' || buyOrSell == 's')) break;
-                else Console.WriteLine($"The value given {buyOrSell} is incorrect");
+                else Console.WriteLine($"The value given {buyOrSell.ToString()} is incorrect");
             }
             
             
             if (buyOrSell == 'b')
             {
+                char ifTheyWantsAlone;
                 Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
-                string ifTheyWantsAlone = Console.ReadLine();
-               
-                if (ifTheyWantsAlone == "y") exchangeRate = Math.Round(UserCurrency(foreignCurrency), 4);
+                
+                while (true)
+                {
+                    if (char.TryParse(Console.ReadLine(), out ifTheyWantsAlone) && (ifTheyWantsAlone == 'y' || ifTheyWantsAlone == 'n')) break;
+                    else Console.WriteLine($"The value given {ifTheyWantsAlone.ToString()} is incorrect");
+                }
+
+                if (ifTheyWantsAlone == 'y') exchangeRate = Math.Round(CurrencyAndUserCourse(foreignCurrency), 4);
                 else exchangeRate = Math.Round(PurchaseCurrency(), 4);
 
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need: ");
@@ -63,7 +69,7 @@ namespace CurrencyConversion
                 Console.Write("User, make a choice regarding the exchange rate now, do you want to assign it yourself[y/n]?: ");
                 string ifTheyWantsAlone = Console.ReadLine();
 
-                if (ifTheyWantsAlone == "y") exchangeRate = Math.Round(UserCurrency(foreignCurrency), 4);
+                if (ifTheyWantsAlone == "y") exchangeRate = Math.Round(CurrencyAndUserCourse(foreignCurrency), 4);
                 else exchangeRate = Math.Round(SellCurrency(), 4);
 
                 Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need sell: ");
@@ -141,11 +147,11 @@ namespace CurrencyConversion
             return exchangeRate;
         }
 
-        static decimal UserCurrency(string foreignCurrency)
+        static decimal CurrencyAndUserCourse(string userCurrency)
         {
             Console.Write("Dear user, tell me what currency you want to sell: ");
-            foreignCurrency = Console.ReadLine();
-            Console.Write($"Dear user, give me the exchange rate at which I should count the {foreignCurrency}: ");
+            userCurrency = Console.ReadLine();
+            Console.Write($"Dear user, give me the exchange rate at which I should count the {userCurrency}: ");
             while (true)
             {
                 if (decimal.TryParse(Console.ReadLine(), out exchangeRate)) break;
