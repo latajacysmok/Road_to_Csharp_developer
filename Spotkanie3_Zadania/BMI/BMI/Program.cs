@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Xml.Linq;
 
 class Program
 {
@@ -14,24 +15,70 @@ class Program
             int weight;
             double height;
 
-            while (true)
-            {
-                Console.Write($"Dear {name}, give me your weight: ");
-                if(int.TryParse(Console.ReadLine(), out weight)) break;
-                else Console.WriteLine($"This is not a number: {weight.GetType()}. Try again, please.");
-            }
+            Console.Write($"Dear {name}, give me your weight: ");
+            weight = ItNumber();     //TODO: daj zabezpieczniea na np ujemna waga albo 100 metrów wzrostu.
 
-            while (true)
-            {
-                Console.Write($"Dear {name}, tell me your height(in meters): ");
-                if (double.TryParse(Console.ReadLine(), out height)) break;
-                else Console.WriteLine($"This is not a number: {weight.GetType()}. Try again, please.");
-            }
+            Console.Write($"Dear {name}, tell me your height(in meters): ");
+            height = ItNumber();    //TODO: daj zabezpieczniea na np ujemna waga albo 100 metrów wzrostu.
 
             double bmi = BmiCalculation(weight, height);
-            Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {WeightRating(bmi)}");
-            Console.Write($"{name} do you want to continue[y/n]: ");
-            if (Console.ReadLine().ToLower() == "y")
+            Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {EstimateWeight(bmi)}.");
+            EndProgramme(name);
+        }
+    }
+    public static double BmiCalculation(int weight, double height)
+    {
+        double bmi = weight / PowerCalculation(height);
+        return bmi;                                               
+    }
+
+    public static double PowerCalculation(double height)
+    {
+        double pow = Math.Pow(2.0, (double)height);    
+        return pow;                                        
+    }
+
+    public static string EstimateWeight(double bmi)                
+    {
+        switch (bmi)
+        {
+            case < 18.5:
+                return "underweight";
+            case > 24.9:
+                return "overweight";
+            default:
+                return "weight in standard";
+        }
+    }
+
+    public static void EndProgramme(string name)
+    {
+        while(true)
+        {
+            Console.WriteLine($"{name} do you want to continue: ");
+            Console.WriteLine("If yes enter: '1'.");
+            Console.WriteLine("If no enter: '2'.");
+            GoOutOrStay(ItNumber(), name);
+            break;
+        }
+    }
+    public static int ItNumber()
+    {
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out int ifExit)) return ifExit;
+            else
+            {
+                Console.Write($"{ifExit.ToString()} is not a number, please try again: ");
+            }
+        }
+    }
+
+    public static void GoOutOrStay(int ifExit, string name)
+    {
+        while (true)
+        {
+            if (ifExit == 1)
             {
                 Console.WriteLine($"So let's get started again {name}.");
                 for (int i = 0; i < 3; i++)
@@ -40,33 +87,18 @@ class Program
                     Thread.Sleep(1000);
                 }
                 Console.Clear();
-            }             
-            else 
-            {
-                Console.WriteLine($"See you soon {name}.");
                 break;
             }
+            else if (ifExit == 2)
+            {
+                Console.WriteLine($"See you soon {name}.");
+                Environment.Exit(1);
+            }
+            else
+            {
+                Console.WriteLine($"Your number is: {ifExit}.The given number must equal 1 if you want to continue and 2 if you want to end the program. Try again");
+                ItNumber();
+            }    
         }
-    }
-    public static double BmiCalculation(int weight, double height)
-    {
-        double bmi = weight / (Math.Pow(2.0, (double)height));
-        return bmi;
-    }
-
-    public static string WeightRating(double bmi)
-    {
-        switch (bmi)
-        {
-            case < 18.5:
-                return "underweight";
-                break;
-            case > 24.9:
-                return "overweight";
-                break;
-            default:
-                return "weight in standard";
-                break;
-        }
-    }
+    }   
 }
