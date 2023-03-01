@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Linq.Expressions;
+
+class Program
 {
     static void Main(string[] args)
     {
@@ -16,14 +18,14 @@
             {
                 Console.Write($"Dear {name}, give me your weight: ");
                 if(int.TryParse(Console.ReadLine(), out weight)) break;
-                else Console.WriteLine($"This is not a number: {weight.GetType}. Try again, please.");
+                else Console.WriteLine($"This is not a number: {weight.GetType()}. Try again, please.");
             }
 
             while (true)
             {
                 Console.Write($"Dear {name}, tell me your height(in meters): ");
                 if (double.TryParse(Console.ReadLine(), out height)) break;
-                else Console.WriteLine($"This is not a number: {weight.GetType}. Try again, please.");
+                else Console.WriteLine($"This is not a number: {weight.GetType()}. Try again, please.");
             }
 
             double bmi = BmiCalculation(weight, height);
@@ -54,8 +56,17 @@
 
     public static string WeightRating(double bmi)
     {
-        if (bmi < 18.5) return "underweight";
-        else if (24.9 < bmi) return "overweight";
-        else return "weight normal";
+        switch (bmi)
+        {
+            case < 18.5:
+                return "underweight";
+                break;
+            case > 24.9:
+                return "overweight";
+                break;
+            default:
+                return "weight in standard";
+                break;
+        }
     }
 }
