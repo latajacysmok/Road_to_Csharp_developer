@@ -29,7 +29,7 @@
             double bmi = BmiCalculation(weight, height);
             Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {WeightRating(bmi)}");
             Console.Write($"{name} do you want to continue[y/n]: ");
-            if (Console.ReadLine() == "y")
+            if (Console.ReadLine().ToLower() == "y")
             {
                 Console.WriteLine($"So let's get started again {name}.");
                 for (int i = 0; i < 3; i++)
