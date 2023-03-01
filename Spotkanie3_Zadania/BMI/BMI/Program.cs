@@ -27,7 +27,7 @@
             }
 
             double bmi = BmiCalculation(weight, height);
-            Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {Result(bmi)}");
+            Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {WeightRating(bmi)}");
             Console.Write($"{name} do you want to continue[y/n]: ");
             if (Console.ReadLine() == "y")
             {
@@ -44,7 +44,6 @@
                 Console.WriteLine($"See you soon {name}.");
                 break;
             }
-
         }
     }
     public static double BmiCalculation(int weight, double height)
@@ -53,15 +52,10 @@
         return bmi;
     }
 
-    public static string Result(double bmi)
+    public static string WeightRating(double bmi)
     {
         if (bmi < 18.5) return "underweight";
         else if (24.9 < bmi) return "overweight";
         else return "weight normal";
-
     }
-
 }
-
-
-
