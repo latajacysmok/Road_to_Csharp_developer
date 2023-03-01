@@ -16,14 +16,14 @@
             {
                 Console.Write($"Dear {name}, give me your weight: ");
                 if(int.TryParse(Console.ReadLine(), out weight)) break;
-                else Console.WriteLine($"This is not a number: {weight.ToString()}. Try again, please.");
+                else Console.WriteLine($"This is not a number: {weight.GetType}. Try again, please.");
             }
 
             while (true)
             {
                 Console.Write($"Dear {name}, tell me your height(in meters): ");
                 if (double.TryParse(Console.ReadLine(), out height)) break;
-                else Console.WriteLine($"This is not a number: {weight.ToString()}. Try again, please.");
+                else Console.WriteLine($"This is not a number: {weight.GetType}. Try again, please.");
             }
 
             double bmi = BmiCalculation(weight, height);
