@@ -20,63 +20,10 @@ namespace CurrencyConversion
 
         static void BuyOrSell()
         {
-            decimal currencyValue;
-            Console.Write("Dear user, tell me what you want? Buy?");
+            Console.Write("Dear user, tell me what you want? Buy?\n");
             int buy = DecideWhichOption();
-            if (buy == 1)
-            {              
-                Console.Write("User, make a choice regarding the exchange rate now?: ");
-                int exchangeRate = DecideWhichOption();
-                if (exchangeRate == 1) currencyValue = Math.Round(CurrencyAndUserCourse(), 4);
-                else if(exchangeRate == 2)
-                {
-                    Console.Write("User, do you want to assign it yourself?: ");
-                    int assignItYourself = DecideWhichOption();
-                    if (assignItYourself == 1) currencyValue = Math.Round(PurchaseCurrency(), 4);
-                    else if(assignItYourself == 2)
-                    {
-                        Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
-                        WhatDoWeDoNext();
-                    }
-                }
-
-                Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need: ");
-                DownloadAmount();
-                Console.WriteLine($"{amount} {foreignCurrency} will cost you: {Math.Round(amount * currencyValue, 2)} PLN.");
-            }
-                      
-            else if (buy == 2) 
-            {
-                Console.Write("Dear user, tell me what you want? Sell?");
-                int sell = DecideWhichOption();
-                if (sell == 1)
-                {
-                    Console.Write("User, do you want to assign it yourself?: ");
-                    int ifTheyWantsAlone = DecideWhichOption();
-                    if (ifTheyWantsAlone == 1) currencyValue = Math.Round(CurrencyAndUserCourse(), 4);
-                    else if (ifTheyWantsAlone == 2)
-                    {
-                        Console.Write("User, make a choice regarding the exchange rate now?: ");
-                        int exchangeRate = DecideWhichOption();
-                        if (exchangeRate == 1) currencyValue = Math.Round(SellCurrency(), 4);
-                        else if (exchangeRate == 2)
-                        {
-                            Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
-                            WhatDoWeDoNext();
-                        }
-                    }
-
-                    Console.Write($"I understand my dear user, you have chosen {foreignCurrency}, and how many {foreignCurrency} do you need sell: ");
-                    DownloadAmount();
-                    Console.WriteLine($"For {amount} {foreignCurrency} you will get: {Math.Round(amount * currencyValue, 2)} PLN.");
-                }
-                else if (sell == 2) 
-                {
-                    Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
-                    WhatDoWeDoNext();
-                }
-
-            }
+            if (buy == 1) Buying();
+            else if (buy == 2) Selling();
         }
 
         public static int DecideWhichOption()
@@ -114,12 +61,15 @@ namespace CurrencyConversion
             return Math.Round(amount, 2);
         }
 
-        static decimal PurchaseCurrency()
+        static  (string, decimal) PurchaseCurrency()
         {
             bool isItGoodCurrency = true;
             while (true)
             {
-                Console.Write("Dear user, tell me what currency you want to buy: ");
+                Console.Write("Dear user, tell me what currency you want to buy: \n");
+                Console.WriteLine("- Dollar,");
+                Console.WriteLine("- Euro,");
+                Console.WriteLine("- Czech crown.");
                 foreignCurrency = Console.ReadLine();
                 switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
                 {
@@ -145,15 +95,18 @@ namespace CurrencyConversion
                 }
             }
             
-            return exchangeRate;
+            return (foreignCurrency, exchangeRate);
         }
 
-        static decimal SellCurrency()
+        static (string, decimal) SellCurrency()
         {
             bool isItGoodCurrency = true;
             while (true)
             {
-                Console.Write("Dear user, tell me what currency you want to sell: ");
+                Console.Write("Dear user, tell me what currency you want to sell: \n");
+                Console.WriteLine("- Dollar,");
+                Console.WriteLine("- Euro,");
+                Console.WriteLine("- Czech crown.");
                 foreignCurrency = Console.ReadLine();
                 switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
                 {
@@ -179,20 +132,115 @@ namespace CurrencyConversion
                 }
             }
             
-            return exchangeRate;
+            return (foreignCurrency, exchangeRate);
         }
 
-        static decimal CurrencyAndUserCourse()
+        static (string, decimal) CurrencyAndUserCourse()
         {
-            Console.Write("Dear user, tell me what currency you want to sell: ");
-            string userCurrency = Console.ReadLine();
+            string userCurrency;
+            while (true)
+            {
+                Console.Write("Dear user, tell me what currency you want to sell: ");
+                userCurrency = Console.ReadLine();
+                if (userCurrency != null) break;
+                else Console.WriteLine("Currency name is required, please try again.");
+            }
+            
             Console.Write($"Dear user, give me the exchange rate at which I should count the {userCurrency}: ");
             while (true)
             {
                 if (decimal.TryParse(Console.ReadLine(), out exchangeRate)) break;
                 else Console.WriteLine($"This is not a number: {exchangeRate.ToString()}. Try again, please.");
             }            
-            return Math.Round(exchangeRate, 4);
+            return (userCurrency, Math.Round(exchangeRate, 4));
+        }
+
+        static void Buying()
+        {
+            Console.Write("User, make your choice regarding the exchange rate now, do you want to set the currency value yourself?: \n");
+            int exchangeRate = DecideWhichOption();
+
+            if (exchangeRate == 1)
+            {
+                var result = CurrencyAndUserCourse();
+                string currency = result.Item1;
+                decimal currencyValue = Math.Round(result.Item2, 4);
+                
+                Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency} do you need: ");
+                amount = DownloadAmount();
+                Console.WriteLine($"{amount} {currency}s will cost you: {Math.Round(amount * currencyValue, 2)} PLN.");
+            }
+                
+            else if (exchangeRate == 2)
+            {
+                Console.Write("User, to sure do you want to use ready-made currencies?: \n");
+                int assignItYourself = DecideWhichOption();
+
+                if (assignItYourself == 1) 
+                {
+                    var result = PurchaseCurrency();
+                    string currency = result.Item1;
+                    decimal currencyValue = Math.Round(result.Item2, 4);
+                    currencyValue = Math.Round(currencyValue, 4);
+                    Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need: ");
+                    amount = DownloadAmount();
+                    Console.WriteLine($"{amount} {currency}s will cost you: {Math.Round(amount * currencyValue, 2)} PLN.");
+                }
+                        
+                else if (assignItYourself == 2)
+                {
+                    Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
+                    WhatDoWeDoNext();
+                }
+            }
+        }
+
+        static void Selling()
+        {
+            Console.Write("Dear user, tell me what you want? Sell?\n");
+            int sell = DecideWhichOption();
+
+            if (sell == 1)
+            {
+                Console.Write("User, do you want to set the currency value yourself?: \n");
+                int ifTheyWantsAlone = DecideWhichOption();
+
+                if (ifTheyWantsAlone == 1)
+                {
+                    var result = CurrencyAndUserCourse();
+                    string currency = result.Item1;
+                    decimal currencyValue = result.Item2;
+                    Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need sell: ");
+                    amount = DownloadAmount();
+                    Console.WriteLine($"For {amount} {currency}s you will get: {Math.Round(amount * currencyValue, 2)} PLN.");
+                }
+                    
+                else if (ifTheyWantsAlone == 2)
+                {
+                    Console.Write("User, to sure make a choice regarding the exchange rate now?: \n");
+                    int exchangeRate = DecideWhichOption();
+                    
+                    if (exchangeRate == 1)
+                    {
+                        var result = SellCurrency();
+                        string currency = result.Item1;
+                        decimal currencyValue = result.Item2;
+                        Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need sell: ");
+                        amount = DownloadAmount();
+                        Console.WriteLine($"For {amount} {currency} you will get: {Math.Round(amount * currencyValue, 2)} PLN.");
+                    }
+                    else if (exchangeRate == 2)
+                    {
+                        Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
+                        WhatDoWeDoNext();
+                    }
+                }            
+            }
+            else if (sell == 2)
+            {
+                Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
+                WhatDoWeDoNext();
+            }
         }
 
         public static void WhatDoWeDoNext()
