@@ -1,21 +1,13 @@
-﻿/*Zadanie 3 - stwórz aplikację w której:
-użytkownika wprowadza jakiś tekst
-tekst zostanie zmanipulowany - odwrócony, wypisany dużymi literami, wypisany małymi literami
-ilość znaków w tekście zostanie policzona i wypisana
-podzielony na litery i wypisany
-skorzystaj z różnych możliwości do łączenia stringów w kodzie
-użyj 2 innych metod do manipulacji na stringu*/
-using System;
+﻿using System;
 using System.Diagnostics.Metrics;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace String
 {
     class Program
     {
         static string word;
-        static string word1;
-        static string word2;
         static void Main(string[] args)
         {
             while (true)
@@ -23,70 +15,89 @@ namespace String
                 Console.WriteLine("Welcome my dear user to a program showing what can be done with a string in C#.");
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("\nFirst select the operation you want to perform on the string:");
+                SelectOptions();
+                EndProgramme();
             }
         }
 
-        static void SelectOptions(int option)
+        static void SelectOptions()
         {
-            Console.WriteLine("1: For print your word.");
-
-            Console.WriteLine("2: For print your word.");
-            Console.WriteLine("3: For print your word.");
-            Console.WriteLine("4: For print your word.");
-            Console.WriteLine("5: For print your word.");
-            Console.WriteLine("6: For print your word.");
-            Console.WriteLine("7: For print your word.");
-            Console.WriteLine("8: For print your word.");
-            Console.WriteLine("9: For print your word.");
-            Console.WriteLine("10: For print your word.");
+            bool rightNumber = true;
             
-                switch (EnterNumber())
+            Console.WriteLine("1: For print your word.");
+            Console.WriteLine("2: Inverted word.");
+            Console.WriteLine("3: For concatenate string using 'String.Join'.");
+            Console.WriteLine("4: If you want to enlarge letters in your word.");
+            Console.WriteLine("5: If you want to change the letters in your word to small ones.");
+            Console.WriteLine("6: If you want the number of letters in your word.");
+            Console.WriteLine("7: If you want to write each letter separately.");
+            Console.WriteLine("8: For print the same sentance in diffrent way.");
+            Console.WriteLine("9: If you want to compare words.");
+            Console.WriteLine("10: For print your word.");
+            Console.Write("\nYou choose: ");
+            
+            while(true)
             {
-                case 1:
-                    Console.WriteLine($"Your word is: {TakeaWord()}");
-                    break;
-                case 2:
-                    Console.WriteLine($"Your inverted word word is: {ReverseTheWord(TakeaWord())}");
-                    break;
-                case 3:
-                    Console.WriteLine($"Concatenate string using 'String.Join' method: {ConcatenateWords(ChangeWordToArray(TakeaWord()))}");
-                    break;
-                case 4:
-                    Console.WriteLine($"###: {EnlargeLetters(TakeaWord())}");
-                    break;
-                case 5:
-                    Console.WriteLine($"###: {LettersSmaller(TakeaWord())}");
-                    break;
-                case 6:
-                    Console.WriteLine($"Number of characters in your text: {CountNumberOfLettersInGivenWord(TakeaWord())}");
-                    break;
-                case 7:
-                    //Console.WriteLine($"###: {SpellWord(TakeaWord())}");
-                    break;
-                case 8:
-                    //Console.WriteLine($"###: {ConcatenateString(TakeaWord())}");
-                    break;
-                case 9:
-                    //Console.WriteLine($"Your word is: {CompareWord(TakeaWord(), TakeaWord())}");
-                    break;
-                case 10:
-                    //Console.WriteLine($"###: {ReturnsSubstringOfString(TakeaWord())}");
-                    break;
-                default:
-                    // code block
-                    break;
+                switch (EnterNumber())
+                {
+                    case 1:
+                        Console.WriteLine($"Your word is: {TakeaWord()}");
+                        break;
+                    case 2:
+                        Console.WriteLine(ReverseTheWord(TakeaWord()));
+                        break;
+                    case 3:
+                        Console.WriteLine(ConcatenateWords(ChangeWordToArray(TakeaWord())));
+                        break;
+                    case 4:
+                        Console.WriteLine(EnlargeLetters(TakeaWord()));
+                        break;
+                    case 5:
+                        Console.WriteLine(LettersSmaller(TakeaWord()));
+                        break;
+                    case 6:
+                        Console.WriteLine(CountNumberOfLettersInGivenWord(TakeaWord()));
+                        break;
+                    case 7:
+                        SpellWord(TakeaWord());
+                        break;
+                    case 8:
+                        ConcatenateString(TakeaWord());
+                        break;
+                    case 9:
+                        CompareWord(TakeaWord(), TakeaWord());
+                        break;
+                    case 10:
+                        ReturnsSubstringOfString(TakeaWord());
+                        break;
+                    default:
+                        Console.Write("The selected number is not from 1 to 10. Please try again: ");
+                        rightNumber = false;
+                        break;
+                }
+                if (rightNumber) break;
+                else rightNumber = true;
+                
             }
+            
         }
 
         static string TakeaWord()
         {
-            Console.Write("My dear user, I am asking you to enter a some text, it can be a word/-s or an insignificant string of characters: ");
-            word = Console.ReadLine();
+            while (true)
+            {
+                Console.Write("My dear user, I am asking you to enter a some text, it can be a word/-s or an insignificant string of characters: ");
+                word = Console.ReadLine();
+                if (word != null) break;
+                else Console.WriteLine("My dear user, provide not empty string.");
+            }
             return word;
         }
         static string ReverseTheWord(string word)
         {
-            return (string)(word.Reverse());//? word nie jest stringiem
+            char[] wordArray = ChangeWordToArray(word);
+            Array.Reverse(wordArray);
+            return string.Join("", wordArray);
         }
 
         static char[] ChangeWordToArray(string word)
@@ -97,7 +108,7 @@ namespace String
         //Concatenate string using String.Join method 
         static string ConcatenateWords(char[] wordArray)
         {
-            return ($"Inverted yours text: {string.Join("-", wordArray)}\n");
+            return ($"Syllable yours text: {string.Join("-", wordArray)}\n");
         }
 
         static string EnlargeLetters(string word)
@@ -128,26 +139,26 @@ namespace String
         static void ConcatenateString(string word)
         {
             //Concatenate String Using + Operator
-            Console.WriteLine("Print below string use: 'Concatenate String Using + Operator'");
+            Console.WriteLine("\nPrint below string use: 'Concatenate String Using + Operator'");
             Console.WriteLine("Hello Dear user, " + "your string is: " + word + ".");
 
             //String Interpolation
-            Console.WriteLine("Print below string use: 'String Interpolation'");
+            Console.WriteLine("\nPrint below string use: 'String Interpolation'");
             Console.WriteLine($"Hello Dear user, your string is: {word}.");
 
             //Concatenate string method
-            Console.WriteLine("Print below string use: 'Concatenate string method'");
+            Console.WriteLine("\nPrint below string use: 'Concatenate string method'");
             Console.WriteLine("Hello Dear user, your string is: {0}.", word);
 
             // Use StringBuilder for concatenation in tight loops.          
             var sb = new System.Text.StringBuilder();
             for (int i = 0; i < 20; i++) sb.AppendLine(i.ToString());
-            Console.WriteLine("Print below string use: 'StringBuilder for concatenation in tight loops'");
+            Console.WriteLine("\nPrint below string use: 'StringBuilder for concatenation in tight loops'");
             Console.WriteLine(sb.ToString());
 
             //Concatenate string using String.Concate method
             string first = "CokolwiekDoPrzykładu";
-            Console.WriteLine("Print below string use: 'String.Concate method'");
+            Console.WriteLine("\nPrint below string use: 'String.Concate method'");
             string.Concat(first, word);
         }
 
@@ -183,10 +194,10 @@ namespace String
         //returns substring of a string
         static void ReturnsSubstringOfString(string word)
         {
-            Console.WriteLine("We print now substring which start from index what you want position: ");
+            Console.Write("We print now substring which start from index what you want position: ");
             int startIndex = EnterNumber();
 
-            Console.WriteLine("We print now substring which end in what you want position: ");
+            Console.Write("We print now substring which end in what you want position: ");
             int endIndex = EnterNumber();
 
             Console.WriteLine($"We print now substring which start from index {startIndex} and end in {endIndex} position: {word.Substring(startIndex, endIndex)} ");
@@ -197,12 +208,8 @@ namespace String
             int numberCandidate;
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out numberCandidate))
-                {
-                    if (numberCandidate <= word.Length) break;
-                    else Console.WriteLine("Dear User, you entered a number greater than the number of letters in the word '{word}', please try again.");
-                }
-                else Console.WriteLine($"Dear User, {numberCandidate} is not a number , please try again.");
+                if (int.TryParse(Console.ReadLine(), out numberCandidate)) break;
+                else Console.Write($"Dear User, this is not a number, please try again: ");
             }
             return numberCandidate;
         }
@@ -213,6 +220,46 @@ namespace String
         {
             Console.WriteLine($"We print now our string but splits a letter: ");
             foreach (string letter in word.Split("")) Console.Write(letter);
+        }
+
+        public static void EndProgramme()
+        {
+            while (true)
+            {
+                Console.WriteLine($"Dear user do you want to continue: ");
+                Console.WriteLine("If 'Yes' enter: '1'.");
+                Console.WriteLine("If 'No' enter: '2'.");
+                GoOutOrStay(EnterNumber());
+                break;
+            }
+        }
+
+        public static void GoOutOrStay(double ifExit)
+        {
+            while (true)
+            {
+                if (ifExit == 1)
+                {
+                    Console.WriteLine($"So let's get started again dear user.");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.Write(".");
+                        Thread.Sleep(1000);
+                    }
+                    Console.Clear();
+                    break;
+                }
+                else if (ifExit == 2)
+                {
+                    Console.WriteLine($"See you soon dear user.");
+                    Environment.Exit(1);
+                }
+                else
+                {
+                    Console.WriteLine($"Your number is: {ifExit}. The given number must equal 1 if you want to continue and 2 if you want to end the program. Try again");
+                }
+                ifExit = EnterNumber();
+            }
         }
     }
 }
