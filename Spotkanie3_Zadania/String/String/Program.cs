@@ -1,13 +1,8 @@
-﻿using System;
-using System.Diagnostics.Metrics;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace String
+﻿namespace Word
 {
     class Program
     {
-        static string word;
+        //static string word;
         static void Main(string[] args)
         {
             while (true)
@@ -16,11 +11,11 @@ namespace String
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("\nFirst select the operation you want to perform on the string:");
                 SelectOptions();
-                EndProgramme();
+                MakingDecisionYesorNo();
             }
         }
 
-        static void SelectOptions()
+        static void SelectOption()
         {
             bool rightNumber = true;
             
@@ -68,7 +63,10 @@ namespace String
                         CompareWord(TakeaWord(), TakeaWord());
                         break;
                     case 10:
-                        ReturnsSubstringOfString(TakeaWord());
+                        PrintSubstringFromTo(TakeaWord());
+                        break;
+                    case 11:
+                        SplitsString(TakeaWord());
                         break;
                     default:
                         Console.Write("The selected number is not from 1 to 10. Please try again: ");
@@ -84,6 +82,7 @@ namespace String
 
         static string TakeaWord()
         {
+            string word;
             while (true)
             {
                 Console.Write("My dear user, I am asking you to enter a some text, it can be a word/-s or an insignificant string of characters: ");
@@ -95,9 +94,9 @@ namespace String
         }
         static string ReverseTheWord(string word)
         {
-            char[] wordArray = ChangeWordToArray(word);
-            Array.Reverse(wordArray);
-            return string.Join("", wordArray);
+            char[] wordeparatedIntoSingleLetters = ChangeWordToArray(word);
+            Array.Reverse(wordeparatedIntoSingleLetters);
+            return string.Join("", wordeparatedIntoSingleLetters);
         }
 
         static char[] ChangeWordToArray(string word)
@@ -151,10 +150,10 @@ namespace String
             Console.WriteLine("Hello Dear user, your string is: {0}.", word);
 
             // Use StringBuilder for concatenation in tight loops.          
-            var sb = new System.Text.StringBuilder();
-            for (int i = 0; i < 20; i++) sb.AppendLine(i.ToString());
+            var mutableSeriesOfCharacters = new System.Text.StringBuilder();
+            for (int i = 0; i < 20; i++) mutableSeriesOfCharacters.AppendLine(i.ToString());
             Console.WriteLine("\nPrint below string use: 'StringBuilder for concatenation in tight loops'");
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine(mutableSeriesOfCharacters.ToString());
 
             //Concatenate string using String.Concate method
             string first = "CokolwiekDoPrzykładu";
@@ -165,8 +164,8 @@ namespace String
         // compare word and usreName
         static void CompareWord(string word1, string word2)
         {
-            Boolean result1 = word1.Equals(word2);
-            Console.WriteLine($"Comparing whether \"{word1}\" is equal to \"{word2}\":\t {result1}");
+            bool isTheSameWord = word1.Equals(word2);
+            Console.WriteLine($"Comparing whether \"{word1}\" is equal to \"{word2}\":\t {isTheSameWord}");
         }
 
         //returns the position of the specified character in the string
@@ -192,7 +191,7 @@ namespace String
         }
 
         //returns substring of a string
-        static void ReturnsSubstringOfString(string word)
+        static void PrintSubstringFromTo(string word)
         {
             Console.Write("We print now substring which start from index what you want position: ");
             int startIndex = EnterNumber();
@@ -214,15 +213,13 @@ namespace String
             return numberCandidate;
         }
 
-
-        //splits the string into substring
         static void SplitsString(string word)
         {
             Console.WriteLine($"We print now our string but splits a letter: ");
             foreach (string letter in word.Split("")) Console.Write(letter);
         }
 
-        public static void EndProgramme()
+        public static void MakingDecisionYesorNo()
         {
             while (true)
             {
