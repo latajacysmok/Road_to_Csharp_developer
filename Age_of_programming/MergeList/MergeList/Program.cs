@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,27 +11,42 @@ namespace MergeList
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
-            var list1 = new List<int>();
-            var list2 = new List<int>();
-            for (int i=0; i<10; i++)
-            {
-                list1.Add(random.Next(100));
-                list2.Add(random.Next(100));
-            }
+            List<int> list1 = new List<int>();
+            List<int> list2 = new List<int>();
+            GenerateRandomItemToList(list1);
+            GenerateRandomItemToList(list2);
             list1.Sort();
             list2.Sort();
-            WriteList(list1);
-            WriteList(list2);
-            WriteList(Merge(list1,list2));
-            WriteList(list1);
-            WriteList(list2);
-            Console.WriteLine("-----------------------");
-            WriteList(MergeWithDeleteItems(list1, list2));
-            WriteList(list1);
-            WriteList(list2);
-
+            CheckMergeList(list1, list2);
+            CheckMergeWithDeleteItems(list1, list2);
             Console.ReadKey();
+        }
+
+        static List<int> GenerateRandomItemToList(List<int> list)
+        {
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                list.Add(random.Next(100));
+            }
+            return list;
+        }
+
+        static void CheckMergeList(List<int> list1, List<int> list2)
+        {
+            ReadList(list1);
+            ReadList(list2);
+            ReadList(Merge(list1, list2));
+            ReadList(list1);
+            ReadList(list2);
+        }
+
+        static void CheckMergeWithDeleteItems(List<int> list1, List<int> list2)
+        {
+            Console.WriteLine("-----------------------");
+            ReadList(MergeWithDeleteItems(list1, list2));
+            ReadList(list1);
+            ReadList(list2);
         }
 
         static List<int> MergeWithDeleteItems(List<int> list1, List<int> list2)
@@ -94,9 +110,9 @@ namespace MergeList
             return result;
         }
 
-        static void WriteList(List<int> list)
+        static void ReadList(List<int> list)
         {
-            if (list == null) Console.WriteLine("[] - empty list.");
+            if (list == null || !list.Any()) Console.WriteLine("[] - empty list.");
             else
             {
                 Console.Write('[');
