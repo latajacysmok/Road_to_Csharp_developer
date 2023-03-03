@@ -30,8 +30,8 @@ namespace CurrencyConversion
         {
             while (true)
             {
-                Console.WriteLine("If yes enter: '1'.");
-                Console.WriteLine("If no enter: '2'.");
+                Console.WriteLine("If 'Yes' enter: '1'.");
+                Console.WriteLine("If 'No' enter: '2'.");
                 int decision = ItNumber();
                 if (decision == 1 || decision == 2) return decision;
                 else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
@@ -245,7 +245,8 @@ namespace CurrencyConversion
 
         public static void WhatDoWeDoNext()
         {
-            Console.WriteLine("User, would you like to perform another operation?");
+            Console.WriteLine("---------------------------------------------------");
+            Console.WriteLine("\nUser, would you like to perform another operation?");
             int decision = DecideWhichOption();
             GoOutOrStay(decision);
         }
@@ -256,7 +257,7 @@ namespace CurrencyConversion
             {
                 if (ifExit == 1)
                 {
-                    Console.WriteLine($"So let's get started again dear user.");
+                    Console.WriteLine($"So let's get started again in a few seconds dear user.");
                     for (int i = 0; i < 3; i++)
                     {
                         Console.Write(".");
