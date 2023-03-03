@@ -34,6 +34,7 @@ namespace MergeList
 
         static void CheckMergeList(List<int> list1, List<int> list2)
         {
+            Console.WriteLine("I am merge list and this is my resoult: ");
             ReadList(list1);
             ReadList(list2);
             ReadList(Merge(list1, list2));
@@ -44,6 +45,7 @@ namespace MergeList
         static void CheckMergeWithDeleteItems(List<int> list1, List<int> list2)
         {
             Console.WriteLine("-----------------------");
+            Console.WriteLine("I am merge list with delete items and this is my resoult: ");
             ReadList(MergeWithDeleteItems(list1, list2));
             ReadList(list1);
             ReadList(list2);
