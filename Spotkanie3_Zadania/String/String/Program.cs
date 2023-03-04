@@ -10,7 +10,7 @@
                 Console.WriteLine("Welcome my dear user to a program showing what can be done with a string in C#.");
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("\nFirst select the operation you want to perform on the string:");
-                SelectOptions();
+                SelectOption();
                 MakingDecisionYesorNo();
             }
         }
@@ -28,7 +28,8 @@
             Console.WriteLine("7: If you want to write each letter separately.");
             Console.WriteLine("8: For print the same sentance in diffrent way.");
             Console.WriteLine("9: If you want to compare words.");
-            Console.WriteLine("10: For print your word.");
+            Console.WriteLine("10: For print your substring.");
+            Console.WriteLine("11: For print write out specially separately from the sentence you wrote the words.");
             Console.Write("\nYou choose: ");
             
             while(true)
@@ -216,7 +217,13 @@
         static void SplitsString(string word)
         {
             Console.WriteLine($"We print now our string but splits a letter: ");
-            foreach (string letter in word.Split("")) Console.Write(letter);
+            string[] words = word.Split(' ');
+
+            foreach (var letter in words)
+            {
+                System.Console.WriteLine($"<{letter}>");
+            }
+            Console.WriteLine("");
         }
 
         public static void MakingDecisionYesorNo()
@@ -226,37 +233,36 @@
                 Console.WriteLine($"Dear user do you want to continue: ");
                 Console.WriteLine("If 'Yes' enter: '1'.");
                 Console.WriteLine("If 'No' enter: '2'.");
-                GoOutOrStay(EnterNumber());
-                break;
+                int decisionToExitTheProgram = EnterNumber();
+                if (decisionToExitTheProgram == 1)
+                {
+                    StayOnProgram();
+                    break;
+                }
+                else if (decisionToExitTheProgram == 2)
+                {
+                    LeaveTheProgramme();
+                }
+                else Console.WriteLine("You entered an invalid value, The given number must equal 1 if you want to continue and 2 if you want to end the program. Please try again.");
+                
             }
         }
 
-        public static void GoOutOrStay(double ifExit)
+        public static void StayOnProgram()
         {
-            while (true)
+            Console.WriteLine($"So let's get started again dear user.");
+            for (int i = 0; i < 3; i++)
             {
-                if (ifExit == 1)
-                {
-                    Console.WriteLine($"So let's get started again dear user.");
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Console.Write(".");
-                        Thread.Sleep(1000);
-                    }
-                    Console.Clear();
-                    break;
-                }
-                else if (ifExit == 2)
-                {
-                    Console.WriteLine($"See you soon dear user.");
-                    Environment.Exit(1);
-                }
-                else
-                {
-                    Console.WriteLine($"Your number is: {ifExit}. The given number must equal 1 if you want to continue and 2 if you want to end the program. Try again");
-                }
-                ifExit = EnterNumber();
+                Console.Write(".");
+                Thread.Sleep(1000);
             }
+            Console.Clear();
+        }
+
+        public static void  LeaveTheProgramme()
+        {
+            Console.WriteLine($"See you soon dear user.");
+            Environment.Exit(1);
         }
     }
 }
