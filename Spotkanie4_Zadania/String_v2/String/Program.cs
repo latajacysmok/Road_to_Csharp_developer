@@ -16,8 +16,10 @@ namespace Word
                 Console.WriteLine("Welcome my dear user to a program showing what can be done with a string in C#.");
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("\nFirst select the operation you want to perform on the string:");
-                SelectOption();
-                OptionsProgram possibleOptionsForUser = new OptionsProgram(EnterNumber());// tu mam dylemat czy dać to do klasy OptionsProgram
+                ChoiceOptions choiceOptions = new ChoiceOptions();
+                choiceOptions.SelectOption();
+                OptionsProgram possibleOptionsForUser = new OptionsProgram();
+                possibleOptionsForUser.MakingDecisionYesorNo();
             }
         }
     }

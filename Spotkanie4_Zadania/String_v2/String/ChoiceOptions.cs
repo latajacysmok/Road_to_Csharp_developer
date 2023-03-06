@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Program;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Word
 {
-    internal class ChoiceOptions
+    class ChoiceOptions
     {
+        public PossibleWordOperation word = new PossibleWordOperation();
+
         public void SelectOption()
         {
             bool rightNumber = true;
@@ -34,37 +37,37 @@ namespace Word
                         Console.WriteLine($"Your word is: {TakeaWord()}");
                         break;
                     case 2:
-                        Console.WriteLine(ReverseTheWord(TakeaWord()));
+                        Console.WriteLine(word.ReverseTheWord(TakeaWord()));
                         break;
                     case 3:
-                        Console.WriteLine(ConcatenateWords(ChangeWordToArray(TakeaWord())));
+                        Console.WriteLine(word.ConcatenateWords(word.ChangeWordToArray(TakeaWord())));
                         break;
                     case 4:
-                        Console.WriteLine(EnlargeLetters(TakeaWord()));
+                        Console.WriteLine(word.EnlargeLetters(TakeaWord()));
                         break;
                     case 5:
-                        Console.WriteLine(LettersSmaller(TakeaWord()));
+                        Console.WriteLine(word.LettersSmaller(TakeaWord()));
                         break;
                     case 6:
-                        Console.WriteLine(CountNumberOfLettersInGivenWord(TakeaWord()));
+                        Console.WriteLine(word.CountNumberOfLettersInGivenWord(TakeaWord()));
                         break;
                     case 7:
-                        SpellWord(TakeaWord());
+                        word.SpellWord(TakeaWord());
                         break;
                     case 8:
-                        ConcatenateString(TakeaWord());
+                        word.ConcatenateString(TakeaWord());
                         break;
                     case 9:
-                        CompareWord(TakeaWord(), TakeaWord());
+                        word.CompareWord(TakeaWord(), TakeaWord());
                         break;
                     case 10:
-                        PrintSubstringFromTo(TakeaWord());
+                        word.PrintSubstringFromTo(TakeaWord());
                         break;
                     case 11:
-                        SplitsString(TakeaWord());
+                        word.SplitsString(TakeaWord());
                         break;
                     case 12:
-                        ReturnPositionOfIndicatedCharacter(TakeaWord());
+                        word.ReturnPositionOfIndicatedCharacter(TakeaWord());
                         break;
 
                     default:

@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Word
 {
-    internal class OptionProgram
-    {
         class OptionsProgram
         {
             private int decisionToExitTheProgram;
+            ChoiceOptions choiceOptions = new ChoiceOptions();
 
-            public OptionsProgram(int number)
-            {
-                decisionToExitTheProgram = number;
-            }
             public void MakingDecisionYesorNo()
             {
                 while (true)
@@ -23,7 +18,7 @@ namespace Word
                     Console.WriteLine($"Dear user do you want to continue: ");
                     Console.WriteLine("If 'Yes' enter: '1'.");
                     Console.WriteLine("If 'No' enter: '2'.");
-                    //int decisionToExitTheProgram = 
+                    int decisionToExitTheProgram = choiceOptions.EnterNumber();
                     if (decisionToExitTheProgram == 1)
                     {
                         StayOnProgram();
@@ -55,5 +50,4 @@ namespace Word
                 Environment.Exit(1);
             }
         }
-    }
 }

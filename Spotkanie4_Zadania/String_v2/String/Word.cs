@@ -2,7 +2,7 @@
 
 namespace Program
 {
-    class Word
+    class PossibleWordOperation
     {
         public string ReverseTheWord(string word)
         {
