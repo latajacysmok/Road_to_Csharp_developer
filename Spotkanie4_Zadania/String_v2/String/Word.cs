@@ -1,9 +1,12 @@
 ﻿using Program;
+using Word;
 
 namespace Program
 {
     class PossibleWordOperation
     {
+        ChoiceOptions choiceOptions = new ChoiceOptions();
+
         public string ReverseTheWord(string word)
         {
             char[] wordeparatedIntoSingleLetters = ChangeWordToArray(word);
@@ -105,10 +108,10 @@ namespace Program
         public void PrintSubstringFromTo(string word)
         {
             Console.Write("We print now substring which start from index what you want position: ");
-            int startIndex = EnterNumber();
+            int startIndex = choiceOptions.EnterNumber();
 
             Console.Write("We print now substring which end in what you want position: ");
-            int endIndex = EnterNumber();
+            int endIndex = choiceOptions.EnterNumber();
 
             Console.WriteLine($"We print now substring which start from index {startIndex} and end in {endIndex} position: {word.Substring(startIndex, endIndex)} ");
         }

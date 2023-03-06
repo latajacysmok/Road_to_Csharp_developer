@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Word
 {
-        class OptionsProgram
+    class OptionsProgram
         {
-            private int decisionToExitTheProgram;
-            ChoiceOptions choiceOptions = new ChoiceOptions();
-
             public void MakingDecisionYesorNo()
             {
+                ChoiceOptions choiceOptions = new ChoiceOptions();
                 while (true)
                 {
                     Console.WriteLine($"Dear user do you want to continue: ");

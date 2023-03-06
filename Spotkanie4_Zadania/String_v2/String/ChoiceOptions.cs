@@ -9,10 +9,9 @@ namespace Word
 {
     class ChoiceOptions
     {
-        public PossibleWordOperation word = new PossibleWordOperation();
-
         public void SelectOption()
         {
+            PossibleWordOperation word = new PossibleWordOperation();
             bool rightNumber = true;
 
             Console.WriteLine("1: For print your word.");
