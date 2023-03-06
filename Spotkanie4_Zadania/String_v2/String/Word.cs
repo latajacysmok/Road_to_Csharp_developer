@@ -1,9 +1,9 @@
 ﻿namespace Word
 {
-    class Program
+    class Word
     {
         //static string word;
-        static void Main(string[] args)
+        public void Main(string[] args)
         {
             while (true)
             {
@@ -11,14 +11,14 @@
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("\nFirst select the operation you want to perform on the string:");
                 SelectOption();
-                MakingDecisionYesorNo();
+                OptionsProgram possibleOptionsForUser = new OptionsProgram(EnterNumber());// tu mam dylemat czy dać to do klasy OptionsProgram czy zostawić tutaj
             }
         }
 
-        static void SelectOption()
+        public void SelectOption()
         {
             bool rightNumber = true;
-            
+
             Console.WriteLine("1: For print your word.");
             Console.WriteLine("2: Inverted word.");
             Console.WriteLine("3: For concatenate string using 'String.Join'.");
@@ -30,9 +30,10 @@
             Console.WriteLine("9: If you want to compare words.");
             Console.WriteLine("10: For print your substring.");
             Console.WriteLine("11: For print write out specially separately from the sentence you wrote the words.");
+            Console.WriteLine("12: For find index number occurrence of the character you selected from the sentence you wrote the words.");
             Console.Write("\nYou choose: ");
-            
-            while(true)
+
+            while (true)
             {
                 switch (EnterNumber())
                 {
@@ -69,6 +70,10 @@
                     case 11:
                         SplitsString(TakeaWord());
                         break;
+                    case 12:
+                        ReturnPositionOfIndicatedCharacter(TakeaWord());
+                        break;
+
                     default:
                         Console.Write("The selected number is not from 1 to 10. Please try again: ");
                         rightNumber = false;
@@ -76,12 +81,12 @@
                 }
                 if (rightNumber) break;
                 else rightNumber = true;
-                
+
             }
-            
+
         }
 
-        static string TakeaWord()
+        public string TakeaWord()
         {
             string word;
             while (true)
@@ -93,40 +98,40 @@
             }
             return word;
         }
-        static string ReverseTheWord(string word)
+        public string ReverseTheWord(string word)
         {
             char[] wordeparatedIntoSingleLetters = ChangeWordToArray(word);
             Array.Reverse(wordeparatedIntoSingleLetters);
             return string.Join("", wordeparatedIntoSingleLetters);
         }
 
-        static char[] ChangeWordToArray(string word)
+        public char[] ChangeWordToArray(string word)
         {
             char[] wordArray = word.ToCharArray();
             return wordArray;
         }
         //Concatenate string using String.Join method 
-        static string ConcatenateWords(char[] wordArray)
+        public string ConcatenateWords(char[] wordArray)
         {
             return ($"Syllable yours text: {string.Join("-", wordArray)}\n");
         }
 
-        static string EnlargeLetters(string word)
+        public string EnlargeLetters(string word)
         {
             return ($"Your text in capital letters: {word.ToUpper()}\n");
         }
 
-        static string LettersSmaller(string word)
+        public string LettersSmaller(string word)
         {
             return ($"Your text in lowercase: {word.ToLower()}\n");
         }
 
-        static int CountNumberOfLettersInGivenWord(string word)
+        public int CountNumberOfLettersInGivenWord(string word)
         {
             return word.Count();
         }
 
-        static void SpellWord(string word)
+        public void SpellWord(string word)
         {
             Console.WriteLine("Here is your word divided into separate characters: ");
             for (int c = 0; c < word.Count(); c++)
@@ -136,7 +141,7 @@
             }
         }
 
-        static void ConcatenateString(string word)
+        public void ConcatenateString(string word)
         {
             //Concatenate String Using + Operator
             Console.WriteLine("\nPrint below string use: 'Concatenate String Using + Operator'");
@@ -163,14 +168,14 @@
         }
 
         // compare word and usreName
-        static void CompareWord(string word1, string word2)
+        public void CompareWord(string word1, string word2)
         {
             bool isTheSameWord = word1.Equals(word2);
             Console.WriteLine($"Comparing whether \"{word1}\" is equal to \"{word2}\":\t {isTheSameWord}");
         }
 
         //returns the position of the specified character in the string
-        static void ReturnPositionOfIndicatedCharacter(string word)
+        public void ReturnPositionOfIndicatedCharacter(string word)
         {
             char letterLookingFor;
             while (true)
@@ -180,19 +185,19 @@
                 {
                     if (Char.IsNumber(letterLookingFor))
                     {
-                        break;
+                        Console.WriteLine("Dear User, you have not entered a letter but a number.");//This is only information for user
                     }
-                    else Console.WriteLine("Dear User, you have not entered a letter but a number, please try again.");
+                    break;
                 }
                 else Console.WriteLine("Dear User, you have not entered a letter, please try again.");
             }
-            Console.Write($"We are looking for the index of the first occurrence of the letter '{letterLookingFor}': ");
-            if (word.IndexOf(letterLookingFor) < 0) Console.WriteLine($"The specified letter \"{letterLookingFor}\" is missing in the string: {word}");
-            else Console.WriteLine(word.IndexOf(letterLookingFor));
+            Console.WriteLine($"We are looking for the index of the first occurrence of the letter '{letterLookingFor}'.");
+            string result = word.IndexOf(letterLookingFor) < 0 ? $"The specified letter \"{letterLookingFor}\" is missing in the string: {word}" : $"Dear User first occurance in phrase \"{word}\" appear on index: {word.IndexOf(letterLookingFor)}";
+            Console.WriteLine(result);// IndexOf(letterLookingFor) < 0
         }
 
         //returns substring of a string
-        static void PrintSubstringFromTo(string word)
+        public void PrintSubstringFromTo(string word)
         {
             Console.Write("We print now substring which start from index what you want position: ");
             int startIndex = EnterNumber();
@@ -203,18 +208,7 @@
             Console.WriteLine($"We print now substring which start from index {startIndex} and end in {endIndex} position: {word.Substring(startIndex, endIndex)} ");
         }
 
-        static int EnterNumber()
-        {
-            int numberCandidate;
-            while (true)
-            {
-                if (int.TryParse(Console.ReadLine(), out numberCandidate)) break;
-                else Console.Write($"Dear User, this is not a number, please try again: ");
-            }
-            return numberCandidate;
-        }
-
-        static void SplitsString(string word)
+        public void SplitsString(string word)
         {
             Console.WriteLine($"We print now our string but splits a letter: ");
             string[] words = word.Split(' ');
@@ -226,14 +220,34 @@
             Console.WriteLine("");
         }
 
-        public static void MakingDecisionYesorNo()
+        public int EnterNumber()
+        {
+            int numberCandidate;
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out numberCandidate)) break;
+                else Console.Write($"Dear User, this is not a number, please try again: ");
+            }
+            return numberCandidate;
+        }
+    }
+
+    class OptionsProgram
+    {
+        private int decisionToExitTheProgram;
+
+        public OptionsProgram(int number)
+        {
+            decisionToExitTheProgram = number;
+        }
+        public void MakingDecisionYesorNo()
         {
             while (true)
             {
                 Console.WriteLine($"Dear user do you want to continue: ");
                 Console.WriteLine("If 'Yes' enter: '1'.");
                 Console.WriteLine("If 'No' enter: '2'.");
-                int decisionToExitTheProgram = EnterNumber();
+                //int decisionToExitTheProgram = 
                 if (decisionToExitTheProgram == 1)
                 {
                     StayOnProgram();
@@ -248,7 +262,7 @@
             }
         }
 
-        public static void StayOnProgram()
+        public void StayOnProgram()
         {
             Console.WriteLine($"So let's get started again dear user.");
             for (int i = 0; i < 3; i++)
@@ -259,7 +273,7 @@
             Console.Clear();
         }
 
-        public static void  LeaveTheProgramme()
+        public void  LeaveTheProgramme()
         {
             Console.WriteLine($"See you soon dear user.");
             Environment.Exit(1);
