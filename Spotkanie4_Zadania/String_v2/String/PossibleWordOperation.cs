@@ -1,17 +1,14 @@
-﻿using Program;
-using Word;
-
-namespace Program
+﻿namespace Word
 {
     class PossibleWordOperation
     {
         ChoiceOptions choiceOptions = new ChoiceOptions();
 
-        public string ReverseTheWord(string word)
+        public void ReverseTheWord(string word)
         {
             char[] wordeparatedIntoSingleLetters = ChangeWordToArray(word);
             Array.Reverse(wordeparatedIntoSingleLetters);
-            return string.Join("", wordeparatedIntoSingleLetters);
+            Console.WriteLine(string.Join("", wordeparatedIntoSingleLetters));
         }
 
         public char[] ChangeWordToArray(string word)
@@ -20,24 +17,24 @@ namespace Program
             return wordArray;
         }
         //Concatenate string using String.Join method 
-        public string ConcatenateWords(char[] wordArray)
+        public void ConcatenateWords(char[] wordArray)
         {
-            return ($"Syllable yours text: {string.Join("-", wordArray)}\n");
+            Console.WriteLine($"Syllable yours text: {string.Join("-", wordArray)}\n");
         }
 
-        public string EnlargeLetters(string word)
+        public void EnlargeLetters(string word)
         {
-            return ($"Your text in capital letters: {word.ToUpper()}\n");
+            Console.WriteLine($"Your text in capital letters: {word.ToUpper()}\n");
         }
 
-        public string LettersSmaller(string word)
+        public void LettersSmaller(string word)
         {
-            return ($"Your text in lowercase: {word.ToLower()}\n");
+            Console.WriteLine($"Your text in lowercase: {word.ToLower()}\n");
         }
 
-        public int CountNumberOfLettersInGivenWord(string word)
+        public void CountNumberOfLettersInGivenWord(string word)
         {
-            return word.Count();
+            Console.WriteLine(word.Count());
         }
 
         public void SpellWord(string word)
@@ -77,8 +74,10 @@ namespace Program
         }
 
         // compare word and usreName
-        public void CompareWord(string word1, string word2)
+        public void CompareWord(string word1)
         {
+            Console.Write("Give me now word to compare: ");
+            string word2 = choiceOptions.TakeWord();
             bool isTheSameWord = word1.Equals(word2);
             Console.WriteLine($"Comparing whether \"{word1}\" is equal to \"{word2}\":\t {isTheSameWord}");
         }
@@ -123,10 +122,15 @@ namespace Program
 
             foreach (var letter in words)
             {
-                System.Console.WriteLine($"<{letter}>");
+                Console.WriteLine($"<{letter}>");
             }
             Console.WriteLine("");
-        }    
+        }
+
+        public void PrintWord(string word)
+        {
+            Console.WriteLine($"Your word is: {word}");
+        }
     }
 }
 

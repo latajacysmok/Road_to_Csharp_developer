@@ -1,19 +1,9 @@
-﻿using Program;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Word
+﻿namespace Word
 {
     class ChoiceOptions
     {
-        public void SelectOption()
+        public void PossibleOption()
         {
-            PossibleWordOperation word = new PossibleWordOperation();
-            bool rightNumber = true;
-
             Console.WriteLine("1: For print your word.");
             Console.WriteLine("2: Inverted word.");
             Console.WriteLine("3: For concatenate string using 'String.Join'.");
@@ -26,47 +16,52 @@ namespace Word
             Console.WriteLine("10: For print your substring.");
             Console.WriteLine("11: For print write out specially separately from the sentence you wrote the words.");
             Console.WriteLine("12: For find index number occurrence of the character you selected from the sentence you wrote the words.");
-            Console.Write("\nYou choose: ");
+        }
+        public void ExecutionOption()
+        {
+            PossibleWordOperation possibleWordOperation = new PossibleWordOperation();
+            bool rightNumber = true;
+            string word = TakeWord();
 
             while (true)
             {
                 switch (EnterNumber())
                 {
                     case 1:
-                        Console.WriteLine($"Your word is: {TakeaWord()}");
+                        possibleWordOperation.PrintWord(word);
                         break;
                     case 2:
-                        Console.WriteLine(word.ReverseTheWord(TakeaWord()));
+                        possibleWordOperation.ReverseTheWord(word);
                         break;
                     case 3:
-                        Console.WriteLine(word.ConcatenateWords(word.ChangeWordToArray(TakeaWord())));
+                        possibleWordOperation.ConcatenateWords(possibleWordOperation.ChangeWordToArray(word));
                         break;
                     case 4:
-                        Console.WriteLine(word.EnlargeLetters(TakeaWord()));
+                        possibleWordOperation.EnlargeLetters(word);
                         break;
                     case 5:
-                        Console.WriteLine(word.LettersSmaller(TakeaWord()));
+                        possibleWordOperation.LettersSmaller(word);
                         break;
                     case 6:
-                        Console.WriteLine(word.CountNumberOfLettersInGivenWord(TakeaWord()));
+                        possibleWordOperation.CountNumberOfLettersInGivenWord(word);
                         break;
                     case 7:
-                        word.SpellWord(TakeaWord());
+                        possibleWordOperation.SpellWord(word);
                         break;
                     case 8:
-                        word.ConcatenateString(TakeaWord());
+                        possibleWordOperation.ConcatenateString(word);
                         break;
                     case 9:
-                        word.CompareWord(TakeaWord(), TakeaWord());
+                        possibleWordOperation.CompareWord(word);
                         break;
                     case 10:
-                        word.PrintSubstringFromTo(TakeaWord());
+                        possibleWordOperation.PrintSubstringFromTo(word);
                         break;
                     case 11:
-                        word.SplitsString(TakeaWord());
+                        possibleWordOperation.SplitsString(word);
                         break;
                     case 12:
-                        word.ReturnPositionOfIndicatedCharacter(TakeaWord());
+                        possibleWordOperation.ReturnPositionOfIndicatedCharacter(word);
                         break;
 
                     default:
@@ -74,14 +69,13 @@ namespace Word
                         rightNumber = false;
                         break;
                 }
-                if (rightNumber) break;
+                if (rightNumber) break;// a dobra już sobie przypomniałem to musi być jak liczba nie jest 1-12 to znowu pyta, default tego nie załatwia
                 else rightNumber = true;
-
             }
 
         }
 
-        public string TakeaWord()
+        public string TakeWord()
         {
             string word;
             while (true)

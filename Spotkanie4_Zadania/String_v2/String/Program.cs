@@ -1,11 +1,4 @@
-﻿using Program;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Word
+﻿namespace Word
 {
     internal class Program
     {
@@ -17,7 +10,8 @@ namespace Word
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("\nFirst select the operation you want to perform on the string:");
                 ChoiceOptions choiceOptions = new ChoiceOptions();
-                choiceOptions.SelectOption();
+                choiceOptions.PossibleOption();
+                choiceOptions.ExecutionOption();
                 OptionsProgram possibleOptionsForUser = new OptionsProgram();
                 possibleOptionsForUser.MakingDecisionYesorNo();
             }
