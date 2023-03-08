@@ -31,16 +31,16 @@
                         possibleWordOperation.PrintWord(word);
                         break;
                     case 2:
-                        possibleWordOperation.ReverseTheWord(word);
+                        possibleWordOperation.ReverseWord(word);
                         break;
                     case 3:
                         possibleWordOperation.ConcatenateWords(possibleWordOperation.ChangeWordToArray(word));
                         break;
                     case 4:
-                        possibleWordOperation.EnlargeLetters(word);
+                        possibleWordOperation.ToUpper(word);
                         break;
                     case 5:
-                        possibleWordOperation.LettersSmaller(word);
+                        possibleWordOperation.ToLower(word);
                         break;
                     case 6:
                         possibleWordOperation.CountNumberOfLettersInGivenWord(word);
@@ -58,7 +58,7 @@
                         possibleWordOperation.PrintSubstringFromTo(word);
                         break;
                     case 11:
-                        possibleWordOperation.SplitsString(word);
+                        possibleWordOperation.SplitString(word);
                         break;
                     case 12:
                         possibleWordOperation.ReturnPositionOfIndicatedCharacter(word);
@@ -82,7 +82,7 @@
             {
                 Console.Write("My dear user, I am asking you to enter a some text, it can be a word/-s or an insignificant string of characters: ");
                 word = Console.ReadLine();
-                if (word != null) break;
+                if (!String.IsNullOrEmpty(word)) break;
                 else Console.WriteLine("My dear user, provide not empty string.");
             }
             return word;

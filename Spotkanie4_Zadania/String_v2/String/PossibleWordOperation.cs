@@ -4,11 +4,11 @@
     {
         ChoiceOptions choiceOptions = new ChoiceOptions();
 
-        public void ReverseTheWord(string word)
+        public void ReverseWord(string word)
         {
-            char[] wordeparatedIntoSingleLetters = ChangeWordToArray(word);
-            Array.Reverse(wordeparatedIntoSingleLetters);
-            Console.WriteLine(string.Join("", wordeparatedIntoSingleLetters));
+            char[] wordeparatedLetters = ChangeWordToArray(word);
+            Array.Reverse(wordeparatedLetters);
+            Console.WriteLine(string.Join("", wordeparatedLetters));
         }
 
         public char[] ChangeWordToArray(string word)
@@ -22,12 +22,12 @@
             Console.WriteLine($"Syllable yours text: {string.Join("-", wordArray)}\n");
         }
 
-        public void EnlargeLetters(string word)
+        public void ToUpper(string word)
         {
             Console.WriteLine($"Your text in capital letters: {word.ToUpper()}\n");
         }
 
-        public void LettersSmaller(string word)
+        public void ToLower(string word)
         {
             Console.WriteLine($"Your text in lowercase: {word.ToLower()}\n");
         }
@@ -91,10 +91,7 @@
                 Console.Write("We are looking for the index of the first occurrence of the letter you provided, dear user: ");
                 if (char.TryParse(Console.ReadLine(), out letterLookingFor))
                 {
-                    if (Char.IsNumber(letterLookingFor))
-                    {
-                        Console.WriteLine("Dear User, you have not entered a letter but a number.");//This is only information for user
-                    }
+                    if (Char.IsNumber(letterLookingFor)) Console.WriteLine("Dear User, you have not entered a letter but a number.");//This is only information for user
                     break;
                 }
                 else Console.WriteLine("Dear User, you have not entered a letter, please try again.");
@@ -106,16 +103,37 @@
 
         public void PrintSubstringFromTo(string word)
         {
-            Console.Write("We print now substring which start from index what you want position: ");
-            int startIndex = choiceOptions.EnterNumber();
+            int startIndex;
+            int endIndex;
 
-            Console.Write("We print now substring which end in what you want position: ");
-            int endIndex = choiceOptions.EnterNumber();
+            while (true)
+            {
+                Console.Write("We print now substring which start from index what you want position: ");
+                startIndex = choiceOptions.EnterNumber();
+                if (startIndex < 0 || word.Length < startIndex)
+                {
+                    Console.WriteLine($"Your start index: {startIndex} is smaller than 0 or larger than your word length. Try again please.");
+                    continue;
+                }
 
+                Console.Write("We print now substring which end in what you want position: ");
+                endIndex = choiceOptions.EnterNumber();
+
+                if (endIndex < 0 || word.Length < endIndex)
+                {
+                    Console.WriteLine($"Your end index: {endIndex} is smaller than 0 or larger than your word length. Try again please.");
+                    continue;
+                }
+                else if (startIndex > endIndex)
+                {
+                    Console.WriteLine($"You entered start index: {startIndex} larger than end index: {endIndex}. Try again please.");
+                }
+                else break;
+            }
             Console.WriteLine($"We print now substring which start from index {startIndex} and end in {endIndex} position: {word.Substring(startIndex, endIndex)} ");
         }
 
-        public void SplitsString(string word)
+        public void SplitString(string word)
         {
             Console.WriteLine($"We print now our string but splits a letter: ");
             string[] words = word.Split(' ');
