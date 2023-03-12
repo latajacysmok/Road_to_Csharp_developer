@@ -45,7 +45,7 @@
             return (foreignCurrency, exchangeRate);
         }
 
-        public (string, decimal) CurrencyAndUserCourse()
+        public (string, string) CurrencyUser()
         {
             string userCurrency;
             while (true)
@@ -55,14 +55,19 @@
                 if (!String.IsNullOrEmpty(userCurrency)) break;
                 else Console.WriteLine("Currency name is required, please try again.");
             }
+            decimal userCourse  = UserCourse(userCurrency);
+            return (userCurrency, userCourse.ToString());
+        }
 
+        public decimal UserCourse(string userCurrency)
+        {
             Console.Write($"Dear user, give me the exchange rate at which I should count the {userCurrency}: ");
             while (true)
             {
                 if (decimal.TryParse(Console.ReadLine(), out exchangeRate)) break;
-                else Console.WriteLine($"This is not a number: {exchangeRate.ToString()}. Try again, please.");
+                else Console.WriteLine($"This is not a number: {exchangeRate}. Try again, please.");
             }
-            return (userCurrency, Math.Round(exchangeRate, 4));
+            return (Math.Round(exchangeRate, 4));
         }
 
         public void AvailableCurrencies()

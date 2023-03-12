@@ -66,7 +66,7 @@
             int exchangeRate = appOption.DecideWhichOption();
             if (exchangeRate == 1)
             {
-                var result = cantor.CurrencyAndUserCourse();
+                var result = cantor.CurrencyUser();
                 string currency = result.Item1;
                 decimal currencyValue = Math.Round(result.Item2, 4);
 
