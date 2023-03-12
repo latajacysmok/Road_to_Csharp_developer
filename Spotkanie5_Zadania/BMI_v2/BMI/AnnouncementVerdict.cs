@@ -7,6 +7,7 @@
             ProgramData programData = new ProgramData();
             BmiCalculator bmiCalculator = new BmiCalculator();
             AppOption appOption = new AppOption();
+            appOption.ProgramWelcome();
             string name = Console.ReadLine();
             while (true)
             {
