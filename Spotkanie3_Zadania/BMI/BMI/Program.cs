@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Xml.Linq;
-
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
