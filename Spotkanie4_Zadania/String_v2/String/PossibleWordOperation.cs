@@ -1,9 +1,14 @@
-﻿namespace Word
+﻿namespace String
 {
     class PossibleWordOperation
     {
-        ChoiceOptions choiceOptions = new ChoiceOptions();
+        OptionSelector choiceOptions = new OptionSelector();
 
+        public char[] ChangeWordToArray(string word)
+        {
+            char[] wordArray = word.ToCharArray();
+            return wordArray;
+        }
         public void ReverseWord(string word)
         {
             char[] wordeparatedLetters = ChangeWordToArray(word);
@@ -11,11 +16,6 @@
             Console.WriteLine(string.Join("", wordeparatedLetters));
         }
 
-        public char[] ChangeWordToArray(string word)
-        {
-            char[] wordArray = word.ToCharArray();
-            return wordArray;
-        }
         //Concatenate string using String.Join method 
         public void ConcatenateWords(char[] wordArray)
         {
@@ -85,31 +85,29 @@
         //returns the position of the specified character in the string
         public void ReturnPositionOfIndicatedCharacter(string word)
         {
-            char letterLookingFor;
             while (true)
             {
                 Console.Write("We are looking for the index of the first occurrence of the letter you provided, dear user: ");
-                if (char.TryParse(Console.ReadLine(), out letterLookingFor))
+                if (char.TryParse(Console.ReadLine(), out char letterLookingFor))
                 {
                     if (Char.IsNumber(letterLookingFor)) Console.WriteLine("Dear User, you have not entered a letter but a number.");//This is only information for user
-                    break;
+                    {
+                        Console.WriteLine($"We are looking for the index of the first occurrence of the letter '{letterLookingFor}'.");
+                        string result = word.IndexOf(letterLookingFor) < 0 ? $"The specified letter \"{letterLookingFor}\" is missing in the string: {word}" : $"Dear User first occurance in phrase \"{word}\" appear on index: {word.IndexOf(letterLookingFor)}";
+                        Console.WriteLine(result);
+                        return;
+                    }   
                 }
                 else Console.WriteLine("Dear User, you have not entered a letter, please try again.");
-            }
-            Console.WriteLine($"We are looking for the index of the first occurrence of the letter '{letterLookingFor}'.");
-            string result = word.IndexOf(letterLookingFor) < 0 ? $"The specified letter \"{letterLookingFor}\" is missing in the string: {word}" : $"Dear User first occurance in phrase \"{word}\" appear on index: {word.IndexOf(letterLookingFor)}";
-            Console.WriteLine(result);
+            }          
         }
 
         public void PrintSubstringFromTo(string word)
         {
-            int startIndex;
-            int endIndex;
-
             while (true)
             {
                 Console.Write("We print now substring which start from index what you want position: ");
-                startIndex = choiceOptions.EnterNumber();
+                int startIndex = choiceOptions.EnterNumber();
                 if (startIndex < 0 || word.Length < startIndex)
                 {
                     Console.WriteLine($"Your start index: {startIndex} is smaller than 0 or larger than your word length. Try again please.");
@@ -117,20 +115,22 @@
                 }
 
                 Console.Write("We print now substring which end in what you want position: ");
-                endIndex = choiceOptions.EnterNumber();
+                int endIndex = choiceOptions.EnterNumber();
 
-                if (endIndex < 0 || word.Length < endIndex)
+                if (endIndex < 0 || word.Length < endIndex) Console.WriteLine($"Your end index: {endIndex} is smaller than 0 or larger than your word length. Try again please.");
+                else if (startIndex > endIndex) Console.WriteLine($"You entered start index: {startIndex} larger than end index: {endIndex}. Try again please.");
+                else if (startIndex == endIndex)
                 {
-                    Console.WriteLine($"Your end index: {endIndex} is smaller than 0 or larger than your word length. Try again please.");
-                    continue;
+                    Console.WriteLine($"You probably know this but I want to make sure you set start index({startIndex}) the same as end index({endIndex}) so your substring is empty.");
+                    return;
                 }
-                else if (startIndex > endIndex)
+                else
                 {
-                    Console.WriteLine($"You entered start index: {startIndex} larger than end index: {endIndex}. Try again please.");
+                    Console.WriteLine($"We print now substring which start from index {startIndex} and end in {endIndex} position: {word.Substring(startIndex, endIndex)} ");
+                    return;
                 }
-                else break;
             }
-            Console.WriteLine($"We print now substring which start from index {startIndex} and end in {endIndex} position: {word.Substring(startIndex, endIndex)} ");
+            
         }
 
         public void SplitString(string word)

@@ -1,9 +1,10 @@
-﻿namespace Word
+﻿namespace String
 {
-    class ChoiceOptions
+    class OptionSelector
     {
-        public void PossibleOption()
+        public int WritingOptions()
         {
+            Console.Write("\nMy dear user, I am asking you to choose one of the numbers below: \n\n");
             Console.WriteLine("1: For print your word.");
             Console.WriteLine("2: Inverted word.");
             Console.WriteLine("3: For concatenate string using 'String.Join'.");
@@ -16,8 +17,10 @@
             Console.WriteLine("10: For print your substring.");
             Console.WriteLine("11: For print write out specially separately from the sentence you wrote the words.");
             Console.WriteLine("12: For find index number occurrence of the character you selected from the sentence you wrote the words.");
+            Console.Write("\nYour choice is(1-12): ");
+            return EnterNumber();
         }
-        public void ExecutionOption()
+        public void PerformedOption()
         {
             PossibleWordOperation possibleWordOperation = new PossibleWordOperation();
             bool rightNumber = true;
@@ -25,78 +28,71 @@
 
             while (true)
             {
-                switch (EnterNumber())
+                switch (WritingOptions())
                 {
                     case 1:
                         possibleWordOperation.PrintWord(word);
-                        break;
+                        return;
                     case 2:
                         possibleWordOperation.ReverseWord(word);
-                        break;
+                        return;
                     case 3:
                         possibleWordOperation.ConcatenateWords(possibleWordOperation.ChangeWordToArray(word));
-                        break;
+                        return;
                     case 4:
                         possibleWordOperation.ToUpper(word);
-                        break;
+                        return;
                     case 5:
                         possibleWordOperation.ToLower(word);
-                        break;
+                        return;
                     case 6:
                         possibleWordOperation.CountNumberOfLettersInGivenWord(word);
-                        break;
+                        return;
                     case 7:
                         possibleWordOperation.SpellWord(word);
-                        break;
+                        return;
                     case 8:
                         possibleWordOperation.ConcatenateString(word);
-                        break;
+                        return;
                     case 9:
                         possibleWordOperation.CompareWord(word);
-                        break;
+                        return;
                     case 10:
                         possibleWordOperation.PrintSubstringFromTo(word);
-                        break;
+                        return;
                     case 11:
                         possibleWordOperation.SplitString(word);
-                        break;
+                        return;
                     case 12:
                         possibleWordOperation.ReturnPositionOfIndicatedCharacter(word);
-                        break;
-
+                        return;
                     default:
                         Console.Write("The selected number is not from 1 to 10. Please try again: ");
                         rightNumber = false;
                         break;
                 }
-                if (rightNumber) break;// a dobra już sobie przypomniałem to musi być jak liczba nie jest 1-12 to znowu pyta, default tego nie załatwia
-                else rightNumber = true;
             }
 
         }
 
         public string TakeWord()
         {
-            string word;
             while (true)
             {
-                Console.Write("My dear user, I am asking you to enter a some text, it can be a word/-s or an insignificant string of characters: ");
-                word = Console.ReadLine();
-                if (!String.IsNullOrEmpty(word)) break;
+                Console.Write("\nMy dear user, I am asking you to enter a some text, it can be a word/-s or an insignificant string of characters: ");
+                string word = Console.ReadLine();
+                if (!string.IsNullOrEmpty(word)) return word;
                 else Console.WriteLine("My dear user, provide not empty string.");
-            }
-            return word;
+            }          
         }
 
         public int EnterNumber()
         {
-            int numberCandidate;
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out numberCandidate)) break;
+                if (int.TryParse(Console.ReadLine(), out int numberCandidate)) return numberCandidate;
                 else Console.Write($"Dear User, this is not a number, please try again: ");
-            }
-            return numberCandidate;
+            }          
         }
     }
 }
