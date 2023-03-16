@@ -4,7 +4,7 @@
     {
         static public void Main(string[] args)
         {
-            AppOption appOption = new AppOption();
+            Option appOption = new Option();
             Transaction transaction = new Transaction();
             while (true)
             {

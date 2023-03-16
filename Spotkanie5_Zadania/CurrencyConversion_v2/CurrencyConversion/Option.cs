@@ -1,6 +1,6 @@
 ﻿namespace CurrencyConversion
 {
-    class AppOption
+    class Option
     {
         public int DecideWhichOption()
         {
@@ -59,7 +59,7 @@
             Console.WriteLine("\nUser, would you like to perform another operation?");
             int decision = DecideWhichOption();
             if (decision == 1) StayOnProgram();
-            else if (decision == 2) LeaveTheProgramme();
+            else if (decision == 2) LeaveProgramme();
         }
 
         public void StayOnProgram()
@@ -73,7 +73,7 @@
             Console.Clear();
         }
 
-        public void LeaveTheProgramme()
+        public void LeaveProgramme()
         {
             Console.WriteLine($"See you soon dear user.");
             Environment.Exit(1);

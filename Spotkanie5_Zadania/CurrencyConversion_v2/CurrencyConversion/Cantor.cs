@@ -4,7 +4,7 @@
     {
         public decimal exchangeRate;
         public string foreignCurrency;
-        AppOption appOption = new AppOption();
+        Option appOption = new Option();
         public (string, decimal) PurchaseCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to buy: \n");
@@ -52,11 +52,13 @@
             {
                 Console.Write("Dear user, tell me what currency you want to sell: ");
                 userCurrency = Console.ReadLine();
-                if (!String.IsNullOrEmpty(userCurrency)) break;
+                if (!String.IsNullOrEmpty(userCurrency))
+                {
+                    decimal userCourse = UserCourse(userCurrency);
+                    return (userCurrency, userCourse.ToString());
+                }
                 else Console.WriteLine("Currency name is required, please try again.");
-            }
-            decimal userCourse  = UserCourse(userCurrency);
-            return (userCurrency, userCourse.ToString());
+            }         
         }
 
         public decimal UserCourse(string userCurrency)

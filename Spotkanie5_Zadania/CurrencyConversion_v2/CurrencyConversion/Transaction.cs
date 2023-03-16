@@ -2,7 +2,7 @@
 {
     class Transaction
     {
-        AppOption appOption = new AppOption();
+        Option appOption = new Option();
         Cantor cantor = new Cantor();
         public decimal amount;
         public void BuyOrSell()
