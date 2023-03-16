@@ -4,7 +4,7 @@
         {
             static public void Main(string[] args)
             {
-                AnnouncementVerdict announcementVerdict = new AnnouncementVerdict();
+                Announcement announcementVerdict = new Announcement();
                 announcementVerdict.ApplicationRunner();
             }
         }

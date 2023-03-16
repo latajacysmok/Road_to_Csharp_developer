@@ -1,12 +1,12 @@
 ﻿namespace BMI
 {
-    class AnnouncementVerdict
+    class Announcement
     {
         BmiCalculator bmiCalculator = new BmiCalculator();
         public void ApplicationRunner()
         {
-            ProgramData programData = new ProgramData();
-            AppOption appOption = new AppOption();
+            Data programData = new Data();
+            Option appOption = new Option();
             appOption.ProgramWelcome();
             string name = Console.ReadLine();
             while (true)
@@ -16,8 +16,8 @@
                 double bmi = bmiCalculator.BmiCalculation(weight, height);
 
                 Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {EstimateWeight(bmi)}.");
-                WhatNeedToBeOk(bmi, height);
-                appOption.ChoiceOptions(name);
+                AdjusterToRightWeight(bmi, height);
+                appOption.MakingDecisionAboutNextStep(name);
             }
         }
         public string EstimateWeight(double bmi)
@@ -33,7 +33,7 @@
             }
         }
 
-        public void WhatNeedToBeOk(double bmi, double height)
+        public void AdjusterToRightWeight(double bmi, double height)
         {
             string results = EstimateWeight(bmi);
 

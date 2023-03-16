@@ -1,6 +1,6 @@
 ﻿namespace BMI
 {
-    class AppOption
+    class Option
     {
         public void ProgramWelcome()
         {
@@ -10,7 +10,7 @@
             Console.Write("Dear user, write me your name: ");
         }
 
-        public void ChoiceOptions(string name)
+        public void MakingDecisionAboutNextStep(string name)
         {
             while (true)
             {
@@ -21,13 +21,9 @@
                 if (decisionToExitTheProgram == 1)
                 {
                     StayOnProgram();
-                    break;
+                    return;
                 }
-                else if (decisionToExitTheProgram == 2)
-                {
-                    LeaveTheProgramme();
-                    break;
-                }
+                else if (decisionToExitTheProgram == 2) LeaveProgramme();
                 else Console.WriteLine($"{name} entered an invalid value, The given number must equal 1 if you want to continue and 2 if you want to end the program. Please try again.");
             }
         }
@@ -43,7 +39,7 @@
             Console.Clear();
         }
 
-        public void LeaveTheProgramme()
+        public void LeaveProgramme()
         {
             Console.WriteLine($"See you soon dear user.");
             Environment.Exit(1);

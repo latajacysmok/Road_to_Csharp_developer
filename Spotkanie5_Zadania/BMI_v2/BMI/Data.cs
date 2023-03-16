@@ -1,8 +1,8 @@
 ﻿namespace BMI
 {
-    class ProgramData
+    class Data
     {
-        AppOption appOption = new AppOption();
+        Option appOption = new Option();
         public double WeightChecker(string name)
         {
             while (true)
