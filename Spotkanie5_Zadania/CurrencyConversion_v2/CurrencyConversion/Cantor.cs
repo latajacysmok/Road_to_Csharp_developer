@@ -19,8 +19,9 @@
                     return 5.3722m;
                 case "Czech crown":
                     return 0.2745m;
+                default:
+                    return 0;
             }
-            return exchangeRate;
         }
 
         public decimal SellCurrency()
@@ -36,8 +37,9 @@
                     return 4.8349m;
                 case "Czech crown":
                     return 0.2470m;
+                default:
+                    return 0;
             }
-            return exchangeRate;
         }
 
         public decimal CurrencyUser()
@@ -72,6 +74,7 @@
             Console.WriteLine("- Dollar,");
             Console.WriteLine("- Euro,");
             Console.WriteLine("- Czech crown.");
+            Console.Write("\nDear user, please enter the name of the currency you want to use: ");
         }
     }
 }

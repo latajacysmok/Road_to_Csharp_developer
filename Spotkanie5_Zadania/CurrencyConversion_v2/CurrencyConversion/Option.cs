@@ -16,6 +16,7 @@
 
         public int ItNumber()
         {
+            Console.Write("Dear user, please give me your answer now: ");
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int number)) return number;
