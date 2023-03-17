@@ -23,8 +23,8 @@
                 if (assignItYourself == 1)
                 {
                     var result = cantor.PurchaseCurrency();
-                    string currency = result.Item1;
-                    decimal currencyValue = Math.Round(result.Item2, 4);
+                    string currency = cantor.foreignCurrency;
+                    decimal currencyValue = Math.Round(result, 4);
                     currencyValue = Math.Round(currencyValue, 4);
                     Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need buy: ");
                     amount = appOption.DownloadAmount();
@@ -39,26 +39,22 @@
             Console.Write("Dear user, tell me what you want? Sell?\n");
             int sell = appOption.DecideWhichOption();
 
-            if (sell == 1)
+            if (OwnCurrency() == 2)
             {
-                if (OwnCurrency() == 2)
-                {
-                    Console.Write("User, to sure make a choice regarding the exchange rate now?: \n");
-                    int exchangeRate = appOption.DecideWhichOption();
+            Console.Write("User, to sure make a choice regarding the exchange rate now?: \n");
+            int exchangeRate = appOption.DecideWhichOption();
 
-                    if (exchangeRate == 1)
-                    {
-                        var result = cantor.SellCurrency();
-                        string currency = result.Item1;
-                        decimal currencyValue = Math.Round(result.Item2, 4);
-                        Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need sell: ");
+            if (exchangeRate == 1)
+            {
+                var result = cantor.SellCurrency();
+                string currency = cantor.foreignCurrency;
+                decimal currencyValue = Math.Round(result, 4);
+                Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need sell: ");
                         amount = appOption.DownloadAmount();
                         Console.WriteLine($"For {amount} {currency} you will get: {Math.Round(amount * currencyValue, 2)} PLN.");
-                    }
-                    else if (exchangeRate == 2) appOption.NoDecisionYet();
-                }
             }
-            else if (sell == 2) appOption.NoDecisionYet();
+            else if (exchangeRate == 2) appOption.NoDecisionYet();
+            }
         }
         public int OwnCurrency()
         {
@@ -67,8 +63,8 @@
             if (exchangeRate == 1)
             {
                 var result = cantor.CurrencyUser();
-                string currency = result.Item1;
-                decimal currencyValue = Math.Round(result.Item2, 4);
+                string currency = cantor.userCurrency;
+                decimal currencyValue = Math.Round(result, 4);
 
                 Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency} do you need: ");
                 amount = appOption.DownloadAmount();

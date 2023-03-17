@@ -4,8 +4,9 @@
     {
         public decimal exchangeRate;
         public string foreignCurrency;
+        public string userCurrency;
         Option appOption = new Option();
-        public (string, decimal) PurchaseCurrency()
+        public decimal PurchaseCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to buy: \n");
             AvailableCurrencies();
@@ -13,19 +14,16 @@
             switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
             {
                 case "Dollar":
-                    exchangeRate = 4.8765m;
-                    break;
+                    return 4.8765m;
                 case "Euro":
-                    exchangeRate = 5.3722m;
-                    break;
+                    return 5.3722m;
                 case "Czech crown":
-                    exchangeRate = 0.2745m;
-                    break;
+                    return 0.2745m;
             }
-            return (foreignCurrency, exchangeRate);
+            return exchangeRate;
         }
 
-        public (string, decimal) SellCurrency()
+        public decimal SellCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to sell: \n");
             AvailableCurrencies();
@@ -33,21 +31,18 @@
             switch (char.ToUpper(foreignCurrency[0]) + foreignCurrency.Substring(1))
             {
                 case "Dollar":
-                    exchangeRate = 4.3888m;
-                    break;
+                    return 4.3888m;
                 case "Euro":
-                    exchangeRate = 4.8349m;
-                    break;
+                    return 4.8349m;
                 case "Czech crown":
-                    exchangeRate = 0.2470m;
-                    break;
+                    return 0.2470m;
             }
-            return (foreignCurrency, exchangeRate);
+            return exchangeRate;
         }
 
-        public (string, string) CurrencyUser()
+        public decimal CurrencyUser()
         {
-            string userCurrency;
+            //string userCurrency;
             while (true)
             {
                 Console.Write("Dear user, tell me what currency you want to sell: ");
@@ -55,7 +50,7 @@
                 if (!String.IsNullOrEmpty(userCurrency))
                 {
                     decimal userCourse = UserCourse(userCurrency);
-                    return (userCurrency, userCourse.ToString());
+                    return userCourse;
                 }
                 else Console.WriteLine("Currency name is required, please try again.");
             }         
