@@ -8,7 +8,7 @@
             return bmi;
         }
 
-        public double PowerCalculation(double height)
+        private double PowerCalculation(double height)
         {
             double pow = Math.Pow(2.0, (double)height);
             return pow;
