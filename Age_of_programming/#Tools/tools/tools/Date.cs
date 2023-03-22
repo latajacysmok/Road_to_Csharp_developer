@@ -1,6 +1,6 @@
 ﻿namespace Tools
 {
-    class TakeDate
+    class Date
     {
         public string TakeName()
         {
