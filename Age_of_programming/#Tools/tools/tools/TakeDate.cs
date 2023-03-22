@@ -1,23 +1,14 @@
 ﻿namespace Tools
 {
-    class Program
+    class TakeDate
     {
-        static void Main(string[] args)
-        {
-            string varNameFromUser = TakeName();
-            int valueFromUser = TakeNumber();
-            Console.WriteLine("--------\n");
-            PrintDate(varNameFromUser, valueFromUser);
-            Console.ReadKey();
-        }
-
-        static string TakeName()
+        public string TakeName()
         {
             Console.Write("Dear user, give me the name of the variable: ");
             return Console.ReadLine();
         }
 
-        static int TakeNumber()
+        public int TakeNumber()
         {
             int number;
             while (true)
@@ -29,11 +20,9 @@
             return number;
         }
 
-        static void PrintDate(string name, int number)
+        public void PrintDate(string name, int number)
         {
             Console.WriteLine($"Your variable {name} has the value: {number}");
         }
     }
-
 }
-
