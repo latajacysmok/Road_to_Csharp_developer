@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -10,9 +9,6 @@
   <ItemGroup>
     <Reference Include="Decide">
       <HintPath>..\..\Decide\Decide\bin\Debug\net6.0\Decide.dll</HintPath>
-    </Reference>
-    <Reference Include="Option">
-      <HintPath>..\..\Option\Option\bin\Debug\net6.0\Option.dll</HintPath>
     </Reference>
   </ItemGroup>
 
