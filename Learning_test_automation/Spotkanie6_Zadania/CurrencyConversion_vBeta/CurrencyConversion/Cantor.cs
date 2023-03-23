@@ -1,13 +1,12 @@
-﻿using Option;
-
-namespace CurrencyConversion
+﻿namespace CurrencyConversion
 {
     class Cantor
     {
-        public decimal exchangeRate;
+        private decimal exchangeRate;
         public string foreignCurrency;
         public string userCurrency;
-        PossibleOperations option = new PossibleOperations();
+        Option.Option option = new Option.Option();
+
         public decimal PurchaseCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to buy: \n");

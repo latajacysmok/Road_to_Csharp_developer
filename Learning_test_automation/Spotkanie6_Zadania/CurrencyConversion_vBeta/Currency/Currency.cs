@@ -1,6 +1,6 @@
-﻿namespace Option
+﻿namespace Currency
 {
-    enum Currency
+    public enum Currency
     {
         Dollar = 1,
         Euro = 2,

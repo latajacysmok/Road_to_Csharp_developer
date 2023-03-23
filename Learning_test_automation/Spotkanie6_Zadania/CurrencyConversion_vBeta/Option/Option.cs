@@ -1,10 +1,7 @@
-﻿using Decide;
-
-namespace Option
+﻿namespace Option
 {
-    public class PossibleOperations
+    public class Option
     {
-
         public int DecideWhichOption()
         {
             while (true)
@@ -12,7 +9,7 @@ namespace Option
                 Console.WriteLine("If 'Yes' enter: '1'.");
                 Console.WriteLine("If 'No' enter: '2'.");
                 int decision = ItNumber();
-                if (decision == (int)Choice.Yes || decision == (int)Choice.No) return decision;
+                if (decision == (int)Decide.Decide.Yes || decision == (int)Decide.Decide.No) return decision;
                 else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
         }
@@ -29,15 +26,17 @@ namespace Option
 
         public string IsCurrency()
         {
+            Currency.Currency currency1 = new Currency.Currency();
             AvailableCurrencies();
             while (true)
-            {               
+            {
                 string[] currency = { "Dollar", "Euro", "Czech_crown" };
                 var foreignCurrency = ItNumber();
-                Currency intAsEnum = (Currency)foreignCurrency;
+                Currency.Currency intAsEnum = (Currency.Currency)foreignCurrency;
 
                 if (currency.Contains(intAsEnum.ToString())) return intAsEnum.ToString();
                 else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
+                return "dupa";
             }
         }
 
@@ -48,7 +47,7 @@ namespace Option
                 Console.WriteLine("If 'Yes' enter: '1'.");
                 Console.WriteLine("If 'No' enter: '2'.");
                 int decision = ItNumber();
-                if (decision == (int)Choice.Yes || decision == (int)Choice.No) return decision;
+                if (decision == (int)Decide.Decide.Yes || decision == (int)Decide.Decide.No) return decision;
                 else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
         }
@@ -80,8 +79,8 @@ namespace Option
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine("\nUser, would you like to perform another operation?");
             int decision = DecideWhichOption();
-            if (decision == (int)Choice.Yes) StayOnProgram();
-            else if (decision == (int)Choice.No) LeaveProgramme();
+            if (decision == (int)Decide.Decide.Yes) StayOnProgram();
+            else if (decision == (int)Decide.Decide.No) LeaveProgramme();
         }
 
         private void StayOnProgram()
@@ -99,7 +98,7 @@ namespace Option
         {
             Console.WriteLine($"\nI understand that, see you soon dear user.");
             Console.ReadKey();
-            Environment.Exit(1);          
+            Environment.Exit(1);
         }
 
         public void NoDecisionYet()

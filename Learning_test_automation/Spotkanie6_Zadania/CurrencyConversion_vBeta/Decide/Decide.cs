@@ -1,6 +1,6 @@
 ﻿namespace Decide
 {
-    public enum Choice
+    public enum Decide
     {
         Yes = 1,
         No = 2,

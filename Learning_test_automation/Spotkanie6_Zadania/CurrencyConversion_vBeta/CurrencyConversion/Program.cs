@@ -1,13 +1,11 @@
-﻿using Option;
-
-namespace CurrencyConversion
+﻿namespace CurrencyConversion
 {
     class Program
     {
         static public void Main(string[] args)
         {
-            PossibleOperations option = new PossibleOperations();
             Transaction transaction = new Transaction();
+            Option.Option option = new Option.Option();
             while (true)
             {
                 transaction.BuyOrSell();

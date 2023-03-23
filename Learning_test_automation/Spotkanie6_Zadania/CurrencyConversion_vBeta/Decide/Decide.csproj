@@ -6,10 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="Decide">
-      <HintPath>..\..\Decide\Decide\bin\Debug\net6.0\Decide.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
