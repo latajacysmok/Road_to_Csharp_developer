@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrecisionString_tools", "PrecisionString_tools\PrecisionString_tools.csproj", "{D24FDEC7-65C7-4E9A-96E8-0006F38DE0DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrecisionString_tools", "PrecisionString_tools\PrecisionString_tools.csproj", "{D24FDEC7-65C7-4E9A-96E8-0006F38DE0DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1165AD66-1D44-491E-9D30-74EC876B454B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Printer", "Printer\Printer.csproj", "{854040B3-10EC-4A22-A794-EF9FB4F6BE2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D24FDEC7-65C7-4E9A-96E8-0006F38DE0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D24FDEC7-65C7-4E9A-96E8-0006F38DE0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D24FDEC7-65C7-4E9A-96E8-0006F38DE0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1165AD66-1D44-491E-9D30-74EC876B454B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1165AD66-1D44-491E-9D30-74EC876B454B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1165AD66-1D44-491E-9D30-74EC876B454B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1165AD66-1D44-491E-9D30-74EC876B454B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854040B3-10EC-4A22-A794-EF9FB4F6BE2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854040B3-10EC-4A22-A794-EF9FB4F6BE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854040B3-10EC-4A22-A794-EF9FB4F6BE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854040B3-10EC-4A22-A794-EF9FB4F6BE2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

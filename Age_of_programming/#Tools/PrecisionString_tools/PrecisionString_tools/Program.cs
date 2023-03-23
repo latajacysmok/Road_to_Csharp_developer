@@ -4,8 +4,8 @@
     {
         static public void Main(string[] args)
         {
-            Date takeDate = new Date();
-            Printer printer = new Printer();
+            Data.Data takeDate = new Data.Data();
+            Printer.Printer printer = new Printer.Printer();
 
             string varNameFromUser = takeDate.TakeName();
             string valueFromUser = takeDate.TakeString();

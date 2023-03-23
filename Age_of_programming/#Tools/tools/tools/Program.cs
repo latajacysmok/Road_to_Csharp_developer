@@ -4,11 +4,11 @@
     {
         static public void Main(string[] args)
         {
-            Date takeDate = new Date();
-            string varNameFromUser = takeDate.TakeName();
-            int valueFromUser = takeDate.TakeNumber();
+            Data.Data takeData = new Data.Data();
+            string varNameFromUser = takeData.TakeName();
+            int valueFromUser = takeData.TakeNumber();
             Console.WriteLine("--------\n");
-            takeDate.PrintDate(varNameFromUser, valueFromUser);
+            takeData.PrintDate(varNameFromUser, valueFromUser);
             Console.ReadKey();
         }
     }

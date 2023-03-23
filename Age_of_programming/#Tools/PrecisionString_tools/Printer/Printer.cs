@@ -1,6 +1,6 @@
-﻿namespace PrecisionString_tools
+﻿namespace Printer
 {
-    class Printer
+    public class Printer
     {
         public void PrintDate(string varNameFromUser, string valueFromUser)
         {

@@ -1,6 +1,6 @@
-﻿namespace PrecisionString_tools
+﻿namespace Data
 {
-    class Date
+    public class Data
     {
         public string TakeName()
         {
@@ -27,7 +27,7 @@
         {
             int minStringLen = TakeMinimumStringLength();
             int maxStringLen = TakeMaximumStringLength(minStringLen);
-         
+
             return TakeWord(minStringLen, maxStringLen);
         }
 
