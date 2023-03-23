@@ -20,35 +20,18 @@
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int number)) return number;
+                else if(String.IsNullOrEmpty(number.ToString())) Console.Write("Dear User you have to give me some value: ");
                 else Console.Write($"{number} is not a number, please try again: ");
             }
         }
 
         public string IsCurrency()
         {
-            Currency.Currency currency1 = new Currency.Currency();
             AvailableCurrencies();
             while (true)
-            {
-                string[] currency = { "Dollar", "Euro", "Czech_crown" };
-                var foreignCurrency = ItNumber();
-                Currency.Currency intAsEnum = (Currency.Currency)foreignCurrency;
-
-                if (currency.Contains(intAsEnum.ToString())) return intAsEnum.ToString();
+            {            
+                if (Enum.TryParse(ItNumber().ToString(), out Currency.Currency currency)) return currency.ToString();
                 else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
-                return "dupa";
-            }
-        }
-
-        private int DecideWhichCurrency()
-        {
-            while (true)
-            {
-                Console.WriteLine("If 'Yes' enter: '1'.");
-                Console.WriteLine("If 'No' enter: '2'.");
-                int decision = ItNumber();
-                if (decision == (int)Decide.Decide.Yes || decision == (int)Decide.Decide.No) return decision;
-                else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
         }
 
@@ -99,12 +82,6 @@
             Console.WriteLine($"\nI understand that, see you soon dear user.");
             Console.ReadKey();
             Environment.Exit(1);
-        }
-
-        public void NoDecisionYet()
-        {
-            Console.WriteLine("I understand that you are not yet decided what to do. We can try again.");
-            WhatDoWeDoNext();
         }
     }
 }

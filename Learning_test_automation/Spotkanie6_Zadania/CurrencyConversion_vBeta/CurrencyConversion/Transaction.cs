@@ -3,7 +3,6 @@
     class Transaction
     {
         Option.Option option = new Option.Option();
-        //Decide.Decide decide = new Decide.Decide();
         Cantor cantor = new Cantor();
         public decimal amount;
 
