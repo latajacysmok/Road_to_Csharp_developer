@@ -1,35 +1,35 @@
 ﻿namespace CurrencyConversion
 {
-    class Transaction
+    public class Transaction
     {
-        Option.Option option = new Option.Option();
+        Option option = new Option();
         Cantor cantor = new Cantor();
-        public decimal amount;
+        private decimal amount;
 
         public void BuyOrSell()
         {
             Console.Write("Dear user, tell me what you want? Buy?\n");
-            int buy = option.DecideWhichOption();
-            if (buy == (int)Decide.Decide.Yes) Buying();
-            else if (buy == (int)Decide.Decide.No) Selling();
+            var buy = option.DecideWhichOption();
+            if      (buy == Decide.MakingDecision.Yes) Buying();
+            else if (buy == Decide.MakingDecision.No) Selling();
         }
 
         public void Buying()
         {
-            if (OwnCurrency() == (int)Decide.Decide.No) BuyCurrency();
+            if (OwnCurrency() == Decide.MakingDecision.No) BuyCurrency();
         }
 
         public void Selling()
         {
             Console.Write("Dear user, tell me what you want? Sell?\n");
-            int sell = option.DecideWhichOption();
-            if (OwnCurrency() == (int)Decide.Decide.No) SellCurrency();
+            Decide.MakingDecision sell = option.DecideWhichOption();
+            if (OwnCurrency() == Decide.MakingDecision.No) SellCurrency();
         }
-        private int OwnCurrency()
+        private Decide.MakingDecision OwnCurrency()
         {
             Console.Write("User, make your choice regarding the exchange rate now, do you want to set the currency value yourself?: \n");
-            int exchangeRate = option.DecideWhichOption();
-            if (exchangeRate == (int)Decide.Decide.Yes)
+            Decide.MakingDecision exchangeRate = option.DecideWhichOption();
+            if (exchangeRate == Decide.MakingDecision.Yes)
             {
                 var result = cantor.CurrencyUser();
                 string currency = cantor.userCurrency;

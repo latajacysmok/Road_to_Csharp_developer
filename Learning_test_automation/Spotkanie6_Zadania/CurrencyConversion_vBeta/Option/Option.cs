@@ -1,15 +1,18 @@
-﻿namespace Option
+﻿using Decide;
+
+namespace CurrencyConversion
 {
     public class Option
     {
-        public int DecideWhichOption()
+        public MakingDecision DecideWhichOption()
         {
             while (true)
             {
                 Console.WriteLine("If 'Yes' enter: '1'.");
                 Console.WriteLine("If 'No' enter: '2'.");
                 int decision = ItNumber();
-                if (decision == (int)Decide.Decide.Yes || decision == (int)Decide.Decide.No) return decision;
+                if (decision == (int)MakingDecision.Yes) return MakingDecision.Yes;
+                else if (decision == (int)MakingDecision.No) return MakingDecision.No;
                 else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
         }
@@ -30,7 +33,7 @@
             AvailableCurrencies();
             while (true)
             {            
-                if (Enum.TryParse(ItNumber().ToString(), out Currency.Currency currency)) return currency.ToString();
+                if (Enum.TryParse(ItNumber().ToString(), out Currency currency)) return currency.ToString();
                 else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
             }
         }
@@ -61,9 +64,9 @@
         {
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine("\nUser, would you like to perform another operation?");
-            int decision = DecideWhichOption();
-            if (decision == (int)Decide.Decide.Yes) StayOnProgram();
-            else if (decision == (int)Decide.Decide.No) LeaveProgramme();
+            MakingDecision decision = DecideWhichOption();
+            if (decision == MakingDecision.Yes) StayOnProgram();
+            else if (decision == MakingDecision.No) LeaveProgramme();
         }
 
         private void StayOnProgram()

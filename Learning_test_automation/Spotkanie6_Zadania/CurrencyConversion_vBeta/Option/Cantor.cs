@@ -1,11 +1,11 @@
 ﻿namespace CurrencyConversion
 {
-    class Cantor
+    public class Cantor
     {
         private decimal exchangeRate;
         public string foreignCurrency;
         public string userCurrency;
-        Option.Option option = new Option.Option();
+        Option option = new Option();
 
         public decimal PurchaseCurrency()
         {
@@ -53,7 +53,7 @@
                     return userCourse;
                 }
                 else Console.WriteLine("Currency name is required, please try again.");
-            }         
+            }
         }
 
         public decimal UserCourse(string userCurrency)
