@@ -17,7 +17,7 @@
                     return 4.8765m;
                 case "Euro":
                     return 5.3722m;
-                case "Czech crown":
+                case "Czech_crown":
                     return 0.2745m;
                 default:
                     return 0;
@@ -34,7 +34,7 @@
                     return 4.3888m;
                 case "Euro":
                     return 4.8349m;
-                case "Czech crown":
+                case "Czech_crown":
                     return 0.2470m;
                 default:
                     return 0;

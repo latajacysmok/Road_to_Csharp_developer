@@ -52,12 +52,22 @@ namespace CurrencyConversion
             {
                 if (decimal.TryParse(Console.ReadLine(), out amount))
                 {
-                    if (amount > 0) break;
-                    else Console.WriteLine("I can't convert negative value of money. Try again, please: ");
+                    if (IfNumberIsPositive(amount)) break;
+                    else continue;                
                 }
                 else Console.WriteLine($"This is not a number: {amount.ToString()}. Try again, please: ");
             }
             return Math.Round(amount, 2);
+        }
+
+        private bool IfNumberIsPositive(decimal number)
+        {
+            if (number > 0) return true;
+            else
+            {
+                Console.Write("I can't convert negative value of money. Try again, please: ");
+                return false;
+            }           
         }
 
         public void WhatDoWeDoNext()

@@ -46,8 +46,9 @@
         private void SellCurrency()
         {
             var result = cantor.SellCurrency();
-            string currency = cantor.foreignCurrency;
+            string currency = cantor.foreignCurrency == "Czech_crown" ? "Czech crown" : cantor.foreignCurrency;
             decimal currencyValue = Math.Round(result, 4);
+
             Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need sell: ");
             amount = option.DownloadAmount();
             Console.WriteLine($"For {amount} {currency} you will get: {Math.Round(amount * currencyValue, 2)} PLN.");
@@ -56,9 +57,9 @@
         private void BuyCurrency()
         {
             var result = cantor.PurchaseCurrency();
-            string currency = cantor.foreignCurrency;
+            string currency = cantor.foreignCurrency == "Czech_crown" ? "Czech crown" : cantor.foreignCurrency;
             decimal currencyValue = Math.Round(result, 4);
-            currencyValue = Math.Round(currencyValue, 4);
+
             Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need buy: ");
             amount = option.DownloadAmount();
             Console.WriteLine($"{amount} {currency}s will cost you: {Math.Round(amount * currencyValue, 2)} PLN.");
