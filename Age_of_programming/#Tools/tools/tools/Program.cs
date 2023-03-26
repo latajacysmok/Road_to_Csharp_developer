@@ -4,7 +4,7 @@
     {
         static public void Main(string[] args)
         {
-            Data.Data takeData = new Data.Data();
+            Data.ValueStorage takeData = new Data.ValueStorage();
             string varNameFromUser = takeData.TakeName();
             int valueFromUser = takeData.TakeNumber();
             Console.WriteLine("--------\n");

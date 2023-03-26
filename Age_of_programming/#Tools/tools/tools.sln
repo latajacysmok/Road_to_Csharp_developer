@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tools", "tools\tools.csproj", "{FD04959F-C854-4E97-AF59-050DC0935422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "tools\Tools.csproj", "{FD04959F-C854-4E97-AF59-050DC0935422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Date\Data.csproj", "{13A0D81E-1CCD-4827-8526-4AC1193024C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Date\Data.csproj", "{13A0D81E-1CCD-4827-8526-4AC1193024C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

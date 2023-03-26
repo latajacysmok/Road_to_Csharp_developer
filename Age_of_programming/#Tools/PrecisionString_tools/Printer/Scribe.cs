@@ -1,6 +1,6 @@
 ﻿namespace Printer
 {
-    public class Printer
+    public class Scribe
     {
         public void PrintDate(string varNameFromUser, string valueFromUser)
         {
