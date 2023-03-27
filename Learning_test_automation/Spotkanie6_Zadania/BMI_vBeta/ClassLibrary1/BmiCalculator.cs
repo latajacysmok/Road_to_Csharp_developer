@@ -1,6 +1,6 @@
 ﻿namespace BMI
 {
-    class BmiCalculator
+    public class BmiCalculator
     {
         public double BmiCalculation(double weight, double height)
         {

@@ -1,8 +1,10 @@
-﻿namespace BMI
+﻿using Option;
+
+namespace Data
 {
-    class Data
+    public class ValueStorage
     {
-        Option appOption = new Option();
+        Performer appOption = new Performer();
         public double WeightChecker(string name)
         {
             while (true)

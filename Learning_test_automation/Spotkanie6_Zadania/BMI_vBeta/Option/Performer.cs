@@ -1,6 +1,6 @@
-﻿namespace BMI
+﻿namespace Option
 {
-    class Option
+    public class Performer
     {
         public void ProgramWelcome()
         {

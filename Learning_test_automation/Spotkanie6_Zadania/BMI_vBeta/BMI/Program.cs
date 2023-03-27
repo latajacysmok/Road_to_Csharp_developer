@@ -1,4 +1,6 @@
-﻿namespace BMI
+﻿using BMI;
+
+namespace Interface
 {
     class Program
         {

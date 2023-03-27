@@ -1,12 +1,15 @@
-﻿namespace BMI
+﻿using Data;
+using Option;
+
+namespace BMI
 {
-    class Announcement
+    public class Announcement
     {
         BmiCalculator bmiCalculator = new BmiCalculator();
         public void ApplicationRunner()
         {
-            Data programData = new Data();
-            Option appOption = new Option();
+            ValueStorage programData = new ValueStorage();
+            Performer appOption = new Performer();
             appOption.ProgramWelcome();
             string name = Console.ReadLine();
             while (true)
