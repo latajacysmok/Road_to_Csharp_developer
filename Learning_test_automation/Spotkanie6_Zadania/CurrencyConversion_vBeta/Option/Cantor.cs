@@ -1,23 +1,25 @@
-﻿namespace CurrencyConversion
+﻿using Decide;
+
+namespace CurrencyConversion
 {
     public class Cantor
     {
         private decimal exchangeRate;
-        public string foreignCurrency;
+        public CurrencyNames foreignCurrency;
         public string userCurrency;
         Option option = new Option();
 
-        public decimal PurchaseCurrency()
+        public decimal PurchaseCurrency()//
         {
             Console.Write("Dear user, tell me what currency you want to buy: \n");
             foreignCurrency = option.IsCurrency();
             switch (foreignCurrency)
             {
-                case "Dollar":
+                case CurrencyNames.Dollar:
                     return 4.8765m;
-                case "Euro":
+                case CurrencyNames.Euro:
                     return 5.3722m;
-                case "Czech_crown":
+                case CurrencyNames.Czech_crown:
                     return 0.2745m;
                 default:
                     return 0;
@@ -30,11 +32,11 @@
             foreignCurrency = option.IsCurrency();
             switch (foreignCurrency)
             {
-                case "Dollar":
+                case CurrencyNames.Dollar:
                     return 4.3888m;
-                case "Euro":
+                case CurrencyNames.Euro:
                     return 4.8349m;
-                case "Czech_crown":
+                case CurrencyNames.Czech_crown:
                     return 0.2470m;
                 default:
                     return 0;

@@ -22,18 +22,28 @@ namespace CurrencyConversion
             Console.Write("Dear user, please give me your answer now: ");
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out int number)) return number;
-                else if(String.IsNullOrEmpty(number.ToString())) Console.Write("Dear User you have to give me some value: ");
+                if (int.TryParse(Console.ReadLine(), out int number))
+                {
+                    if (0 < number && number < 4 ) return number;
+                    else Console.WriteLine($"{number} must be equal: 1, 2 or 3");
+                }
+                else if (String.IsNullOrEmpty(number.ToString())) Console.Write("Dear User you have to give me some value: ");
                 else Console.Write($"{number} is not a number, please try again: ");
             }
         }
 
-        public string IsCurrency()
+        public CurrencyNames IsCurrency()
         {
             AvailableCurrencies();
+            
             while (true)
-            {            
-                if (Enum.TryParse(ItNumber().ToString(), out Currency currency)) return currency.ToString();
+            {
+                //if (Enum.TryParse(ItNumber().ToString(), out CurrencyNames currency)) return currency.ToString();
+                if (Enum.TryParse(ItNumber().ToString(), out CurrencyNames currency))
+                {
+                    Currency currency1 = new Currency(currency);
+                    return currency;
+                }
                 else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
             }
         }

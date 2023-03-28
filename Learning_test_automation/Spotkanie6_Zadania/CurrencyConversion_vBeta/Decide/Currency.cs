@@ -1,9 +1,18 @@
-﻿namespace Decide
+﻿using System.Xml.Linq;
+
+namespace Decide
 {
-    public enum Currency
+    public class Currency
     {
-        Dollar = 1,
-        Euro = 2,
-        Czech_crown = 3,
+        //private CurrencyNames cash;
+        public CurrencyNames Cash { get; }
+
+        public Currency(CurrencyNames cash)//ct+ tab
+        {
+            Cash = cash;
+        }
+
+         //prop + tab
+        // przy Tworzeniu klasy wywołuje konstruktor z konkretnymi wartościami, utwórz obiekt żeby było
     }
 }
