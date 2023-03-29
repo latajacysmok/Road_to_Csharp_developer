@@ -8,39 +8,18 @@ namespace CurrencyConversion
         public CurrencyNames foreignCurrency;
         public string userCurrency;
         Option option = new Option();
+        Transaction transaction = new Transaction();
 
-        public decimal PurchaseCurrency()//
+        public void PurchaseCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to buy: \n");
-            foreignCurrency = option.IsCurrency();
-            switch (foreignCurrency)
-            {
-                case CurrencyNames.Dollar:
-                    return 4.8765m;
-                case CurrencyNames.Euro:
-                    return 5.3722m;
-                case CurrencyNames.Czech_crown:
-                    return 0.2745m;
-                default:
-                    return 0;
-            }
+            Currency currency = new Currency(option.GetCurrencyName());
         }
 
-        public decimal SellCurrency()
+        public void SellCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to sell: \n");
-            foreignCurrency = option.IsCurrency();
-            switch (foreignCurrency)
-            {
-                case CurrencyNames.Dollar:
-                    return 4.3888m;
-                case CurrencyNames.Euro:
-                    return 4.8349m;
-                case CurrencyNames.Czech_crown:
-                    return 0.2470m;
-                default:
-                    return 0;
-            }
+            Currency currency = new Currency(option.GetCurrencyName());
         }
 
         public decimal CurrencyUser()

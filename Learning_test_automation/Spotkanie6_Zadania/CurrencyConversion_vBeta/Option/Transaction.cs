@@ -1,4 +1,6 @@
-﻿namespace CurrencyConversion
+﻿using Decide;
+
+namespace CurrencyConversion
 {
     public class Transaction
     {
@@ -45,7 +47,7 @@
 
         private void SellCurrency()
         {
-            var result = cantor.SellCurrency();
+            Currency result = cantor.SellCurrency;
             string currency = cantor.foreignCurrency.ToString() == "Czech_crown" ? "Czech crown" : cantor.foreignCurrency.ToString();
             decimal currencyValue = Math.Round(result, 4);
 
@@ -56,8 +58,9 @@
 
         private void BuyCurrency()
         {
-            var result = cantor.PurchaseCurrency();
-            string currency = cantor.foreignCurrency.ToString() == "Czech_crown" ? "Czech crown" : cantor.foreignCurrency.ToString();
+            //var result = cantor.PurchaseCurrency();
+
+            string currency =  .ToString() == "Czech_crown" ? "Czech crown" : cantor.foreignCurrency.ToString();
             decimal currencyValue = Math.Round(result, 4);
 
             Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency}s do you need buy: ");

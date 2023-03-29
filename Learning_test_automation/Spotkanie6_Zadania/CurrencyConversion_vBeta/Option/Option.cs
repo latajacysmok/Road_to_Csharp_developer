@@ -32,18 +32,13 @@ namespace CurrencyConversion
             }
         }
 
-        public CurrencyNames IsCurrency()
+        public CurrencyNames GetCurrencyName()
         {
             AvailableCurrencies();
             
             while (true)
             {
-                //if (Enum.TryParse(ItNumber().ToString(), out CurrencyNames currency)) return currency.ToString();
-                if (Enum.TryParse(ItNumber().ToString(), out CurrencyNames currency))
-                {
-                    Currency currency1 = new Currency(currency);
-                    return currency;
-                }
+                if (Enum.TryParse(ItNumber().ToString(), out CurrencyNames currency)) return currency;
                 else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
             }
         }
