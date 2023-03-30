@@ -1,14 +1,15 @@
 ﻿using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Decide
 {
     public class Currency
     {
         public CurrencyNames Name { get; }
-        public decimal BoughtValue { get; }
-        public decimal SentValue { get; }
-        private decimal BoughtCourse { get; }
-        private decimal SentCourse { get; }
+        public decimal BoughtValue { get; set; }
+        public decimal SentValue { get; set; }
+        public decimal BoughtCourse { get; }
+        public decimal SentCourse { get; }
 
         public Currency(CurrencyNames name)//ct+ tab
         {
@@ -16,6 +17,17 @@ namespace Decide
             BoughtCourse = GetBuyingCourse();
             SentCourse = GetSellCourse();
         }
+
+        public void GetSellValue(decimal amount)//jak to zrobić żeby nie było metody tylko wszystjo w property
+        {
+             SentValue = Math.Round(amount * SentCourse, 2);
+        }
+
+        public void GetBuyValue(decimal amount)
+        {
+            BoughtValue = Math.Round(amount * BoughtCourse, 2);
+        }
+
 
         private decimal GetBuyingCourse()
         {

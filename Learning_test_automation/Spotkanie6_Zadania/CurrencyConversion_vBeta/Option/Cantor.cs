@@ -8,18 +8,25 @@ namespace CurrencyConversion
         public CurrencyNames foreignCurrency;
         public string userCurrency;
         Option option = new Option();
-        Transaction transaction = new Transaction();
+        private Currency currency;
 
-        public void PurchaseCurrency()
+        public CurrencyNames GetCurrency()
         {
-            Console.Write("Dear user, tell me what currency you want to buy: \n");
-            Currency currency = new Currency(option.GetCurrencyName());
+            this.currency = new Currency(option.GetCurrencyName());
+            return currency.Name;
         }
 
-        public void SellCurrency()
+
+        public decimal GetCurrencySellAmount(decimal amount)
         {
-            Console.Write("Dear user, tell me what currency you want to sell: \n");
-            Currency currency = new Currency(option.GetCurrencyName());
+            currency.GetSellValue(amount);
+            return currency.SentCourse;
+        }
+        
+        public decimal GetCurrencyBuyAmount(decimal amount)
+        {
+            currency.GetBuyValue(amount);
+            return currency.BoughtValue;
         }
 
         public decimal CurrencyUser()
