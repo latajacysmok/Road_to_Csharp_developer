@@ -1,4 +1,5 @@
 ﻿using Decide;
+using static Decide.Names;
 
 namespace CurrencyConversion
 {
@@ -32,13 +33,13 @@ namespace CurrencyConversion
             }
         }
 
-        public CurrencyNames GetCurrencyName()
+        public CurrencyDefault GetCurrencyName()
         {
             AvailableCurrencies();
             
             while (true)
             {
-                if (Enum.TryParse(ItNumber().ToString(), out CurrencyNames currency)) return currency;
+                if (Enum.TryParse(ItNumber().ToString(), out CurrencyDefault currency)) return currency;
                 else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
             }
         }
@@ -48,31 +49,6 @@ namespace CurrencyConversion
             Console.WriteLine("- Dollar: 1,");
             Console.WriteLine("- Euro: 2,");
             Console.WriteLine("- Czech crown: 3.");
-        }
-
-        public decimal DownloadAmount()
-        {
-            decimal amount;
-            while (true)
-            {
-                if (decimal.TryParse(Console.ReadLine(), out amount))
-                {
-                    if (IfNumberIsPositive(amount)) break;
-                    else continue;                
-                }
-                else Console.WriteLine($"This is not a number: {amount.ToString()}. Try again, please: ");
-            }
-            return Math.Round(amount, 2);
-        }
-
-        private bool IfNumberIsPositive(decimal number)
-        {
-            if (number > 0) return true;
-            else
-            {
-                Console.Write("I can't convert negative value of money. Try again, please: ");
-                return false;
-            }           
         }
 
         public void WhatDoWeDoNext()

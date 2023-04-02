@@ -1,43 +1,77 @@
 ﻿using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Decide
 {
     public class Currency
     {
-        public CurrencyNames Name { get; }
-        public decimal BoughtValue { get; set; }
-        public decimal SentValue { get; set; }
-        public decimal BoughtCourse { get; }
-        public decimal SentCourse { get; }
+        public Names.CurrencyDefault Name { get; }
+        public decimal UserValueCurrency { get; }
+        public string UserNameCurrency { get; }
 
-        public Currency(CurrencyNames name)//ct+ tab
+        public decimal boughtValue;
+        public decimal BoughtValue 
         {
-            Name = name;
+            get { return boughtValue; }
+            set { boughtValue = Math.Round(value * BoughtCourse, 2); }
+        }
+
+        private decimal sentValue;
+        public decimal SentValue 
+        {
+            get {return sentValue; }
+            set { sentValue = Math.Round(value * SentCourse, 2); }     
+        }
+        private decimal BoughtCourse { get; }
+        private decimal SentCourse { get; }
+        private decimal UserCourse { get; }
+
+        public Currency(Names.CurrencyDefault name)//ct+ tab
+        {
+            Name         = name;
             BoughtCourse = GetBuyingCourse();
-            SentCourse = GetSellCourse();
+            SentCourse   = GetSellCourse();
         }
 
-        public void GetSellValue(decimal amount)//jak to zrobić żeby nie było metody tylko wszystjo w property
+        public Currency(string name)//ct+ tab
         {
-             SentValue = Math.Round(amount * SentCourse, 2);
+            UserNameCurrency       = name;
+            this.UserValueCurrency = GetUserCourse(name);
         }
 
-        public void GetBuyValue(decimal amount)
+        public decimal GetAmount()
         {
-            BoughtValue = Math.Round(amount * BoughtCourse, 2);
+            decimal amount;
+            while (true)
+            {
+                if (decimal.TryParse(Console.ReadLine(), out amount))
+                {
+                    if (IfNumberIsPositive(amount)) break;
+                    else continue;
+                }
+                else Console.WriteLine($"This is not a number: {amount.ToString()}. Try again, please: ");
+            }
+            return amount;
         }
 
+        private bool IfNumberIsPositive(decimal number)
+        {
+            if (number > 0) return true;
+            else
+            {
+                Console.Write("I can't convert negative value of money. Try again, please: ");
+                return false;
+            }
+        }
 
         private decimal GetBuyingCourse()
         {
             switch (Name)
             {
-                case CurrencyNames.Dollar:
+                case Names.CurrencyDefault.Dollar:
                     return 4.8765m;
-                case CurrencyNames.Euro:
+                case Names.CurrencyDefault.Euro:
                     return 5.3722m;
-                case CurrencyNames.Czech_crown:
+                case Names.CurrencyDefault.Czech_crown:
                     return 0.2745m;
                 default:
                     return 0;
@@ -48,18 +82,29 @@ namespace Decide
         {
             switch (Name)
             {
-                case CurrencyNames.Dollar:
+                case Names.CurrencyDefault.Dollar:
                     return 4.3888m;
-                case CurrencyNames.Euro:
+                case Names.CurrencyDefault.Euro:
                     return 4.8349m;
-                case CurrencyNames.Czech_crown:
+                case Names.CurrencyDefault.Czech_crown:
                     return 0.2470m;
                 default:
                     return 0;
             }
         }
 
-        //prop + tab
-        // przy Tworzeniu klasy wywołuje konstruktor z konkretnymi wartościami, utwórz obiekt żeby było
-    }
+        private decimal GetUserCourse(string currencyUserName)
+        {
+            
+            Console.Write($"Dear user, give me the exchange rate at which I should count the {currencyUserName}: ");
+            while (true)
+            {
+                if (decimal.TryParse(Console.ReadLine(), out decimal exchangeRate)) return (Math.Round(exchangeRate, 4));
+                else Console.WriteLine($"This is not a number: {exchangeRate}. Try again, please.");
+            }
+        }
+
+    //prop + tab
+    // przy Tworzeniu klasy wywołuje konstruktor z konkretnymi wartościami, utwórz obiekt żeby było
+}
 }

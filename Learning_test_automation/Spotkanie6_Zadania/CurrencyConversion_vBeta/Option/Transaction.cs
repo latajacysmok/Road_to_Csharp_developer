@@ -6,7 +6,6 @@ namespace CurrencyConversion
     {
         Option option = new Option();
         Cantor currencyExchange = new Cantor();
-        private decimal amount;      
 
         public void BuyOrSell()
         {
@@ -33,13 +32,13 @@ namespace CurrencyConversion
             MakingDecision exchangeRate = option.DecideWhichOption();
             if (exchangeRate == MakingDecision.Yes)
             {
-                var result = currencyExchange.CurrencyUser();
-                string currency = currencyExchange.userCurrency;
-                decimal currencyValue = Math.Round(result, 4);
+                Currency currency = currencyExchange.GetCurrencyUserName();
+                Console.Write($"I understand my dear user, you have chosen {currency.UserNameCurrency}, and how many {currency.UserNameCurrency} do you need: ");
 
-                Console.Write($"I understand my dear user, you have chosen {currency}, and how many {currency} do you need: ");
-                amount = option.DownloadAmount();
-                Console.WriteLine($"{amount} {currency}s will cost you: {Math.Round(amount * currencyValue, 2)} PLN.");
+                decimal amount = currencyExchange.GetOnlyAmount();
+
+                Console.WriteLine($"For {amount} {currency.UserNameCurrency} you will get: {amount * currency.UserValueCurrency} PLN.");
+
                 return exchangeRate;
             }
             return exchangeRate;
@@ -48,28 +47,31 @@ namespace CurrencyConversion
         private void SellCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to sell: \n");
-            CurrencyNames currency = currencyExchange.GetCurrency();// tu uzyc obiekt, ktory utworzyles
-            //Currency.BoughtCourse value = currencyExchange.GetCurrency();
-
-            string result = currency.ToString() == "Czech_crown" ? "Czech crown" : currencyExchange.foreignCurrency.ToString();
-            //decimal currencyValue = Math.Round(result.BoughtValue, 4);
+            Names.CurrencyDefault currency = currencyExchange.GetCurrency();
+            
+            string result = currency.ToString() == "Czech_crown" ? "Czech crown" : currency.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
-            amount = option.DownloadAmount();
-            //Console.WriteLine($"For {amount} {result} you will get: {Math.Round(amount * currencyValue, 2)} PLN.");
+            
+            decimal amount = currencyExchange.GetOnlyAmount();
+            decimal currencyAmount = currencyExchange.GetCurrencySellAmount(amount);
+
+            Console.WriteLine($"For {amount} {result} you will get: {currencyAmount} PLN.");
         }
 
         private void BuyCurrency()
         {
             Console.Write("Dear user, tell me what currency you want to buy: \n");
-            CurrencyNames currency = currencyExchange.GetCurrency();
+            Names.CurrencyDefault currency = currencyExchange.GetCurrency();
 
-            string result = currency.ToString() == "Czech_crown" ? "Czech crown" : currencyExchange.foreignCurrency.ToString();
+            string result = currency.ToString() == "Czech_crown" ? "Czech crown" : currency.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
-            amount = option.DownloadAmount();
+
+            decimal amount = currencyExchange.GetOnlyAmount();
             decimal currencyAmount = currencyExchange.GetCurrencyBuyAmount(amount);
-            Console.WriteLine($"{amount} {result}s will cost you: {currencyAmount} PLN.");
+
+            Console.WriteLine($"For {amount} {result} you will pay: {currencyAmount} PLN.");
         }
     }
 }

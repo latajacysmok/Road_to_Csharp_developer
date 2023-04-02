@@ -4,55 +4,39 @@ namespace CurrencyConversion
 {
     public class Cantor
     {
-        private decimal exchangeRate;
-        public CurrencyNames foreignCurrency;
-        public string userCurrency;
         Option option = new Option();
+        Names name = new Names();
         private Currency currency;
 
-        public CurrencyNames GetCurrency()
+        public Names.CurrencyDefault GetCurrency()
         {
             this.currency = new Currency(option.GetCurrencyName());
             return currency.Name;
         }
 
-
         public decimal GetCurrencySellAmount(decimal amount)
         {
-            currency.GetSellValue(amount);
-            return currency.SentCourse;
+            currency.SentValue = amount;
+            return currency.SentValue;
         }
         
-        public decimal GetCurrencyBuyAmount(decimal amount)
+        public decimal GetOnlyAmount()
         {
-            currency.GetBuyValue(amount);
+            decimal amount = currency.GetAmount();
+            return amount;
+        }
+
+        public decimal GetCurrencyBuyAmount(decimal amount)
+        {           
+            currency.BoughtValue = amount;
             return currency.BoughtValue;
         }
 
-        public decimal CurrencyUser()
+        public Currency GetCurrencyUserName()
         {
-            while (true)
-            {
-                Console.Write("Dear user, tell me what currency you want to sell: ");
-                userCurrency = Console.ReadLine();
-                if (!String.IsNullOrEmpty(userCurrency))
-                {
-                    decimal userCourse = UserCourse(userCurrency);
-                    return userCourse;
-                }
-                else Console.WriteLine("Currency name is required, please try again.");
-            }
+            this.currency = new Currency(name.CurrencyUser());
+            return currency;
         }
 
-        public decimal UserCourse(string userCurrency)
-        {
-            Console.Write($"Dear user, give me the exchange rate at which I should count the {userCurrency}: ");
-            while (true)
-            {
-                if (decimal.TryParse(Console.ReadLine(), out exchangeRate)) break;
-                else Console.WriteLine($"This is not a number: {exchangeRate}. Try again, please.");
-            }
-            return (Math.Round(exchangeRate, 4));
-        }
     }
 }
