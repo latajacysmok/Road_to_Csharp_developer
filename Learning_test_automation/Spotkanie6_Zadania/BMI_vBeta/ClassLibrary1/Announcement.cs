@@ -5,27 +5,34 @@ namespace BMI
 {
     public class Announcement
     {
-        BmiCalculator bmiCalculator = new BmiCalculator();
-        public void ApplicationRunner()
+        private string name;
+        private double weight;
+        private double height;
+        private BmiCalculator bmi;
+        Performer appOption = new Performer();
+
+        public Announcement()
         {
             ValueStorage programData = new ValueStorage();
-            Performer appOption = new Performer();
+            
             appOption.ProgramWelcome();
-            string name = Console.ReadLine();
+            this.name = Console.ReadLine();
+            this.weight = programData.WeightChecker(name);
+            this.height = programData.HeightChecker(name);
+            this.bmi = new BmiCalculator(weight, height);
+        }
+        public void ApplicationRunner()
+        {           
             while (true)
             {
-                double weight = programData.WeightChecker(name);
-                double height = programData.HeightChecker(name);
-                double bmi = bmiCalculator.BmiCalculation(weight, height);
-
-                Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi, 2)}. You have {EstimateWeight(bmi)}.");
-                AdjusterToRightWeight(bmi, height);
+                Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi.BmiCalculation, 2)}. You have {EstimateWeight()}.");
+                AdjusterToRightWeight();
                 appOption.MakingDecisionAboutNextStep(name);
             }
         }
-        public string EstimateWeight(double bmi)
+        public string EstimateWeight()
         {
-            switch (bmi)
+            switch (bmi.BmiCalculation)
             {
                 case < 18.5:
                     return "underweight";
@@ -36,12 +43,12 @@ namespace BMI
             }
         }
 
-        public void AdjusterToRightWeight(double bmi, double height)
+        public void AdjusterToRightWeight()
         {
-            string results = EstimateWeight(bmi);
+            string results = EstimateWeight();
 
-            if (results == "underweight") Console.WriteLine($"You need gain {Math.Round(bmiCalculator.CalculateHowMuchShouldBeGained(bmi, height), 2)} kg to be within the normal BMI.");
-            else if (results == "overweight") Console.WriteLine($"You need lose {Math.Round(bmiCalculator.CalculateHowMuchShouldBeLost(bmi, height), 2)} kg to be within the normal BMI.");
+            if (results == "underweight") Console.WriteLine($"You need gain {Math.Round(bmi.CalculateHowMuchShouldBeGained, 2)} kg to be within the normal BMI.");
+            else if (results == "overweight") Console.WriteLine($"You need lose {Math.Round(bmi.CalculateHowMuchShouldBeLost, 2)} kg to be within the normal BMI.");
         }
     }
 }

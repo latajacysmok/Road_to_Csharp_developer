@@ -2,29 +2,38 @@
 {
     public class BmiCalculator
     {
-        public double BmiCalculation(double weight, double height)
+        public double BmiCalculation { get; }
+        public double CalculateHowMuchShouldBeGained { get; }
+        public double CalculateHowMuchShouldBeLost { get; }
+
+        public BmiCalculator(double weight, double height)
         {
-            double bmi = weight / PowerCalculation(height);
-            return bmi;
+            BmiCalculation = GetBmiCalculation(weight, height);
+            CalculateHowMuchShouldBeGained = GetCalculateHowMuchShouldBeGained(height);
+            CalculateHowMuchShouldBeLost = GetCalculateHowMuchShouldBeLost(height);
         }
 
-        private double PowerCalculation(double height)
+        private double GetBmiCalculation(double weight, double height)
         {
-            double pow = Math.Pow(2.0, (double)height);
-            return pow;
+            return weight / GetPowerCalculation(height);
         }
 
-        public double CalculateHowMuchShouldBeGained(double bmi, double height)
+        private double GetPowerCalculation(double height)
         {
-            double missingDiffToRightBmi = 18.5 - bmi;
-            double result = missingDiffToRightBmi * PowerCalculation(height);
+            return Math.Pow(2.0, (double)height);
+        }
+
+        public double GetCalculateHowMuchShouldBeGained(double height)
+        {
+            double missingDiffToRightBmi = 18.5 - BmiCalculation;
+            double result = missingDiffToRightBmi * GetPowerCalculation(height);
             return result;
         }
 
-        public double CalculateHowMuchShouldBeLost(double bmi, double height)
+        public double GetCalculateHowMuchShouldBeLost(double height)
         {
-            double missingDiffToRightBmi = bmi - 24.9;
-            double result = missingDiffToRightBmi * PowerCalculation(height);
+            double missingDiffToRightBmi = BmiCalculation - 24.9;
+            double result = missingDiffToRightBmi * GetPowerCalculation(height);
             return result;
         }
     }
