@@ -9,9 +9,11 @@
             Euro = 2,
             Czech_crown = 3,
         }
-        public string CurrencyUser()
+        public string CurrencyUser(bool ifBuy)
         {
-            Console.Write("Dear user, tell me what currency you want to sell: ");
+            if (ifBuy == true) Console.Write("Dear user, tell me what currency you want to buy: ");
+            else Console.Write("Dear user, tell me what currency you want to sell: ");
+
             while (true)
             {       
                 string userCurrency = Console.ReadLine();

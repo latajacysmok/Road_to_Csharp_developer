@@ -19,12 +19,6 @@ namespace CurrencyConversion
             currency.SentValue = amount;
             return currency.SentValue;
         }
-        
-        public decimal GetOnlyAmount()
-        {
-            decimal amount = currency.GetAmount();
-            return amount;
-        }
 
         public decimal GetCurrencyBuyAmount(decimal amount)
         {           
@@ -32,9 +26,15 @@ namespace CurrencyConversion
             return currency.BoughtValue;
         }
 
-        public Currency GetCurrencyUserName()
+        public decimal GetOnlyAmount()
         {
-            this.currency = new Currency(name.CurrencyUser());
+            decimal amount = currency.GetAmount();
+            return amount;
+        }
+
+        public Currency GetCurrencyUserName(bool ifBuy)
+        {
+            this.currency = new Currency(name.CurrencyUser(ifBuy));
             return currency;
         }
 

@@ -1,8 +1,9 @@
 ﻿using Decide;
+using System.Diagnostics;
 
 namespace CurrencyConversion
 {
-    public class Transaction // może tutaj tylko wypiywać a w Currency wyliczać, Cantor przyjmuje wartośći
+    public class Transaction
     {
         Option option = new Option();
         Cantor currencyExchange = new Cantor();
@@ -32,7 +33,13 @@ namespace CurrencyConversion
             MakingDecision exchangeRate = option.DecideWhichOption();
             if (exchangeRate == MakingDecision.Yes)
             {
-                Currency currency = currencyExchange.GetCurrencyUserName();
+                string caller = new StackTrace().GetFrame(1).GetMethod().Name;
+                bool ifBuy;
+                if (caller == "Buying") ifBuy = true;
+                else ifBuy = false;
+
+                Currency currency = currencyExchange.GetCurrencyUserName(ifBuy);
+
                 Console.Write($"I understand my dear user, you have chosen {currency.UserNameCurrency}, and how many {currency.UserNameCurrency} do you need: ");
 
                 decimal amount = currencyExchange.GetOnlyAmount();

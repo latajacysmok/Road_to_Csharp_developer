@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace Decide
+﻿namespace Decide
 {
     public class Currency
     {
@@ -23,7 +21,6 @@ namespace Decide
         }
         private decimal BoughtCourse { get; }
         private decimal SentCourse { get; }
-        private decimal UserCourse { get; }
 
         public Currency(Names.CurrencyDefault name)//ct+ tab
         {
@@ -105,6 +102,5 @@ namespace Decide
         }
 
     //prop + tab
-    // przy Tworzeniu klasy wywołuje konstruktor z konkretnymi wartościami, utwórz obiekt żeby było
 }
 }
