@@ -1,6 +1,6 @@
 ﻿namespace Decide//pole typu enum jako decyzja
 {
-    public class Instruction
+    /*public class Instruction
     {
         private bool makingDecision;
 
@@ -19,12 +19,12 @@
         {
             MakingDecision = false;
         }
-    }
+    }*/
 
 
-    /*public enum MakingDecision
+    public enum MakingDecision
     {
         Yes = 1,
         No = 2,
-    }*/
+    }
 }
