@@ -30,7 +30,7 @@ namespace CurrencyConversion
                     Console.WriteLine(caller);
                     if (caller == "DecideWhichOption" || caller == "BuyOrSell") ifYesOrNo = true;
                     else ifYesOrNo = false;
-                    LimitingOptions(ifYesOrNo, number);
+                    return LimitingOptions(ifYesOrNo, number);             
                 }
                 else if (String.IsNullOrEmpty(number.ToString())) Console.Write("Dear User you have to give me some value: ");
                 else Console.Write($"{number} is not a number, please try again: ");
