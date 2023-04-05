@@ -10,7 +10,7 @@ namespace Interface
             Option option = new Option();
             while (true)
             {
-                transaction.BuyOrSell();
+                option.BuyOrSell();
                 option.WhatDoWeDoNext();
             }          
         }

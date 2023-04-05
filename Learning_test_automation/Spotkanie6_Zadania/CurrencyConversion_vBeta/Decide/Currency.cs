@@ -2,7 +2,7 @@
 {
     public class Currency
     {
-        public Names.CurrencyDefault Name { get; }
+        public CurrencyDefault Name { get; }
         public decimal UserValueCurrency { get; }
         public string UserNameCurrency { get; }
 
@@ -22,14 +22,14 @@
         private decimal BoughtCourse { get; }
         private decimal SentCourse { get; }
 
-        public Currency(Names.CurrencyDefault name)//ct+ tab
+        public Currency(CurrencyDefault name)//ct+ tab
         {
             Name         = name;
             BoughtCourse = GetBuyingCourse();
             SentCourse   = GetSellCourse();
         }
 
-        public Currency(string name)//ct+ tab
+        public Currency(string name)
         {
             UserNameCurrency       = name;
             this.UserValueCurrency = GetUserCourse(name);
@@ -45,7 +45,7 @@
                     if (IfNumberIsPositive(amount)) break;
                     else continue;
                 }
-                else Console.WriteLine($"This is not a number: {amount.ToString()}. Try again, please: ");
+                else Console.WriteLine($"This is not a number: {amount}. Try again, please: ");
             }
             return amount;
         }
@@ -64,11 +64,11 @@
         {
             switch (Name)
             {
-                case Names.CurrencyDefault.Dollar:
+                case CurrencyDefault.Dollar:
                     return 4.8765m;
-                case Names.CurrencyDefault.Euro:
+                case CurrencyDefault.Euro:
                     return 5.3722m;
-                case Names.CurrencyDefault.Czech_crown:
+                case CurrencyDefault.Czech_crown:
                     return 0.2745m;
                 default:
                     return 0;
@@ -79,11 +79,11 @@
         {
             switch (Name)
             {
-                case Names.CurrencyDefault.Dollar:
+                case CurrencyDefault.Dollar:
                     return 4.3888m;
-                case Names.CurrencyDefault.Euro:
+                case CurrencyDefault.Euro:
                     return 4.8349m;
-                case Names.CurrencyDefault.Czech_crown:
+                case CurrencyDefault.Czech_crown:
                     return 0.2470m;
                 default:
                     return 0;
