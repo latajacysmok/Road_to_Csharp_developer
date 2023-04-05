@@ -27,7 +27,6 @@ namespace CurrencyConversion
                 {
                     string caller = new StackTrace().GetFrame(1).GetMethod().Name;
                     bool ifYesOrNo;
-                    Console.WriteLine(caller);
                     if (caller == "DecideWhichOption" || caller == "BuyOrSell") ifYesOrNo = true;
                     else ifYesOrNo = false;
                     return LimitingOptions(ifYesOrNo, number);             
