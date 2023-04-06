@@ -100,7 +100,6 @@
                 else Console.WriteLine($"This is not a number: {exchangeRate}. Try again, please.");
             }
         }
-
     //prop + tab
 }
 }

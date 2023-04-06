@@ -86,7 +86,7 @@ namespace CurrencyConversion
         
         public void PrintAvailableBuyExchangeRates()
         {
-            Console.WriteLine("\n- Dollar: 4.38 pln ,");
+            Console.WriteLine("\n- Dollar: 4.38 pln,");
             Console.WriteLine("- Euro: 4.83 pln,");
             Console.WriteLine("- Czech crown: 0.24 pln.\n");
         }

@@ -6,7 +6,7 @@ namespace CurrencyConversion
     public class Transaction
     {
         Option option = new Option();
-        private Currency currency;
+        private Currency _currency;
 
         public void Buying()
         {
@@ -17,8 +17,6 @@ namespace CurrencyConversion
         public void Selling()
         {
             option.PrintAvailableSellExchangeRates();
-            Console.Write("Dear user, tell me what you want? Sell?\n");
-            MakingDecision sell = option.DecideWhichOption();
             if (OwnCurrency() == MakingDecision.No) SellCurrency();
         }
         private MakingDecision OwnCurrency()
@@ -35,13 +33,13 @@ namespace CurrencyConversion
                 else ifBuy = false;
 
                 string name = userName.UserEntersNameOfCurrency(ifBuy);
-                this.currency = new Currency(name);
+                _currency = new Currency(name);
 
-                Console.Write($"I understand my dear user, you have chosen {currency.UserNameCurrency}, and how many {currency.UserNameCurrency} do you need: ");
+                Console.Write($"I understand my dear user, you have chosen {_currency.UserNameCurrency}, and how many {_currency.UserNameCurrency} do you need: ");
 
-                decimal amount = currency.GetAmount();
+                decimal amount = _currency.GetAmount();
 
-                Console.WriteLine($"For {amount} {currency.UserNameCurrency} you will get: {amount * currency.UserValueCurrency} PLN.");
+                Console.WriteLine($"For {amount} {_currency.UserNameCurrency} you will get: {amount * _currency.UserValueCurrency} PLN.");
 
                 return exchangeRate;
             }
@@ -57,11 +55,11 @@ namespace CurrencyConversion
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
             
-            Currency currencyForValuation = new Currency(currencyDefault);
-            decimal amount = currencyForValuation.GetAmount();
-            currencyForValuation.SentValue = amount;
+            _currency = new Currency(currencyDefault);
+            decimal amount = _currency.GetAmount();
+            _currency.SentValue = amount;
 
-            Console.WriteLine($"For {amount} {result} you will get: {currencyForValuation.SentValue} PLN.");
+            Console.WriteLine($"For {amount} {result} you will get: {_currency.SentValue} PLN.");
         }
 
         private void BuyCurrency()
@@ -73,12 +71,12 @@ namespace CurrencyConversion
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
 
-            Currency currencyForValuation = new Currency(currencyDefault);
-            decimal amount = currencyForValuation.GetAmount();
-            currencyForValuation.BoughtValue = amount;
-            decimal currencyAmount = currencyForValuation.BoughtValue;
+            Currency currency = new Currency(currencyDefault);
+            decimal amount = currency.GetAmount();
+            currency.BoughtValue = amount;
+            decimal currencyAmount = currency.BoughtValue;
 
-            Console.WriteLine($"For {amount} {result} you will pay: {currencyForValuation.BoughtValue} PLN.");
+            Console.WriteLine($"For {amount} {result} you will pay: {currency.BoughtValue} PLN.");
         }
     }
 }
