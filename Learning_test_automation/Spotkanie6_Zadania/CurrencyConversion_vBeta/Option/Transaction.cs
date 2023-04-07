@@ -48,7 +48,7 @@ namespace CurrencyConversion
 
         private void SellCurrency()
         {        
-            Console.Write("Dear user, tell me what currency you want to sell: \n");
+            Console.Write("\nDear user, tell me what currency you want to sell: \n");
             
             CurrencyDefault currencyDefault = option.GetCurrencyName();       
             string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
@@ -64,19 +64,18 @@ namespace CurrencyConversion
 
         private void BuyCurrency()
         {         
-            Console.Write("Dear user, tell me what currency you want to buy: \n");
+            Console.Write("\nDear user, tell me what currency you want to buy: \n");
             
             CurrencyDefault currencyDefault = option.GetCurrencyName();
             string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
 
-            Currency currency = new Currency(currencyDefault);
-            decimal amount = currency.GetAmount();
-            currency.BoughtValue = amount;
-            decimal currencyAmount = currency.BoughtValue;
+            Currency _currency = new Currency(currencyDefault);
+            decimal amount = _currency.GetAmount();
+            _currency.BoughtValue = amount;
 
-            Console.WriteLine($"For {amount} {result} you will pay: {currency.BoughtValue} PLN.");
+            Console.WriteLine($"For {amount} {result} you will pay: {_currency.BoughtValue} PLN.");
         }
     }
 }

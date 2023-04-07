@@ -5,6 +5,8 @@ namespace CurrencyConversion
 {
     public class Option
     {
+        private int[] numberOfCurrency = { 1, 2, 3 };
+
         public MakingDecision DecideWhichOption()
         {
             while (true)
@@ -81,20 +83,32 @@ namespace CurrencyConversion
         {
             Console.WriteLine("- Dollar: 1,");
             Console.WriteLine("- Euro: 2,");
-            Console.WriteLine("- Czech crown: 3.");
+            Console.WriteLine("- Czech crown: 3.\n");
         }
         
         public void PrintAvailableBuyExchangeRates()
         {
-            Console.WriteLine("\n- Dollar: 4.38 pln,");
-            Console.WriteLine("- Euro: 4.83 pln,");
-            Console.WriteLine("- Czech crown: 0.24 pln.\n");
+            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
+            foreach (int num in numberOfCurrency)
+            {
+                Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
+                Currency currency = new Currency(currencyDefault);
+                if (num == 3) Console.WriteLine($"- Czech crown: {currency.GetBuyingCourse()} pln,");
+                else Console.WriteLine($"- {currency.Name}: {currency.GetBuyingCourse()} pln,");
+            }
+            Console.WriteLine();
         }
         public void PrintAvailableSellExchangeRates()
         {
-            Console.WriteLine("\n- Dollar: 4.87 pln,");
-            Console.WriteLine("- Euro: 5.37 pln,");
-            Console.WriteLine("- Czech crown: 0.27 pln.\n");
+            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
+            foreach (int num in numberOfCurrency)
+            {
+                Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
+                Currency currency = new Currency(currencyDefault);
+                if (num == 3) Console.WriteLine($"- Czech crown: {currency.GetSellCourse()} pln,");
+                else Console.WriteLine($"- {currency.Name}: {currency.GetSellCourse()} pln,");
+            }
+            Console.WriteLine();
         }
 
         public void WhatDoWeDoNext()

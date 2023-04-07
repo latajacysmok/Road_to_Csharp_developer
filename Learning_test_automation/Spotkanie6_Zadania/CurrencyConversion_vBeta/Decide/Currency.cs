@@ -60,7 +60,7 @@
             }
         }
 
-        private decimal GetBuyingCourse()
+        public decimal GetBuyingCourse()
         {
             switch (Name)
             {
@@ -75,7 +75,7 @@
             }
         }
 
-        private decimal GetSellCourse()
+        public decimal GetSellCourse()
         {
             switch (Name)
             {
