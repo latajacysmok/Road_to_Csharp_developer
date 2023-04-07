@@ -5,9 +5,12 @@ namespace Interface
     class Program
         {
             static public void Main(string[] args)
-            {
-                Announcement announcementVerdict = new Announcement();
-                announcementVerdict.ApplicationRunner();
+            {   
+                while (true)
+                {
+                    Announcement announcementVerdict = new Announcement();
+                    announcementVerdict.ApplicationRunner();
+                }
             }
         }
 }
