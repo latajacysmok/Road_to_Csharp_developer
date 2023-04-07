@@ -45,7 +45,7 @@
                     if (IfNumberIsPositive(amount)) break;
                     else continue;
                 }
-                else Console.WriteLine($"This is not a number: {amount}. Try again, please: ");
+                else Console.Write($"This is not a number: {amount}. Try again, please: ");
             }
             return amount;
         }
@@ -97,7 +97,7 @@
             while (true)
             {
                 if (decimal.TryParse(Console.ReadLine(), out decimal exchangeRate)) return (Math.Round(exchangeRate, 4));
-                else Console.WriteLine($"This is not a number: {exchangeRate}. Try again, please.");
+                else Console.Write($"This is not a number: {exchangeRate}. Try again, please: ");
             }
         }
     //prop + tab

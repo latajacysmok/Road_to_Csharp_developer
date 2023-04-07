@@ -31,26 +31,39 @@ namespace CurrencyConversion
                     bool ifYesOrNo;
                     if (caller == "DecideWhichOption" || caller == "BuyOrSell") ifYesOrNo = true;
                     else ifYesOrNo = false;
-                    return LimitingOptions(ifYesOrNo, number);             
+                    if (LimitingOptions(ifYesOrNo, number)) return number;
+                    else
+                    {
+                        Console.Write("Dear user, please give me your answer now: ");
+                        continue;
+                    }
                 }
                 else if (String.IsNullOrEmpty(number.ToString())) Console.Write("Dear User you have to give me some value: ");
                 else Console.Write($"{number} is not a number, please try again: ");
             }
         }
 
-        private int LimitingOptions(bool ifYesOrNo, int number)
+        private bool LimitingOptions(bool ifYesOrNo, int number)
         {
             while(true)
             {
                 if (ifYesOrNo)
                 {
-                    if (0 < number && number < 3) return number;
-                    else Console.WriteLine($"{number} must be equal: 1 or 2 ");
+                    if (0 < number && number < 3) return true;
+                    else
+                    {
+                        Console.WriteLine($"Your choice: {number} is wrong. Must be equal: 1 or 2");
+                        return false;
+                    }
                 }
                 else
                 {
-                    if (0 < number && number < 4) return number;
-                    else Console.WriteLine($"{number} must be equal: 1, 2 or 3");
+                    if (0 < number && number < 4) return true;
+                    else
+                    {
+                        Console.WriteLine($"Your choice: {number} is wrong. Must be equal: 1, 2 or 3");
+                        return false;
+                    }
                 }
             }
         }
