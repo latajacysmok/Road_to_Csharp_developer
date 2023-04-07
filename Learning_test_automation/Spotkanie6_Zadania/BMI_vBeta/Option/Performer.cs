@@ -28,7 +28,7 @@
             }
         }
 
-        public void StayOnProgram()
+        private void StayOnProgram()
         {
             Console.WriteLine($"So let's get started again dear user.");
             for (int i = 0; i < 3; i++)
@@ -39,7 +39,7 @@
             Console.Clear();
         }
 
-        public void LeaveProgramme()
+        private void LeaveProgramme()
         {
             Console.WriteLine($"See you soon dear user.");
             Environment.Exit(1);

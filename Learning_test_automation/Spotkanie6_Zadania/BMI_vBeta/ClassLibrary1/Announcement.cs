@@ -28,9 +28,10 @@ namespace BMI
                 Console.WriteLine($"Dear {name}, Your BMI is {Math.Round(bmi.BmiCalculation, 2)}. You have {EstimateWeight()}.");
                 AdjusterToRightWeight();
                 appOption.MakingDecisionAboutNextStep(name);
+                break;
             }
         }
-        public string EstimateWeight()
+        private string EstimateWeight()
         {
             switch (bmi.BmiCalculation)
             {
@@ -43,7 +44,7 @@ namespace BMI
             }
         }
 
-        public void AdjusterToRightWeight()
+        private void AdjusterToRightWeight()
         {
             string results = EstimateWeight();
 

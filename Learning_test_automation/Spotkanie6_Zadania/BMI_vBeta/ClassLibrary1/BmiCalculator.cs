@@ -23,14 +23,14 @@
             return Math.Pow(2.0, (double)height);
         }
 
-        public double GetCalculateHowMuchShouldBeGained(double height)
+        private double GetCalculateHowMuchShouldBeGained(double height)
         {
             double missingDiffToRightBmi = 18.5 - BmiCalculation;
             double result = missingDiffToRightBmi * GetPowerCalculation(height);
             return result;
         }
 
-        public double GetCalculateHowMuchShouldBeLost(double height)
+        private double GetCalculateHowMuchShouldBeLost(double height)
         {
             double missingDiffToRightBmi = BmiCalculation - 24.9;
             double result = missingDiffToRightBmi * GetPowerCalculation(height);
