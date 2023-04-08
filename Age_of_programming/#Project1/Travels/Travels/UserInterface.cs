@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Option;
+using Data;
 
-namespace Excursions
+namespace Travels
 {
-    class UserInterface
+    public class UserInterface
     {
         public void Menu()
         {
+            Security option = new Security();
             //Console.WriteLine("╗╣");
             var osoby = new ListOfPeople();
             var miejsca = new ListOfPlaces();
@@ -24,7 +26,7 @@ namespace Excursions
                 Console.WriteLine("8 - wypisz szczegoly osoby");
                 Console.WriteLine("9 - wyjscie");
 
-                wybor = int.Parse(Console.ReadLine());
+                wybor = option.GetNumber();
                 switch (wybor)
                 {
                     case 1:
@@ -43,16 +45,16 @@ namespace Excursions
                         miejsca.AddPlace();
                         break;
                     case 6:
-                        miejsca.Usun();
+                        miejsca.ClearPlace();
                         break;
                     case 7:
-                        Person osoba = osoby.SelectPerson();
-                        Place miejsce = miejsca.SelectPlace();
-                        osoba.AddPlace(miejsce);
+                        string osoba = osoby.SelectPerson();
+                        string miejsce = miejsca.SelectPlace();
+                        //osoba.AddPlace(miejsce);
                         break;
                     case 8:
                         osoba = osoby.SelectPerson();
-                        osoba.ListDetails();
+                        //osoba.ListDetails();
                         break;
                 }
 

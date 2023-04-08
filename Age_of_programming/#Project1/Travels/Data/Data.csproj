@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DownloadingData\Option.csproj" />
+    <ProjectReference Include="..\Option\Option.csproj" />
   </ItemGroup>
 
 </Project>

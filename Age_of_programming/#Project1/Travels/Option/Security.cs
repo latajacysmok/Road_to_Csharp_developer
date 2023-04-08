@@ -18,5 +18,14 @@
             }
             return word;
         }
+
+        public int GetNumber()
+        {
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out int number)) return number;
+                else Console.Write("Nie wprowadziłeś liczby: ");
+            }
+        }
     }
 }
