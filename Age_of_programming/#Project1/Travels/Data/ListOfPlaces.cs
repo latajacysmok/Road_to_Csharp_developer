@@ -4,37 +4,38 @@ namespace Data
     public class ListOfPlaces
     {
         Security option = new Security();
-        private List<string> placesList;
-        Place place = new Place();
+        private List<Place> placesList;
 
         public ListOfPlaces()
         {
-            placesList = new List<string>();
+            placesList = new List<Place>();
         }
 
         public void AddPlace()
         {
-            placesList.Add(place.LoadSpot);
+            Place place = new Place();
+            placesList.Add(place.GetSpot());
         }
 
         public void PrintOut()
         {
-            Console.WriteLine("MIEJSCA: ");
+            Console.WriteLine("\n------------------------");
+            Console.WriteLine("\tMIEJSCA: ");
             for (int i = 0; i < placesList.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {placesList[i]}");
+                Console.WriteLine($"\t-{i + 1}- {placesList[i]}");
             }
         }
 
         public void ClearPlace()
         {
             PrintOut();
-            Console.Write("Podaj numer miejsca: ");
+            Console.Write("Podaj numer miejsca: ");//zmienić komunikat
             int numer = option.GetNumber();
             placesList.RemoveAt(numer - 1);//potrzebujemy index
         }
 
-        public string SelectPlace()
+        public Place SelectPlace()
         {
             PrintOut();
             Console.Write("Podaj numer miejsca: ");

@@ -5,37 +5,39 @@ namespace Data
     public class ListOfPeople
     {
         Security option = new Security();
-        Person person = new Person();
-        private List<string> listaOsob;
+        private List<Person> listaOsob;
 
         public ListOfPeople()
         {
-            listaOsob = new List<string>();
+            listaOsob = new List<Person>();
         }
 
         public void AddPerson()
         {
-            listaOsob.Add(person.Individual);
+            Person person = new Person(true);
+            listaOsob.Add(person.GetPerson());
         }
 
         public void PrintOut()
         {
+            Console.WriteLine("\n---------");
             Console.WriteLine("OSOBY: ");
             for (int i = 0; i < listaOsob.Count; i++)
             {
                 Console.WriteLine($"{i + 1} - {listaOsob[i]}");
             }
+            Console.WriteLine("");
         }
 
         public void DeletePerson()
         {
             PrintOut();
-            Console.Write("Podaj numer osoby: ");
+            Console.Write("Podaj numer osoby: ");//zmienić komunikat
             int numer = option.GetNumber();
             listaOsob.RemoveAt(numer - 1);//potrzebujemy index
         }
 
-        public string SelectPerson()
+        public Person SelectPerson()
         {
             PrintOut();
             Console.Write("Podaj numer osoby: ");

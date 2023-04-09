@@ -8,23 +8,22 @@ namespace Travels
         public void Menu()
         {
             Security option = new Security();
-            //Console.WriteLine("╗╣");
-            var osoby = new ListOfPeople();
-            var miejsca = new ListOfPlaces();
+            var osoby       = new ListOfPeople();
+            var miejsca     = new ListOfPlaces();
 
             int wybor = 0;
             while (wybor != 9)
             {
-                Console.WriteLine("MENU");
-                Console.WriteLine("1 - wypisz osoby");
-                Console.WriteLine("2 - wypisz miejsca");
-                Console.WriteLine("3 - dodaj osobe");
-                Console.WriteLine("4 - usun osobe");
-                Console.WriteLine("5 - dodaj miejsce");
-                Console.WriteLine("6 - usun miejsce");
-                Console.WriteLine("7 - dodaj miejsce do osoby");
-                Console.WriteLine("8 - wypisz szczegoly osoby");
-                Console.WriteLine("9 - wyjscie");
+                Console.WriteLine("\n\t-MENU-");
+                Console.WriteLine("1 - Wypisz osoby.");
+                Console.WriteLine("2 - Wypisz miejsca.");
+                Console.WriteLine("3 - Dodaj osobe.");
+                Console.WriteLine("4 - Dodaj miejsce.");
+                Console.WriteLine("5 - Usun osobe.");               
+                Console.WriteLine("6 - Usun miejsce.");
+                Console.WriteLine("7 - Dodaj miejsce do osoby.");
+                Console.WriteLine("8 - Wypisz szczegoly osoby.");
+                Console.WriteLine("9 - Wyjscie.");
 
                 wybor = option.GetNumber();
                 switch (wybor)
@@ -39,25 +38,27 @@ namespace Travels
                         osoby.AddPerson();
                         break;
                     case 4:
-                        osoby.DeletePerson();
-                        break;
-                    case 5:
                         miejsca.AddPlace();
                         break;
+                    case 5:
+                        osoby.DeletePerson();
+                        break;                  
                     case 6:
                         miejsca.ClearPlace();
                         break;
                     case 7:
-                        string osoba = osoby.SelectPerson();
-                        string miejsce = miejsca.SelectPlace();
+                        //string osoba = osoby.SelectPerson();
+                        //string miejsce = miejsca.SelectPlace();
                         //osoba.AddPlace(miejsce);
                         break;
                     case 8:
-                        osoba = osoby.SelectPerson();
+                        //osoba = osoby.SelectPerson();
                         //osoba.ListDetails();
                         break;
+                    case 9:
+                        option.LeaveProgramme();
+                        break; 
                 }
-
             }
         }
     }

@@ -1,27 +1,44 @@
 ﻿using Option;
+using System.Xml.Linq;
 
 namespace Data
 {
     public class Person
     {
         Security option = new Security();
+
+        private static int idCounter = 0;
+        private int id;
         private string Name { get; }
         private string LastName { get; }
-        public string Individual { get; }
 
-        public Person()
+        public Person(string name, string lastName)
         {
-            Name = GetLoadName();
-            LastName = GetLoadLastname();
-            Individual = GetLoadPerson();
+            this.id = ++idCounter;
+            Name = name;
+            LastName = lastName;
         }
 
-        private void PrintOutPerson()
+        public Person(bool ifForList)
         {
-            //Console.WriteLine($"Imię: {Name}, Nazwisko: {LastName}, Ilość odwiedzonych miejsc: {places.Amount}");
+            Name = GetName();
+            LastName = GetLastname();
         }
 
-        private string GetLoadName()
+        public override string ToString()
+        {
+            return $"{id}: {Name} {LastName}";
+        }
+
+        /*List<Person> listaOsob = new List<Person>();
+        Person person1 = new Person("John", "Doe");
+        Person person2 = new Person("Jane", "Smith");
+        listaOsob.Add(person1);
+        listaOsob.Add(person2);
+        Console.WriteLine(person1); // output: "1: John Doe"
+        Console.WriteLine(person2); // output: "2: Jane Smith"*/
+
+        public string GetName()
         {
             Console.Write("Podaj imie: ");
             string name = option.GetName();
@@ -29,16 +46,16 @@ namespace Data
             return name;
         }
 
-        private string GetLoadLastname()
+        public string GetLastname()
         {
             Console.Write("Podaj nazwisko: ");
             string lastName = option.GetName();
 
             return lastName;
         }
-        private string GetLoadPerson()
+        public Person GetPerson()
         {
-            return $"{Name} {LastName}";
+            return new Person(Name, LastName);
         }
     }
 }

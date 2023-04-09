@@ -1,4 +1,5 @@
 ﻿using Option;
+using System.Xml.Linq;
 
 namespace Data
 {
@@ -7,13 +8,17 @@ namespace Data
         Security option = new Security();
         private string Spot { get; }
         private string Country { get; }
-        public string LoadSpot { get; }
 
         public Place()
         {
-            Spot = GetLoadPlace();
-            Country = GetLoadLastCountry();
-            LoadSpot = GetLoadSpot();
+            Spot = GetPlace();
+            Country = GetCountry();
+        }
+
+        public Place(string spot, string country)
+        {
+            Spot = spot;
+            Country = country;
         }
 
         public Place(string country)
@@ -22,27 +27,27 @@ namespace Data
             Country = country;
         }
 
-        private void PrintOutLocation()
+        public override string ToString()
         {
-            Console.WriteLine($"\n- Miejsce: {Spot},\n- Kraj: {Country}.");
+            return $"\n- Miejsce: {Spot},\n- Kraj: {Country}.";
         }
 
-        private string GetLoadPlace()
+        private string GetPlace()
         {
             Console.Write("Podaj miejsce: ");
             string place = option.GetName();
             return place;
         }
 
-        private string GetLoadLastCountry()
+        private string GetCountry()
         {
             Console.Write("Podaj kraj: ");
             string country = option.GetName();
             return country;
         }
-        private string GetLoadSpot()
+        public Place GetSpot()
         {
-            return $" Miejsce: {Spot}, Kraj: {Country}";
+            return new Place(Spot, Country);
         }
     }
 }
