@@ -30,7 +30,6 @@ namespace Data
         public void ClearPlace()
         {
             PrintOut();
-            Console.Write("Podaj numer miejsca: ");//zmienić komunikat
             int numer = option.GetNumber();
             placesList.RemoveAt(numer - 1);//potrzebujemy index
         }
@@ -38,7 +37,6 @@ namespace Data
         public Place SelectPlace()
         {
             PrintOut();
-            Console.Write("Podaj numer miejsca: ");
             int numer = option.GetNumber();
             return placesList[numer - 1];//potrzebujemy index
         }

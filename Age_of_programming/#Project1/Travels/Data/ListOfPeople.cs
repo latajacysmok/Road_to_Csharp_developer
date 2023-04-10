@@ -32,7 +32,6 @@ namespace Data
         public void DeletePerson()
         {
             PrintOut();
-            Console.Write("Podaj numer osoby: ");//zmienić komunikat
             int numer = option.GetNumber();
             listaOsob.RemoveAt(numer - 1);//potrzebujemy index
         }
@@ -40,7 +39,6 @@ namespace Data
         public Person SelectPerson()
         {
             PrintOut();
-            Console.Write("Podaj numer osoby: ");
             int numer = option.GetNumber();
             return listaOsob[numer - 1];//potrzebujemy index
         }

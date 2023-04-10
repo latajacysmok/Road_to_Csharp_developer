@@ -1,4 +1,6 @@
-﻿namespace Option
+﻿using System.Diagnostics;
+
+namespace Option
 {
     public class Security
     {
@@ -27,7 +29,12 @@
 
         public int GetNumber()
         {
-            Console.Write("\nWybierz proszę opcję która Cię interesuję: ");
+            string caller = new StackTrace().GetFrame(1).GetMethod().Name;
+
+            if (caller == "ClearPlace" || caller == "SelectPlace") Console.Write("Podaj numer miejsca: ");
+            else if (caller == "DeletePerson" || caller == "SelectPerson") Console.Write("Podaj numer osoby: ");
+            else Console.Write("\nWybierz proszę opcję która Cię interesuję: ");
+
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int number))
