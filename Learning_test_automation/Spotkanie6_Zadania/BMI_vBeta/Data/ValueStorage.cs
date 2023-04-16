@@ -6,27 +6,13 @@ namespace Data
     {
         Performer appOption = new Performer();
 
-        private string name;
         public double Weight { get; }
         public double Height { get; }
-        public string Name { get; }
 
-        public ValueStorage()
+        public ValueStorage(string name)
         {
-            Name = GetName();
             Weight = GetWeightChecker(name);
             Height = GetHeightChecker(name);
-        }
-
-        private string GetName()
-        {
-            while (true)
-            {
-                name = Console.ReadLine();
-                if (!String.IsNullOrEmpty(name)) break;
-                else Console.Write("Dear user, you have entered an empty value, please enter your name: ");
-            }
-            return name.Substring(0, 1).ToUpper() + name.Substring(1);
         }
 
         private double GetWeightChecker(string name)

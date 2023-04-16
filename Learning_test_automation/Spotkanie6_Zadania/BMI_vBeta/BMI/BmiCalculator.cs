@@ -2,7 +2,7 @@
 {
     public class BmiCalculator
     {
-        private double BmiCalculation { get; }
+        public double BmiCalculation { get; }
         private double CalculateHowMuchShouldBeGained { get; }
         private double CalculateHowMuchShouldBeLost { get; }
         public string AdjusterToRightWeight { get; }
@@ -12,13 +12,13 @@
         private const double upperLimitBmi = 24.9;
 
 
+
         public BmiCalculator(double weight, double height)
         {
             BmiCalculation = GetBmiCalculation(weight, height);
             CalculateHowMuchShouldBeGained = GetCalculateHowMuchShouldBeGained(height);
             CalculateHowMuchShouldBeLost = GetCalculateHowMuchShouldBeLost(height);
-            EstimateWeight = GetEstimateWeight();
-            AdjusterToRightWeight = GetAdjusterToRightWeight(EstimateWeight);
+            AdjusterToRightWeight = GetAdjusterToRightWeight(GetEstimateWeight());
         }
 
         private double GetBmiCalculation(double weight, double height)
@@ -34,15 +34,13 @@
         private double GetCalculateHowMuchShouldBeGained(double height)
         {
             double missingDiffToRightBmi = lowerLimitBmi - BmiCalculation;
-            double result = missingDiffToRightBmi * GetPowerCalculation(height);
-            return result;
+            return missingDiffToRightBmi * GetPowerCalculation(height);
         }
 
         private double GetCalculateHowMuchShouldBeLost(double height)
         {
             double missingDiffToRightBmi = BmiCalculation - upperLimitBmi;
-            double result = missingDiffToRightBmi * GetPowerCalculation(height);
-            return result;
+            return missingDiffToRightBmi * GetPowerCalculation(height);
         }
 
         private string GetEstimateWeight()

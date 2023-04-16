@@ -1,4 +1,6 @@
-﻿namespace Option
+﻿using System.Xml.Linq;
+
+namespace Option
 {
     public class Performer
     {
@@ -26,6 +28,19 @@
                 else if (decisionToExitTheProgram == (int)MakingDecision.No) LeaveProgramme();
                 else Console.WriteLine($"Your number is: {decisionToExitTheProgram}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
+        }
+
+        public string GetName()
+        {
+            string name;
+
+            while (true)
+            {
+                name = Console.ReadLine();
+                if (!String.IsNullOrEmpty(name)) break;
+                else Console.Write("Dear user, you have entered an empty value, please enter your name: ");
+            }
+            return name.Substring(0, 1).ToUpper() + name.Substring(1);
         }
 
         private void StayOnProgram()

@@ -12,8 +12,8 @@ namespace BMI
         public Announcement()
         {
             appOption.ProgramWelcome();
-            ValueStorage programData = new ValueStorage();
-            this.name = programData.Name;
+            this.name = appOption.GetName();
+            ValueStorage programData = new ValueStorage(this.name);
             this.bmi = new BmiCalculator(programData.Weight, programData.Height);
         }
         public void ApplicationRunner()
