@@ -25,7 +25,7 @@ namespace Data
                 name = Console.ReadLine();
                 if (!String.IsNullOrEmpty(name)) break;
                 else Console.Write("Dear user, you have entered an empty value, please enter your name: ");
-            }           
+            }
             return name.Substring(0, 1).ToUpper() + name.Substring(1);
         }
 

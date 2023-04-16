@@ -2,11 +2,14 @@
 {
     public class BmiCalculator
     {
-        public double BmiCalculation { get; }
-        public double CalculateHowMuchShouldBeGained { get; }
-        public double CalculateHowMuchShouldBeLost { get; }
+        private double BmiCalculation { get; }
+        private double CalculateHowMuchShouldBeGained { get; }
+        private double CalculateHowMuchShouldBeLost { get; }
         public string AdjusterToRightWeight { get; }
         public string EstimateWeight { get; }
+
+        private const double lowerLimitBmi = 18.5;
+        private const double upperLimitBmi = 24.9;
 
 
         public BmiCalculator(double weight, double height)
@@ -15,7 +18,7 @@
             CalculateHowMuchShouldBeGained = GetCalculateHowMuchShouldBeGained(height);
             CalculateHowMuchShouldBeLost = GetCalculateHowMuchShouldBeLost(height);
             EstimateWeight = GetEstimateWeight();
-            AdjusterToRightWeight = GetAdjusterToRightWeight(EstimateWeight);      
+            AdjusterToRightWeight = GetAdjusterToRightWeight(EstimateWeight);
         }
 
         private double GetBmiCalculation(double weight, double height)
@@ -30,14 +33,14 @@
 
         private double GetCalculateHowMuchShouldBeGained(double height)
         {
-            double missingDiffToRightBmi = 18.5 - BmiCalculation;
+            double missingDiffToRightBmi = lowerLimitBmi - BmiCalculation;
             double result = missingDiffToRightBmi * GetPowerCalculation(height);
             return result;
         }
 
         private double GetCalculateHowMuchShouldBeLost(double height)
         {
-            double missingDiffToRightBmi = BmiCalculation - 24.9;
+            double missingDiffToRightBmi = BmiCalculation - upperLimitBmi;
             double result = missingDiffToRightBmi * GetPowerCalculation(height);
             return result;
         }
@@ -46,9 +49,9 @@
         {
             switch (BmiCalculation)
             {
-                case < 18.5:
+                case < lowerLimitBmi:
                     return "underweight";
-                case > 24.9:
+                case > upperLimitBmi:
                     return "overweight";
                 default:
                     return "weight in standard";
