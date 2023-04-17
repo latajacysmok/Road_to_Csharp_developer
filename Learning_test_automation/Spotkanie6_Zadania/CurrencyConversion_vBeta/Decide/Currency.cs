@@ -17,16 +17,22 @@
         public decimal SentValue 
         {
             get {return sentValue; }
-            set { sentValue = Math.Round(value * SentCourse, 2); }     
+            set { sentValue = Math.Round(value * SentCourse, 2); }  
         }
         private decimal BoughtCourse { get; }
         private decimal SentCourse { get; }
+        private string SymbolCurrency { get; }
+
+        private Euro euro = new Euro();
+        private Dollar dollar = new Dollar();
+        private CzechCrown czechCrown = new CzechCrown();
 
         public Currency(CurrencyDefault name)//ct+ tab
         {
             Name         = name;
             BoughtCourse = GetBuyingCourse();
             SentCourse   = GetSellCourse();
+            SymbolCurrency = GetSymbolCurrency();
         }
 
         public Currency(string name)
@@ -62,31 +68,60 @@
 
         public decimal GetBuyingCourse()
         {
+            //Euro euro = new Euro();
+            //Dollar dollar = new Dollar();
+            //CzechCrown czechCrown = new CzechCrown();
+
             switch (Name)
             {
                 case CurrencyDefault.Dollar:
-                    return 4.8765m;
+                    return dollar.buyCurrency();
+                    //return 4.8765m;
                 case CurrencyDefault.Euro:
-                    return 5.3722m;
+                    return euro.buyCurrency();
+                    //return 5.3722m;
                 case CurrencyDefault.Czech_crown:
-                    return 0.2745m;
+                    return czechCrown.buyCurrency();
+                    //return 0.2745m;
+                default:
+                    return 0;
+            }
+        }    
+
+        public decimal GetSellCourse()
+        {
+            //Euro euro = new Euro();
+            //Dollar dollar = new Dollar();
+            //CzechCrown czechCrown = new CzechCrown();
+
+            switch (Name)
+            {
+                case CurrencyDefault.Dollar:
+                    return dollar.sellCurrency();
+                    //return 4.3888m;
+                case CurrencyDefault.Euro:
+                    return euro.sellCurrency();
+                    //return 4.8349m;
+                case CurrencyDefault.Czech_crown:
+                    return czechCrown.sellCurrency();
+                    //return 0.2470m;
                 default:
                     return 0;
             }
         }
 
-        public decimal GetSellCourse()
+        public string GetSymbolCurrency()
         {
             switch (Name)
             {
                 case CurrencyDefault.Dollar:
-                    return 4.3888m;
+                    return dollar.symbolCurrency();
                 case CurrencyDefault.Euro:
-                    return 4.8349m;
+                    return euro.symbolCurrency();
                 case CurrencyDefault.Czech_crown:
-                    return 0.2470m;
+                    return czechCrown.symbolCurrency();
                 default:
-                    return 0;
+                    throw new ArgumentException("Invalid currency value", nameof(Name));
             }
         }
 
@@ -101,5 +136,5 @@
             }
         }
     //prop + tab
-}
+    }
 }

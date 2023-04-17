@@ -50,7 +50,7 @@ namespace CurrencyConversion
         {        
             Console.Write("\nDear user, tell me what currency you want to sell: \n");
             
-            CurrencyDefault currencyDefault = option.GetCurrencyName();       
+            CurrencyDefault currencyDefault = option.GetCurrencyName();  
             string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
@@ -58,8 +58,9 @@ namespace CurrencyConversion
             _currency = new Currency(currencyDefault);
             decimal amount = _currency.GetAmount();
             _currency.SentValue = amount;
+            string currencySymbol = _currency.GetSymbolCurrency();
 
-            Console.WriteLine($"For {amount} {result} you will get: {_currency.SentValue} PLN.");
+            Console.WriteLine($"For {amount} {currencySymbol} ({result})  you will get: {_currency.SentValue} PLN.");
         }
 
         private void BuyCurrency()
@@ -74,8 +75,9 @@ namespace CurrencyConversion
             Currency _currency = new Currency(currencyDefault);
             decimal amount = _currency.GetAmount();
             _currency.BoughtValue = amount;
+            string currencySymbol = _currency.GetSymbolCurrency();
 
-            Console.WriteLine($"For {amount} {result} you will pay: {_currency.BoughtValue} PLN.");
+            Console.WriteLine($"For {amount} {currencySymbol} ({result}) you will pay: {_currency.BoughtValue} PLN.");
         }
     }
 }
