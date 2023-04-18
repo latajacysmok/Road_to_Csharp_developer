@@ -27,18 +27,23 @@ namespace Data
             }
         }
 
+        public List<Place> TakePlaceList()
+        {
+            return placesList;
+        }
+
         public void ClearPlace()
         {
             PrintOut();
             int numer = option.GetNumber();
-            placesList.RemoveAt(numer - 1);//potrzebujemy index
+            placesList.RemoveAt(numer - 1);
         }
 
         public Place SelectPlace()
         {
             PrintOut();
             int numer = option.GetNumber();
-            return placesList[numer - 1];//potrzebujemy index
+            return placesList[numer - 1];
         }
     }
 }

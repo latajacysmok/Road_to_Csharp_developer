@@ -29,18 +29,23 @@ namespace Data
             Console.WriteLine("");
         }
 
+        public List<Person> TakePeopleList()
+        {
+            return listaOsob;
+        }
+
         public void DeletePerson()
         {
             PrintOut();
             int numer = option.GetNumber();
-            listaOsob.RemoveAt(numer - 1);//potrzebujemy index
+            listaOsob.RemoveAt(numer - 1);
         }
 
         public Person SelectPerson()
         {
             PrintOut();
             int numer = option.GetNumber();
-            return listaOsob[numer - 1];//potrzebujemy index
+            return listaOsob[numer - 1];
         }
     }
 }

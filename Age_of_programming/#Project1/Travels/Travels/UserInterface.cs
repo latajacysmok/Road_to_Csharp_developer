@@ -11,6 +11,7 @@ namespace Travels
             var osoby       = new ListOfPeople();
             var miejsca     = new ListOfPlaces();
 
+
             int wybor = 0;
             while (wybor != 9)
             {
@@ -47,9 +48,10 @@ namespace Travels
                         miejsca.ClearPlace();
                         break;
                     case 7:
-                        //string osoba = osoby.SelectPerson();
-                        //string miejsce = miejsca.SelectPlace();
-                        //osoba.AddPlace(miejsce);
+                        //pobrać osobe z punktu 3 i przypisać włażnie do jakiego miejsca?
+                        //osoby.PrintOut();
+                        List<Place> listaMiejsc = miejsca.TakePlaceList();
+                        string osoba = osoby.ToString();
                         break;
                     case 8:
                         //osoba = osoby.SelectPerson();
