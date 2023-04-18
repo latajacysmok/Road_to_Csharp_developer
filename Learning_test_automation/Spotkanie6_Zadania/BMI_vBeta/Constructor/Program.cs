@@ -1,6 +1,6 @@
-﻿using BMI;
+﻿using Performer;
 
-namespace Interface
+namespace Constructor
 {
     class Program
     {

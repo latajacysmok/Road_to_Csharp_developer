@@ -1,11 +1,11 @@
 ﻿using Data;
 using Option;
 
-namespace BMI
+namespace Performer
 {
     public class Announcement
     {
-        Performer appOption = new Performer();
+        MainContractor appOption = new MainContractor();
         private BmiCalculator bmi;
         private string name;
 

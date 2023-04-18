@@ -4,7 +4,7 @@ namespace Data
 {
     public class ValueStorage
     {
-        Performer appOption = new Performer();
+        MainContractor appOption = new MainContractor();
 
         public double Weight { get; }
         public double Height { get; }

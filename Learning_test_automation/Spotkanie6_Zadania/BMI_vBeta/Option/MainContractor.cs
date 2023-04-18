@@ -1,8 +1,6 @@
-﻿using System.Xml.Linq;
-
-namespace Option
+﻿namespace Option
 {
-    public class Performer
+    public class MainContractor
     {
         public void ProgramWelcome()
         {
@@ -19,6 +17,7 @@ namespace Option
                 Console.WriteLine($"{name} do you want to continue: ");
                 Console.WriteLine("If yes enter: '1'.");
                 Console.WriteLine("If no enter: '2'.");
+                Console.Write("Dear user, make a choice: ");
                 double decisionToExitTheProgram = ItNumber();
                 if (decisionToExitTheProgram == (int)MakingDecision.Yes)
                 {
