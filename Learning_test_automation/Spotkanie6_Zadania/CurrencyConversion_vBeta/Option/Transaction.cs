@@ -1,5 +1,4 @@
-﻿using Decide;
-using System;
+﻿using CurrencySelection;
 using System.Diagnostics;
 
 namespace CurrencyConversion
@@ -7,20 +6,20 @@ namespace CurrencyConversion
     public class Transaction
     {
         Option option = new Option();
-        private Currency _currency;
+        CurrencyPresentation currencyPresentation = new CurrencyPresentation();
         private Dollar dollar = new Dollar();
         private Euro euro = new Euro();
         private CzechCrown czechCrown = new CzechCrown();
 
         public void Buying()
         {
-            option.PrintAvailableBuyExchangeRates();
+            currencyPresentation.PrintAvailableBuyExchangeRates();
             if (OwnCurrency() == MakingDecision.No) BuyCurrency();
         }
 
         public void Selling()
         {
-            option.PrintAvailableSellExchangeRates();
+            currencyPresentation.PrintAvailableSellExchangeRates();
             if (OwnCurrency() == MakingDecision.No) SellCurrency();
         }
         private MakingDecision OwnCurrency()
@@ -38,7 +37,7 @@ namespace CurrencyConversion
 
                 UserCurrency userCurrency = new UserCurrency(ifBuy);
 
-                string name = userCurrency.UserNameCurrency;
+                string name = userCurrency.NameCurrency;
 
                 Console.Write($"I understand my dear user, you have chosen {name}, and how many {name} do you need: ");
 
@@ -57,12 +56,11 @@ namespace CurrencyConversion
         {        
             Console.Write("\nDear user, tell me what currency you want to sell: \n");
             
-            CurrencyDefault currencyDefault = option.GetCurrencyName();  
+            CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();  
             string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
             
-            _currency = new Currency();
             decimal amount = option.GetAmount();
             string currencySymbol = "None!";
             decimal sentValue = 0;
@@ -93,12 +91,11 @@ namespace CurrencyConversion
         {         
             Console.Write("\nDear user, tell me what currency you want to buy: \n");
             
-            CurrencyDefault currencyDefault = option.GetCurrencyName();
+            CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
             string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
 
-            Currency _currency = new Currency();
             decimal amount = option.GetAmount();
             string currencySymbol = "None!";
             decimal boughtValue = 0;

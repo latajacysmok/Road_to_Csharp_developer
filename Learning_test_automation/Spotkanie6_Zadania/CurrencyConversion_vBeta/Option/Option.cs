@@ -1,4 +1,4 @@
-﻿using Decide;
+﻿using CurrencySelection;
 using System.Diagnostics;
 using System.Drawing;
 
@@ -6,11 +6,6 @@ namespace CurrencyConversion
 {
     public class Option
     {
-        private int[] numberOfCurrency = { 1, 2, 3 };
-        private Dollar dollar = new Dollar();
-        private Euro euro = new Euro();
-        private CzechCrown czechCrown = new CzechCrown();
-
         public MakingDecision DecideWhichOption()
         {
             while (true)
@@ -24,7 +19,7 @@ namespace CurrencyConversion
             }
         }
 
-        private int ValidateOptionNumber()
+        public int ValidateOptionNumber()
         {
             Console.Write("Dear user, please give me your answer now: ");
             while (true)
@@ -95,62 +90,6 @@ namespace CurrencyConversion
                 Console.Write("I can't convert negative value of money. Try again, please: ");
                 return false;
             }
-        }
-
-        public void BuyOrSell()
-        {
-            Console.Write("Dear user, tell me what you want?\n");
-            Console.WriteLine("If 'Buy' currency, enter: '1'.");
-            Console.WriteLine("If 'Sell' currency, enter: '2'.");
-            int decision = ValidateOptionNumber();
-            Transaction transaction = new Transaction();
-
-            if (decision == (int)BuyingAndSelling.Buy) transaction.Buying();
-            else if (decision == (int)BuyingAndSelling.Sell) transaction.Selling();
-            else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
-        }
-
-        public CurrencyDefault GetCurrencyName()
-        {
-            PrintAvailableCurrencies();
-            
-            while (true)
-            {
-                if (Enum.TryParse(ValidateOptionNumber().ToString(), out CurrencyDefault currency)) return currency;
-                else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
-            }
-        }
-
-        public void PrintAvailableCurrencies()
-        {
-            Console.WriteLine("- Dollar: 1,");
-            Console.WriteLine("- Euro: 2,");
-            Console.WriteLine("- Czech crown: 3.\n");
-        }
-        
-        public void PrintAvailableBuyExchangeRates()
-        {
-            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
-            foreach (int num in numberOfCurrency)
-            {
-                Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
-                if (num == 1) Console.WriteLine($"- {dollar.NameCurrency}: {dollar.BoughtCurrency} pln,");
-                else if (num == 2) Console.WriteLine($"- {euro.NameCurrency}: {euro.BoughtCurrency} pln,");
-                else if (num == 3) Console.WriteLine($"- {czechCrown.NameCurrency}: {czechCrown.BoughtCurrency} pln.");
-            }
-            Console.WriteLine();
-        }
-        public void PrintAvailableSellExchangeRates()
-        {
-            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
-            foreach (int num in numberOfCurrency)
-            {
-                Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
-                if (num == 1) Console.WriteLine($"- {dollar.NameCurrency}: {euro.SoldCurrency} pln,");
-                else if (num == 2) Console.WriteLine($"- {euro.NameCurrency}: {euro.SoldCurrency} pln,");
-                else if (num == 3) Console.WriteLine($"- {czechCrown.NameCurrency}: {czechCrown.SoldCurrency} pln.");
-            }
-            Console.WriteLine();
         }
 
         public void WhatDoWeDoNext()

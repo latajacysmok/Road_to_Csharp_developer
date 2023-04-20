@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Decide\Decide.csproj" />
+    <ProjectReference Include="..\Decide\CurrencySelection.csproj" />
   </ItemGroup>
 
 </Project>

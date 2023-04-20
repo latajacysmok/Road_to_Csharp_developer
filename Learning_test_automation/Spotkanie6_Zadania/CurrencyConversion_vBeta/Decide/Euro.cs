@@ -1,4 +1,4 @@
-﻿namespace Decide
+﻿namespace CurrencySelection
 {
     public class Euro : Currency
     {
@@ -20,17 +20,13 @@
             set { sentValue = Math.Round(value * SoldCurrency, 2); }
         }
 
-        public Euro()//czy ja muszę dawać argument w konstruktorze z wszystkimi mozliwościami dla CurrencyDefault 
+        public Euro()
         {
             BoughtCurrency = 5.3722m;
             SoldCurrency = 5.3722m;
             SymbolCurrency = "€";
             NameCurrency = "Euro";
-
-            //przypisywanie propertkom wartości, czyli temu wyżej przypisać tutaj wartości a nie tam na górze.
-            //usunięcie metod switch w Currency(3 są).
             //zastanowić się co jeszcze mogłoby być w klasie bazowej a co konkretnie w pochodnej.
-            // powtórz powyższe dla pozostałych walut.
         }
 }
 }
