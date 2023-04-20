@@ -3,10 +3,17 @@ using System.Diagnostics;
 
 namespace CurrencyConversion
 {
-    public class Transaction
+    public class Transaction : Currency
     {
         Option option = new Option();
         private Currency _currency;
+        CurrencyDefault name;
+
+        public Transaction(CurrencyDefault name) : base(name) => this.name = name;
+        public Transaction()
+        {
+            
+        }
 
         public void Buying()
         {
@@ -37,7 +44,7 @@ namespace CurrencyConversion
 
                 Console.Write($"I understand my dear user, you have chosen {_currency.UserNameCurrency}, and how many {_currency.UserNameCurrency} do you need: ");
 
-                decimal amount = _currency.GetAmount();
+                decimal amount = base.GetAmount(); //_currency.GetAmount();
 
                 Console.WriteLine($"For {amount} {_currency.UserNameCurrency} you will get: {amount * _currency.UserValueCurrency} PLN.");
 
@@ -55,12 +62,12 @@ namespace CurrencyConversion
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
             
-            _currency = new Currency(currencyDefault);
-            decimal amount = _currency.GetAmount();
-            _currency.SentValue = amount;
-            string currencySymbol = _currency.GetSymbolCurrency();
+            //_currency = new Currency(currencyDefault);
+            decimal amount = base.GetAmount();//_currency.GetAmount();
+            base.SentValue = amount;//_currency.SentValue
+            string currencySymbol = base.GetSymbolCurrency(name); //_currency.GetSymbolCurrency();
 
-            Console.WriteLine($"For {amount} {currencySymbol} ({result})  you will get: {_currency.SentValue} PLN.");
+            Console.WriteLine($"For {amount} {currencySymbol} ({result})  you will get: {base.SentValue} PLN.");//_currency.SentValue
         }
 
         private void BuyCurrency()
@@ -73,9 +80,9 @@ namespace CurrencyConversion
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
 
             Currency _currency = new Currency(currencyDefault);
-            decimal amount = _currency.GetAmount();
+            decimal amount = base.GetAmount();//_currency.GetAmount();
             _currency.BoughtValue = amount;
-            string currencySymbol = _currency.GetSymbolCurrency();
+            string currencySymbol = _currency.GetSymbolCurrency(name);
 
             Console.WriteLine($"For {amount} {currencySymbol} ({result}) you will pay: {_currency.BoughtValue} PLN.");
         }

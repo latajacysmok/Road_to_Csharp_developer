@@ -1,4 +1,6 @@
-﻿namespace Decide
+﻿using System.Xml.Linq;
+
+namespace Decide
 {
     public class Currency
     {
@@ -32,13 +34,18 @@
             Name         = name;
             BoughtCourse = GetBuyingCourse();
             SentCourse   = GetSellCourse();
-            SymbolCurrency = GetSymbolCurrency();
+            SymbolCurrency = GetSymbolCurrency(name);
         }
 
         public Currency(string name)
         {
             UserNameCurrency       = name;
             this.UserValueCurrency = GetUserCourse(name);
+        }
+
+        public Currency()
+        {
+            
         }
 
         public decimal GetAmount()
@@ -68,21 +75,15 @@
 
         public decimal GetBuyingCourse()
         {
-            //Euro euro = new Euro();
-            //Dollar dollar = new Dollar();
-            //CzechCrown czechCrown = new CzechCrown();
 
             switch (Name)
             {
                 case CurrencyDefault.Dollar:
                     return dollar.buyCurrency();
-                    //return 4.8765m;
                 case CurrencyDefault.Euro:
                     return euro.buyCurrency();
-                    //return 5.3722m;
                 case CurrencyDefault.Czech_crown:
                     return czechCrown.buyCurrency();
-                    //return 0.2745m;
                 default:
                     return 0;
             }
@@ -90,29 +91,22 @@
 
         public decimal GetSellCourse()
         {
-            //Euro euro = new Euro();
-            //Dollar dollar = new Dollar();
-            //CzechCrown czechCrown = new CzechCrown();
-
             switch (Name)
             {
                 case CurrencyDefault.Dollar:
                     return dollar.sellCurrency();
-                    //return 4.3888m;
                 case CurrencyDefault.Euro:
                     return euro.sellCurrency();
-                    //return 4.8349m;
                 case CurrencyDefault.Czech_crown:
                     return czechCrown.sellCurrency();
-                    //return 0.2470m;
                 default:
                     return 0;
             }
         }
 
-        public string GetSymbolCurrency()
+        public string GetSymbolCurrency(CurrencyDefault name)
         {
-            switch (Name)
+            switch (name)
             {
                 case CurrencyDefault.Dollar:
                     return dollar.symbolCurrency();
