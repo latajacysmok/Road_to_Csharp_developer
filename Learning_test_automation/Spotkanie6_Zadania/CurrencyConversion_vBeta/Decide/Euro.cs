@@ -1,20 +1,36 @@
 ﻿namespace Decide
 {
-    public class Euro : Cash
+    public class Euro : Currency
     {
-        public override decimal buyCurrency()
+        public decimal BoughtCurrency;
+        public decimal SoldCurrency;
+        public string NameCurrency;
+        public string SymbolCurrency;
+        public decimal boughtValue;
+        public decimal BoughtValue
         {
-            return 5.3722m;
+            get { return boughtValue; }
+            set { boughtValue = Math.Round(value * BoughtCurrency, 2); }
         }
 
-        public override decimal sellCurrency()
+        private decimal sentValue;
+        public decimal SentValue
         {
-            return 4.8349m;
+            get { return sentValue; }
+            set { sentValue = Math.Round(value * SoldCurrency, 2); }
         }
-        
-        public override string symbolCurrency()
+
+        public Euro()//czy ja muszę dawać argument w konstruktorze z wszystkimi mozliwościami dla CurrencyDefault 
         {
-            return "€";
+            BoughtCurrency = 5.3722m;
+            SoldCurrency = 5.3722m;
+            SymbolCurrency = "€";
+            NameCurrency = "Euro";
+
+            //przypisywanie propertkom wartości, czyli temu wyżej przypisać tutaj wartości a nie tam na górze.
+            //usunięcie metod switch w Currency(3 są).
+            //zastanowić się co jeszcze mogłoby być w klasie bazowej a co konkretnie w pochodnej.
+            // powtórz powyższe dla pozostałych walut.
         }
-    }
+}
 }

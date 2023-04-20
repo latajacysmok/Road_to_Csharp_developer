@@ -1,20 +1,31 @@
 ﻿namespace Decide
 {
-    public class Dollar : Cash
+    public class Dollar : Currency
     {
-        public override decimal buyCurrency()
+        public decimal BoughtCurrency;
+        public decimal SoldCurrency;
+        public string NameCurrency;
+        public string SymbolCurrency;
+        public decimal boughtValue;
+        public decimal BoughtValue
         {
-            return 4.8765m;
+            get { return boughtValue; }
+            set { boughtValue = Math.Round(value * BoughtCurrency, 2); }
         }
 
-        public override decimal sellCurrency()
+        public decimal sentValue;
+        public decimal SentValue
         {
-            return 4.3888m;
+            get { return sentValue; }
+            set { sentValue = Math.Round(value * SoldCurrency, 2); }
         }
 
-        public override string symbolCurrency()
+        public Dollar()
         {
-            return "$";
+            BoughtCurrency = 4.8765m;
+            SoldCurrency = 4.3888m;
+            SymbolCurrency = "$";
+            NameCurrency = "Dolar";
         }
     }
 }
