@@ -1,6 +1,5 @@
 ﻿using CurrencySelection;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace CurrencyConversion
 {

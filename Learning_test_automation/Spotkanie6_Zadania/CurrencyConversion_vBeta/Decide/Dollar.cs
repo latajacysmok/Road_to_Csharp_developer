@@ -2,30 +2,14 @@
 {
     public class Dollar : Currency
     {
-        public decimal BoughtCurrency;
-        public decimal SoldCurrency;
-        public string NameCurrency;
-        public string SymbolCurrency;
-        public decimal boughtValue;
-        public decimal BoughtValue
+        public Dollar() : base(4.8765m, 4.3888m)
         {
-            get { return boughtValue; }
-            set { boughtValue = Math.Round(value * BoughtCurrency, 2); }
-        }
-
-        public decimal sentValue;
-        public decimal SentValue
-        {
-            get { return sentValue; }
-            set { sentValue = Math.Round(value * SoldCurrency, 2); }
-        }
-
-        public Dollar()
-        {
-            BoughtCurrency = 4.8765m;
-            SoldCurrency = 4.3888m;
             SymbolCurrency = "$";
-            NameCurrency = "Dolar";
+            NameCurrency = "Dollar";
         }
+
+        public string NameCurrency { get; private set; }
+        public string SymbolCurrency { get; private set; }
+
     }
 }

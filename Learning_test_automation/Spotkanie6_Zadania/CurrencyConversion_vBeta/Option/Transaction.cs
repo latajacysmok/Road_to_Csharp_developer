@@ -37,13 +37,13 @@ namespace CurrencyConversion
 
                 UserCurrency userCurrency = new UserCurrency(ifBuy);
 
-                string name = userCurrency.NameCurrency;
+                string name = userCurrency.currencyName;
 
                 Console.Write($"I understand my dear user, you have chosen {name}, and how many {name} do you need: ");
 
                 decimal amount = option.GetAmount();
-                userCurrency.UserValue = amount;
-                decimal userValue = userCurrency.UserValue;
+                userCurrency.BoughtValue = amount;
+                decimal userValue = userCurrency.BoughtValue;
 
                 Console.WriteLine($"For {amount} {name} you will get: {userValue} PLN.");
 

@@ -2,23 +2,36 @@
 {
     public class UserCurrency : Currency
     {
-        public decimal UserCurrencyRate;
-        public string NameCurrency;
-
+        public decimal userCurrencyRate;
+        public string currencyName;
         private decimal userValue;
-        public decimal UserValue
+
+        public override decimal BoughtValue
         {
             get { return userValue; }
-            set { userValue = Math.Round(value * UserCurrencyRate, 2); }
+            set { userValue = Math.Round(value * userCurrencyRate, 2); }
         }
 
         private CurrencyName userName = new CurrencyName();
 
-        public UserCurrency(bool ifBuy)
+        public UserCurrency(bool ifBuy) : base(0, 0)
         {
-            NameCurrency = userName.UserEntersNameOfCurrency(ifBuy);
-            UserCurrencyRate = GetUserCourse(NameCurrency);
+            currencyName = userName.UserEntersNameOfCurrency(ifBuy);
+            userCurrencyRate = GetUserCourse(currencyName);
         }
+
+        public decimal UserCurrencyRate
+        {
+            get { return userCurrencyRate; }
+            set { userCurrencyRate = value; }
+        }
+
+        public string CurrencyName
+        {
+            get { return currencyName; }
+            set { currencyName = value; }
+        }
+
 
         private decimal GetUserCourse(string currencyUserName)
         {

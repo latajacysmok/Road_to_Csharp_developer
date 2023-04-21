@@ -2,31 +2,13 @@
 {
     public class Euro : Currency
     {
-        public decimal BoughtCurrency;
-        public decimal SoldCurrency;
-        public string NameCurrency;
-        public string SymbolCurrency;
-        public decimal boughtValue;
-        public decimal BoughtValue
+        public Euro() : base(5.3722m, 5.3722m)
         {
-            get { return boughtValue; }
-            set { boughtValue = Math.Round(value * BoughtCurrency, 2); }
-        }
-
-        private decimal sentValue;
-        public decimal SentValue
-        {
-            get { return sentValue; }
-            set { sentValue = Math.Round(value * SoldCurrency, 2); }
-        }
-
-        public Euro()
-        {
-            BoughtCurrency = 5.3722m;
-            SoldCurrency = 5.3722m;
             SymbolCurrency = "€";
             NameCurrency = "Euro";
-            //zastanowić się co jeszcze mogłoby być w klasie bazowej a co konkretnie w pochodnej.
         }
-}
+
+        public string NameCurrency { get; private set; }
+        public string SymbolCurrency { get; private set; }
+    }
 }
