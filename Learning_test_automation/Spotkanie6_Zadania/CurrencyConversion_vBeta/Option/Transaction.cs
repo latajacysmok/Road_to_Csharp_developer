@@ -7,9 +7,9 @@ namespace CurrencyConversion
     {
         Option option = new Option();
         CurrencyPresentation currencyPresentation = new CurrencyPresentation();
-        private Dollar dollar = new Dollar();
-        private Euro euro = new Euro();
-        private CzechCrown czechCrown = new CzechCrown();
+        Dollar dollar = new Dollar();
+        Euro euro = new Euro();
+        CzechCrown czechCrown = new CzechCrown();
 
         public void Buying()
         {

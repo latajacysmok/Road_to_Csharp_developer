@@ -20,19 +20,6 @@
             userCurrencyRate = GetUserCourse(currencyName);
         }
 
-        public decimal UserCurrencyRate
-        {
-            get { return userCurrencyRate; }
-            set { userCurrencyRate = value; }
-        }
-
-        public string CurrencyName
-        {
-            get { return currencyName; }
-            set { currencyName = value; }
-        }
-
-
         private decimal GetUserCourse(string currencyUserName)
         {
 
