@@ -1,10 +1,18 @@
 ﻿using Option;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml.Linq;
+
 namespace Data
 {
-    public class ListOfPlaces
+    public class ListOfPlaces : Operations<Place>
     {
-        Security option = new Security();
         private List<Place> placesList;
+        public List<Place> PlacesList
+        {
+            get { return placesList; }
+        }
 
         public ListOfPlaces()
         {
@@ -14,36 +22,51 @@ namespace Data
         public void AddPlace()
         {
             Place place = new Place();
-            placesList.Add(place.GetSpot());
+            AddItem(place.GetSpot());
         }
 
-        public void PrintOut()
+        public override void AddItem(object item)
         {
-            Console.WriteLine("\n------------------------");
-            Console.WriteLine("\tMIEJSCA: ");
-            for (int i = 0; i < placesList.Count; i++)
+            placesList.Add((Place)item);
+        }
+
+        public bool PrintOut()
+        {
+            bool ifExit = false;
+            StringBuilder listOfPlace = new StringBuilder();
+
+            if (placesList.Count == 0)
             {
-                Console.WriteLine($"\t-{i + 1}- {placesList[i]}");
+                listOfPlace.Append("\nLista miejsc jest pusta! Aby zobaczyć jakąś zawartość wpierw dodaj miejsce.\n");
+                ifExit = true;
             }
+            else
+            {
+                listOfPlace.Append("\n------------------------\n");
+                listOfPlace.Append("\tMIEJSCA: \n");
+                for (int i = 0; i < placesList.Count; i++)
+                {
+                    listOfPlace.Append($"\t-{i + 1}- {placesList[i]}\n");
+                }
+
+                listOfPlace.Append("\n");
+            }
+                
+            string result = listOfPlace.ToString();
+            Console.WriteLine(result);
+            return ifExit;
         }
 
-        public List<Place> TakePlaceList()
+        public override void Delete<T>(List<T> list)
         {
-            return placesList;
+            if (PrintOut()) return;
+            base.Delete(placesList);
         }
 
-        public void ClearPlace()
+        public override T Select<T>(List<T> list)
         {
-            PrintOut();
-            int numer = option.GetNumber();
-            placesList.RemoveAt(numer - 1);
-        }
-
-        public Place SelectPlace()
-        {
-            PrintOut();
-            int numer = option.GetNumber();
-            return placesList[numer - 1];
+            if (PrintOut()) return null;
+            else return base.Select(placesList) as T;
         }
     }
 }

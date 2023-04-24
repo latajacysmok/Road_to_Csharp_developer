@@ -1,21 +1,22 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace Option
 {
     public class Security
     {
-        private bool IfEmpty(string word)
+        private static bool IfEmpty(string word)
         {
             return String.IsNullOrEmpty(word);
         }
 
-        private bool IfNumberFromSet(int number)
+        private static bool IfNumberFromSet(int number)
         {
             if (0 < number && number < 10) return true;
             else return false;
         }
 
-        public string GetName()
+        public static string GetName()
         {
             string word;
             while (true)
@@ -27,7 +28,7 @@ namespace Option
             return word;
         }
 
-        public int GetNumber()
+        public static int GetNumber()
         {
             string caller = new StackTrace().GetFrame(1).GetMethod().Name;
 
@@ -45,7 +46,7 @@ namespace Option
                 else Console.Write("Nie wprowadziłeś cyfry: ");
             }
         }
-        public void LeaveProgramme()
+        public static void LeaveProgramme()
         {
             Console.WriteLine($"\nRozumiem, w takim razie do zobaczenia(aby zamknąć aplikację kliknij dowolny klawisz).");
             Console.ReadKey();

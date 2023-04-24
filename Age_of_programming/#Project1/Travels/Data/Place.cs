@@ -1,11 +1,10 @@
 ﻿using Option;
-using System.Xml.Linq;
+using System;
 
 namespace Data
 {
     public class Place
     {
-        Security option = new Security();
         private string Spot { get; }
         private string Country { get; }
 
@@ -27,22 +26,17 @@ namespace Data
             Country = country;
         }
 
-        public override string ToString()
-        {
-            return $"\n- Miejsce: {Spot},\n- Kraj: {Country}.";
-        }
-
         private string GetPlace()
         {
             Console.Write("Podaj miejsce: ");
-            string place = option.GetName();
+            string place = Security.GetName();
             return place;
         }
 
         private string GetCountry()
         {
             Console.Write("Podaj kraj: ");
-            string country = option.GetName();
+            string country = Security.GetName();
             return country;
         }
         public Place GetSpot()

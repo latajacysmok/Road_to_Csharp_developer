@@ -1,51 +1,65 @@
 ﻿using Option;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Data
 {
-    public class ListOfPeople
+    public class ListOfPeople : Operations<Person>
     {
-        Security option = new Security();
-        private List<Person> listaOsob;
+        private List<Person> peopleList;
+
+        public List<Person> PeopleList
+        {
+            get { return peopleList; }
+        }
 
         public ListOfPeople()
         {
-            listaOsob = new List<Person>();
+            peopleList = new List<Person>();
         }
 
-        public void AddPerson()
+        public override void AddItem(object item)
         {
-            Person person = new Person(true);
-            listaOsob.Add(person.GetPerson());
+            peopleList.Add((Person)item);
         }
 
-        public void PrintOut()
+        public bool PrintOut()
         {
-            Console.WriteLine("\n---------");
-            Console.WriteLine("OSOBY: ");
-            for (int i = 0; i < listaOsob.Count; i++)
+            bool ifExit = false;
+            StringBuilder listOfPeople = new StringBuilder();
+
+            if (this.peopleList.Count == 0)
             {
-                Console.WriteLine($"{i + 1} - {listaOsob[i]}");
+                listOfPeople.Append("\nLista osób jest pusta! Aby zobaczyć jakąś zawartość wpierw dodaj osobę.\n");
+                ifExit = true;
             }
-            Console.WriteLine("");
+            else
+            {
+                listOfPeople.Append("\n---------\n");
+                listOfPeople.Append("OSOBY: \n");
+                for (int i = 0; i < this.peopleList.Count; i++)
+                {
+                    listOfPeople.Append($"{i + 1} - {this.peopleList[i]}\n");
+                }
+                listOfPeople.Append("\n");
+            }
+                      
+            string result = listOfPeople.ToString();
+            Console.WriteLine(result);
+            return ifExit;
         }
 
-        public List<Person> TakePeopleList()
+        public override void Delete<T>(List<T> list)
         {
-            return listaOsob;
+            if (PrintOut()) return;
+            base.Delete(list);
         }
 
-        public void DeletePerson()
+        public override T Select<T>(List<T> list)
         {
-            PrintOut();
-            int numer = option.GetNumber();
-            listaOsob.RemoveAt(numer - 1);
-        }
-
-        public Person SelectPerson()
-        {
-            PrintOut();
-            int numer = option.GetNumber();
-            return listaOsob[numer - 1];
+            if (PrintOut()) return null;
+            else return base.Select(peopleList) as T;
         }
     }
 }
