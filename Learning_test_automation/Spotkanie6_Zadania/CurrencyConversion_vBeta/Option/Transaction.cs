@@ -37,15 +37,12 @@ namespace CurrencyConversion
 
                 UserCurrency userCurrency = new UserCurrency(ifBuy);
 
-                string name = userCurrency.currencyName;
-
-                Console.Write($"I understand my dear user, you have chosen {name}, and how many {name} do you need: ");
+                Console.Write($"I understand my dear user, you have chosen {userCurrency.currencyName}, and how many {userCurrency.currencyName} do you need: ");
 
                 decimal amount = option.GetAmount();
-                userCurrency.BoughtValue = amount;
-                decimal userValue = userCurrency.BoughtValue;
+                userCurrency.UserTransaction = amount;
 
-                Console.WriteLine($"For {amount} {name} you will get: {userValue} PLN.");
+                Console.WriteLine($"For {amount} {userCurrency.currencyName} you will get: {userCurrency.BoughtValue} PLN.");
 
                 return exchangeRate;
             }
@@ -56,7 +53,7 @@ namespace CurrencyConversion
         {        
             Console.Write("\nDear user, tell me what currency you want to sell: \n");
             
-            CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();  
+            CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
             string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");

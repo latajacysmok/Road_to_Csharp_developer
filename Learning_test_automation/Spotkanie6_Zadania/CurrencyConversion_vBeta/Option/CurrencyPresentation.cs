@@ -58,7 +58,7 @@ namespace CurrencyConversion
             foreach (int num in numberOfCurrency)
             {
                 Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
-                if (num == 1) Console.WriteLine($"- {dollar.NameCurrency}: {euro.SoldCurrency} pln,");
+                if (num == 1) Console.WriteLine($"- {dollar.NameCurrency}: {dollar.SoldCurrency} pln,");
                 else if (num == 2) Console.WriteLine($"- {euro.NameCurrency}: {euro.SoldCurrency} pln,");
                 else if (num == 3) Console.WriteLine($"- {czechCrown.NameCurrency}: {czechCrown.SoldCurrency} pln.");
             }

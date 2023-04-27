@@ -2,7 +2,7 @@
 {
     public class CzechCrown : Currency
     {
-        public CzechCrown() : base(0.2745m, 0.2470m)
+        public CzechCrown() : base(boughtCurrency: 0.2745m, soldCurrency: 0.2470m)
         {
             SymbolCurrency = "Kč";
             NameCurrency = "Czech crown";

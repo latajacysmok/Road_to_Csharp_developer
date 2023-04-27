@@ -14,7 +14,7 @@
 
         private CurrencyName userName = new CurrencyName();
 
-        public UserCurrency(bool ifBuy) : base(0, 0)
+        public UserCurrency(bool ifBuy)
         {
             currencyName = userName.UserEntersNameOfCurrency(ifBuy);
             userCurrencyRate = GetUserCourse(currencyName);

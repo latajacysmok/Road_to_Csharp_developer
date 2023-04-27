@@ -2,7 +2,7 @@
 {
     public class Dollar : Currency
     {
-        public Dollar() : base(4.8765m, 4.3888m)
+        public Dollar() : base(boughtCurrency: 4.8765m, soldCurrency: 4.3888m)
         {
             SymbolCurrency = "$";
             NameCurrency = "Dollar";
