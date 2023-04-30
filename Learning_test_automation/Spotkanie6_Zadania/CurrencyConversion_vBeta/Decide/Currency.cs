@@ -1,105 +1,47 @@
-﻿namespace Decide
+﻿namespace CurrencySelection
 {
-    public class Currency
+    public class Currency//użyć "Czegoś" żeby nie tworzyć obiektu klasy Currency
     {
-        public CurrencyDefault Name { get; }
-        public decimal UserValueCurrency { get; }
-        public string UserNameCurrency { get; }
+        public decimal BoughtCurrency { get; private set; }
+        public decimal SoldCurrency { get; private set; }
+        public decimal UserCurrency { get; private set; }
 
-        public decimal boughtValue;
-        public decimal BoughtValue 
-        {
-            get { return boughtValue; }
-            set { boughtValue = Math.Round(value * BoughtCourse, 2); }
-        }
-
+        private decimal boughtValue;
         private decimal sentValue;
-        public decimal SentValue 
-        {
-            get {return sentValue; }
-            set { sentValue = Math.Round(value * SentCourse, 2); }     
-        }
-        private decimal BoughtCourse { get; }
-        private decimal SentCourse { get; }
+        private decimal userValue;
 
-        public Currency(CurrencyDefault name)//ct+ tab
+        public Currency(decimal boughtCurrency, decimal soldCurrency)
         {
-            Name         = name;
-            BoughtCourse = GetBuyingCourse();
-            SentCourse   = GetSellCourse();
+            BoughtCurrency = boughtCurrency;
+            SoldCurrency = soldCurrency;
         }
 
-        public Currency(string name)
-        {
-            UserNameCurrency       = name;
-            this.UserValueCurrency = GetUserCourse(name);
-        }
-
-        public decimal GetAmount()
-        {
-            decimal amount;
-            while (true)
-            {
-                if (decimal.TryParse(Console.ReadLine(), out amount))
-                {
-                    if (IfNumberIsPositive(amount)) break;
-                    else continue;
-                }
-                else Console.Write($"This is not a number: {amount}. Try again, please: ");
-            }
-            return amount;
-        }
-
-        private bool IfNumberIsPositive(decimal number)
-        {
-            if (number > 0) return true;
-            else
-            {
-                Console.Write("I can't convert negative value of money. Try again, please: ");
-                return false;
-            }
-        }
-
-        public decimal GetBuyingCourse()
-        {
-            switch (Name)
-            {
-                case CurrencyDefault.Dollar:
-                    return 4.8765m;
-                case CurrencyDefault.Euro:
-                    return 5.3722m;
-                case CurrencyDefault.Czech_crown:
-                    return 0.2745m;
-                default:
-                    return 0;
-            }
-        }
-
-        public decimal GetSellCourse()
-        {
-            switch (Name)
-            {
-                case CurrencyDefault.Dollar:
-                    return 4.3888m;
-                case CurrencyDefault.Euro:
-                    return 4.8349m;
-                case CurrencyDefault.Czech_crown:
-                    return 0.2470m;
-                default:
-                    return 0;
-            }
-        }
-
-        private decimal GetUserCourse(string currencyUserName)
+        public Currency()
         {
             
-            Console.Write($"Dear user, give me the exchange rate at which I should count the {currencyUserName}: ");
-            while (true)
-            {
-                if (decimal.TryParse(Console.ReadLine(), out decimal exchangeRate)) return (Math.Round(exchangeRate, 4));
-                else Console.Write($"This is not a number: {exchangeRate}. Try again, please: ");
-            }
         }
-    //prop + tab
-}
+
+        public virtual decimal BoughtValue
+        {
+            get { return boughtValue; }
+            set { boughtValue = Math.Round(value * BoughtCurrency, 2); }
+        }
+
+        public decimal SentValue
+        {
+            get { return sentValue; }
+            set { sentValue = Math.Round(value * SoldCurrency, 2); }
+        }
+        
+        public decimal UserTransaction
+        {
+            get { return userValue; }
+            set { userValue = Math.Round(value * UserCurrency, 2); }
+        }
+
+        //w inny sposób umożliwić tworzenie obiektu czyli pomyśleć nad konstruktorem
+        // mieć konkretny konstruktor który jest wywoływany tylko wtedy gdy użytkownik podaję kurs
+        // żeby logika wyciągania wartości waluty była utworzona osobna klasa jak np. Euro
+        //prop + tab
+    }
 }

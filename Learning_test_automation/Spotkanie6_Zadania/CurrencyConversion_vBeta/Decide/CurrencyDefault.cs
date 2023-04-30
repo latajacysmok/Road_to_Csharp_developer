@@ -1,4 +1,4 @@
-﻿namespace Decide
+﻿namespace CurrencySelection
 {
         public enum CurrencyDefault
         {

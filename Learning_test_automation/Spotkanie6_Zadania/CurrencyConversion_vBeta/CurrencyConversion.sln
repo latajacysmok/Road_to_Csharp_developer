@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "CurrencyConver
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyConversion", "Option\CurrencyConversion.csproj", "{92F3011F-7B05-4677-87C4-F0951281454B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decide", "Decide\Decide.csproj", "{9715D67E-AE55-40AD-858E-29FBA81D343D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencySelection", "Decide\CurrencySelection.csproj", "{9715D67E-AE55-40AD-858E-29FBA81D343D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

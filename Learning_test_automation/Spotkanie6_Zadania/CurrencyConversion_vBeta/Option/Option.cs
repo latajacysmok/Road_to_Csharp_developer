@@ -1,26 +1,24 @@
-﻿using Decide;
+﻿using CurrencySelection;
 using System.Diagnostics;
 
 namespace CurrencyConversion
 {
     public class Option
     {
-        private int[] numberOfCurrency = { 1, 2, 3 };
-
         public MakingDecision DecideWhichOption()
         {
             while (true)
             {
                 Console.WriteLine("If 'Yes' enter: '1'.");
                 Console.WriteLine("If 'No' enter: '2'.");
-                int decision = VerifyItsNumber();
+                int decision = ValidateOptionNumber();
                 if (decision == (int)MakingDecision.Yes) return MakingDecision.Yes;
                 else if (decision == (int)MakingDecision.No) return MakingDecision.No;
                 else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
         }
 
-        private int VerifyItsNumber()
+        public int ValidateOptionNumber()
         {
             Console.Write("Dear user, please give me your answer now: ");
             while (true)
@@ -28,10 +26,10 @@ namespace CurrencyConversion
                 if (int.TryParse(Console.ReadLine(), out int number))
                 {
                     string caller = new StackTrace().GetFrame(1).GetMethod().Name;
-                    bool ifYesOrNo;
-                    if (caller == "DecideWhichOption" || caller == "BuyOrSell") ifYesOrNo = true;
-                    else ifYesOrNo = false;
-                    if (LimitingOptions(ifYesOrNo, number)) return number;
+                    bool ifTwoChoiceOption;
+                    if (caller == "DecideWhichOption" || caller == "BuyOrSell") ifTwoChoiceOption = true;
+                    else ifTwoChoiceOption = false;
+                    if (LimitingOptions(ifTwoChoiceOption, number)) return number;
                     else
                     {
                         Console.Write("Dear user, please give me your answer now: ");
@@ -45,7 +43,7 @@ namespace CurrencyConversion
 
         private bool LimitingOptions(bool ifYesOrNo, int number)
         {
-            while(true)
+            while (true)
             {
                 if (ifYesOrNo)
                 {
@@ -68,60 +66,29 @@ namespace CurrencyConversion
             }
         }
 
-        public void BuyOrSell()
+        public decimal GetAmount()
         {
-            Console.Write("Dear user, tell me what you want?\n");
-            Console.WriteLine("If 'Buy' currency, enter: '1'.");
-            Console.WriteLine("If 'Sell' currency, enter: '2'.");
-            int decision = VerifyItsNumber();
-            Transaction transaction = new Transaction();
-
-            if (decision == (int)BuyingAndSelling.Buy) transaction.Buying();
-            else if (decision == (int)BuyingAndSelling.Sell) transaction.Selling();
-            else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
-        }
-
-        public CurrencyDefault GetCurrencyName()
-        {
-            PrintAvailableCurrencies();
-            
+            decimal amount;
             while (true)
             {
-                if (Enum.TryParse(VerifyItsNumber().ToString(), out CurrencyDefault currency)) return currency;
-                else Console.WriteLine("Try again, you can choose from among: \n-Dollar: 1,\n-Euro: 2,\n-Czech crown: 3.");
+                if (decimal.TryParse(Console.ReadLine(), out amount))
+                {
+                    if (IfNumberIsPositive(amount)) break;
+                    else continue;
+                }
+                else Console.Write($"This is not a number: {amount}. Try again, please: ");
             }
+            return amount;
         }
 
-        public void PrintAvailableCurrencies()
+        private bool IfNumberIsPositive(decimal number)
         {
-            Console.WriteLine("- Dollar: 1,");
-            Console.WriteLine("- Euro: 2,");
-            Console.WriteLine("- Czech crown: 3.\n");
-        }
-        
-        public void PrintAvailableBuyExchangeRates()
-        {
-            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
-            foreach (int num in numberOfCurrency)
+            if (number > 0) return true;
+            else
             {
-                Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
-                Currency currency = new Currency(currencyDefault);
-                if (num == 3) Console.WriteLine($"- Czech crown: {currency.GetBuyingCourse()} pln,");
-                else Console.WriteLine($"- {currency.Name}: {currency.GetBuyingCourse()} pln,");
+                Console.Write("I can't convert negative value of money. Try again, please: ");
+                return false;
             }
-            Console.WriteLine();
-        }
-        public void PrintAvailableSellExchangeRates()
-        {
-            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
-            foreach (int num in numberOfCurrency)
-            {
-                Enum.TryParse(num.ToString(), out CurrencyDefault currencyDefault);
-                Currency currency = new Currency(currencyDefault);
-                if (num == 3) Console.WriteLine($"- Czech crown: {currency.GetSellCourse()} pln,");
-                else Console.WriteLine($"- {currency.Name}: {currency.GetSellCourse()} pln,");
-            }
-            Console.WriteLine();
         }
 
         public void WhatDoWeDoNext()
