@@ -1,23 +1,29 @@
 ﻿namespace CurrencySelection
 {
-    public class UserCurrency : Currency
+    public class UserCurrency
     {
-        public decimal userCurrencyRate;
-        public string currencyName;
-        private decimal userValue;
+        public decimal BoughtCurrency { get; set; }
+        public decimal SoldCurrency { get; set; }
+        public decimal UserTransaction { get; set; }
 
-        public override decimal BoughtValue
-        {
-            get { return userValue; }
-            set { userValue = Math.Round(value * userCurrencyRate, 2); }
-        }
+        public string currencyName;     
+        private decimal userValue;
 
         private CurrencyName userName = new CurrencyName();
 
         public UserCurrency(bool ifBuy)
         {
             currencyName = userName.UserEntersNameOfCurrency(ifBuy);
-            userCurrencyRate = GetUserCourse(currencyName);
+            if (ifBuy) BoughtCurrency = GetUserCourse(currencyName);
+            else SoldCurrency = GetUserCourse(currencyName);
+
+            UserTransaction = ifBuy ? BoughtCurrency : SoldCurrency;
+        }
+
+        public decimal CurrencyExchange
+        {
+            get { return userValue; }
+            set { userValue = Math.Round(value * UserTransaction, 2); }
         }
 
         private decimal GetUserCourse(string currencyUserName)

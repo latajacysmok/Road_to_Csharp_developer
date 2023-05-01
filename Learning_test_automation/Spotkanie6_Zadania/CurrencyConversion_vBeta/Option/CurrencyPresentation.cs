@@ -9,7 +9,6 @@ namespace CurrencyConversion
         Dollar dollar = new Dollar();
         Euro euro = new Euro();
         CzechCrown czechCrown = new CzechCrown();
-        private int[] numberOfCurrency = { 1, 2, 3 };
         public void BuyOrSell()
         {
             Console.Write("Dear user, tell me what you want?\n");
