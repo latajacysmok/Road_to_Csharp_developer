@@ -1,5 +1,4 @@
 ﻿using CurrencySelection;
-using System;
 
 namespace CurrencyConversion
 {
@@ -9,6 +8,10 @@ namespace CurrencyConversion
         Currency dollar = new Dollar();
         Currency euro = new Euro();
         Currency czechCrown = new CzechCrown();
+        List<Currency> currencies = new List<Currency>();
+
+        private string name;
+
         public void BuyOrSell()
         {
             Console.Write("Dear user, tell me what you want?\n");
@@ -44,24 +47,34 @@ namespace CurrencyConversion
         {
             Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
 
-            foreach (CurrencyDefault currency in Enum.GetValues(typeof(CurrencyDefault)))
+            currencies.Add(dollar);
+            currencies.Add(euro);
+            currencies.Add(czechCrown);
+
+            foreach (var currency in currencies)
             {
-                if (currency == CurrencyDefault.Dollar) Console.WriteLine($"- {dollar.NameCurrency}: {dollar.BoughtCurrency} pln,");
-                else if (currency == CurrencyDefault.Euro) Console.WriteLine($"- {euro.NameCurrency}: {euro.BoughtCurrency} pln,");
-                else if (currency == CurrencyDefault.Czech_crown) Console.WriteLine($"- {czechCrown.NameCurrency}: {czechCrown.BoughtCurrency} pln.");
+                name = currency.NameCurrency.ToString() == "Czech_crown" ? "Czech crown" : currency.NameCurrency.ToString();
+
+                Console.WriteLine($"- {name}: {currency.BoughtCurrency} pln,");
             }
+
             Console.WriteLine();
         }
         public void PrintAvailableSellExchangeRates()
         {
             Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
 
-            foreach (CurrencyDefault currency in Enum.GetValues(typeof(CurrencyDefault)))
+            currencies.Add(dollar);
+            currencies.Add(euro);
+            currencies.Add(czechCrown);
+
+            foreach (var currency in currencies)
             {
-                if (currency == CurrencyDefault.Dollar) Console.WriteLine($"- {dollar.NameCurrency}: {dollar.SoldCurrency} pln,");
-                else if (currency == CurrencyDefault.Euro) Console.WriteLine($"- {euro.NameCurrency}: {euro.SoldCurrency} pln,");
-                else if (currency == CurrencyDefault.Czech_crown) Console.WriteLine($"- {czechCrown.NameCurrency}: {czechCrown.SoldCurrency} pln.");
+                name = currency.NameCurrency.ToString() == "Czech_crown" ? "Czech crown" : currency.NameCurrency.ToString();
+
+                Console.WriteLine($"- {name}: {currency.SoldCurrency} pln,");
             }
+
             Console.WriteLine();
         }
     }
