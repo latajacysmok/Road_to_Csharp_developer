@@ -6,9 +6,9 @@ namespace CurrencyConversion
     public class CurrencyPresentation
     {
         Option option = new Option();
-        Dollar dollar = new Dollar();
-        Euro euro = new Euro();
-        CzechCrown czechCrown = new CzechCrown();
+        Currency dollar = new Dollar();
+        Currency euro = new Euro();
+        Currency czechCrown = new CzechCrown();
         public void BuyOrSell()
         {
             Console.Write("Dear user, tell me what you want?\n");
@@ -43,6 +43,7 @@ namespace CurrencyConversion
         public void PrintAvailableBuyExchangeRates()
         {
             Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
+
             foreach (CurrencyDefault currency in Enum.GetValues(typeof(CurrencyDefault)))
             {
                 if (currency == CurrencyDefault.Dollar) Console.WriteLine($"- {dollar.NameCurrency}: {dollar.BoughtCurrency} pln,");
@@ -54,6 +55,7 @@ namespace CurrencyConversion
         public void PrintAvailableSellExchangeRates()
         {
             Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
+
             foreach (CurrencyDefault currency in Enum.GetValues(typeof(CurrencyDefault)))
             {
                 if (currency == CurrencyDefault.Dollar) Console.WriteLine($"- {dollar.NameCurrency}: {dollar.SoldCurrency} pln,");

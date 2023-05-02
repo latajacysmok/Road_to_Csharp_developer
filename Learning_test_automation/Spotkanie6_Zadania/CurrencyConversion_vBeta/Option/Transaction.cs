@@ -7,11 +7,6 @@ namespace CurrencyConversion
     {
         Option option = new Option();
         CurrencyPresentation currencyPresentation = new CurrencyPresentation();
-        Currency dollar = new Dollar();
-        Currency euro = new Euro();
-        Currency czechCrown = new CzechCrown();
-
-        List<Currency> currencies = new List<Currency>();
 
         public void Buying()
         {
@@ -53,6 +48,11 @@ namespace CurrencyConversion
 
         private void BuyOrSellCurrency()
         {
+            Currency dollar = new Dollar();
+            Currency euro = new Euro();
+            Currency czechCrown = new CzechCrown();
+            List<Currency> currencies = new List<Currency>();
+
             string caller = new StackTrace().GetFrame(1).GetMethod().Name;
             bool ifBuy;
             string transaction;
