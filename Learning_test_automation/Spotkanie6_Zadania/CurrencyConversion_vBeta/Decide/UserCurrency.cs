@@ -9,15 +9,11 @@
         public string currencyName;     
         private decimal userValue;
 
-        private CurrencyName userName = new CurrencyName();
-
         public UserCurrency(bool ifBuy)
         {
+            CurrencyName userName = new CurrencyName();
             currencyName = userName.UserEntersNameOfCurrency(ifBuy);
-            if (ifBuy) BoughtCurrency = GetUserCourse(currencyName);
-            else SoldCurrency = GetUserCourse(currencyName);
-
-            UserTransaction = ifBuy ? BoughtCurrency : SoldCurrency;
+            UserTransaction = GetUserCourse(currencyName);
         }
 
         public decimal CurrencyExchange

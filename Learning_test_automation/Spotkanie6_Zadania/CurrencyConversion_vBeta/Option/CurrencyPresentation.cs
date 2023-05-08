@@ -1,4 +1,5 @@
 ﻿using CurrencySelection;
+using System.Diagnostics;
 
 namespace CurrencyConversion
 {
@@ -9,20 +10,41 @@ namespace CurrencyConversion
         Currency euro = new Euro();
         Currency czechCrown = new CzechCrown();
         List<Currency> currencies = new List<Currency>();
+        //Transaction transaction = new Transaction(); //coś się tutaj kiełbasi, dlaczego :D
 
-        private string name;
+        private string name = "";// czy ja moge uniknąć takiego przypisywania?
+
+        public CurrencyPresentation()
+        {
+            currencies.Add(dollar);
+            currencies.Add(euro);
+            currencies.Add(czechCrown);
+        }
 
         public void BuyOrSell()
         {
             Console.Write("Dear user, tell me what you want?\n");
             Console.WriteLine("If 'Buy' currency, enter: '1'.");
             Console.WriteLine("If 'Sell' currency, enter: '2'.");
+            Console.WriteLine("If you want to print sell and buy values for selected currencies, enter: '3'.");
             int decision = option.ValidateOptionNumber();
             Transaction transaction = new Transaction();
 
-            if (decision == (int)BuyingAndSelling.Buy) transaction.Buying();
-            else if (decision == (int)BuyingAndSelling.Sell) transaction.Selling();
-            else Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
+            switch (decision)
+            {
+                case (int)BuyingAndSelling.Buy:
+                    transaction.Buying();
+                    break;
+                case (int)BuyingAndSelling.Sell:
+                    transaction.Selling();
+                    break;
+                case (int)BuyingAndSelling.PrintSaleAndPurchaseValues:
+                    transaction.PrintingSalesAndPurchaseValues();
+                    break;
+                default:
+                    Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
+                    break;
+            }
         }
 
         public CurrencyDefault GetCurrencyName()
@@ -43,39 +65,37 @@ namespace CurrencyConversion
             Console.WriteLine("- Czech crown: 3.\n");
         }
 
-        public void PrintAvailableBuyExchangeRates()
+        public void PrintAvailableListExchangeRatesValue()
         {
-            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
+            string caller = new StackTrace().GetFrame(1).GetMethod().Name;
 
-            currencies.Add(dollar);
-            currencies.Add(euro);
-            currencies.Add(czechCrown);
+            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
 
             foreach (var currency in currencies)
             {
-                name = currency.NameCurrency.ToString() == "Czech_crown" ? "Czech crown" : currency.NameCurrency.ToString();
+                name = currency.NameCurrency.ToString();
 
-                Console.WriteLine($"- {name}: {currency.BoughtCurrency} pln,");
+                if (caller == "Buying") Console.WriteLine($"- {name}: {currency.BoughtCurrency} pln,");
+                else Console.WriteLine($"- {name}: {currency.SoldCurrency} pln,");
             }
 
             Console.WriteLine();
         }
-        public void PrintAvailableSellExchangeRates()
+
+        public void PrintAvailableBuyAndSellExchangeRates()
         {
-            Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
+            Transaction transaction = new Transaction();
 
-            currencies.Add(dollar);
-            currencies.Add(euro);
-            currencies.Add(czechCrown);
+            Console.Write($"I understand my dear user, you have chosen to print the value of each available currency.\nEnter the value to be converted: ");
 
-            foreach (var currency in currencies)
-            {
-                name = currency.NameCurrency.ToString() == "Czech_crown" ? "Czech crown" : currency.NameCurrency.ToString();
+            decimal amount = option.GetAmount();
 
-                Console.WriteLine($"- {name}: {currency.SoldCurrency} pln,");
-            }
+            List<CurrencyDefault> currenciesNames = new List<CurrencyDefault>();
+            currenciesNames.Add(CurrencyDefault.Dollar);
+            currenciesNames.Add(CurrencyDefault.Euro);
+            currenciesNames.Add(CurrencyDefault.Czech_crown);
 
-            Console.WriteLine();
+            transaction.PrintOutValueOfBuyingAndSellingCurrency(currenciesNames, amount);
         }
     }
 }
