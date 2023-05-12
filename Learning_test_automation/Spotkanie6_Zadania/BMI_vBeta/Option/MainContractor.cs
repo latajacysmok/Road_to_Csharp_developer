@@ -1,6 +1,6 @@
-﻿namespace BMI
+﻿namespace Option
 {
-    class Option
+    public class MainContractor
     {
         public void ProgramWelcome()
         {
@@ -17,18 +17,32 @@
                 Console.WriteLine($"{name} do you want to continue: ");
                 Console.WriteLine("If yes enter: '1'.");
                 Console.WriteLine("If no enter: '2'.");
+                Console.Write("Dear user, make a choice: ");
                 double decisionToExitTheProgram = ItNumber();
-                if (decisionToExitTheProgram == 1)
+                if (decisionToExitTheProgram == (int)MakingDecision.Yes)
                 {
                     StayOnProgram();
-                    return;
+                    break;
                 }
-                else if (decisionToExitTheProgram == 2) LeaveProgramme();
-                else Console.WriteLine($"{name} entered an invalid value, The given number must equal 1 if you want to continue and 2 if you want to end the program. Please try again.");
+                else if (decisionToExitTheProgram == (int)MakingDecision.No) LeaveProgramme();
+                else Console.WriteLine($"Your number is: {decisionToExitTheProgram}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
             }
         }
 
-        public void StayOnProgram()
+        public string GetName()
+        {
+            string name;
+
+            while (true)
+            {
+                name = Console.ReadLine();
+                if (!String.IsNullOrEmpty(name)) break;
+                else Console.Write("Dear user, you have entered an empty value, please enter your name: ");
+            }
+            return name.Substring(0, 1).ToUpper() + name.Substring(1);
+        }
+
+        private void StayOnProgram()
         {
             Console.WriteLine($"So let's get started again dear user.");
             for (int i = 0; i < 3; i++)
@@ -39,7 +53,7 @@
             Console.Clear();
         }
 
-        public void LeaveProgramme()
+        private void LeaveProgramme()
         {
             Console.WriteLine($"See you soon dear user.");
             Environment.Exit(1);

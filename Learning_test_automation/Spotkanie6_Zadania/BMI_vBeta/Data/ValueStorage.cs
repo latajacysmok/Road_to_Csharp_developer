@@ -1,9 +1,21 @@
-﻿namespace BMI
+﻿using Option;
+
+namespace Data
 {
-    class Data
+    public class ValueStorage
     {
-        Option appOption = new Option();
-        public double WeightChecker(string name)
+        MainContractor appOption = new MainContractor();
+
+        public double Weight { get; }
+        public double Height { get; }
+
+        public ValueStorage(string name)
+        {
+            Weight = GetWeightChecker(name);
+            Height = GetHeightChecker(name);
+        }
+
+        private double GetWeightChecker(string name)
         {
             while (true)
             {
@@ -14,7 +26,7 @@
             }
         }
 
-        public double HeightChecker(string name)
+        private double GetHeightChecker(string name)
         {
             while (true)
             {
