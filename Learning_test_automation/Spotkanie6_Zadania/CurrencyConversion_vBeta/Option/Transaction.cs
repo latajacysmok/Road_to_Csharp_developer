@@ -7,22 +7,32 @@ namespace CurrencyConversion
     {
         Option option = new Option();
         CurrencyPresentation currencyPresentation = new CurrencyPresentation();
-        Dollar dollar = new Dollar();
-        Euro euro = new Euro();
-        CzechCrown czechCrown = new CzechCrown();
+        Currency dollar = new Dollar();
+        Currency euro = new Euro();
+        Currency czechCrown = new CzechCrown();
+        List<Currency> currencies = new List<Currency>();
 
-        public void Buying()
+        private decimal amount;
+        private bool ifBuy;
+
+        public Transaction()
         {
-            currencyPresentation.PrintAvailableBuyExchangeRates();
-            if (OwnCurrency() == MakingDecision.No) BuyCurrency();
+            currencies.Add(dollar);
+            currencies.Add(euro);
+            currencies.Add(czechCrown);
         }
 
-        public void Selling()
+        public void Buy()
         {
-            currencyPresentation.PrintAvailableSellExchangeRates();
-            if (OwnCurrency() == MakingDecision.No) SellCurrency();
+            if (OwnCurrency(CurrencyTrading.Buy) == MakingDecision.No) PurchaseValueSetting();
         }
-        private MakingDecision OwnCurrency()
+
+        public void Sell()
+        {
+            if (OwnCurrency(CurrencyTrading.Sell) == MakingDecision.No) SalesValueSetting();
+        }
+
+        private MakingDecision OwnCurrency(CurrencyTrading choice)
         {
             CurrencyName userName = new CurrencyName();
 
@@ -30,93 +40,108 @@ namespace CurrencyConversion
             MakingDecision exchangeRate = option.DecideWhichOption();
             if (exchangeRate == MakingDecision.Yes)
             {
-                string caller = new StackTrace().GetFrame(1).GetMethod().Name;
-                bool ifBuy;
-                if (caller == "Buying") ifBuy = true;
-                else ifBuy = false;
+                if (choice == CurrencyTrading.Buy) ifBuy = true;
+                else if (choice == CurrencyTrading.Buy) ifBuy = false;
 
                 UserCurrency userCurrency = new UserCurrency(ifBuy);
 
                 Console.Write($"I understand my dear user, you have chosen {userCurrency.currencyName}, and how many {userCurrency.currencyName} do you need: ");
 
-                decimal amount = option.GetAmount();
-                userCurrency.UserTransaction = amount;
+                amount = option.GetAmount();
+                userCurrency.CurrencyExchange = option.GetAmount();
 
-                Console.WriteLine($"For {amount} {userCurrency.currencyName} you will get: {userCurrency.BoughtValue} PLN.");
-
+                Console.WriteLine($"For {amount} {userCurrency.currencyName} you will get: {userCurrency.CurrencyExchange} PLN.");
+                            
                 return exchangeRate;
             }
             return exchangeRate;
-        }
+        }   
 
-        private void SellCurrency()
-        {        
-            Console.Write("\nDear user, tell me what currency you want to sell: \n");
-            
+        private void PurchaseValueSetting()
+        {
+            Console.Write($"\nDear user, tell me what currency you want to buy: \n");
+
             CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
-            string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
 
-            Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
-            
-            decimal amount = option.GetAmount();
-            string currencySymbol = "None!";
-            decimal sentValue = 0;
-
-            if (currencyDefault == CurrencyDefault.Dollar)
-            {
-                dollar.SentValue = amount;
-                sentValue = dollar.SentValue;
-                currencySymbol = dollar.SymbolCurrency;
-            }
-            else if (currencyDefault == CurrencyDefault.Euro)
-            {
-                euro.SentValue = amount;
-                sentValue = euro.SentValue;
-                currencySymbol = euro.SymbolCurrency;
-            }
-            else if (currencyDefault == CurrencyDefault.Czech_crown)
-            {
-                czechCrown.SentValue = amount;
-                sentValue = czechCrown.SentValue;
-                currencySymbol = czechCrown.SymbolCurrency;
-            }
-
-            Console.WriteLine($"For {amount} {currencySymbol} ({result})  you will get: {sentValue} PLN.");
-        }
-
-        private void BuyCurrency()
-        {         
-            Console.Write("\nDear user, tell me what currency you want to buy: \n");
-            
-            CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
-            string result = currencyDefault.ToString() == "Czech_crown" ? "Czech crown" : currencyDefault.ToString();
+            string result = currencyDefault.GetDisplayName();
+            Currency selectedCurrency = currencies.First(c => c.NameCurrency == result);
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
 
             decimal amount = option.GetAmount();
-            string currencySymbol = "None!";
-            decimal boughtValue = 0;
+            ValueOfPurchase(currencyDefault, amount);
 
-            if (currencyDefault == CurrencyDefault.Dollar)
-            {
-                dollar.BoughtValue = amount;
-                boughtValue = dollar.BoughtValue;
-                currencySymbol = dollar.SymbolCurrency;
-            }
-            else if (currencyDefault == CurrencyDefault.Euro)
-            {
-                euro.BoughtValue = amount;
-                boughtValue = euro.BoughtValue;
-                currencySymbol = euro.SymbolCurrency;
-            }
-            else if (currencyDefault == CurrencyDefault.Czech_crown)
-            {
-                czechCrown.BoughtValue = amount;
-                boughtValue = czechCrown.BoughtValue;
-                currencySymbol = czechCrown.SymbolCurrency;
-            }
+            Console.WriteLine($"For {amount} {selectedCurrency.SymbolCurrency} ({result})  you will pay: {selectedCurrency.BoughtValue} PLN.");
+        }
 
-            Console.WriteLine($"For {amount} {currencySymbol} ({result}) you will pay: {boughtValue} PLN.");
+    private void SalesValueSetting()
+        {
+            Console.Write($"\nDear user, tell me what currency you want to sell: \n");
+
+            CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
+            string result = currencyDefault.GetDisplayName();
+            Currency selectedCurrency = currencies.First(c => c.NameCurrency == result);
+
+            Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
+
+            amount = option.GetAmount();
+            ValueOfSales(currencyDefault, amount);
+
+            Console.WriteLine($"For {amount} {selectedCurrency.SymbolCurrency} ({result})  you will get: {selectedCurrency.SentValue} PLN.");
+        }
+
+        private void ValueOfPurchase(CurrencyDefault currencyDefault, decimal amount)
+        {
+            switch (currencyDefault)
+            {
+                case CurrencyDefault.Dollar:
+                    dollar.BoughtValue = amount;
+                    break;
+                case CurrencyDefault.Euro:
+                    euro.BoughtValue = amount;
+                    break;
+                case CurrencyDefault.Czech_crown:
+                    czechCrown.BoughtValue = amount;
+                    break;
+                default:
+                    Console.WriteLine("Error, something went wrong!!!");
+                    break;
+            }
+        }
+        
+        private void ValueOfSales(CurrencyDefault currencyDefault, decimal amount)
+        {
+            switch (currencyDefault)
+            {
+                case CurrencyDefault.Dollar:
+                    dollar.SentValue = amount;
+                    break;
+                case CurrencyDefault.Euro:
+                    euro.SentValue = amount;
+                    break;
+                case CurrencyDefault.Czech_crown:
+                    czechCrown.SentValue = amount;
+                    break;
+                default:
+                    Console.WriteLine("Error, something went wrong!!!");
+                    break;
+            }
+        }
+
+        public void PrintOutValueOfBuyingAndSellingCurrency(List<CurrencyDefault> currenciesNames, decimal amount)
+        {           
+            for (int i = 0; i < currencies.Count; i++)
+            {
+                ValueOfPurchase(currenciesNames[i], amount);
+                Console.WriteLine($"For {amount} {currencies[i].SymbolCurrency} ({currencies[i].NameCurrency})  you will pay: {currencies[i].BoughtValue} PLN.");
+                
+
+                ValueOfSales(currenciesNames[i], amount);
+                Console.WriteLine($"For {amount} {currencies[i].SymbolCurrency} ({currencies[i].NameCurrency})  you will get: {currencies[i].SentValue} PLN.");
+
+                Console.WriteLine("*****************************************");
+                Console.WriteLine();
+            }
         }
     }
 }

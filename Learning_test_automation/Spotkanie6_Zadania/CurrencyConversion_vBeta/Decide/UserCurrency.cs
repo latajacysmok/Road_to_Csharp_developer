@@ -1,23 +1,25 @@
 ﻿namespace CurrencySelection
 {
-    public class UserCurrency : Currency
+    public class UserCurrency//dodać propertkę amount i jej użyć np. w metodzie OwnCurrency z klasy Transaction
     {
-        public decimal userCurrencyRate;
-        public string currencyName;
+        public decimal BoughtCurrency { get; set; }
+        public decimal SoldCurrency { get; set; }
+        public decimal UserTransaction { get; set; }
+
+        public string currencyName;     
         private decimal userValue;
-
-        public override decimal BoughtValue
-        {
-            get { return userValue; }
-            set { userValue = Math.Round(value * userCurrencyRate, 2); }
-        }
-
-        private CurrencyName userName = new CurrencyName();
 
         public UserCurrency(bool ifBuy)
         {
+            CurrencyName userName = new CurrencyName();
             currencyName = userName.UserEntersNameOfCurrency(ifBuy);
-            userCurrencyRate = GetUserCourse(currencyName);
+            UserTransaction = GetUserCourse(currencyName);
+        }
+
+        public decimal CurrencyExchange
+        {
+            get { return userValue; }
+            set { userValue = Math.Round(value * UserTransaction, 2); }
         }
 
         private decimal GetUserCourse(string currencyUserName)

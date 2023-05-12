@@ -2,13 +2,8 @@
 {
     public class Euro : Currency
     {
-        public Euro() : base( boughtCurrency: 5.3722m, soldCurrency: 5.1722m)
+        public Euro() : base( boughtCurrency: 5.3722m, soldCurrency: 5.1722m, nameCurrency: CurrencyDefault.Euro.GetDisplayName(), symbolCurrency: "€")//"Euro"
         {
-            SymbolCurrency = "€";
-            NameCurrency = "Euro";
         }
-
-        public string NameCurrency { get; private set; }
-        public string SymbolCurrency { get; private set; }
     }
 }
