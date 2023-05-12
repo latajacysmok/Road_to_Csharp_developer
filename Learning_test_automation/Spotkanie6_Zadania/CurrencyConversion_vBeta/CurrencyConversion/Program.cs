@@ -13,7 +13,7 @@ namespace Interface
             CurrencyPresentation currencyPresentation = new CurrencyPresentation();
             while (true)
             {
-                currencyPresentation.BuyOrSell();
+                currencyPresentation.TransactionSelection();
                 option.WhatDoWeDoNext();
             }          
         }

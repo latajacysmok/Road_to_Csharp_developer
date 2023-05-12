@@ -13,6 +13,7 @@ namespace CurrencyConversion
         List<Currency> currencies = new List<Currency>();
 
         private decimal amount;
+        private bool ifBuy;
 
         public Transaction()
         {
@@ -21,23 +22,17 @@ namespace CurrencyConversion
             currencies.Add(czechCrown);
         }
 
-        public void Buying()
+        public void Buy()
         {
-            currencyPresentation.PrintAvailableListExchangeRatesValue();
-            if (OwnCurrency() == MakingDecision.No) Purchase();
+            if (OwnCurrency(CurrencyTrading.Buy) == MakingDecision.No) PurchaseValueSetting();
         }
 
-        public void Selling()
+        public void Sell()
         {
-            currencyPresentation.PrintAvailableListExchangeRatesValue();
-            if (OwnCurrency() == MakingDecision.No) Sale();
+            if (OwnCurrency(CurrencyTrading.Sell) == MakingDecision.No) SalesValueSetting();
         }
 
-        public void PrintingSalesAndPurchaseValues()
-        {
-            currencyPresentation.PrintAvailableBuyAndSellExchangeRates();
-        }
-        private MakingDecision OwnCurrency()
+        private MakingDecision OwnCurrency(CurrencyTrading choice)
         {
             CurrencyName userName = new CurrencyName();
 
@@ -45,17 +40,15 @@ namespace CurrencyConversion
             MakingDecision exchangeRate = option.DecideWhichOption();
             if (exchangeRate == MakingDecision.Yes)
             {
-                string caller = new StackTrace().GetFrame(1).GetMethod().Name;
-                bool ifBuy;
-                if (caller == "Buying") ifBuy = true;
-                else ifBuy = false;
+                if (choice == CurrencyTrading.Buy) ifBuy = true;
+                else if (choice == CurrencyTrading.Buy) ifBuy = false;
 
                 UserCurrency userCurrency = new UserCurrency(ifBuy);
 
                 Console.Write($"I understand my dear user, you have chosen {userCurrency.currencyName}, and how many {userCurrency.currencyName} do you need: ");
 
                 amount = option.GetAmount();
-                userCurrency.CurrencyExchange = amount;
+                userCurrency.CurrencyExchange = option.GetAmount();
 
                 Console.WriteLine($"For {amount} {userCurrency.currencyName} you will get: {userCurrency.CurrencyExchange} PLN.");
                             
@@ -64,14 +57,14 @@ namespace CurrencyConversion
             return exchangeRate;
         }   
 
-        private void Purchase()
+        private void PurchaseValueSetting()
         {
             Console.Write($"\nDear user, tell me what currency you want to buy: \n");
 
             CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
 
             string result = currencyDefault.GetDisplayName();
-            Currency selectedCurrency = currencies.First(c => c.NameCurrency == currencyDefault.GetDisplayName());
+            Currency selectedCurrency = currencies.First(c => c.NameCurrency == result);
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need buy: ");
 
@@ -81,13 +74,13 @@ namespace CurrencyConversion
             Console.WriteLine($"For {amount} {selectedCurrency.SymbolCurrency} ({result})  you will pay: {selectedCurrency.BoughtValue} PLN.");
         }
 
-    private void Sale()
+    private void SalesValueSetting()
         {
             Console.Write($"\nDear user, tell me what currency you want to sell: \n");
 
             CurrencyDefault currencyDefault = currencyPresentation.GetCurrencyName();
             string result = currencyDefault.GetDisplayName();
-            Currency selectedCurrency = currencies.First(c => c.NameCurrency == currencyDefault.GetDisplayName());
+            Currency selectedCurrency = currencies.First(c => c.NameCurrency == result);
 
             Console.Write($"I understand my dear user, you have chosen {result}, and how many {result}s do you need sell: ");
 

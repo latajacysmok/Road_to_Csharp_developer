@@ -10,7 +10,7 @@
         private decimal boughtValue;
         private decimal sentValue;
 
-        public Currency(decimal boughtCurrency, decimal soldCurrency, string nameCurrency, string symbolCurrency)
+        public Currency(decimal boughtCurrency, decimal soldCurrency, string nameCurrency, string symbolCurrency)//CurrencyDefault
         {
             BoughtCurrency = boughtCurrency;
             SoldCurrency = soldCurrency;
@@ -29,6 +29,11 @@
             get { return sentValue; }
             set { sentValue = Math.Round(value * SoldCurrency, 2); }
         }
+
+        /*public string NameCurrency(CurrencyDefault name)
+        {
+            return name.ToString();
+        }*/
         //w inny sposób umożliwić tworzenie obiektu czyli pomyśleć nad konstruktorem
         // mieć konkretny konstruktor który jest wywoływany tylko wtedy gdy użytkownik podaję kurs
         //prop + tab

@@ -1,9 +1,9 @@
 ﻿namespace CurrencySelection
 {
-    public enum BuyingAndSelling
+    public enum CurrencyTrading
     {
         Buy = 1,
         Sell = 2,
-        PrintSaleAndPurchaseValues = 3,
+        TransactionOfAllCurrencies = 3,
     }
 }

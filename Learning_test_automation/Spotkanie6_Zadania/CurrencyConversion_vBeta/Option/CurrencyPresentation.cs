@@ -12,7 +12,7 @@ namespace CurrencyConversion
         List<Currency> currencies = new List<Currency>();
         //Transaction transaction = new Transaction(); //coś się tutaj kiełbasi, dlaczego :D
 
-        private string name = "";// czy ja moge uniknąć takiego przypisywania?
+        private string name;
 
         public CurrencyPresentation()
         {
@@ -21,7 +21,7 @@ namespace CurrencyConversion
             currencies.Add(czechCrown);
         }
 
-        public void BuyOrSell()
+        public void TransactionSelection()
         {
             Console.Write("Dear user, tell me what you want?\n");
             Console.WriteLine("If 'Buy' currency, enter: '1'.");
@@ -32,14 +32,16 @@ namespace CurrencyConversion
 
             switch (decision)
             {
-                case (int)BuyingAndSelling.Buy:
-                    transaction.Buying();
+                case (int)CurrencyTrading.Buy:
+                    PrintAvailableListExchangeRatesValue(CurrencyTrading.Buy);
+                    transaction.Buy();
                     break;
-                case (int)BuyingAndSelling.Sell:
-                    transaction.Selling();
+                case (int)CurrencyTrading.Sell:
+                    PrintAvailableListExchangeRatesValue(CurrencyTrading.Sell);
+                    transaction.Sell();
                     break;
-                case (int)BuyingAndSelling.PrintSaleAndPurchaseValues:
-                    transaction.PrintingSalesAndPurchaseValues();
+                case (int)CurrencyTrading.TransactionOfAllCurrencies:
+                    PrintAvailableBuyAndSellExchangeRates();
                     break;
                 default:
                     Console.WriteLine($"Your number is: {decision}.\nThe given number must equal 1 if you want to continue or 2 if you want to end the program. Try again.");
@@ -65,18 +67,14 @@ namespace CurrencyConversion
             Console.WriteLine("- Czech crown: 3.\n");
         }
 
-        public void PrintAvailableListExchangeRatesValue()
+        public void PrintAvailableListExchangeRatesValue(CurrencyTrading option)
         {
-            string caller = new StackTrace().GetFrame(1).GetMethod().Name;
-
             Console.WriteLine("\nHere are the values of currencies that we have prepared for you: ");
 
             foreach (var currency in currencies)
             {
-                name = currency.NameCurrency.ToString();
-
-                if (caller == "Buying") Console.WriteLine($"- {name}: {currency.BoughtCurrency} pln,");
-                else Console.WriteLine($"- {name}: {currency.SoldCurrency} pln,");
+                if (option == CurrencyTrading.Buy) Console.WriteLine($"- {currency.NameCurrency}: {currency.BoughtCurrency} pln,");
+                else if (option == CurrencyTrading.Sell) Console.WriteLine($"- {currency.NameCurrency}: {currency.SoldCurrency} pln,");
             }
 
             Console.WriteLine();

@@ -1,6 +1,6 @@
 ﻿namespace CurrencySelection
 {
-    public class UserCurrency
+    public class UserCurrency//dodać propertkę amount i jej użyć np. w metodzie OwnCurrency z klasy Transaction
     {
         public decimal BoughtCurrency { get; set; }
         public decimal SoldCurrency { get; set; }
