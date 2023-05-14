@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Animal_Sounds", "Animal_Sounds\Animal_Sounds.csproj", "{2483BD8A-D68F-4864-BEC3-B8BDFCFBB537}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animals", "Animals\Animals.csproj", "{EC81662C-0A1C-4576-861B-A7CB293E0A59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Option", "Option\Option.csproj", "{9519E84B-E5E6-4491-8D42-B55D4C23C4EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2483BD8A-D68F-4864-BEC3-B8BDFCFBB537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2483BD8A-D68F-4864-BEC3-B8BDFCFBB537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2483BD8A-D68F-4864-BEC3-B8BDFCFBB537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2483BD8A-D68F-4864-BEC3-B8BDFCFBB537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC81662C-0A1C-4576-861B-A7CB293E0A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC81662C-0A1C-4576-861B-A7CB293E0A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC81662C-0A1C-4576-861B-A7CB293E0A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC81662C-0A1C-4576-861B-A7CB293E0A59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9519E84B-E5E6-4491-8D42-B55D4C23C4EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9519E84B-E5E6-4491-8D42-B55D4C23C4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9519E84B-E5E6-4491-8D42-B55D4C23C4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9519E84B-E5E6-4491-8D42-B55D4C23C4EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0F7AC9A-8D4F-443F-9FF0-5728812A7181}
+	EndGlobalSection
+EndGlobal
