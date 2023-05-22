@@ -1,6 +1,6 @@
 ﻿namespace TeachersRoom
 {
-    public class Degree
+    public class Mark
     {
         private double rating;
         public double LessImportantRating

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutputInformation", "Teache
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolData", "SchoolData\SchoolData.csproj", "{D7379D71-D381-45EA-B1A4-58C451B3EF72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachersRoom", "TeachersRoom\TeachersRoom.csproj", "{CCB2E5EE-0413-4321-90AA-DA64B427A653}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "TeachersRoom\Infrastructure.csproj", "{CCB2E5EE-0413-4321-90AA-DA64B427A653}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

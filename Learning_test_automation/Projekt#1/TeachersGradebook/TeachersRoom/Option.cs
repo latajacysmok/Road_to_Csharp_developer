@@ -9,7 +9,7 @@
             {
                 if (int.TryParse(Console.ReadLine(), out int number))
                 {
-                    if (LimitingOptions(number)) return number;
+                    if (IsChoiceWithinRange(number)) return number;
                     else
                     {
                         Console.Write("Dear user, please provide your answer: ");
@@ -21,7 +21,7 @@
             }
         }
 
-        private bool LimitingOptions(int number)
+        private bool IsChoiceWithinRange(int number)
         {
             while (true)
             {
@@ -33,7 +33,7 @@
                 }
             }
         }
-        public int GetAmount()
+        public int ReadPositiveIntegerInput()
         {
             int amount;
             while (true)

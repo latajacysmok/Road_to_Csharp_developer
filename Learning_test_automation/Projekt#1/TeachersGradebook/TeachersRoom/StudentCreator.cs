@@ -55,7 +55,7 @@ namespace TeachersRoom
         private int GetGrade()
         {
             Console.Write("Please enter the class your student is attending: ");
-            return option.GetAmount();
+            return option.ReadPositiveIntegerInput();
         }
 
         public override string ToString()

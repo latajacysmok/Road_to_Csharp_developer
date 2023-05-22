@@ -5,7 +5,6 @@ namespace TeachersRoom
     public class SchoolGradeWizard
     {
         Option option = new Option();
-        SchoolSubjects schoolSubjects = new SchoolSubjects();
 
         public void AddGrade(List<StudentCreator> studentsList)
         {
@@ -13,9 +12,8 @@ namespace TeachersRoom
             int id = GetID();
 
             ListAvailableSubjects();
-            schoolSubjects = GetSchoolSubjects();
 
-            AddGrade(id, studentsList, schoolSubjects);
+            AddGrade(id, studentsList, GetSchoolSubjects());
         }
 
         private void AddGrade(int id, List<StudentCreator> studentsList, SchoolSubjects schoolSubjects)
@@ -24,13 +22,13 @@ namespace TeachersRoom
             switch (schoolSubjects)
             {
                 case SchoolSubjects.Mathematics:
-                    student.TeachersDiary.AddingGrades(student.TeachersDiary.mathGrades); ;
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.mathGrades); ;
                     break;
                 case SchoolSubjects.Physics:
-                    student.TeachersDiary.AddingGrades(student.TeachersDiary.physicsGrades); ;
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.physicsGrades); ;
                     break;
                 case SchoolSubjects.Religion:
-                    student.TeachersDiary.AddingGrades(student.TeachersDiary.religionGrades); ;
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.religionGrades); ;
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");
@@ -40,6 +38,7 @@ namespace TeachersRoom
 
         public void ShowGrade(List<StudentCreator> studentsList)
         {
+            SchoolSubjects schoolSubjects = new SchoolSubjects();
             ListAvailableStudents(studentsList);
             int id = GetID();
             StudentCreator student = studentsList[id - 1];
@@ -55,15 +54,15 @@ namespace TeachersRoom
             {
                 case SchoolSubjects.Mathematics:
                     Console.WriteLine("\nMath grades are as follows:");
-                    PrintouSchoolGradesPerSubject(student.TeachersDiary.mathGrades);
+                    PrintSubjectGrades(student.TeachersDiary.mathGrades);
                     break;
                 case SchoolSubjects.Physics:
                     Console.WriteLine("\nPhysics grades are as follows:");
-                    PrintouSchoolGradesPerSubject(student.TeachersDiary.physicsGrades);
+                    PrintSubjectGrades(student.TeachersDiary.physicsGrades);
                     break;
                 case SchoolSubjects.Religion:
                     Console.WriteLine("\nReligious grades are as follows:");
-                    PrintouSchoolGradesPerSubject(student.TeachersDiary.religionGrades);
+                    PrintSubjectGrades(student.TeachersDiary.religionGrades);
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");
@@ -71,7 +70,7 @@ namespace TeachersRoom
             }
         }
 
-        private void PrintouSchoolGradesPerSubject(List<double> subject)
+        private void PrintSubjectGrades(List<double> subject)
         {
             int index = 0;
             int totalCount = subject.Count;
@@ -95,7 +94,7 @@ namespace TeachersRoom
         private int GetID()
         {
             Console.Write("Enter the ID of the student you are interested in: ");
-            return option.GetAmount();
+            return option.ReadPositiveIntegerInput();
         }
 
         private SchoolSubjects GetSchoolSubjects()

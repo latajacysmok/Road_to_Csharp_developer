@@ -7,7 +7,7 @@ namespace OutputInformation
         static public void Main(string[] args)
         {
             Menu menu = new Menu();
-            menu.ListingPossibilities();
+            menu.ShowMenuAndProcessUserInput();
         }
     }
 }

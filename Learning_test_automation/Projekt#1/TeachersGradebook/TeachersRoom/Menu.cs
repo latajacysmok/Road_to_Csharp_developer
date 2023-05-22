@@ -9,7 +9,7 @@ namespace TeachersRoom
         SchoolGradeWizard schoolGradeWizard = new SchoolGradeWizard();
 
 
-        public void ListingPossibilities()
+        public void ShowMenuAndProcessUserInput()
         {        
             int choice;
             
