@@ -1,34 +1,37 @@
 ﻿using SchoolData;
 
-namespace TeachersRoom
+namespace Infrastructure
 {
     public class SchoolGradeWizard
     {
         Option option = new Option();
+        Verifier verifier = new Verifier();
+        SchoolGradebook schoolGradebook = new SchoolGradebook();
 
-        public void AddGrade(List<StudentCreator> studentsList)
+        public void AddGrade(List<Student> studentsList)
         {
-            ListAvailableStudents(studentsList);
-            int id = GetID();
+            schoolGradebook.ListAvailableStudents(studentsList);
+            int id = option.GetID();
 
-            ListAvailableSubjects();
+            schoolGradebook.ListAvailableSubjects();
 
             AddGrade(id, studentsList, GetSchoolSubjects());
         }
 
-        private void AddGrade(int id, List<StudentCreator> studentsList, SchoolSubjects schoolSubjects)
+        private void AddGrade(int id, List<Student> studentsList, SchoolSubjects schoolSubjects)
         {
-            StudentCreator student = studentsList[id - 1];
+            Student student = studentsList[id - 1];
+
             switch (schoolSubjects)
             {
                 case SchoolSubjects.Mathematics:
-                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.mathGrades); ;
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.mathGrades); 
                     break;
                 case SchoolSubjects.Physics:
-                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.physicsGrades); ;
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.physicsGrades);
                     break;
                 case SchoolSubjects.Religion:
-                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.religionGrades); ;
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.religionGrades);
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");
@@ -36,72 +39,24 @@ namespace TeachersRoom
             }
         }
 
-        public void ShowGrade(List<StudentCreator> studentsList)
+        public void ShowGrade(List<Student> studentsList)
         {
             SchoolSubjects schoolSubjects = new SchoolSubjects();
-            ListAvailableStudents(studentsList);
-            int id = GetID();
-            StudentCreator student = studentsList[id - 1];
+            schoolGradebook.ListAvailableStudents(studentsList);
+            int id = option.GetID();
 
-            ListAvailableSubjects();
+            Student student = studentsList[id - 1];
+
+            schoolGradebook.ListAvailableSubjects();
             schoolSubjects = GetSchoolSubjects();
-            ShowGrade(id, schoolSubjects, student);
+            schoolGradebook.ShowGrade(schoolSubjects, student);
         }
 
-        private void ShowGrade(int id, SchoolSubjects schoolSubjects, StudentCreator student)
-        {
-            switch (schoolSubjects)
-            {
-                case SchoolSubjects.Mathematics:
-                    Console.WriteLine("\nMath grades are as follows:");
-                    PrintSubjectGrades(student.TeachersDiary.mathGrades);
-                    break;
-                case SchoolSubjects.Physics:
-                    Console.WriteLine("\nPhysics grades are as follows:");
-                    PrintSubjectGrades(student.TeachersDiary.physicsGrades);
-                    break;
-                case SchoolSubjects.Religion:
-                    Console.WriteLine("\nReligious grades are as follows:");
-                    PrintSubjectGrades(student.TeachersDiary.religionGrades);
-                    break;
-                default:
-                    Console.WriteLine("There is no such school subject in our timetable.");
-                    break;
-            }
-        }
-
-        private void PrintSubjectGrades(List<double> subject)
-        {
-            int index = 0;
-            int totalCount = subject.Count;
-
-            foreach (double grades in subject)
-            {
-                index++;
-
-                if (index == totalCount)
-                {
-                    Console.WriteLine(grades + " ;");
-                }
-                else
-                {
-                    Console.Write(grades + ", ");
-                }
-            }
-            Console.WriteLine("");
-        }
-
-        private int GetID()
-        {
-            Console.Write("Enter the ID of the student you are interested in: ");
-            return option.ReadPositiveIntegerInput();
-        }
-
-        private SchoolSubjects GetSchoolSubjects()
+        public SchoolSubjects GetSchoolSubjects()
         {
             while (true)
             {
-                switch (option.ValidateOptionNumber())
+                switch (verifier.GetValidOptionNumber())
                 {
                     case (int)SchoolSubjects.Mathematics:
                         return SchoolSubjects.Mathematics;
@@ -114,32 +69,6 @@ namespace TeachersRoom
                         break;
                 }
             }
-        }
-
-        private void ListAvailableStudents(List<StudentCreator> studentsList)
-        {
-            Console.WriteLine("\nHere is a list of our students: ");
-
-            foreach (StudentCreator student in studentsList)
-            {
-                Console.WriteLine(student.ToString());
-            }
-            Console.WriteLine("");
-        }
-
-        private void ListAvailableSubjects()
-        {
-            Console.WriteLine("\nHere is a list of our subjects: ");
-
-            string[] subjectNames = Enum.GetNames(typeof(SchoolSubjects));
-
-            int count = 1;
-            foreach (string subjectName in subjectNames)
-            {
-                Console.WriteLine(count + " - " + subjectName);
-                count++;
-            }
-            Console.WriteLine("");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TeachersRoom
+﻿namespace Infrastructure
 {
     public class Mark
     {

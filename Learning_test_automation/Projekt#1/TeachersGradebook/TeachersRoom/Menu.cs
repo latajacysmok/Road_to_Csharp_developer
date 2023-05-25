@@ -1,39 +1,36 @@
 ﻿using SchoolData;
 
-namespace TeachersRoom
+namespace Infrastructure
 {
     public class Menu
     {
         Option option = new Option();
-        private List<StudentCreator> studentsList = new List<StudentCreator>();
+        Verifier verifier = new Verifier();        
         SchoolGradeWizard schoolGradeWizard = new SchoolGradeWizard();
+        StudentList listOperation = new StudentList();
 
 
-        public void ShowMenuAndProcessUserInput()
+        public void GetSelectionOfOptionsFromMenu()
         {        
             int choice;
             
             while (true)
             {
-                Console.WriteLine("\n\t***Menu***");
-                Console.WriteLine("1 - Add a student");
-                Console.WriteLine("2 - Add a degree");
-                Console.WriteLine("3 - View ratings.");
-                Console.WriteLine("4 - Finish the program\n");
+                PrintMenu();
 
-                choice = option.ValidateOptionNumber();
+                choice = verifier.GetValidOptionNumber();
 
                 switch (choice)
                 {
                     case 1:
-                        StudentCreator studentCreator = new StudentCreator();
-                        studentsList.Add(studentCreator);
+                        Student student = new Student();
+                        listOperation.AddingStudentToList(student);
                         break;
                     case 2:
-                        schoolGradeWizard.AddGrade(studentsList);
+                        schoolGradeWizard.AddGrade(listOperation.studentsList);
                         break;
                     case 3:
-                        schoolGradeWizard.ShowGrade(studentsList);
+                        schoolGradeWizard.ShowGrade(listOperation.studentsList);
                         break; 
                     case 4:
                         option.LeaveProgramme();
@@ -41,5 +38,15 @@ namespace TeachersRoom
                 }
             }
         }
+
+        public void PrintMenu()
+        {
+            Console.WriteLine("\n\t***Menu***");
+            Console.WriteLine("1 - Add a student");
+            Console.WriteLine("2 - Add a degree");
+            Console.WriteLine("3 - View ratings.");
+            Console.WriteLine("4 - Finish the program\n");
+        }
+
     }
 }

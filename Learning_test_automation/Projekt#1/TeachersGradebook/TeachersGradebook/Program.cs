@@ -1,4 +1,4 @@
-﻿using TeachersRoom;
+﻿using Infrastructure;
 
 namespace OutputInformation
 {
@@ -7,7 +7,7 @@ namespace OutputInformation
         static public void Main(string[] args)
         {
             Menu menu = new Menu();
-            menu.ShowMenuAndProcessUserInput();
+            menu.GetSelectionOfOptionsFromMenu();
         }
     }
 }

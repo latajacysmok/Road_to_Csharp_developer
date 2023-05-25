@@ -1,32 +1,40 @@
-﻿using SchoolData;
-
-namespace TeachersRoom
+﻿namespace Infrastructure
 {
-    public class StudentCreator
+    public class Student
     {
-        Option option = new Option();
-        private string name;
-        private string lastname;
-        private int grade;
-        Student student;
+        Verifier verifier = new Verifier();
 
         private TeachersDiary teachersDiary;
+        public string name;
+        public string lastName;
+        public int educationYear;
+
+        private static int idCounter = 0;
+        public int id;
+
 
         public TeachersDiary TeachersDiary
         {
             get { return teachersDiary; }
         }
 
-        public StudentCreator()
+        public Student()
         {
+            idCounter++;
+            id = idCounter;
             name = GetName();
-            lastname = GetLastName();
-            grade = GetGrade();
-            student = new Student(name, lastname, grade);
-            teachersDiary = new TeachersDiary(student.id);
+            lastName = GetLastName();
+            educationYear = GetGrade();
+
+            teachersDiary = new TeachersDiary();
+        }
+        
+        public Student(string name, string lastName, int educationYear)
+        {
+            teachersDiary = new TeachersDiary();
         }
 
-        private string GetName()
+        private static string GetName()
         {
             string name;
             Console.Write("Please enter the name of the student: ");
@@ -39,7 +47,7 @@ namespace TeachersRoom
             return name;
         }
 
-        private string GetLastName()
+        private static string GetLastName()
         {
             string lastname;
             Console.Write("Please enter the lastname of the student: ");
@@ -55,12 +63,12 @@ namespace TeachersRoom
         private int GetGrade()
         {
             Console.Write("Please enter the class your student is attending: ");
-            return option.ReadPositiveIntegerInput();
+            return verifier.GetPositiveIntegerInput();
         }
 
         public override string ToString()
         {
-            return $"{name} {lastname}, ID number: {student.id}";
+            return $"{name} {lastName}, ID number: {id}";
         }
     }
 }
