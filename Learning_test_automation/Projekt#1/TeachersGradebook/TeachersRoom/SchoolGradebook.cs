@@ -26,22 +26,22 @@ namespace Infrastructure
             }
         }
 
-        private void PrintSubjectGrades(List<double> subject)
+        private void PrintSubjectGrades(List<Grades> subject)
         {
             int index = 0;
             int totalCount = subject.Count;
 
-            foreach (double grades in subject)
+            foreach (Grades grades in subject)
             {
                 index++;
 
                 if (index == totalCount)
                 {
-                    Console.WriteLine(grades + " ;");
+                    Console.WriteLine(grades.Grade + " ;");
                 }
                 else
                 {
-                    Console.Write(grades + ", ");
+                    Console.Write(grades.Grade + ", ");
                 }
             }
             Console.WriteLine("");

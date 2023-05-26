@@ -1,12 +1,14 @@
-﻿namespace Infrastructure
+﻿using SchoolData;
+
+namespace Infrastructure
 {
     public class TeachersDiary
     {
-        public List<double> mathGrades = new List<double>();
-        public List<double> physicsGrades = new List<double>();
-        public List<double> religionGrades = new List<double>();
+        public List<Grades> mathGrades = new List<Grades>();
+        public List<Grades> physicsGrades = new List<Grades>();
+        public List<Grades> religionGrades = new List<Grades>();
 
-        public void AddGradeToSchoolSubjects(List<double> schoolSubjects)
+        public void AddGradeToSchoolSubjects(List<Grades> schoolSubjects, int id)
         {
             double[] ratings = { 1, 1.5D, 2, 2.5D, 3, 3.5D, 4, 4.5D, 5, 5.5D, 6 };
 
@@ -19,7 +21,8 @@
                 {
                     if (ratings.Contains(number))
                     {
-                        schoolSubjects.Add(number);
+                        Grades grades = new Grades(id, number, schoolSubjects);
+                        schoolSubjects.Add(grades);
                         break;
                     }
                     else Console.WriteLine("There is no such school grade.");

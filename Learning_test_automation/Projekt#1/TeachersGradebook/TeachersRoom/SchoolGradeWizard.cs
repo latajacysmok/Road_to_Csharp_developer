@@ -25,13 +25,13 @@ namespace Infrastructure
             switch (schoolSubjects)
             {
                 case SchoolSubjects.Mathematics:
-                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.mathGrades); 
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.mathGrades, student.id); 
                     break;
                 case SchoolSubjects.Physics:
-                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.physicsGrades);
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.physicsGrades, student.id);
                     break;
                 case SchoolSubjects.Religion:
-                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.religionGrades);
+                    student.TeachersDiary.AddGradeToSchoolSubjects(student.TeachersDiary.religionGrades, student.id);
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");

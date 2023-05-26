@@ -28,11 +28,6 @@
 
             teachersDiary = new TeachersDiary();
         }
-        
-        public Student(string name, string lastName, int educationYear)
-        {
-            teachersDiary = new TeachersDiary();
-        }
 
         private static string GetName()
         {
