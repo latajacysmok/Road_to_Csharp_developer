@@ -40,7 +40,7 @@
             {
                 if (int.TryParse(Console.ReadLine(), out amount))
                 {
-                    if (IfNumberIsPositive(amount)) break;
+                    if (IsNumberPositive(amount)) break;
                     else continue;
                 }
                 else Console.Write($"This is not a number: {amount}. Please try again: ");
@@ -48,7 +48,23 @@
             return amount;
         }
 
-        private bool IfNumberIsPositive(int number)
+        public int GetSchoolGradeNumber()
+        {
+            int amount;
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out amount))
+                {
+                    if (0 < amount && amount < 9) break;
+                    else if (0 > amount) Console.Write($"The given number({amount}) is too small. Please try again:");
+                    else if( amount > 9) Console.Write($"The given number({amount}) is too large. Please try again:");
+                }
+                else Console.Write($"This is not a number: {amount}. Please try again: ");
+            }
+            return amount;
+        }
+
+        private bool IsNumberPositive(int number)
         {
             if (number > 0) return true;
             else
@@ -56,6 +72,12 @@
                 Console.Write("I can't accept a negative number. Please try again: ");
                 return false;
             }
+        }
+
+        public bool IsNullOrEmpty<T>(List<T> inputList)
+        {
+            if (inputList?.Any() != true) return true;
+            else return false;
         }
     }
 }

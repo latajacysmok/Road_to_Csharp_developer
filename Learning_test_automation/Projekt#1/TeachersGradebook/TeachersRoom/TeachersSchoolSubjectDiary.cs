@@ -1,0 +1,78 @@
+﻿using SchoolData;
+
+namespace Infrastructure
+{
+    public class TeachersSchoolSubjectDiary
+    {
+        SchoolGradebook schoolGradebook = new SchoolGradebook();
+        SchoolSubjects schoolSubjects = new SchoolSubjects();
+        Verifier verifier = new Verifier();
+
+        public int id;
+        public SchoolSubjects subject;
+        public double number;
+
+        public void ShowSchoolSubjects(Student student)
+        {
+            ListAvailableSubjects();
+            schoolSubjects = GetSchoolSubjects();
+            schoolGradebook.ShowGrade(schoolSubjects, student);
+        }
+
+        public SchoolSubjects GetSchoolSubjects()
+        {
+            while (true)
+            {
+                switch (verifier.GetValidOptionNumber())
+                {
+                    case (int)SchoolSubjects.Mathematics:
+                        return SchoolSubjects.Mathematics;
+                    case (int)SchoolSubjects.Physics:
+                        return SchoolSubjects.Physics;
+                    case (int)SchoolSubjects.Religion:
+                        return SchoolSubjects.Religion;
+                    default:
+                        Console.WriteLine("\nThe given number must equal 1, 2 or 3. Try again.");
+                        break;
+                }
+            }
+        }
+
+        public void ChoiceOfSchoolSubject(Student student)
+        {
+            ListAvailableSubjects();
+            schoolSubjects = GetSchoolSubjects();
+
+            switch (schoolSubjects)
+            {
+                case SchoolSubjects.Mathematics:
+                    schoolGradebook.AddGradeToStudent(student.Id, SchoolSubjects.Mathematics);
+                    break;
+                case SchoolSubjects.Physics:
+                    schoolGradebook.AddGradeToStudent(student.Id, SchoolSubjects.Physics);
+                    break;
+                case SchoolSubjects.Religion:
+                    schoolGradebook.AddGradeToStudent(student.Id, SchoolSubjects.Religion);
+                    break;
+                default:
+                    Console.WriteLine("There is no such school subject in our timetable.");
+                    break;
+            }
+        }
+
+        public void ListAvailableSubjects()
+        {
+            Console.WriteLine("\nHere is a list of our subjects: ");
+
+            string[] subjectNames = Enum.GetNames(typeof(SchoolSubjects));
+
+            int count = 1;
+            foreach (string subjectName in subjectNames)
+            {
+                Console.WriteLine(count + " - " + subjectName);
+                count++;
+            }
+            Console.WriteLine("");
+        }
+    }
+}
