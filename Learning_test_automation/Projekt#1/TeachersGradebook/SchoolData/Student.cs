@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+﻿namespace SchoolData
 {
     public class Student
     {

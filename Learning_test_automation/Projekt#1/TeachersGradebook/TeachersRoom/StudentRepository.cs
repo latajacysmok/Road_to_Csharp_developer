@@ -1,4 +1,6 @@
-﻿namespace Infrastructure
+﻿using SchoolData;
+
+namespace Infrastructure
 {
     public class StudentRepository
     {

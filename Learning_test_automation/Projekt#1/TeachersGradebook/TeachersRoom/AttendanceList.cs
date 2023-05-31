@@ -1,4 +1,6 @@
-﻿namespace Infrastructure
+﻿using SchoolData;
+
+namespace Infrastructure
 {
     public class AttendanceList
     {
@@ -6,27 +8,29 @@
         Verifier verifier = new Verifier();
         StudentRepository studentRepository = new StudentRepository();
 
-        public Student SelectingStuden(List<Student> studentsList)
+        public Student SelectStudent()
         {
-            if(verifier.IsNullOrEmpty(studentsList))
+            List<Student> students = studentRepository.GetAllStudents();
+            if (verifier.IsNullOrEmpty(students))
             {
                 Console.WriteLine("Your list is empty, add an item to it before displaying the list.");
                 return null;
             }
             else
             {
-                ListAvailableStudents(studentsList);
+                ListAvailableStudents();
 
                 int id = option.GetID();
                 return studentRepository.GetStudent(id);
             }           
         }
 
-        private void ListAvailableStudents(List<Student> studentsList)
+        private void ListAvailableStudents()
         {
+            List<Student> students = studentRepository.GetAllStudents();
             Console.WriteLine("\nHere is a list of our students: ");
 
-            foreach (Student student in studentsList)
+            foreach (Student student in students)
             {
                 Console.WriteLine(student.ToString());
             }

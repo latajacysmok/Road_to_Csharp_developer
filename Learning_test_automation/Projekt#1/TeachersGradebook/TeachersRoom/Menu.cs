@@ -1,11 +1,10 @@
 ﻿using SchoolData;
-using System.Xml.Linq;
 
 namespace Infrastructure
 {
     public class Menu
     {
-        Option option = new Option();// Ogarnąć sobie w jaki sposób połączyć oceny ze studentami i jakoś wyświetlać napisz metode do tego
+        Option option = new Option();
         Verifier verifier = new Verifier();       
         AttendanceList attendanceList = new AttendanceList();
         StudentRepository studentRepository = new StudentRepository();
@@ -14,7 +13,6 @@ namespace Infrastructure
         public void GetSelectionOfOptionsFromMenu()
         {        
             int choice;
-            List<Student> studentsList = studentRepository.GetAllStudents();
 
             while (true)
             {
@@ -28,15 +26,19 @@ namespace Infrastructure
                         string name = option.GetName();
                         string lastName = option.GetLastName();
                         int educationYear = option.GetGrade();
-                        int id = option.GetUniqueStudentId(studentsList);
+                        int id = option.GetUniqueStudentId();
                         Student student = new Student(id, name, lastName, educationYear);
                         studentRepository.AddStudent(student);
                         break;
                     case 2:
-                        teachersDiary.ChoiceOfSchoolSubject(attendanceList.SelectingStuden(studentsList));
+                        student = attendanceList.SelectStudent();
+                        if (student == null) break;
+                        else teachersDiary.ChoiceOfSchoolSubject(student);
                         break;
                     case 3:
-                        teachersDiary.ShowSchoolSubjects(attendanceList.SelectingStuden(studentsList));
+                        student = attendanceList.SelectStudent();
+                        if (student == null) break;
+                        else teachersDiary.ShowSchoolSubjects(student);
                         break; 
                     case 4:
                         option.LeaveProgramme();

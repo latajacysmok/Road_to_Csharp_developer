@@ -5,7 +5,7 @@ namespace Infrastructure
     public class TeachersSchoolSubjectDiary
     {
         SchoolGradebook schoolGradebook = new SchoolGradebook();
-        SchoolSubjects schoolSubjects = new SchoolSubjects();
+        SchoolSubjects schoolSubject = new SchoolSubjects();
         Verifier verifier = new Verifier();
 
         public int id;
@@ -15,11 +15,11 @@ namespace Infrastructure
         public void ShowSchoolSubjects(Student student)
         {
             ListAvailableSubjects();
-            schoolSubjects = GetSchoolSubjects();
-            schoolGradebook.ShowGrade(schoolSubjects, student);
+            schoolSubject = GetSchoolSubject();
+            schoolGradebook.ShowGrade(schoolSubject, student);
         }
 
-        public SchoolSubjects GetSchoolSubjects()
+        public SchoolSubjects GetSchoolSubject()
         {
             while (true)
             {
@@ -41,18 +41,18 @@ namespace Infrastructure
         public void ChoiceOfSchoolSubject(Student student)
         {
             ListAvailableSubjects();
-            schoolSubjects = GetSchoolSubjects();
+            schoolSubject = GetSchoolSubject();
 
-            switch (schoolSubjects)
+            switch (schoolSubject)
             {
                 case SchoolSubjects.Mathematics:
-                    schoolGradebook.AddGradeToStudent(student.Id, SchoolSubjects.Mathematics);
+                    schoolGradebook.AddGrade(student.Id, SchoolSubjects.Mathematics);
                     break;
                 case SchoolSubjects.Physics:
-                    schoolGradebook.AddGradeToStudent(student.Id, SchoolSubjects.Physics);
+                    schoolGradebook.AddGrade(student.Id, SchoolSubjects.Physics);
                     break;
                 case SchoolSubjects.Religion:
-                    schoolGradebook.AddGradeToStudent(student.Id, SchoolSubjects.Religion);
+                    schoolGradebook.AddGrade(student.Id, SchoolSubjects.Religion);
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");

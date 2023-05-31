@@ -29,10 +29,10 @@ namespace Infrastructure
             }
         }
 
-        public void AddGradeToStudent(int id, SchoolSubjects subject)
+        public void AddGrade(int studentId, SchoolSubjects subject)
         {
             double[] ratings = { 1, 1.5D, 2, 2.5D, 3, 3.5D, 4, 4.5D, 5, 5.5D, 6 };
-            List<Grade> grades = gradeRepository.GetAllGrades();
+            
 
             PrintPossibleSchoolGrades(ratings);
 
@@ -43,8 +43,8 @@ namespace Infrastructure
                 {
                     if (ratings.Contains(number))
                     {
-                        int gradeID = option.GetUniqueGradeId(grades);
-                        Grade grade = new Grade(gradeID, id, subject, number);
+                        int gradeID = option.GetUniqueGradeId();
+                        Grade grade = new Grade(gradeID, studentId, subject, number);
                         gradeRepository.AddGrade(grade);
                         break;
                     }
@@ -62,25 +62,29 @@ namespace Infrastructure
                 Console.Write(grade + " ");
             }
         }
-        private void PrintSubjectGrades(List<Grade> subject)
+        private void PrintSubjectGrades(List<Grade> grades)
         {
             int index = 0;
-            int totalCount = subject.Count;
+            int totalCount = grades.Count;
 
-            foreach (Grade grades in subject)
+            if (totalCount == 0) Console.WriteLine("\nYour list is empty, You add the first item to your list.");
+            else
             {
-                index++;
+                foreach (Grade grade in grades)
+                {
+                    index++;
 
-                if (index == totalCount)
-                {
-                    Console.WriteLine(grades.Value + " ;");
+                    if (index == totalCount)
+                    {
+                        Console.WriteLine(grade.Value + " ;");
+                    }
+                    else
+                    {
+                        Console.Write(grade.Value + ", ");
+                    }
                 }
-                else
-                {
-                    Console.Write(grades.Value + ", ");
-                }
-            }
-            Console.WriteLine("");
+                Console.WriteLine("");
+            }       
         }
     }
 }

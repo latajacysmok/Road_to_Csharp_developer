@@ -5,9 +5,13 @@ namespace Infrastructure
     public class Option
     {
         Verifier verifier = new Verifier();
+        StudentRepository studentRepository = new StudentRepository();
+        GradeRepository gradeRepository = new GradeRepository();
 
-        public int GetUniqueStudentId(List<Student> students)
+        public int GetUniqueStudentId()
         {
+            List<Student> students = studentRepository.GetAllStudents();
+
             int id = 0;
             if (verifier.IsNullOrEmpty(students))
             {
@@ -23,8 +27,9 @@ namespace Infrastructure
                 return id + 1;
             }
         }
-        public int GetUniqueGradeId(List<Grade> grades)
+        public int GetUniqueGradeId()
         {
+            List<Grade> grades = gradeRepository.GetAllGrades();
             int id = 0;
 
             if (verifier.IsNullOrEmpty(grades))
