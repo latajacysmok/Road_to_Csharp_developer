@@ -9,10 +9,12 @@ namespace Infrastructure
         AttendanceList attendanceList = new AttendanceList();
         StudentRepository studentRepository = new StudentRepository();
         TeachersSchoolSubjectDiary teachersDiary = new TeachersSchoolSubjectDiary();
+        Time time = new Time();
 
         public void GetSelectionOfOptionsFromMenu()
         {        
             int choice;
+            time.GetDate();
 
             while (true)
             {
@@ -39,10 +41,10 @@ namespace Infrastructure
                         student = attendanceList.SelectStudent();
                         if (student == null) break;
                         else teachersDiary.ShowSchoolSubjects(student);
-                        break; 
+                        break;
                     case 4:
                         option.LeaveProgramme();
-                        break;                       
+                        break;                     
                 }
             }
         }

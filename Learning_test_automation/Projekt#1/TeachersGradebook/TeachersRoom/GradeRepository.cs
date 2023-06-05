@@ -4,16 +4,14 @@ namespace Infrastructure
 {
     public class GradeRepository
     {
-        public double value;
-        public int studentID;
-        public int id;
-        public string schoolSubject;
-
         private List<Grade> grades = new List<Grade>();
 
         public void AddGrade(Grade grade)
         {
             grades.Add(grade);
+
+            FileWizard fileWizard = new FileWizard();
+            fileWizard.FileCreation(grade);
         }
 
         public Grade GetGrade(int id)
@@ -42,7 +40,7 @@ namespace Infrastructure
 
         public override string ToString()
         {
-            return $"{value} for ID number: {id}";
+            return string.Join(", ", grades.Select(grade => $"{grade.SchoolSubject}: {grade.Value}, Student id number: {grade.StudentID}"));
         }
     }
 }
