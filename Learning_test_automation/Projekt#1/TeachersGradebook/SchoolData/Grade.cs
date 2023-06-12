@@ -1,12 +1,12 @@
 ﻿namespace SchoolData
 {
-    public class Grade
+    public class Grade : IGrade
     {
         public double Value { get; set; }
         public int StudentID { get; set; }
         public SchoolSubjects SchoolSubject { get; set; }
-        public int Id{ get; set; }
-        public string GetCreationTime { get; set; }
+        public int Id { get; set; }
+        public DateTime CreationTime { get; set; }
 
         public Grade(int iD, int studentID, SchoolSubjects schoolSubject, double grade)
         {
@@ -14,8 +14,7 @@
             Value = grade;
             StudentID = studentID;
             SchoolSubject = schoolSubject;
-            DateTime gradeCreationTime = DateTime.Now;
-            GetCreationTime = gradeCreationTime.ToString("'Grade_'HH'-'mm'-'ss'_'dd'-'MM'-'yyyy");
+            CreationTime = DateTime.Now;
         }
 
         public override string ToString()

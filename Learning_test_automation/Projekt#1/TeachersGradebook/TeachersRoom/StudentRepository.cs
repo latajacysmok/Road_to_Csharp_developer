@@ -30,7 +30,7 @@ namespace Infrastructure
 
         public override string ToString()
         {
-            return string.Join(", ", students.Select(student => $"Name: {student.Name} Lastname: {student.LastName}, ID number: {student.Id}"));
+            return string.Join(", ", students.Select(student => $"Name: {student.Name}; Lastname: {student.LastName}; ID number: {student.Id}; \n"));
         }
     }
 }

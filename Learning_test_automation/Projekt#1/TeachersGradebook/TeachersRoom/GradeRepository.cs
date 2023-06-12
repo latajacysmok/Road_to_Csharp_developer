@@ -4,7 +4,7 @@ namespace Infrastructure
 {
     public class GradeRepository
     {
-        private List<Grade> grades = new List<Grade>();
+        private static List<Grade> grades = new List<Grade>();
 
         public void AddGrade(Grade grade)
         {
@@ -40,7 +40,7 @@ namespace Infrastructure
 
         public override string ToString()
         {
-            return string.Join(", ", grades.Select(grade => $"{grade.SchoolSubject}: {grade.Value}, Student id number: {grade.StudentID}"));
+            return string.Join(", ", grades.Select(grade => $"School subject: {grade.SchoolSubject}; Grade value: {grade.Value}; Student id number: {grade.StudentID};\n"));
         }
     }
 }
