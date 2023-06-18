@@ -1,6 +1,4 @@
 ﻿using Infrastructure;
-using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace OutputInformation
 {

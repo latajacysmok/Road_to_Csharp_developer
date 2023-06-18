@@ -4,14 +4,14 @@ namespace Infrastructure
 {
     public class StudentRepository
     {
-        private static List<Student> students = new List<Student>();
+        public static List<IStudent> students = new List<IStudent>();
+        StudentFile studentFile = new StudentFile();
 
-        public void AddStudent(Student student)
-        {
+        public void AddStudent(IStudent student)
+        {      
             students.Add(student);
 
-            FileWizard fileWizard = new FileWizard();
-            fileWizard.FileCreation(student);
+            studentFile.StudentFileCreation(student.ToString());
         }
 
         public Student GetStudent(int id)
@@ -23,14 +23,14 @@ namespace Infrastructure
             throw new NullReferenceException("We do not have a student with this id.");
         }
 
-        public List<Student> GetAllStudents()
+        public List<IStudent> GetAllStudents()
         { 
             return students; 
         }
 
         public override string ToString()
         {
-            return string.Join(", ", students.Select(student => $"Name: {student.Name}; Lastname: {student.LastName}; ID number: {student.Id}; \n"));
+            return string.Join("", students.Select(student => $"Name: {student.Name}; Lastname: {student.LastName}; ID number: {student.Id}; Education year: {student.EducationYear}"));
         }
     }
 }

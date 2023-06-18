@@ -15,6 +15,11 @@ namespace Infrastructure
         {        
             int choice;
             time.GetDate();
+            StudentFile studentFile = new StudentFile();
+            GradeFile gradeFile = new GradeFile();
+
+            studentFile.AddStudentParametersFromFileToList();
+            gradeFile.AddGradeParametersFromFileToList();
 
             while (true)
             {
@@ -29,7 +34,7 @@ namespace Infrastructure
                         string lastName = option.GetLastName();
                         int educationYear = option.GetGrade();
                         int id = option.GetUniqueStudentId();
-                        Student student = new Student(id, name, lastName, educationYear);
+                        IStudent student = new Student(id, name, lastName, educationYear);
                         studentRepository.AddStudent(student);
                         break;
                     case 2:

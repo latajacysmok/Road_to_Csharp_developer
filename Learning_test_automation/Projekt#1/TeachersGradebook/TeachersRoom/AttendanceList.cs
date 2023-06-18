@@ -10,7 +10,7 @@ namespace Infrastructure
 
         public Student SelectStudent()
         {
-            List<Student> students = studentRepository.GetAllStudents();
+            List<IStudent> students = studentRepository.GetAllStudents();
             if (verifier.IsNullOrEmpty(students))
             {
                 Console.WriteLine("Your list is empty, add an item to it before displaying the list.");
@@ -27,10 +27,10 @@ namespace Infrastructure
 
         private void ListAvailableStudents()
         {
-            List<Student> students = studentRepository.GetAllStudents();
+            List<IStudent> students = studentRepository.GetAllStudents();
             Console.WriteLine("\nHere is a list of our students: ");
 
-            foreach (Student student in students)
+            foreach (IStudent student in students)
             {
                 Console.WriteLine(student.ToString());
             }

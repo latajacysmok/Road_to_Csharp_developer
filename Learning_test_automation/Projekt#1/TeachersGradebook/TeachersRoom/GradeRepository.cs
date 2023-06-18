@@ -4,14 +4,14 @@ namespace Infrastructure
 {
     public class GradeRepository
     {
-        private static List<Grade> grades = new List<Grade>();
+        public static List<IGrade> grades = new List<IGrade>();
+        GradeFile gradeFile = new GradeFile();
 
-        public void AddGrade(Grade grade)
+        public void AddGrade(IGrade grade)
         {
             grades.Add(grade);
 
-            FileWizard fileWizard = new FileWizard();
-            fileWizard.FileCreation(grade);
+            gradeFile.GradeFileCreation(grade.ToString());
         }
 
         public Grade GetGrade(int id)
@@ -23,7 +23,7 @@ namespace Infrastructure
             throw new NullReferenceException("We do not have a grade with this id.");
         }
 
-        public List<Grade> GetAllGrades()
+        public List<IGrade> GetAllGrades()
         {
             return grades;
         }
@@ -40,7 +40,7 @@ namespace Infrastructure
 
         public override string ToString()
         {
-            return string.Join(", ", grades.Select(grade => $"School subject: {grade.SchoolSubject}; Grade value: {grade.Value}; Student id number: {grade.StudentID};\n"));
+            return string.Join("", grades.Select(grade => $"School subject: {grade.SchoolSubject}; Grade value: {grade.Value}; Student id number: {grade.StudentID};"));
         }
     }
 }

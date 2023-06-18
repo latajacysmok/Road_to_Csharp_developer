@@ -20,7 +20,7 @@
 
         public override string ToString()
         {
-            return $"{Name} {LastName}, ID number: {Id}";
+            return $"Name: {Name}; Lastname: {LastName}; ID number: {Id}; Education year: {EducationYear};";
         }
     }
 }

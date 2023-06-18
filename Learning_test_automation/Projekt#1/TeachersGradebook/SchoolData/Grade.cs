@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return $"{SchoolSubject}: {Value}, Student id number: {StudentID}";
+            return $"{SchoolSubject}: {Value}, ID number: {Id}, Student id number: {StudentID}";
         }
     }
 }

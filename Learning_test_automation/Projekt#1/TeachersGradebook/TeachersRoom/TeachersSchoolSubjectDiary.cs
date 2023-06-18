@@ -12,7 +12,7 @@ namespace Infrastructure
         public SchoolSubjects subject;
         public double number;
 
-        public void ShowSchoolSubjects(Student student)
+        public void ShowSchoolSubjects(IStudent student)
         {
             ListAvailableSubjects();
             schoolSubject = GetSchoolSubject();
@@ -38,7 +38,7 @@ namespace Infrastructure
             }
         }
 
-        public void ChoiceOfSchoolSubject(Student student)
+        public void ChoiceOfSchoolSubject(IStudent student)
         {
             ListAvailableSubjects();
             schoolSubject = GetSchoolSubject();
