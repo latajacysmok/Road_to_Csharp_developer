@@ -5,26 +5,28 @@ namespace Infrastructure
     public class FileWizard
     {    
 
-        public void SaveDataToFile(string uniqName, string createText)
+        public void SaveDataToFile(string uniqueName, string createText)
         {
-            string dir = @"C:\Users\lemk\Desktop\TeachersGradebook";
-            FolderDirectoryCreation(dir);
+            //string dir = @"C:\Users\lemk\Desktop\TeachersGradebook";
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TeachersGradebook");
 
-            string fileName = $"{dir}\\{uniqName}.txt";
+            DirectoryCreation(dir);
+
+            string fileName = $"{dir}\\{uniqueName}.txt";
             ListFiles(dir);
             
             using (FileStream fileStream = FileCreation(fileName))
             {
                 if (!File.Exists(fileName))
                 {
-                    Console.WriteLine($"The file '{uniqName}' was not created.");
+                    Console.WriteLine($"The file '{uniqueName}' was not created.");
                 }
                 else
                 {
                     fileStream.Seek(0, SeekOrigin.End);
-                    using (StreamWriter sw = new StreamWriter(fileStream))
+                    using (StreamWriter informationForOneObjectToWrite = new StreamWriter(fileStream))
                     {
-                        sw.WriteLine(createText);
+                        informationForOneObjectToWrite.WriteLine(createText);
                     }
                 }
             }
@@ -32,7 +34,7 @@ namespace Infrastructure
             ReadFile(fileName);
         }
 
-        private void FolderDirectoryCreation(string dir)
+        private void DirectoryCreation(string dir)
         {
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
@@ -52,21 +54,21 @@ namespace Infrastructure
         {
             if (File.Exists(fileName))
             {
-                using (StreamReader sr = new StreamReader(fileName))
+                using (StreamReader fileContent = new StreamReader(fileName))
                 {
-                    if (sr.Peek() >= 0)
+                    if (fileContent.Peek() >= 0)
                     {
                         int counter = 0;
-                        string ln;
+                        string collectionOfInformationAboutSingleObject;
 
                         Console.WriteLine($"File content: ");
 
-                        while ((ln = sr.ReadLine()) != null)
+                        while ((collectionOfInformationAboutSingleObject = fileContent.ReadLine()) != null)
                         {
-                            Console.WriteLine(ln);
+                            Console.WriteLine(collectionOfInformationAboutSingleObject);
                             counter++;
                         }
-                        sr.Close();
+                        fileContent.Close();
                         Console.WriteLine($"File has {counter} lines.");
                     }
                     else Console.WriteLine($"File {fileName} is EMPTY!");

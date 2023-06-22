@@ -5,7 +5,12 @@ namespace Infrastructure
     public class StudentFile
     {
         FileWizard fileWizard = new FileWizard();
-        
+
+        private string name;
+        private string lastname;
+        private int id;
+        private int educationYear;
+
         public void StudentFileCreation(string createText)
         {
             string uniqName = "Student";
@@ -14,66 +19,71 @@ namespace Infrastructure
 
         public void AddStudentParametersFromFileToList()
         {
-            string fileName = @"C:\Users\lemk\Desktop\TeachersGradebook\Student.txt";
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TeachersGradebook", "Student.txt");
 
             if (File.Exists(fileName))
             {
-                using (StreamReader sr = new StreamReader(fileName))
+                using (StreamReader streamReader = new StreamReader(fileName))
                 {
-                    if (sr.Peek() >= 0)
+                    if (streamReader.Peek() >= 0)
                     {
-                        string fileContent = sr.ReadToEnd();
+                        string fileContent = streamReader.ReadToEnd();
 
                         string[] allStudentsFromFile = fileContent.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        string name          = default;
-                        string lastname      = default;
-                        int    id            = default;
-                        int    educationYear = default;
+                        ExtractingStudentInformationFromFile(allStudentsFromFile);
 
-                        foreach (var lineWithStudentDate in allStudentsFromFile)
-                        {
-                            string[] fields = lineWithStudentDate.Split(';');
-
-                            foreach (string field in fields)
-                            {
-                                if (field.Trim().StartsWith("Name:"))
-                                {
-                                    name = field.Trim().Substring("Name:".Length).Trim();
-                                }
-
-                                if (field.Trim().StartsWith("Lastname:"))
-                                {
-                                    lastname = field.Trim().Substring("Lastname:".Length).Trim();
-                                }
-
-                                if (field.Trim().StartsWith("ID number:"))
-                                {
-                                    int.TryParse(field.Trim().Substring("ID number:".Length).Trim(), out id);
-                                }
-
-                                if (field.Trim().StartsWith("Education year:"))
-                                {
-                                    int.TryParse(field.Trim().Substring("Education year:".Length).Trim(), out educationYear);
-                                }
-                            }
-                            IStudent student = new Student(id, name, lastname, educationYear);
-                            StudentRepository.students.Add(student);
-                        }
-
-                        sr.Close();
+                        streamReader.Close();
                     }
                     else
                     {
                         Console.WriteLine($"File {fileName} is EMPTY!");
                     }
 
-                    sr.Close();
+                    streamReader.Close();
                 }
             }
             else
             {
                 Console.WriteLine($"File {fileName} does NOT EXIST!");
+            }
+        }
+
+        private void ExtractingStudentInformationFromFile(string[] allStudentsFromFile)
+        {
+            foreach (var lineWithStudentDate in allStudentsFromFile)
+            {
+                string[] fields = lineWithStudentDate.Split(';');
+
+                foreach (string field in fields)
+                {
+                    StudentData(field);
+                }
+                IStudent student = new Student(id, name, lastname, educationYear);
+                StudentRepository.students.Add(student);
+            }
+        }
+
+        private void StudentData(string field)
+        {
+            if (field.Trim().StartsWith("Name:"))
+            {
+                name = field.Trim().Substring("Name:".Length).Trim();
+            }
+
+            if (field.Trim().StartsWith("Lastname:"))
+            {
+                lastname = field.Trim().Substring("Lastname:".Length).Trim();
+            }
+
+            if (field.Trim().StartsWith("ID number:"))
+            {
+                int.TryParse(field.Trim().Substring("ID number:".Length).Trim(), out id);
+            }
+
+            if (field.Trim().StartsWith("Education year:"))
+            {
+                int.TryParse(field.Trim().Substring("Education year:".Length).Trim(), out educationYear);
             }
         }
     }

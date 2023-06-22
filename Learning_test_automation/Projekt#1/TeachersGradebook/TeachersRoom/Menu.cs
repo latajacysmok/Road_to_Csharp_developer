@@ -6,7 +6,7 @@ namespace Infrastructure
     {
         Option option = new Option();
         Verifier verifier = new Verifier();       
-        AttendanceList attendanceList = new AttendanceList();
+        StudentSelector attendanceList = new StudentSelector();
         StudentRepository studentRepository = new StudentRepository();
         TeachersSchoolSubjectDiary teachersDiary = new TeachersSchoolSubjectDiary();
         Time time = new Time();

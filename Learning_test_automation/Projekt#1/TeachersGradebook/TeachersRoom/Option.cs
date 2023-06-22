@@ -28,26 +28,6 @@ namespace Infrastructure
             }
         }
 
-        public int GetUniqueStudentId(int stutentId)
-        {
-            var students = studentRepository.GetAllStudents();
-
-            //int id = 0;
-            if (verifier.IsNullOrEmpty(students))
-            {
-                Console.WriteLine("\nYour list is empty, You add the first item to your list.");
-                return stutentId;
-            }
-            else
-            {
-                foreach (Student student in students)
-                {
-                    if (student.Id == stutentId) stutentId = GetUniqueStudentId();
-                }
-                return stutentId;
-            }
-        }
-
         public int GetUniqueGradeId()
         {
             List<IGrade> grades = gradeRepository.GetAllGrades();

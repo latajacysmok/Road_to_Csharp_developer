@@ -2,15 +2,15 @@
 
 namespace Infrastructure
 {
-    public class AttendanceList
+    public class StudentSelector
     {
         Option option = new Option();
         Verifier verifier = new Verifier();
         StudentRepository studentRepository = new StudentRepository();
+        List<IStudent> students = StudentRepository.students;
 
-        public Student SelectStudent()
-        {
-            List<IStudent> students = studentRepository.GetAllStudents();
+        public IStudent SelectStudent()
+        {         
             if (verifier.IsNullOrEmpty(students))
             {
                 Console.WriteLine("Your list is empty, add an item to it before displaying the list.");
@@ -18,16 +18,20 @@ namespace Infrastructure
             }
             else
             {
-                ListAvailableStudents();
-
-                int id = option.GetID();
-                return studentRepository.GetStudent(id);
+                return SelectStudentFromAvailableStudents();
             }           
+        }
+
+        private IStudent SelectStudentFromAvailableStudents()
+        {
+            ListAvailableStudents();
+
+            int id = option.GetID();
+            return studentRepository.GetStudent(id);
         }
 
         private void ListAvailableStudents()
         {
-            List<IStudent> students = studentRepository.GetAllStudents();
             Console.WriteLine("\nHere is a list of our students: ");
 
             foreach (IStudent student in students)

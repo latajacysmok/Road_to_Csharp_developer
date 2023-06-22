@@ -11,7 +11,7 @@ namespace Infrastructure
         {
             grades.Add(grade);
 
-            gradeFile.GradeFileCreation(grade.ToString());
+            gradeFile.GradeFileCreate(grade.ToString());
         }
 
         public Grade GetGrade(int id)
