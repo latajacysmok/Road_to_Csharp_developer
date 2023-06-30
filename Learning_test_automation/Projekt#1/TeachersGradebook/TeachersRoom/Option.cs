@@ -10,7 +10,7 @@ namespace Infrastructure
 
         public int GetUniqueStudentId()
         {
-            List<Student> students = studentRepository.GetAllStudents();
+            var students = studentRepository.GetAllStudents();
 
             int id = 0;
             if (verifier.IsNullOrEmpty(students))
@@ -27,9 +27,10 @@ namespace Infrastructure
                 return id + 1;
             }
         }
+
         public int GetUniqueGradeId()
         {
-            List<Grade> grades = gradeRepository.GetAllGrades();
+            List<IGrade> grades = gradeRepository.GetAllGrades();
             int id = 0;
 
             if (verifier.IsNullOrEmpty(grades))

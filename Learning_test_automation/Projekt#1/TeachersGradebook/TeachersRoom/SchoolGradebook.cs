@@ -7,7 +7,7 @@ namespace Infrastructure
         Option option = new Option();
         GradeRepository gradeRepository = new GradeRepository();
         
-        public void ShowGrade(SchoolSubjects schoolSubjects, Student student)
+        public void ShowGrade(SchoolSubjects schoolSubjects, IStudent student)
         {
             switch (schoolSubjects)
             {
@@ -44,7 +44,7 @@ namespace Infrastructure
                     if (ratings.Contains(number))
                     {
                         int gradeID = option.GetUniqueGradeId();
-                        Grade grade = new Grade(gradeID, studentId, subject, number);
+                        IGrade grade = new Grade(gradeID, studentId, subject, number);
                         gradeRepository.AddGrade(grade);
                         break;
                     }

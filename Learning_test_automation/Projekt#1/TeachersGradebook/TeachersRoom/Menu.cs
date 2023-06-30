@@ -6,13 +6,20 @@ namespace Infrastructure
     {
         Option option = new Option();
         Verifier verifier = new Verifier();       
-        AttendanceList attendanceList = new AttendanceList();
+        StudentSelector attendanceList = new StudentSelector();
         StudentRepository studentRepository = new StudentRepository();
         TeachersSchoolSubjectDiary teachersDiary = new TeachersSchoolSubjectDiary();
+        Time time = new Time();
 
         public void GetSelectionOfOptionsFromMenu()
         {        
             int choice;
+            time.GetDate();
+            StudentFile studentFile = new StudentFile();
+            GradeFile gradeFile = new GradeFile();
+
+            studentFile.AddStudentParametersFromFileToList();
+            gradeFile.AddGradeParametersFromFileToList();
 
             while (true)
             {
@@ -27,7 +34,7 @@ namespace Infrastructure
                         string lastName = option.GetLastName();
                         int educationYear = option.GetGrade();
                         int id = option.GetUniqueStudentId();
-                        Student student = new Student(id, name, lastName, educationYear);
+                        IStudent student = new Student(id, name, lastName, educationYear);
                         studentRepository.AddStudent(student);
                         break;
                     case 2:
@@ -39,10 +46,10 @@ namespace Infrastructure
                         student = attendanceList.SelectStudent();
                         if (student == null) break;
                         else teachersDiary.ShowSchoolSubjects(student);
-                        break; 
+                        break;
                     case 4:
                         option.LeaveProgramme();
-                        break;                       
+                        break;                     
                 }
             }
         }
