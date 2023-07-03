@@ -1,4 +1,8 @@
-﻿namespace Infrastructure
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SchoolPencilCase
 {
     public class Verifier
     {
@@ -25,10 +29,10 @@
         {
             while (true)
             {
-                if (0 < number && number < 5) return true;
+                if (0 < number && number < 6) return true;
                 else
                 {
-                    Console.WriteLine($"Your choice: {number} is incorrect. It has to be equal: 1 - 4");
+                    Console.WriteLine($"Your choice: {number} is incorrect. It has to be equal: 1 - 5");
                     return false;
                 }
             }

@@ -1,31 +1,43 @@
 ﻿using SchoolData;
+using SchoolPencilCase;
 
-namespace Infrastructure
+namespace SchoolActivity
 {
     public class GradeRepository
     {
         public static List<IGrade> grades = new List<IGrade>();
         GradeFile gradeFile = new GradeFile();
-
+        Verifier verifier = new Verifier();
         public void AddGrade(IGrade grade)
-        {
+        {          
             grades.Add(grade);
 
             gradeFile.GradeFileCreate(grade.ToString());
         }
 
-        public Grade GetGrade(int id)
-        {
-            foreach (Grade grade in grades)
-            {
-                if (grade.Id.Equals(id)) return grade;
-            }
-            throw new NullReferenceException("We do not have a grade with this id.");
-        }
-
-        public List<IGrade> GetAllGrades()
+        private List<IGrade> GetAllGrades()
         {
             return grades;
+        }
+
+        public int GetUniqueGradeId()
+        {
+            List<IGrade> grades = GetAllGrades();
+            int id = 0;
+
+            if (verifier.IsNullOrEmpty(grades))
+            {
+                Console.WriteLine("\nYour list is empty, You add the first item to your list.");
+                return 1;
+            }
+            else
+            {
+                foreach (Grade grade in grades)
+                {
+                    if (grade.Id > id) id = grade.Id;
+                }
+                return id + 1;
+            }
         }
 
         public List<Grade> GetGradeStudentsSubject(int idSearchedStudent, SchoolSubjects schoolSubject)
@@ -36,11 +48,6 @@ namespace Infrastructure
                 if (grade.StudentID.Equals(idSearchedStudent) && grade.SchoolSubject == schoolSubject) studentGrades.Add(grade);
             }
             return studentGrades;
-        }
-
-        public override string ToString()
-        {
-            return string.Join("", grades.Select(grade => $"School subject: {grade.SchoolSubject}; Grade value: {grade.Value}; Student id number: {grade.StudentID};"));
         }
     }
 }

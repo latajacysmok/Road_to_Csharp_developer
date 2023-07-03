@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Infrastructure
+namespace Classroom
 {
     public class Time
     {

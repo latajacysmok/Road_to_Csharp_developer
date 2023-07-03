@@ -1,25 +1,31 @@
 ﻿using SchoolData;
+using SchoolPencilCase;
 
-namespace Infrastructure
+namespace SchoolActivity
 {
-    public class TeachersSchoolSubjectDiary
+    public class ClassRegister
     {
         SchoolGradebook schoolGradebook = new SchoolGradebook();
         SchoolSubjects schoolSubject = new SchoolSubjects();
-        Verifier verifier = new Verifier();
 
         public int id;
         public SchoolSubjects subject;
         public double number;
 
-        public void ShowSchoolSubjects(IStudent student)
+        public void ShowSchoolSubjects(IStudent student, Verifier verifier)
         {
-            ListAvailableSubjects();
-            schoolSubject = GetSchoolSubject();
+            GetListAvailableSubjects();
+            schoolSubject = GetSchoolSubject(verifier);
             schoolGradebook.ShowGrade(schoolSubject, student);
         }
+        public void ShowSchoolSubjects(IStudent student, Verifier verifier, bool avg)
+        {
+            GetListAvailableSubjects();
+            schoolSubject = GetSchoolSubject(verifier);
+            schoolGradebook.ShowAverageGrade(schoolSubject, student);
+        }
 
-        public SchoolSubjects GetSchoolSubject()
+        private SchoolSubjects GetSchoolSubject(Verifier verifier)
         {
             while (true)
             {
@@ -38,10 +44,10 @@ namespace Infrastructure
             }
         }
 
-        public void ChoiceOfSchoolSubject(IStudent student)
+        public void ChoiceOfSchoolSubject(IStudent student, Verifier verifier)
         {
-            ListAvailableSubjects();
-            schoolSubject = GetSchoolSubject();
+            GetListAvailableSubjects();
+            schoolSubject = GetSchoolSubject(verifier);
 
             switch (schoolSubject)
             {
@@ -60,7 +66,7 @@ namespace Infrastructure
             }
         }
 
-        public void ListAvailableSubjects()
+        public void GetListAvailableSubjects()
         {
             Console.WriteLine("\nHere is a list of our subjects: ");
 

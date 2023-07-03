@@ -1,21 +1,21 @@
-﻿using SchoolData;
+﻿using System;
+using System.IO;
 
-namespace Infrastructure
+namespace SchoolPencilCase
 {
     public class FileWizard
     {    
 
         public void SaveDataToFile(string uniqueName, string createText)
         {
-            //string dir = @"C:\Users\lemk\Desktop\TeachersGradebook";
             string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TeachersGradebook");
 
-            DirectoryCreation(dir);
+            DirectoryCreate(dir);
 
             string fileName = $"{dir}\\{uniqueName}.txt";
-            ListFiles(dir);
+            GetListFiles(dir);
             
-            using (FileStream fileStream = FileCreation(fileName))
+            using (FileStream fileStream = FileCreate(fileName))
             {
                 if (!File.Exists(fileName))
                 {
@@ -34,13 +34,13 @@ namespace Infrastructure
             ReadFile(fileName);
         }
 
-        private void DirectoryCreation(string dir)
+        private void DirectoryCreate(string dir)
         {
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
 
-        private FileStream FileCreation(string fileName)
+        private FileStream FileCreate(string fileName)
         {
             if (!File.Exists(fileName))
             {
@@ -77,13 +77,13 @@ namespace Infrastructure
             else Console.WriteLine($"File {fileName} NOT EXIST!");
         }
 
-        private void ListFiles(string dir)
+        private void GetListFiles(string dir)
         {
             string[] files = Directory.GetFiles(dir);
             if (files.Length == 0) Console.WriteLine("The folder is empty. Now the first file will be created.");
             else
             {
-                Console.WriteLine($"List of files in the folder({dir}):");
+                Console.WriteLine($"\nList of files in the folder({dir}):");
 
                 foreach (string file in files)
                 {
