@@ -1,9 +1,9 @@
 ﻿using SchoolData;
-using SchoolPencilCase;
+using SchoolEquipment;
 
 namespace SchoolActivity
 {
-    public class ClassRegister
+    public class GradeSheetPrinter
     {
         SchoolGradebook schoolGradebook = new SchoolGradebook();
         SchoolSubjects schoolSubject = new SchoolSubjects();
@@ -15,17 +15,17 @@ namespace SchoolActivity
         public void ShowSchoolSubjects(IStudent student, Verifier verifier)
         {
             GetListAvailableSubjects();
-            schoolSubject = GetSchoolSubject(verifier);
-            schoolGradebook.ShowGrade(schoolSubject, student);
+            schoolSubject = SchoolSubjectsNameExtensions(verifier);
+            schoolGradebook.ShowAllGrades(schoolSubject, student);
         }
         public void ShowSchoolSubjects(IStudent student, Verifier verifier, bool avg)
         {
             GetListAvailableSubjects();
-            schoolSubject = GetSchoolSubject(verifier);
-            schoolGradebook.ShowAverageGrade(schoolSubject, student);
+            schoolSubject = SchoolSubjectsNameExtensions(verifier);
+            schoolGradebook.ShowGradesAverage(schoolSubject, student);
         }
 
-        private SchoolSubjects GetSchoolSubject(Verifier verifier)
+        private SchoolSubjects SchoolSubjectsNameExtensions(Verifier verifier)
         {
             while (true)
             {
@@ -47,7 +47,7 @@ namespace SchoolActivity
         public void ChoiceOfSchoolSubject(IStudent student, Verifier verifier)
         {
             GetListAvailableSubjects();
-            schoolSubject = GetSchoolSubject(verifier);
+            schoolSubject = SchoolSubjectsNameExtensions(verifier);
 
             switch (schoolSubject)
             {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SchoolPencilCase
+﻿namespace SchoolEquipment
 {
     public class Option
     {

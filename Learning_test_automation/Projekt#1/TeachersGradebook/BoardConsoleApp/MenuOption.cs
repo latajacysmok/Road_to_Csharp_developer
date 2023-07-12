@@ -1,4 +1,4 @@
-﻿namespace Classroom
+﻿namespace BoardConsoleApp
 {
     public enum MenuOption
     {

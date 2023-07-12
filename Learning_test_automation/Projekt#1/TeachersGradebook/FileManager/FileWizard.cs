@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SchoolPencilCase
+namespace FileManager
 {
     public class FileWizard
     {    
@@ -10,12 +10,12 @@ namespace SchoolPencilCase
         {
             string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TeachersGradebook");
 
-            DirectoryCreate(dir);
+            CreateDirectory(dir);
 
             string fileName = $"{dir}\\{uniqueName}.txt";
             GetListFiles(dir);
             
-            using (FileStream fileStream = FileCreate(fileName))
+            using (FileStream fileStream = CreateFile(fileName))
             {
                 if (!File.Exists(fileName))
                 {
@@ -34,13 +34,13 @@ namespace SchoolPencilCase
             ReadFile(fileName);
         }
 
-        private void DirectoryCreate(string dir)
+        private void CreateDirectory(string dir)
         {
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
 
-        private FileStream FileCreate(string fileName)
+        private FileStream CreateFile(string fileName)
         {
             if (!File.Exists(fileName))
             {

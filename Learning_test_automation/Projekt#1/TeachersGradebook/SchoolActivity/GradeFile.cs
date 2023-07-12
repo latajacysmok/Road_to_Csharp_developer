@@ -1,5 +1,5 @@
 ﻿using SchoolData;
-using SchoolPencilCase;
+using FileManager;
 
 namespace SchoolActivity
 {
@@ -11,7 +11,7 @@ namespace SchoolActivity
         private double gradeValue;
         private int studentId;
         private int gradeID;
-        private KnowledgeTestType testType;
+        private GradeType testType;
 
         public void GradeFileCreate(string createText)
         {
@@ -31,9 +31,9 @@ namespace SchoolActivity
                     {
                         string fileContent = streamReader.ReadToEnd();
 
-                        string[] grades = fileContent.Split('\n');
+                        string[] allGradesFromFile = fileContent.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        ExtractingGradeInformationFromFile(grades);
+                        ExtractingGradeInformationFromFile(allGradesFromFile);
                     }
                     else
                     {
@@ -75,7 +75,7 @@ namespace SchoolActivity
 
             if (field.Trim().StartsWith(searchedPhraseSchoolSubject))
             {
-                Enum.TryParse(field.Trim().Substring(searchedPhraseSchoolSubject.Length).Trim(), out schoolSubject);
+                SchoolSubjects.TryParse(field.Trim().Substring(searchedPhraseSchoolSubject.Length).Trim(), out schoolSubject);
             }
 
             if (field.Trim().StartsWith(searchedPhrasegradeValue))

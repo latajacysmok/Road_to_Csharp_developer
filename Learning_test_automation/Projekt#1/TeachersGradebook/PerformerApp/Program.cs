@@ -1,4 +1,4 @@
-﻿using Classroom;
+﻿using BoardConsoleApp;
 
 namespace Board
 {
@@ -11,3 +11,4 @@ namespace Board
         }
     }
 }
+

@@ -1,6 +1,6 @@
 ﻿namespace SchoolData
 {
-    public enum KnowledgeTestType
+    public enum GradeType
     {
         Test = 1,
         Homework = 2,

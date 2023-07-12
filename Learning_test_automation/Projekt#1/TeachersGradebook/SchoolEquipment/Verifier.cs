@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace SchoolPencilCase
+﻿namespace SchoolEquipment
 {
     public class Verifier
     {
@@ -61,7 +57,7 @@ namespace SchoolPencilCase
                 {
                     if (0 < amount && amount < 9) break;
                     else if (0 > amount) Console.Write($"The given number({amount}) is too small. Please try again:");
-                    else if( amount > 9) Console.Write($"The given number({amount}) is too large. Please try again:");
+                    else if (amount > 9) Console.Write($"The given number({amount}) is too large. Please try again:");
                 }
                 else Console.Write($"This is not a number: {amount}. Please try again: ");
             }

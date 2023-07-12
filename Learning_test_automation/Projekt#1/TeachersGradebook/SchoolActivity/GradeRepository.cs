@@ -1,5 +1,6 @@
 ﻿using SchoolData;
-using SchoolPencilCase;
+using SchoolEquipment;
+using FileManager;
 
 namespace SchoolActivity
 {
@@ -40,7 +41,7 @@ namespace SchoolActivity
             }
         }
 
-        public List<Grade> GetGradeStudentsSubject(int idSearchedStudent, SchoolSubjects schoolSubject)
+        public List<Grade> GetStudentGradesBySchoolSubject(int idSearchedStudent, SchoolSubjects schoolSubject)
         {
             List<Grade> studentGrades = new List<Grade>();
             foreach (Grade grade in grades)

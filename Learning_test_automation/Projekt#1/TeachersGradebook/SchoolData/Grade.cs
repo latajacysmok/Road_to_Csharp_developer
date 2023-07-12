@@ -7,9 +7,9 @@
         public SchoolSubjects SchoolSubject { get; set; }
         public int Id { get; set; }
         public DateTime CreationTime { get; set; }
-        public KnowledgeTestType GradeType { get; set; }
+        public GradeType GradeType { get; set; }
 
-        public Grade(int iD, int studentID, SchoolSubjects schoolSubject, double grade, KnowledgeTestType gradeType)
+        public Grade(int iD, int studentID, SchoolSubjects schoolSubject, double grade, GradeType gradeType)
         {
             Id = iD;
             Value = grade;
@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return $"School subject: {SchoolSubject}, Grade value: {Value}, The given grade is from: {GradeType}, ID number: {Id}, Student id number: {StudentID}";
+            return $"School subject: {SchoolSubject}; Grade value: {Value}; The given grade is from: {GradeType}; ID number: {Id}; Student id number: {StudentID};";
         }
     }
 }

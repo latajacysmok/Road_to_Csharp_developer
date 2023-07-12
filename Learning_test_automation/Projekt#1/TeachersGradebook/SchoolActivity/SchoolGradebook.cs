@@ -1,5 +1,5 @@
 ﻿using SchoolData;
-using SchoolPencilCase;
+using SchoolEquipment;
 
 namespace SchoolActivity
 {
@@ -8,21 +8,36 @@ namespace SchoolActivity
         GradeRepository gradeRepository = new GradeRepository();
         Verifier verifier = new Verifier();
         Degree degree = new Degree();
-        public void ShowGrade(SchoolSubjects schoolSubjects, IStudent student)
+        public void ShowAllGrades(SchoolSubjects schoolSubjects, IStudent student)
         {
             switch (schoolSubjects)
             {
                 case SchoolSubjects.Mathematics:
-                    Console.WriteLine("\nMath grades are as follows:");
-                    PrintSubjectGrades(gradeRepository.GetGradeStudentsSubject(student.Id, SchoolSubjects.Mathematics));
+                    if (gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Mathematics).Count == 0) { Console.WriteLine("This student has no grades. You need to add a some grades to it first."); }
+                    else
+                    {
+                        Console.WriteLine("\nMath grades are as follows:");
+                        PrintSubjectGrades(gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Mathematics));
+                    }
+                    
                     break;
                 case SchoolSubjects.Physics:
-                    Console.WriteLine("\nPhysics grades are as follows:");
-                    PrintSubjectGrades(gradeRepository.GetGradeStudentsSubject(student.Id, SchoolSubjects.Physics));
+                    if (gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Physics).Count == 0) { Console.WriteLine("This student has no grades. You need to add a some grades to it first."); }
+                    else
+                    {
+                        Console.WriteLine("\nPhysics grades are as follows:");
+                        PrintSubjectGrades(gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Physics));
+                    }
+                    
                     break;
                 case SchoolSubjects.Religion:
-                    Console.WriteLine("\nReligious grades are as follows:");
-                    PrintSubjectGrades(gradeRepository.GetGradeStudentsSubject(student.Id, SchoolSubjects.Religion));
+                    if (gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Religion).Count == 0) { Console.WriteLine("This student has no grades. You need to add a some grades to it first."); }
+                    else
+                    {
+                        Console.WriteLine("\nReligious grades are as follows:");
+                        PrintSubjectGrades(gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Religion));
+                    }
+                    
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");
@@ -30,21 +45,36 @@ namespace SchoolActivity
             }
         }
         
-        public void ShowAverageGrade(SchoolSubjects schoolSubjects, IStudent student)
+        public void ShowGradesAverage(SchoolSubjects schoolSubjects, IStudent student)
         {
             switch (schoolSubjects)
             {
                 case SchoolSubjects.Mathematics:
-                    Console.WriteLine("\nThe average math grade is:");
-                    PrintSubjectAverage(gradeRepository.GetGradeStudentsSubject(student.Id, SchoolSubjects.Mathematics));
+                    if (gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Mathematics).Count == 0) { Console.WriteLine("The grade point average is 0 because the student does not yet have grades in the subject."); } 
+                    else 
+                    {
+                        Console.WriteLine("\nThe average math grade is:");
+                        PrintSubjectAverage(gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Mathematics)); 
+                    }
+                   
                     break;
                 case SchoolSubjects.Physics:
-                    Console.WriteLine("\nThe average physics grade is:");
-                    PrintSubjectAverage(gradeRepository.GetGradeStudentsSubject(student.Id, SchoolSubjects.Physics));
+                    if (gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Physics).Count == 0) { Console.WriteLine("The grade point average is 0 because the student does not yet have grades in the subject."); }
+                    else
+                    {
+                        Console.WriteLine("\nThe average physics grade is:");
+                        PrintSubjectAverage(gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Physics));
+                    }
+                    
                     break;
                 case SchoolSubjects.Religion:
-                    Console.WriteLine("\nThe average religious grade is:");
-                    PrintSubjectAverage(gradeRepository.GetGradeStudentsSubject(student.Id, SchoolSubjects.Religion));
+                    if (gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Religion).Count == 0) { Console.WriteLine("The grade point average is 0 because the student does not yet have grades in the subject."); }
+                    else
+                    {
+                        Console.WriteLine("\nThe average religious grade is:");
+                        PrintSubjectAverage(gradeRepository.GetStudentGradesBySchoolSubject(student.Id, SchoolSubjects.Religion));
+                    }
+                        
                     break;
                 default:
                     Console.WriteLine("There is no such school subject in our timetable.");
@@ -56,7 +86,7 @@ namespace SchoolActivity
         {
             double[] ratings = { 1, 1.5D, 2, 2.5D, 3, 3.5D, 4, 4.5D, 5, 5.5D, 6 };
 
-            KnowledgeTestType testType = ChoiceTestType();
+            GradeType testType = ChooseTestType();
 
             PrintPossibleSchoolGrades(ratings);
 
@@ -129,27 +159,27 @@ namespace SchoolActivity
             }       
         }
 
-        private void TestType()
+        private void GradeTypePrintout()
         {
             Console.WriteLine("\nWhat type of grade will be given: ");
             Console.WriteLine("1 - Test.");
             Console.WriteLine("2 - Homework.");
             Console.WriteLine("3 - Quiz.");
         }
-        public KnowledgeTestType ChoiceTestType()
+        public GradeType ChooseTestType()
         {
-            TestType();
+            GradeTypePrintout();
 
             while (true)
             {
                 switch (verifier.GetValidOptionNumber())
                 {
-                    case (int)KnowledgeTestType.Test:
-                        return KnowledgeTestType.Test;
-                    case (int)KnowledgeTestType.Homework:
-                        return KnowledgeTestType.Homework;
-                    case (int)KnowledgeTestType.Quiz:
-                        return KnowledgeTestType.Quiz;
+                    case (int)GradeType.Test:
+                        return GradeType.Test;
+                    case (int)GradeType.Homework:
+                        return GradeType.Homework;
+                    case (int)GradeType.Quiz:
+                        return GradeType.Quiz;
                     default:
                         Console.WriteLine("\nThe given number must equal 1, 2 or 3. Try again.");
                         break;
