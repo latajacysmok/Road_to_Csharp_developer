@@ -1,4 +1,4 @@
-﻿namespace AutomaticTests
+﻿namespace AutomaticTests.Pages
 {
     public class XPath
     {
@@ -15,9 +15,9 @@
         public static readonly string headingBookRoomSection = "//h2[contains(text(), 'Rooms')]";
         public static readonly string imgBookRoomArticle = "//img[@class = 'img-responsive hotel-img']";
         public static readonly string headingBookRoomArticle = "//div[@class = 'col-sm-7']/h3";
-        public static readonly string wheelchairIcone = "//span[@class = 'fa fa-wheelchair wheelchair']";     
+        public static readonly string wheelchairIcone = "//span[@class = 'fa fa-wheelchair wheelchair']";
         public static readonly string contentBookRoomArticle = "//div[@class = 'col-sm-7']/p";
-        public static readonly string pointsBookRoomArticle = "//div[@class = 'col-sm-7']/ul"; 
+        public static readonly string pointsBookRoomArticle = "//div[@class = 'col-sm-7']/ul";
         public static readonly string bookThisRoomButton = "//div[@class = 'col-sm-7']/button";
 
         #endregion
