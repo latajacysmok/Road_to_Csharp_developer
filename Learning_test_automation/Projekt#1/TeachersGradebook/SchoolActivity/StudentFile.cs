@@ -1,6 +1,7 @@
 ﻿using SchoolData;
+using FileManager;
 
-namespace Infrastructure
+namespace SchoolActivity
 {
     public class StudentFile
     {
@@ -57,14 +58,14 @@ namespace Infrastructure
 
                 foreach (string field in fields)
                 {
-                    StudentData(field);
+                    GetStudentData(field);
                 }
                 IStudent student = new Student(id, name, lastname, educationYear);
                 StudentRepository.students.Add(student);
             }
         }
 
-        private void StudentData(string field)
+        private void GetStudentData(string field)
         {
             if (field.Trim().StartsWith("Name:"))
             {

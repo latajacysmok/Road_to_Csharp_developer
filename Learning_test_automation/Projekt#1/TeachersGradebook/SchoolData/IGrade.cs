@@ -7,5 +7,6 @@
         SchoolSubjects SchoolSubject { get; set; }
         int Id { get; set; }
         DateTime CreationTime { get; set; }
+        GradeType GradeType { get; set; }
     }
 }

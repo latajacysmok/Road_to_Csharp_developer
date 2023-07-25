@@ -1,6 +1,7 @@
 ﻿using SchoolData;
+using FileManager;
 
-namespace Infrastructure
+namespace SchoolActivity
 {
     public class GradeFile
     {
@@ -10,6 +11,7 @@ namespace Infrastructure
         private double gradeValue;
         private int studentId;
         private int gradeID;
+        private GradeType testType;
 
         public void GradeFileCreate(string createText)
         {
@@ -29,9 +31,9 @@ namespace Infrastructure
                     {
                         string fileContent = streamReader.ReadToEnd();
 
-                        string[] grades = fileContent.Split('\n');
+                        string[] allGradesFromFile = fileContent.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        ExtractingGradeInformationFromFile(grades);
+                        ExtractingGradeInformationFromFile(allGradesFromFile);
                     }
                     else
                     {
@@ -55,24 +57,25 @@ namespace Infrastructure
 
                 foreach (string field in fields)
                 {
-                    GradeData(field);
+                    GetGradeData(field);
                 }
-                IGrade grade = new Grade(gradeID, studentId, schoolSubject, gradeValue);
+                IGrade grade = new Grade(gradeID, studentId, schoolSubject, gradeValue, testType);
                 GradeRepository.grades.Add(grade);
             }
         }
 
-        private void GradeData(string field)
+        private void GetGradeData(string field)
         {
             const string searchedPhraseSchoolSubject = "School subject:";
             const string searchedPhrasegradeValue = "Grade value:";
             const string searchedPhraseIdNumber = "ID number:";
             const string searchedPhraseStudentIdNumber = "Student id number:";
+            const string searchedPhraseGradeType = "The given grade is from:";
 
 
             if (field.Trim().StartsWith(searchedPhraseSchoolSubject))
             {
-                Enum.TryParse(field.Trim().Substring(searchedPhraseSchoolSubject.Length).Trim(), out schoolSubject);
+                SchoolSubjects.TryParse(field.Trim().Substring(searchedPhraseSchoolSubject.Length).Trim(), out schoolSubject);
             }
 
             if (field.Trim().StartsWith(searchedPhrasegradeValue))
@@ -88,6 +91,11 @@ namespace Infrastructure
             if (field.Trim().StartsWith(searchedPhraseStudentIdNumber))
             {
                 int.TryParse(field.Trim().Substring(searchedPhraseStudentIdNumber.Length).Trim(), out studentId);
+            }
+
+            if (field.Trim().StartsWith(searchedPhraseGradeType))
+            {
+                Enum.TryParse(field.Trim().Substring(searchedPhraseGradeType.Length).Trim(), out testType);
             }
         }
     }

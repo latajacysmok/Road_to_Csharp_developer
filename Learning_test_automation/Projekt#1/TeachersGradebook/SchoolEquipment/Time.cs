@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Infrastructure
+namespace SchoolEquipment
 {
     public class Time
     {
@@ -9,6 +9,6 @@ namespace Infrastructure
             DateTime applicationLaunchDate = DateTime.Now;
             var culture = new CultureInfo("de-DE");
             Console.WriteLine($"\t\t {applicationLaunchDate.ToString(culture)}");
-        }     
+        }
     }
 }

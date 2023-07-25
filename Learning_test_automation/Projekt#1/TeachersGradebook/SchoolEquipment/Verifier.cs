@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+﻿namespace SchoolEquipment
 {
     public class Verifier
     {
@@ -25,10 +25,10 @@
         {
             while (true)
             {
-                if (0 < number && number < 5) return true;
+                if (0 < number && number < 6) return true;
                 else
                 {
-                    Console.WriteLine($"Your choice: {number} is incorrect. It has to be equal: 1 - 4");
+                    Console.WriteLine($"Your choice: {number} is incorrect. It has to be equal: 1 - 5");
                     return false;
                 }
             }
@@ -57,7 +57,7 @@
                 {
                     if (0 < amount && amount < 9) break;
                     else if (0 > amount) Console.Write($"The given number({amount}) is too small. Please try again:");
-                    else if( amount > 9) Console.Write($"The given number({amount}) is too large. Please try again:");
+                    else if (amount > 9) Console.Write($"The given number({amount}) is too large. Please try again:");
                 }
                 else Console.Write($"This is not a number: {amount}. Please try again: ");
             }

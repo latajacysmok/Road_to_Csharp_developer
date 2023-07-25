@@ -1,15 +1,15 @@
 ﻿using SchoolData;
+using SchoolEquipment;
 
-namespace Infrastructure
+
+namespace SchoolActivity
 {
     public class StudentSelector
     {
-        Option option = new Option();
-        Verifier verifier = new Verifier();
         StudentRepository studentRepository = new StudentRepository();
         List<IStudent> students = StudentRepository.students;
 
-        public IStudent SelectStudent()
+        public IStudent SelectStudent(Verifier verifier, Option option)
         {         
             if (verifier.IsNullOrEmpty(students))
             {
@@ -18,19 +18,19 @@ namespace Infrastructure
             }
             else
             {
-                return SelectStudentFromAvailableStudents();
+                return SelectStudentFromAvailableStudents(option, verifier);
             }           
         }
 
-        private IStudent SelectStudentFromAvailableStudents()
+        private IStudent SelectStudentFromAvailableStudents(Option option, Verifier verifier)
         {
-            ListAvailableStudents();
+            GetListAvailableStudents();
 
-            int id = option.GetID();
+            int id = option.GetID(verifier);
             return studentRepository.GetStudent(id);
         }
 
-        private void ListAvailableStudents()
+        private void GetListAvailableStudents()
         {
             Console.WriteLine("\nHere is a list of our students: ");
 
