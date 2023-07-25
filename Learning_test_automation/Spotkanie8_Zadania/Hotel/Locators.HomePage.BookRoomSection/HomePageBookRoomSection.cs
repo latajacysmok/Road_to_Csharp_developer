@@ -1,13 +1,14 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
-using NUnit.Framework;
 using System;
 using System.Collections.ObjectModel;
+using OpenQA.Selenium.Support.UI;
+using FluentAssertions;
 
-namespace AutomaticTests.Pages
+namespace Locators.HomePage.BookRoomSection
 {
-    public class HomePage
+    public class HomePageBookRoomSection
     {
         public readonly IWebDriver driver;
         public IWebElement LogoHotel => driver.FindElement(By.XPath(@"//img[@class = 'hotel-logoUrl']"));
@@ -27,11 +28,45 @@ namespace AutomaticTests.Pages
         public ReadOnlyCollection <IWebElement> AlertBookNotificationPoints => driver.FindElements(By.XPath(@"//div[@class = 'alert alert-danger']/p"));
         public IWebElement BookDateCancelButton => driver.FindElement(By.XPath(@"//button[@class = 'btn btn-outline-danger float-right book-room']"));
         public IWebElement Calendar => driver.FindElement(By.XPath(@"//div[@class = 'rbc-calendar']"));
+        public IWebElement FirstNameFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'firstname']"));
+        public IWebElement LastNameFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'lastname']"));
+        public ReadOnlyCollection <IWebElement> RoomInfoSection => driver.FindElements(By.XPath(@"//div[@class= 'row hotel-room-info']"));
+        public IWebElement EmailFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'email']"));
 
-        public HomePage(IWebDriver webDriver)
+        public HomePageBookRoomSection(IWebDriver webDriver)
         {
             driver = webDriver;
         }
+        
+        public void ClickBookThisRoomButtonFromRoomSection()
+        {
+            var bookThisRoomButton = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => BookThisRoomButton);
+
+            bookThisRoomButton.Click();
+
+            var roomInfoSection = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => RoomInfoSection);
+
+            roomInfoSection.Should().HaveCount(2);
+        }
+        
+        public void ClickBookDateButtonFromRoomSection()
+        {
+            var bookDateButton = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                           .Until(_ => BookDateButton);
+
+            bookDateButton.Click();
+        }
+        
+        public void AlertBookNotificationAppear()
+        {
+            var alertBookNotification = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => AlertBookNotification);
+
+            alertBookNotification.Enabled.Should().BeTrue("The notification alert should be enabled.");
+        }
+
     }
 }
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -25,6 +25,10 @@
 
   <ItemGroup>
     <Folder Include="drivers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Locators.HomePage.BookRoomSection\Locators.HomePage.BookRoomSection.csproj" />
   </ItemGroup>
 
 </Project>
