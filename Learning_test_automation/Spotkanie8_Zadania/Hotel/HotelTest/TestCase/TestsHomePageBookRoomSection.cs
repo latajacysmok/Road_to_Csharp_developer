@@ -5,7 +5,7 @@ using FluentAssertions;
 using Locators.HomePage;
 using Locators.HomePage.BookRoomSection;
 
-namespace Hotel.TestCase
+namespace HotelTest.TestCase
 {
     public class TestsHomePageBookRoomSection
     {

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel", "Hotel\Hotel.csproj", "{BA65297E-E395-45B5-AFAC-C7FFE9069A90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelTest", "HotelTest\HotelTest.csproj", "{BA65297E-E395-45B5-AFAC-C7FFE9069A90}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locators.HomePage.BookRoomSection", "Locators.HomePage.BookRoomSection\Locators.HomePage.BookRoomSection.csproj", "{09EC6EE2-9B68-4818-9A5E-E5F15D238EC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowProjectTest", "SpecFlowProjectTest\SpecFlowProjectTest.csproj", "{39C542FF-D92C-49AA-B089-D87E9542D192}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{09EC6EE2-9B68-4818-9A5E-E5F15D238EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09EC6EE2-9B68-4818-9A5E-E5F15D238EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09EC6EE2-9B68-4818-9A5E-E5F15D238EC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C542FF-D92C-49AA-B089-D87E9542D192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C542FF-D92C-49AA-B089-D87E9542D192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C542FF-D92C-49AA-B089-D87E9542D192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C542FF-D92C-49AA-B089-D87E9542D192}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
