@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelTest", "HotelTest\Hote
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locators.HomePage.BookRoomSection", "Locators.HomePage.BookRoomSection\Locators.HomePage.BookRoomSection.csproj", "{09EC6EE2-9B68-4818-9A5E-E5F15D238EC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowProjectTest", "SpecFlowProjectTest\SpecFlowProjectTest.csproj", "{39C542FF-D92C-49AA-B089-D87E9542D192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlowProjectTest", "SpecFlowProjectTest\SpecFlowProjectTest.csproj", "{39C542FF-D92C-49AA-B089-D87E9542D192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapSeleniumMethod", "WrapSeleniumMethod\WrapSeleniumMethod.csproj", "{5BB58506-2C9F-4B0B-B20A-0F46208B8237}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{39C542FF-D92C-49AA-B089-D87E9542D192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39C542FF-D92C-49AA-B089-D87E9542D192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39C542FF-D92C-49AA-B089-D87E9542D192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

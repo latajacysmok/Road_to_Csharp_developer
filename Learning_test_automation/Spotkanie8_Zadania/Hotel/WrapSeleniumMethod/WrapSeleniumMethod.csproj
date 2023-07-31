@@ -10,26 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetSeleniumExtras.PageObjects" Version="3.11.0" />
-    <PackageReference Include="DotNetSeleniumExtras.PageObjects.Core" Version="4.3.0" />
-    <PackageReference Include="FluentAssertions" Version="6.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
-    <PackageReference Include="Selenium.Support" Version="4.10.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.10.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="114.0.5735.9000" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="drivers\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Locators.HomePage.BookRoomSection\Locators.HomePage.BookRoomSection.csproj" />
-    <ProjectReference Include="..\WrapSeleniumMethod\WrapSeleniumMethod.csproj" />
   </ItemGroup>
 
 </Project>

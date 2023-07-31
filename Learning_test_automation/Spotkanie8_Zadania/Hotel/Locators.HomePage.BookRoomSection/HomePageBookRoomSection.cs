@@ -10,6 +10,11 @@ namespace Locators.HomePage.BookRoomSection
 {
     public class HomePageBookRoomSection
     {
+        public HomePageBookRoomSection(IWebDriver webDriver)
+        {
+            driver = webDriver;
+        }
+
         public readonly IWebDriver driver;
         public IWebElement LogoHotel => driver.FindElement(By.XPath(@"//img[@class = 'hotel-logoUrl']"));
         public IWebElement DescriptionHotel => driver.FindElement(By.XPath(@"//div[@class = 'row hotel-description']/div[@class = 'col-sm-10']"));
@@ -32,41 +37,7 @@ namespace Locators.HomePage.BookRoomSection
         public IWebElement LastNameFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'lastname']"));
         public ReadOnlyCollection <IWebElement> RoomInfoSection => driver.FindElements(By.XPath(@"//div[@class= 'row hotel-room-info']"));
         public IWebElement EmailFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'email']"));
-
-        public HomePageBookRoomSection(IWebDriver webDriver)
-        {
-            driver = webDriver;
-        }
-        
-        public void ClickBookThisRoomButtonFromRoomSection()
-        {
-            var bookThisRoomButton = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
-                            .Until(_ => BookThisRoomButton);
-
-            bookThisRoomButton.Click();
-
-            var roomInfoSection = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
-                            .Until(_ => RoomInfoSection);
-
-            roomInfoSection.Should().HaveCount(2);
-        }
-        
-        public void ClickBookDateButtonFromRoomSection()
-        {
-            var bookDateButton = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
-                           .Until(_ => BookDateButton);
-
-            bookDateButton.Click();
-        }
-        
-        public void AlertBookNotificationAppear()
-        {
-            var alertBookNotification = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
-                            .Until(_ => AlertBookNotification);
-
-            alertBookNotification.Enabled.Should().BeTrue("The notification alert should be enabled.");
-        }
-
+        public IWebElement PhoneNumberFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'phone']"));
     }
 }
 
