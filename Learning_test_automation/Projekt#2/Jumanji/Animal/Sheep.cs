@@ -9,17 +9,17 @@ namespace Animal
 
         public Sheep()
         {
-            strength = 4;
+            Strength = 4;
             initiative = 4;
-            id = "A2";
+            Id = "A2";
             getAnimalType = AnimalType.Sheep;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             //Console.WriteLine("Sheep doesn't take any action.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             //Console.WriteLine("Sheep does nothing during the collision.");
         }

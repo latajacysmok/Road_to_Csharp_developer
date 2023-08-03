@@ -14,7 +14,7 @@ namespace GameBoard
             
             SpawnRepository spawnRepository = new SpawnRepository(board);
 
-            foreach(Organism item in spawnRepository.organism)
+            foreach(IOrganism item in spawnRepository.organism)
             {
                 Console.WriteLine(item.ToString());
             }

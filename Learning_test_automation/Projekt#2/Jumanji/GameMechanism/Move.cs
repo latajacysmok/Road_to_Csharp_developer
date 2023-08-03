@@ -2,6 +2,7 @@
 using GamesElement;
 using Plant;
 using System;
+using System.Drawing;
 
 namespace GameMechanism
 {
@@ -10,29 +11,27 @@ namespace GameMechanism
         private int _height;
         private int _width;
         Board _board;
-        private List<Organism> _organismCollection;
+        Collision collision;
+        private List<IOrganism> _organismCollection;
         Random random = new Random();
         
-        public Move(Board board, List<Organism> organismCollection)
+        public Move(Board board, List<IOrganism> organismCollection)
         {
             _board = board;
             _height = board.Height;
             _width = board.Width;
             _organismCollection = organismCollection;
+            collision = new Collision(_board);
         }
 
-        private bool IfMakeMove(Organism organism)
+        private bool IfMakeMove(IOrganism organism)
         {
-            if (organism is AnimalOrganism)
-            {
-                _board.EmptyGameBoard[organism.Position[0], organism.Position[1]] = "0";
-            }
+            if (organism is AnimalOrganism) { return true; }
             else
             {              
                 if (WhetherToReproducePlant()) { return true; }
                 else { return false; }
-            }
-            return true;
+            }         
         }
 
 
@@ -42,59 +41,61 @@ namespace GameMechanism
             {
                 if(IfMakeMove(organism))
                 {
-                    List<int[]> selectAvailableField = SelectAvailableField(organism.Position);
-                    int[] availableField = ChoosingPlace(selectAvailableField);
+                    List<Point> selectAvailableField = SelectAvailableField(organism);
+                    Point availableField = ChoosingPlace(selectAvailableField);
 
-                    organism.SetPosition(availableField[0], availableField[1]);
+                    organism.Position = new Point(availableField.X, availableField.Y);
 
-                    _board.EmptyGameBoard[GetOrganizmLocation(organism)[0], GetOrganizmLocation(organism)[1]] = organism.Id;
+                    _board.EmptyGameBoard[organism.Position.X, organism.Position.Y] = organism.Id;
                 }
                 else { continue; }
                 
             }
         }
-        public int[] GetOrganizmLocation(Organism organism)
+
+        private List<Point> SelectAvailableField(IOrganism organism)
         {
-            return organism.GetPosition();
-        }
-        
-        public List<int[]> SelectAvailableField(int[] organizmPosition)
-        {
-            List<int[]> availableField = new List<int[]>();
-            int rowValue = (int)organizmPosition[0];
-            int columnValue = (int)organizmPosition[1];
+            List<Point> availableField = new List<Point>();
+            int rowValue = (int)organism.Position.X;
+            int columnValue = (int)organism.Position.Y;
 
-            if (rowValue + 1 < _height) { SelectionLocation(rowValue + 1, columnValue, availableField); }
+            if (IfOrganismOffBoard(rowValue + 1)) { SelectionLocation(rowValue + 1, columnValue, availableField, organism); }
 
-            if (rowValue + 1 < _height && columnValue + 1 < _width) { SelectionLocation(rowValue + 1, columnValue + 1, availableField); }
+            if (rowValue + 1 < _height && columnValue + 1 < _width) { SelectionLocation(rowValue + 1, columnValue + 1, availableField, organism); }
 
-            if (columnValue + 1 < _width) { SelectionLocation(rowValue, columnValue + 1, availableField); }
+            if (columnValue + 1 < _width) { SelectionLocation(rowValue, columnValue + 1, availableField, organism); }
 
-            if (0 <= rowValue - 1 && 0 <= columnValue - 1) { SelectionLocation(rowValue - 1, columnValue - 1, availableField); }
+            if (0 <= rowValue - 1 && columnValue + 1 <= _width) { SelectionLocation(rowValue - 1, columnValue + 1, availableField, organism); }
 
-            if (0 <= rowValue - 1) { SelectionLocation(rowValue - 1, columnValue, availableField); }
+            if (0 <= rowValue - 1) { SelectionLocation(rowValue - 1, columnValue, availableField, organism); }
 
-            if (0 <= rowValue - 1 && 0 <= columnValue + 1) { SelectionLocation(rowValue - 1, columnValue - 1, availableField); }
+            if (0 <= rowValue - 1 && 0 <= columnValue - 1) { SelectionLocation(rowValue - 1, columnValue - 1, availableField, organism); }
 
-            if (0 <= columnValue - 1) { SelectionLocation(rowValue, columnValue - 1, availableField); }
+            if (0 <= columnValue - 1) { SelectionLocation(rowValue, columnValue - 1, availableField, organism); }
 
-            if (0 <= rowValue - 1 && columnValue + 1 <= _height) { SelectionLocation(rowValue - 1, columnValue + 1, availableField); }
+            if (rowValue + 1 < _height && 0 <= columnValue - 1) { SelectionLocation(rowValue + 1, columnValue - 1, availableField, organism); }
 
             return availableField;
         }
 
-        public void SelectionLocation(int rowValue, int columnValue, List<int[]> availableField)
+        private bool IfOrganismOffBoard(int rowValue = 0, int columnValue = 0)
         {
-            int[] location = new int[] { rowValue, columnValue };
+            return 0 <= rowValue && rowValue < _height && 0 <= columnValue && columnValue < _height;
+        }
+
+        private void SelectionLocation(int rowValue, int columnValue, List<Point> availableField, IOrganism organism)
+        {
+            Point location = collision.IfBeCollision(rowValue, columnValue, _organismCollection, organism);
+
             availableField.Add(location);
         }
 
-        public int[] ChoosingPlace(List<int[]> availableField)
+        private Point ChoosingPlace(List<Point> availableField)
         {         
             int placeDraw = random.Next(availableField.Count);
             return availableField[placeDraw];
         }
-        public bool WhetherToReproducePlant()
+        private bool WhetherToReproducePlant()
         {
             int whetherToReproduce = random.Next(2);
             return whetherToReproduce == 1;

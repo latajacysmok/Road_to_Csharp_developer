@@ -1,6 +1,6 @@
 ﻿namespace GamesElement
 {
-    public abstract class AnimalOrganism : Organism
+    public abstract class AnimalOrganism : Organism, IAnimalOrganism
     {
         public abstract int Initiative { get; }
         
@@ -10,7 +10,7 @@
 
         public override string ToString()
         {
-            return $"Id: {Id}, Type: {getAnimalType}, Position: [{position[0] + 1},{position[1] + 1}]";
+            return $"Id: {Id}, Type: {getAnimalType}, Position: [{Position.X + 1},{Position.Y + 1}]";
         }
     }
 }

@@ -2,18 +2,9 @@
 {
     public class Board
     {
-        private int _height;
-        public int Height
-        {
-            get { return _height; }
-        }
+        public int Height { get; set; }
 
-        private int _width;
-
-        public int Width
-        {
-            get { return _width; }
-        }
+        public int Width { get; set; }
 
         private string[,] emptyGameBoard;
         public string[,] EmptyGameBoard
@@ -23,11 +14,11 @@
 
         public Board(int height, int width)
         {
-            _height = height;
-            _width = width;
-            emptyGameBoard = CreatingEmptyGameBoard(_height, _width);
+            Height = height;
+            Width = width;
+            emptyGameBoard = CreateEmptyGameBoard(Height, Width);
         }
-        public string[,] CreatingEmptyGameBoard(int height, int width)
+        public string[,] CreateEmptyGameBoard(int height, int width)
         {
             string[,] emptyGameBoard = new string[height, width];
             for (int i = 0; i < height; i++)

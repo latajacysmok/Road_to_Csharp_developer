@@ -8,11 +8,11 @@ namespace Plant
 
         public Dandelion()
         {
-            strength = 0;
-            id = "P2";
+            Strength = 0;
+            Id = "P2";
             getPlantType = PlantType.Dandelion;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             //Console.WriteLine("Grass doesn't take any action.");
         }
@@ -37,7 +37,7 @@ namespace Plant
             else return false;
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             //Console.WriteLine("Grass does nothing during the collision.");
         }
