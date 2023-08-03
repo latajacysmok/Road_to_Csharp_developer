@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Animal\Animal.csproj" />
+    <ProjectReference Include="..\GameMechanism\GameMechanism.csproj" />
+    <ProjectReference Include="..\GamesElement\GamesElement.csproj" />
+    <ProjectReference Include="..\Plant\Plant.csproj" />
+  </ItemGroup>
+
+</Project>
