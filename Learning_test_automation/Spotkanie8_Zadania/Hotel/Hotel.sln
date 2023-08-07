@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locators.HomePage.BookRoomS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlowProjectTest", "SpecFlowProjectTest\SpecFlowProjectTest.csproj", "{39C542FF-D92C-49AA-B089-D87E9542D192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrapSeleniumMethod", "WrapSeleniumMethod\WrapSeleniumMethod.csproj", "{5BB58506-2C9F-4B0B-B20A-0F46208B8237}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumDriver", "WrapSeleniumMethod\SeleniumDriver.csproj", "{5BB58506-2C9F-4B0B-B20A-0F46208B8237}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,17 +3,19 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using FluentAssertions;
 using Locators.HomePage.BookRoomSection;
-using WrapSeleniumMethod;
+using SeleniumDriver;
+using OpenQA.Selenium.Interactions;
+using System.Xml.Linq;
 
 namespace HotelTest.TestCase
 {
     public class TestsHomePageBookRoomSection
-    {
-        string automationintestingWebUrlAdress = "https://automationintesting.online/";
-        
+    {     
         HomePageBookRoomSection home;
         IWebDriver driver;
-        WrapMethod wrapMethod;
+        ISeleniumDriver seleniumDriver;
+
+        readonly string url = TestData.webUrlAdress;
 
         [SetUp]
         public void Setup()
@@ -21,61 +23,59 @@ namespace HotelTest.TestCase
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             home = new HomePageBookRoomSection(driver);
-            wrapMethod = new WrapMethod(driver);
+            seleniumDriver = new SeleniumDriver.SeleniumDriver(driver);
         }
 
         [Test]
         public void Should_OpenHomePageWebSite()
         {
-            string homeUrl = wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
-
-            Assert.AreEqual(homeUrl, automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
         }
 
         [Test]
         public void Should_HaveCorrectTitleRoomsSection()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ComparingTexts(home.HeadingBookRoomSection, "Rooms");
+            seleniumDriver.ComparingTexts(home.HeadingBookRoomSection, "Rooms");
         }
 
         [Test]
         public void Should_HaveCorrectHeadlineRoomsArticle()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ComparingTexts(home.HeadingBookRoomArticle, "single");
+            seleniumDriver.ComparingTexts(home.HeadingBookRoomArticle, "single");
         }
 
         [Test]
         public void Should_HaveRightAmountUnOrderList()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.CountElementsOfGivenCollection(home.PointsItemBookRoomArticle, 3);
+            seleniumDriver.CountElementsOfGivenCollection(home.PointsItemBookRoomArticle, 3);
         }
 
         [Test]
         public void Should_AppearImg()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ItemShouldBeEnabled(home.ImgBookRoomArticle);
+            seleniumDriver.ItemShouldBeEnabled(home.ImgBookRoomArticle);
         }
 
         [Test]
         public void Should_AppearWheelchairIcone()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ItemShouldBeEnabled(home.WheelchairIcone);
+            seleniumDriver.ItemShouldBeEnabled(home.WheelchairIcone);
         }
 
         [Test]
         public void Should_AppearRightContentBookRoomArticle()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
             var contentBookRoomArticle = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
                             .Until(_ => home.ContentBookRoomArticle.Text);
@@ -86,7 +86,7 @@ namespace HotelTest.TestCase
         [Test]
         public void Should_RoomBookingButtonHasCorrectText()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
             var bookThisRoomButton = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
                             .Until(_ => home.BookThisRoomButton.Text);
@@ -97,23 +97,23 @@ namespace HotelTest.TestCase
         [Test]
         public void Should_RoomBookingButtonAppear()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ItemShouldBeEnabled(home.BookThisRoomButton);
+            seleniumDriver.ItemShouldBeEnabled(home.BookThisRoomButton);
         }
 
         [Test]
         public void Should_CalendarDisappear_When_ClickCancelButtonOnBookDateWindow()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.ClickButton(home.BookDateCancelButton);
+            seleniumDriver.ClickButton(home.BookDateCancelButton);
 
             Action calendarNotDisplay = () => driver.FindElement(By.XPath(@"//div[@class = 'rbc-calendar']"));
 
@@ -123,223 +123,256 @@ namespace HotelTest.TestCase
         [Test]
         public void Should_AlertBookNotificationAppear_When_BookDateWithoutEnterAnyDate()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 9);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 9);
         }
 
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputOnlyFirstNameWithNotEnoughLongFirstName()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "St");
+            seleniumDriver.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "St");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
         }
         
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputOnlyFirstNameWithCorrectData()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "Stefek");
+            seleniumDriver.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "Stefek");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 7);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 7);
         }
 
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputOnlyLastName()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.LastNameFieldFromRoomSection, "PierdziBący");
+            seleniumDriver.EnteringDataIntoField(home.LastNameFieldFromRoomSection, "PierdziBący");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 7);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 7);
         }
 
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputWrongEmailAdress()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.EmailFieldFromRoomSection, "hWDPna50%BoTrocheSieBoje");
+            seleniumDriver.EnteringDataIntoField(home.EmailFieldFromRoomSection, "hWDPna50%BoTrocheSieBoje");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 9);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 9);
         }
 
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputRightEmailAdress()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.EmailFieldFromRoomSection, "spokoAdres@giewno.com");
+            seleniumDriver.EnteringDataIntoField(home.EmailFieldFromRoomSection, "spokoAdres@giewno.com");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
         }
 
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputNotEnoughLongPhoneNumber()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "070088891");
+            seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "070088891");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
         }
         
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputTooLongPhoneNumber()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "070088891070088891070088891");
+            seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "070088891070088891070088891");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 8);
         }
 
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputRightPhoneNumber()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
+            seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 7);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 7);
         }
         
         [Test]
         public void Should_AlertBookNotificationAppear_When_InputRightDateToAllField()
         {
-            wrapMethod.OpenHomePageWebSiteCorrectly(automationintestingWebUrlAdress);
+            seleniumDriver.OpenHomePageWebSite(url);
 
-            wrapMethod.ClickButton(home.BookThisRoomButton);
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
 
-            wrapMethod.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
 
-            wrapMethod.ItemShouldBeEnabled(home.Calendar);
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
 
-            wrapMethod.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "Stefek");
+            seleniumDriver.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "Stefek");
 
-            wrapMethod.EnteringDataIntoField(home.LastNameFieldFromRoomSection, "PierdziBący");
+            seleniumDriver.EnteringDataIntoField(home.LastNameFieldFromRoomSection, "PierdziBący");
 
-            wrapMethod.EnteringDataIntoField(home.EmailFieldFromRoomSection, "spokoAdres@giewno.com");
+            seleniumDriver.EnteringDataIntoField(home.EmailFieldFromRoomSection, "spokoAdres@giewno.com");
 
-            wrapMethod.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
+            seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
 
-            wrapMethod.ClickButton(home.BookDateButton);
+            seleniumDriver.ClickButton(home.BookDateButton);
 
-            wrapMethod.WaitFor(10);
+            seleniumDriver.WaitFor(10);
 
-            wrapMethod.ItemShouldBeEnabled(home.AlertBookNotification);
+            seleniumDriver.ItemShouldBeEnabled(home.AlertBookNotification);
 
-            wrapMethod.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 2);
+            seleniumDriver.CountElementsOfGivenCollection(home.AlertBookNotificationPoints, 2);
+        }
+        
+        [Test]
+        public void Should_RightBookRoom()
+        {
+            seleniumDriver.OpenHomePageWebSite(url);
+
+            seleniumDriver.ClickButton(home.BookThisRoomButton);
+
+            seleniumDriver.CountElementsOfGivenCollection(home.RoomInfoSection, 2);
+
+            seleniumDriver.ItemShouldBeEnabled(home.Calendar);
+
+
+            seleniumDriver.EnteringDataIntoField(home.FirstNameFieldFromRoomSection, "Stefek");
+
+            seleniumDriver.EnteringDataIntoField(home.LastNameFieldFromRoomSection, "PierdziBący");
+
+            seleniumDriver.EnteringDataIntoField(home.EmailFieldFromRoomSection, "spokoAdres@giewno.com");
+
+            seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
+
+            int day = 15;
+            var firstDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day);
+            var lastDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day - 2);
+
+            seleniumDriver.MarkingDateOfBookingRoom(firstDay, lastDay);
+
+            seleniumDriver.ClickButton(home.BookDateButton);
+
+            seleniumDriver.WaitFor(10);
+
+            seleniumDriver.ItemShouldBeEnabled(home.BookingSuccessfulWindow);
         }
 
         [TearDown]

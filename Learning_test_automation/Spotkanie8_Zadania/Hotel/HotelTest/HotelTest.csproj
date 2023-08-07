@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Locators.HomePage.BookRoomSection\Locators.HomePage.BookRoomSection.csproj" />
-    <ProjectReference Include="..\WrapSeleniumMethod\WrapSeleniumMethod.csproj" />
+    <ProjectReference Include="..\WrapSeleniumMethod\SeleniumDriver.csproj" />
   </ItemGroup>
 
 </Project>

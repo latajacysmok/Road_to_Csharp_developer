@@ -5,27 +5,32 @@ using OpenQA.Selenium.Support.UI;
 using FluentAssertions;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
+using OpenQA.Selenium.Interactions;
+using System;
+using System.Security.Cryptography;
+using System.Xml.XPath;
+using System.Drawing;
 
-namespace WrapSeleniumMethod
+namespace SeleniumDriver
 {
-    public class WrapMethod
+    public class SeleniumDriver : ISeleniumDriver
     {
-        HomePageBookRoomSection home;
         public readonly IWebDriver driver;
 
-        public WrapMethod(IWebDriver webDriver)
+        public SeleniumDriver(IWebDriver webDriver)
         {
             driver = webDriver;
-            home = new HomePageBookRoomSection(driver);
         }
 
-        public string OpenHomePageWebSiteCorrectly(string automationintestingWebUrlAdress)
+        public void OpenHomePageWebSite(string webUrlAdress)
         {
             var home = new HomePageBookRoomSection(driver);
-            home.driver.Navigate().GoToUrl(automationintestingWebUrlAdress);
+            home.driver.Navigate().GoToUrl(webUrlAdress);
 
-            return new WebDriverWait(driver, TimeSpan.FromSeconds(5))
+            string homeUrl = new WebDriverWait(driver, TimeSpan.FromSeconds(5))
                                 .Until(_ => _.Url);
+
+            homeUrl.Should().Be(webUrlAdress);
         }
 
         public void CountElementsOfGivenCollection(ReadOnlyCollection<IWebElement> collection, int amount)
@@ -40,6 +45,8 @@ namespace WrapSeleniumMethod
         {
             var button = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
                            .Until(_ => buttonToClick);
+
+            button.Enabled.Should().BeTrue("The button should be enabled.");
 
             button.Click();
         }
@@ -72,6 +79,45 @@ namespace WrapSeleniumMethod
                                 .Until(_ => lookForItem.Text);
 
             textFromSomeItem.Should().Be(searchText);
+        }
+
+        public IWebElement DayOfMonthSelection(IWebElement packingForNumberOfDayAndAvailability, int numberDayOfMonth)
+        {
+            IWebElement specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[@class='rbc-date-cell']/button[@class='rbc-button-link' and text()='{numberDayOfMonth}']"));
+
+            while (IsDayAvailable(specificDay, By.XPath(".//div[@class='rbc-event-content']")))
+            {
+                specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[@class='rbc-date-cell']/button[@class='rbc-button-link' and text()='{numberDayOfMonth + 1}']"));
+            }
+            
+            return specificDay;
+        }
+
+        private bool IsDayAvailable(IWebElement day, By unavailableDays)
+        {
+            try
+            {
+                day.FindElement(unavailableDays);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+
+        public void MarkingDateOfBookingRoom(IWebElement firstDay, IWebElement lastDay)
+        {
+            Actions actions = new Actions(driver);
+
+            actions.ClickAndHold(firstDay);
+
+            Point offset = new Point((lastDay.Location.X - firstDay.Location.X) / 2, (lastDay.Location.Y - firstDay.Location.Y) / 2);
+            actions.MoveByOffset(offset.X, offset.Y)
+                    .MoveToElement(lastDay)
+                    .Release()
+                    .Perform();
         }
 
         public void WaitFor(int amount)

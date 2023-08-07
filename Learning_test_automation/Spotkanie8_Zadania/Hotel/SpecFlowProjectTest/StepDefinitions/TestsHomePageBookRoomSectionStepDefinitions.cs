@@ -220,5 +220,42 @@ namespace SpecFlowProjectTest.StepDefinitions
 
             calendarNotDisplay.Should().Throw<NoSuchElementException>("The element should not be present.");
         }
+
+        [When(@"Fill in the ""([^""]*)"" field with data ""([^""]*)""")]
+        public void WhenFillInTheFieldWithData(string fieldName, string value)
+        {
+            IWebElement field;
+
+            switch (fieldName)
+            {
+                case "name":
+                    field = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => home.FirstNameFieldFromRoomSection);                   
+                    break;
+                case "lastname":
+                    field = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => home.LastNameFieldFromRoomSection);
+                    break;
+                case "email":
+                    field = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => home.EmailFieldFromRoomSection);
+                    break;
+                
+                case "phone":
+                    field = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            .Until(_ => home.PhoneNumberFieldFromRoomSection);
+                    break;
+                default:
+                    break;
+
+                field.Enabled.Should().BeTrue("The field should be enabled.");
+
+                field.SendKeys(value);
+
+                string textFromField = field.GetAttribute("value");
+
+                textFromField.Should().Contain(value);
+            }
+        }
     }
 }
