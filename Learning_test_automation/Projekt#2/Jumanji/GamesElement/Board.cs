@@ -6,17 +6,17 @@
 
         public int Width { get; set; }
 
-        private string[,] emptyGameBoard;
-        public string[,] EmptyGameBoard
+        private string[,] gameBoard;
+        public string[,] GameBoard
         {
-            get { return emptyGameBoard; }
+            get { return gameBoard; }
         }
 
         public Board(int height, int width)
         {
             Height = height;
             Width = width;
-            emptyGameBoard = CreateEmptyGameBoard(Height, Width);
+            gameBoard = CreateEmptyGameBoard(Height, Width);
         }
         public string[,] CreateEmptyGameBoard(int height, int width)
         {

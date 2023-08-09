@@ -2,7 +2,7 @@
 
 namespace GamesElement
 {
-    public abstract class Organism : IOrganism//Utworzyć Interface z propertkami i z tego Interface ma dziedzicyć ta obecna klasa
+    public abstract class Organism : IOrganism
     {
         public  int Strength { get; set; }
         public  string Id { get; set; }

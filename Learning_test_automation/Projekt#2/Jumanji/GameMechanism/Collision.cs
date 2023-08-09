@@ -6,27 +6,26 @@ namespace GameMechanism
     public class Collision
     {
         Board _board;
-        Point location;
+        //Point location;
 
         public Collision(Board board)
         {
-            _board = board;
-            
+            _board = board;      
         }
 
         public Point IfBeCollision(int rowValue, int columnValue, List<IOrganism> _organismCollection, IOrganism organism)
         {
-            Point newPowition = new Point(rowValue, columnValue);
+            Point newPosition = new Point(rowValue, columnValue);
 
             foreach (Organism someOrganism in _organismCollection)
             {
-                if (someOrganism.Position == newPowition)
+                if (someOrganism.Position == newPosition)
                 {
-                    Console.WriteLine("Uwaga mamy kolizje");
+                    Console.WriteLine($"Uwaga mamy kolizja organizmu: {organism.Id} z organizmem: {someOrganism.Id}");
                     return new Point(organism.Position.X, organism.Position.Y);
                 }
             }
-            if (organism is AnimalOrganism) { _board.EmptyGameBoard[organism.Position.X, organism.Position.Y] = "0"; }          
+            if (organism is IAnimalOrganism) { _board.GameBoard[organism.Position.X, organism.Position.Y] = "0"; }          
             return new Point(rowValue, columnValue);
         }
     }

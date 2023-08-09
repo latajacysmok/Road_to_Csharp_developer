@@ -10,7 +10,7 @@ namespace GameBoard
     {
         private int _high;
         private int _width; 
-        public List<IOrganism> organism = new List<IOrganism>
+        public List<IOrganism> organisms = new List<IOrganism>
         {
             new Grass(),
             new Dandelion(),
@@ -23,23 +23,32 @@ namespace GameBoard
             new Turtle(),
             new Antelope(),
             new CyberSheep()
-        };
+        };        
 
         public SpawnRepository(Board board)
         {
             _high = board.Height;
             _width = board.Width;
-            AddingOrganismSpawn(board);
+            organisms = SetOrderOfMovement();
+            IteratingThroughAllOrganisms(board);
         }
 
-        private void AddingOrganismSpawn(Board board)
+        private List<IOrganism> SetOrderOfMovement()
         {
-            SpawnOrganizm(board);
+            var sortedAnimals = organisms.OfType<IAnimalOrganism>()
+                                         .OrderByDescending(animal => animal.Initiative)
+                                         .ToList();
+
+            var remainingPlants = organisms.Except(sortedAnimals).ToList();
+
+            return sortedAnimals.Cast<IOrganism>()
+                                .Concat(remainingPlants)
+                                .ToList();
         }
 
-        private void SpawnOrganizm(Board board)
-        {
-            foreach (IOrganism being in organism)
+        private void IteratingThroughAllOrganisms(Board board)
+        {         
+            foreach (IOrganism being in organisms)
             {
                 AddingOrganizmSpawnPlace(board, being);
             }
@@ -47,16 +56,13 @@ namespace GameBoard
 
         private void AddingOrganizmSpawnPlace(Board board, IOrganism being)
         {
-            //ID i position  zbiór koelkcji typu abstrakcyjnego
-            // utwórz public List<IOrganism> organism = new List<IOrganism>() odrazu dodaj organizmy w sensie obiekty Popatrz na materiały z Interface i zadziała xD Zwróć
-
             Spawn spawn = new Spawn(_high, _width);
             Point currentPosition = being.Position;
 
             // Modifying the Position array
             being.Position = new Point(spawn.Column, spawn.Row);
 
-            board.EmptyGameBoard[spawn.Column, spawn.Row] = being.Id;
+            board.GameBoard[spawn.Column, spawn.Row] = being.Id;
         }
     }
 }

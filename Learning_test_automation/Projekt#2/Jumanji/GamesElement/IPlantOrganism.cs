@@ -1,6 +1,6 @@
 ﻿namespace GamesElement
 {
-    public interface IPlantOrganism
+    public interface IPlantOrganism : IOrganism
     {
         public PlantType GetPlantType { get ;}
     }

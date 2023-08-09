@@ -14,18 +14,18 @@ namespace GameBoard
             
             SpawnRepository spawnRepository = new SpawnRepository(board);
 
-            foreach(IOrganism item in spawnRepository.organism)
+            foreach(IOrganism item in spawnRepository.organisms)
             {
                 Console.WriteLine(item.ToString());
             }
 
             gameBoardRepository.DrawGameBoard();
 
-            Move move = new Move(board, spawnRepository.organism);
+            Move move = new Move(board, spawnRepository.organisms);
 
             move.MakeMove();
 
-            foreach (Organism item in spawnRepository.organism)
+            foreach (Organism item in spawnRepository.organisms)
             {
                 Console.WriteLine(item.ToString());
             }

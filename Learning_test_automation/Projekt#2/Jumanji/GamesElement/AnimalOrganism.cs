@@ -6,6 +6,7 @@
         
         protected AnimalType getAnimalType;
         public AnimalType GetAnimalType { get { return getAnimalType; } }
+
         public abstract void OrganismMovement();
 
         public override string ToString()

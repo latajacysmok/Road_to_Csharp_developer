@@ -3,7 +3,7 @@
 namespace Plant
 {
     public class Grass : PlantOrganism
-    {
+    { 
         public Grass()
         {
             Strength = 0;
