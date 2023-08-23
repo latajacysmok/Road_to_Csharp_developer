@@ -13,15 +13,31 @@ namespace GameBoard
         public List<IOrganism> organisms = new List<IOrganism>
         {
             new Grass(),
-            new Dandelion(),
+/*            new Dandelion(),
             new Guarana(),
             new Nightshade(),
-            new PineBorscht(),
+            new PineBorscht(),*/
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
+            new Wolf(),
             new Wolf(),
             new Sheep(),
+            new Sheep(),
             new Fox(),
+            new Fox(),
+/*            new Turtle(),
             new Turtle(),
             new Antelope(),
+            new Antelope(),
+            new CyberSheep(),*/
             new CyberSheep()
         };        
 

@@ -1,32 +1,49 @@
 ﻿using GamesElement;
 using System.Drawing;
+using System.Linq;
 
 namespace GameMechanism
 {
     public class Collision
     {
         Board _board;
-        //Point location;
 
         public Collision(Board board)
         {
             _board = board;      
         }
 
-        public Point IfBeCollision(int rowValue, int columnValue, List<IOrganism> _organismCollection, IOrganism organism)
+        public Point HandleCollision(Point newPosition, List<IOrganism> organisms, IOrganism organism)
         {
-            Point newPosition = new Point(rowValue, columnValue);
+            IOrganism organismWithWhichCollisionOccurs = WithWhoBeCollision(newPosition, organisms);
 
-            foreach (Organism someOrganism in _organismCollection)
+            if (organismWithWhichCollisionOccurs != null) 
             {
-                if (someOrganism.Position == newPosition)
-                {
-                    Console.WriteLine($"Uwaga mamy kolizja organizmu: {organism.Id} z organizmem: {someOrganism.Id}");
-                    return new Point(organism.Position.X, organism.Position.Y);
-                }
+                BeCollision(organism, organismWithWhichCollisionOccurs, organisms);
+                return organism.Position;
             }
-            if (organism is IAnimalOrganism) { _board.GameBoard[organism.Position.X, organism.Position.Y] = "0"; }          
-            return new Point(rowValue, columnValue);
+            // TODO: powstanie jeszcze else ale jeszcze nie zabrałem się za interakcje pomiędzy poszczególnymi gatunkami to na óźniej
+            
+            return newPosition;
+        }
+
+        private IOrganism WithWhoBeCollision(Point newPosition, List<IOrganism> organisms)
+        {
+            return organisms.FirstOrDefault(org => org.Position == newPosition);
+        }
+        
+        private void BeCollision(IOrganism organism, IOrganism otherOrganism, List<IOrganism> organismCollection)
+        {
+
+            if (IfSameAnimalSpecies(organism.Id, otherOrganism.Id) && (organism is IAnimalOrganism)) 
+            {
+                Console.WriteLine("Spotykają się dwa zwierzątka");
+                Reproduction reproduction = new Reproduction(organism, organismCollection, _board); }
+        }
+
+        private bool IfSameAnimalSpecies(string firstOrganism, string secendOrganism)
+        {
+            return firstOrganism == secendOrganism;
         }
     }
 }

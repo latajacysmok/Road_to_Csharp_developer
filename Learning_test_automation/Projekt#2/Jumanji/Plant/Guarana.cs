@@ -9,6 +9,7 @@ namespace Plant
             Strength = 0;
             Id = "P3";
             getPlantType = PlantType.Guarana;
+            IfNew = true;
         }
         public override void PerformAction()
         {

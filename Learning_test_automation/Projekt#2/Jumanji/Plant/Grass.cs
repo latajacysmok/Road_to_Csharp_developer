@@ -9,6 +9,7 @@ namespace Plant
             Strength = 0;
             Id = "P1";
             getPlantType = PlantType.Grass;
+            IfNew = true;
         }
         public override void PerformAction()
         {

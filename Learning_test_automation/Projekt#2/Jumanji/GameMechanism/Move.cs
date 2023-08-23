@@ -32,31 +32,41 @@ namespace GameMechanism
         
         private void AnimalMove(IOrganism organism)
         {
-            List<Point> selectAvailableField = SelectAvailableField(organism);
-            Point availableField = ChoosingPlace(selectAvailableField);
-            Point oranismLocation = collision.IfBeCollision(availableField.X, availableField.Y, _organismCollection, organism);
+            Point oranismLocation = FindOrganismAvailableLocation(organism);// UWAGA!!! należy popracować nad Rozmnażaniem bo teraz nowe zwierze powstaje w miejsu starego a nie w wolnym możliwym 
+
+            _board.GameBoard[organism.Position.X, organism.Position.Y] = "O";
 
             organism.Position = new Point(oranismLocation.X, oranismLocation.Y);
 
-            _board.GameBoard[organism.Position.X, organism.Position.Y] = organism.Id;
+            _board.GameBoard[organism.Position.X, organism.Position.Y] = organism.Id;           
         }
         
         private void PlantMove(IOrganism organism)
         {
+            Point oranismLocation = FindOrganismAvailableLocation(organism);
+
+            if (organism.IfNew == false) { Reproduction reproduction = new Reproduction(organism, _organismCollection, _board); }  
+        }
+
+        private Point FindOrganismAvailableLocation(IOrganism organism)
+        {
+            Point newPosition = SelectNewPosition(organism);
+
+            return collision.HandleCollision(newPosition, _organismCollection, organism);
+        }
+
+        private Point SelectNewPosition(IOrganism organism) 
+        {
             List<Point> selectAvailableField = SelectAvailableField(organism);
             Point availableField = ChoosingPlace(selectAvailableField);
-            Point oranismLocation = collision.IfBeCollision(availableField.X, availableField.Y, _organismCollection, organism);
-
-            //organism.Position = new Point(oranismLocation.X, oranismLocation.Y);
-
-            //Utworzenie nowego obiektu danej rośliny na powyższym miejscu
-            Reproduction reproduction = new Reproduction(organism, oranismLocation, _organismCollection);
+            return new Point(availableField.X, availableField.Y);
         }
 
 
         public void MakeMove()
         {
-            for (int i = 0; i < _organismCollection.Count; i++)//var organism in _organismCollection
+            ChangingStatusFromNewToOld();
+            for (int i = 0; i < _organismCollection.Count; i++)
             {
                 if (IfAnimal(_organismCollection[i])) { AnimalMove(_organismCollection[i]); }
                 else 
@@ -69,43 +79,35 @@ namespace GameMechanism
         private List<Point> SelectAvailableField(IOrganism organism)
         {
             List<Point> availableField = new List<Point>();
-            int rowValue = (int)organism.Position.X;
-            int columnValue = (int)organism.Position.Y;
-            List<Point> allPossiblePlayingDieldsToMakeMove = new List<Point>()
-                                                                {
-                                                                    new Point(rowValue + 1, columnValue),
-                                                                    new Point(rowValue + 1, columnValue + 1),
-                                                                    new Point(rowValue, columnValue + 1),
-                                                                    new Point(rowValue - 1, columnValue + 1),
-                                                                    new Point(rowValue - 1, columnValue),
-                                                                    new Point(rowValue - 1, columnValue - 1),
-                                                                    new Point(rowValue , columnValue - 1),
-                                                                    new Point(rowValue + 1, columnValue - 1),
-                                                                };
-
-            foreach(Point point in allPossiblePlayingDieldsToMakeMove)
+            
+            List<Point> allPossiblePlayingFieldsToMakeMove = SelectFieldsOnGameBoard(organism);
+            
+            foreach(Point point in allPossiblePlayingFieldsToMakeMove)
             {
                 if (!IfOrganismOffBoard(point.X, point.Y)) { availableField.Remove(point); }          
                 else { availableField.Add(point); }
             }
 
-            /*if (IfOrganismOffBoard(rowValue + 1)) { SelectionLocation(rowValue + 1, columnValue, availableField, organism); }
-
-            if (rowValue + 1 < _height && columnValue + 1 < _width) { SelectionLocation(rowValue + 1, columnValue + 1, availableField, organism); }
-
-            if (columnValue + 1 < _width) { SelectionLocation(rowValue, columnValue + 1, availableField, organism); }
-
-            if (0 <= rowValue - 1 && columnValue + 1 <= _width) { SelectionLocation(rowValue - 1, columnValue + 1, availableField, organism); }
-
-            if (0 <= rowValue - 1) { SelectionLocation(rowValue - 1, columnValue, availableField, organism); }
-
-            if (0 <= rowValue - 1 && 0 <= columnValue - 1) { SelectionLocation(rowValue - 1, columnValue - 1, availableField, organism); }
-
-            if (0 <= columnValue - 1) { SelectionLocation(rowValue, columnValue - 1, availableField, organism); }
-
-            if (rowValue + 1 < _height && 0 <= columnValue - 1) { SelectionLocation(rowValue + 1, columnValue - 1, availableField, organism); }*/
-
             return availableField;
+        }
+
+        private List<Point> SelectFieldsOnGameBoard(IOrganism organism)
+        {
+            List<Point> allPossiblePlayingFieldsToMakeMove = new List<Point>();
+
+            int rowValue = (int)organism.Position.X;
+            int columnValue = (int)organism.Position.Y;
+
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    if (j == 0 && i == 0) { continue; }
+                    else { allPossiblePlayingFieldsToMakeMove.Add(new Point(rowValue + i, columnValue + j)); }
+                }
+            }
+
+            return allPossiblePlayingFieldsToMakeMove;
         }
 
         private bool IfOrganismOffBoard(int rowValue = 0, int columnValue = 0)
@@ -117,6 +119,14 @@ namespace GameMechanism
         {         
             int placeDraw = random.Next(availableField.Count);
             return availableField[placeDraw];
+        }
+        
+        private void ChangingStatusFromNewToOld()
+        {
+            foreach (var organism in _organismCollection)
+            {
+                organism.IfNew = false;
+            }
         }
         private bool WhetherToReproducePlant()
         {

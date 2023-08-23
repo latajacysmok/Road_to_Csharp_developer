@@ -9,6 +9,7 @@ namespace Plant
             Strength =99;
             Id = "P4";
             getPlantType = PlantType.Nightshade;
+            IfNew = true;
         }
         public override void PerformAction()
         {

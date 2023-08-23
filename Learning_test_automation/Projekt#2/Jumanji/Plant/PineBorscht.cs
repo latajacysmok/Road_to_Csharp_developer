@@ -9,6 +9,7 @@ namespace Plant
             Strength = 10;
             Id = "P5";
             getPlantType = PlantType.Pine_borscht;
+            IfNew = true;
         }
         public override void PerformAction()
         {

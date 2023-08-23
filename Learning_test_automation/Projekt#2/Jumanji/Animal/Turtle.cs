@@ -13,6 +13,7 @@ namespace Animal
             initiative = 1;
             Id = "A4";
             getAnimalType = AnimalType.Turtle;
+            IfNew = true;
         }
         public override void PerformAction()
         {

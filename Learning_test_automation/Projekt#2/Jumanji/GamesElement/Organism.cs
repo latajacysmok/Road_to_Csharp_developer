@@ -9,6 +9,7 @@ namespace GamesElement
 
         protected Point position;
         public Point Position { get; set; }
+        public bool IfNew { get; set; }
         public abstract void PerformAction();
         public abstract void Interact();
     }

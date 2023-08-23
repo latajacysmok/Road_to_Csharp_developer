@@ -14,6 +14,7 @@ namespace Animal
             initiative = 4;
             Id = "A5";
             getAnimalType = AnimalType.Antelope;
+            IfNew = true;
         }
         public override void PerformAction()
         {

@@ -13,6 +13,7 @@ namespace Animal
             initiative = 7;
             Id = "A3";
             getAnimalType = AnimalType.Fox;
+            IfNew = true;
         }
         public override void PerformAction()
         {
