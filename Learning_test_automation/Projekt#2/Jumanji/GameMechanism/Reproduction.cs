@@ -5,6 +5,8 @@ using System;
 using System.Drawing;
 using System.Net.NetworkInformation;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Xml;
 
 namespace GameMechanism
 {
@@ -12,91 +14,79 @@ namespace GameMechanism
     {
         IOrganism _organism;
         Point _oranismLocation;
+        Point _spawnPlaceForNewOrganism;
         private List<IOrganism> _organismCollection;
         private Board _board;
 
-        public Reproduction(IOrganism organism, List<IOrganism> organismCollection, Board board)
+
+        public Reproduction(IOrganism organism, List<IOrganism> organismCollection, Board board, Point spawnPlaceForNewOrganism)
         {
             _organism = organism;
             _oranismLocation = organism.Position;
             _organismCollection = organismCollection;
+            _spawnPlaceForNewOrganism = spawnPlaceForNewOrganism;
             _board = board;
             OrganismReproduces();
         }
-        
+
         private void OrganismReproduces()
-        {
+        {       
             switch (_organism)
             {
-                case (Grass):
+                case (Grass):                                  
                     IOrganism newGrass = new Grass();
-                    newGrass.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newGrass);
-                    _board.GameBoard[newGrass.Position.X, newGrass.Position.Y] = newGrass.Id;
+                    FindSpawnPlace(newGrass);
                     break;
                 case (Dandelion):
                     IOrganism newDandelion = new Dandelion();
-                    newDandelion.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newDandelion);
-                    _board.GameBoard[newDandelion.Position.X, newDandelion.Position.Y] = newDandelion.Id;
+                    FindSpawnPlace(newDandelion);                   
                     break;
                 case (Guarana):
                     IOrganism newGuarana = new Guarana();
-                    newGuarana.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newGuarana);
-                    _board.GameBoard[newGuarana.Position.X, newGuarana.Position.Y] = newGuarana.Id;
+                    FindSpawnPlace(newGuarana);
                     break;
                 case (Nightshade):
                     IOrganism newNightshade = new Nightshade();
-                    newNightshade.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newNightshade);
-                    _board.GameBoard[newNightshade.Position.X, newNightshade.Position.Y] = newNightshade.Id;
+                    FindSpawnPlace(newNightshade);
                     break;
                 case (PineBorscht):
                     IOrganism newPineBorscht = new PineBorscht();
-                    newPineBorscht.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newPineBorscht);
-                    _board.GameBoard[newPineBorscht.Position.X, newPineBorscht.Position.Y] = newPineBorscht.Id;
+                    FindSpawnPlace(newPineBorscht);
                     break;
                 case (Wolf):
                     IOrganism newWolf = new Wolf();
-                    newWolf.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newWolf);
-                    _board.GameBoard[newWolf.Position.X, newWolf.Position.Y] = newWolf.Id;
+                    FindSpawnPlace(newWolf);
                     break;
                 case (Sheep):
                     IOrganism newSheep = new Sheep();
-                    newSheep.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newSheep);
-                    _board.GameBoard[newSheep.Position.X, newSheep.Position.Y] = newSheep.Id;
+                    FindSpawnPlace(newSheep);
                     break;
                 case (Fox):
                     IOrganism newFox = new Fox();
-                    newFox.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newFox);
-                    _board.GameBoard[newFox.Position.X, newFox.Position.Y] = newFox.Id;
+                    FindSpawnPlace(newFox);
                     break;
                 case (Turtle):
                     IOrganism newTurtle = new Turtle();
-                    newTurtle.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newTurtle);
-                    _board.GameBoard[newTurtle.Position.X, newTurtle.Position.Y] = newTurtle.Id;
+                    FindSpawnPlace(newTurtle);
                     break;
                 case (Antelope):
                     IOrganism newAntelope = new Antelope();
-                    newAntelope.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newAntelope);
-                    _board.GameBoard[newAntelope.Position.X, newAntelope.Position.Y] = newAntelope.Id;
+                    FindSpawnPlace(newAntelope);
                     break;
                 case (CyberSheep):
                     IOrganism newCyberSheep = new CyberSheep();
-                    newCyberSheep.Position = new Point(_oranismLocation.X, _oranismLocation.Y);
-                    _organismCollection.Add(newCyberSheep);
-                    _board.GameBoard[newCyberSheep.Position.X, newCyberSheep.Position.Y] = newCyberSheep.Id;
+                    FindSpawnPlace(newCyberSheep);
                     break;
                 default:
                     break;
             }
+        }
+
+        private void FindSpawnPlace(IOrganism newIOrganism)
+        {
+            newIOrganism.Position = _spawnPlaceForNewOrganism; //FindOrganismAvailableLocation(_organism);
+            _organismCollection.Add(newIOrganism);
+            _board.GameBoard[newIOrganism.Position.X, newIOrganism.Position.Y] = newIOrganism.Id;
         }
     }
 }

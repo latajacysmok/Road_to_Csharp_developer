@@ -1,4 +1,6 @@
-﻿namespace GameBoard
+﻿using GamesElement;
+
+namespace GameBoard
 {
     public class Verifier
     {
@@ -27,5 +29,10 @@
             }
         }
 
+        public bool IfAnimal(IOrganism organism)
+        {
+            if (organism is AnimalOrganism) { return true; }
+            else { return false; }
+        }
     }
 }
