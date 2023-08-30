@@ -2,14 +2,18 @@
 using Animal;
 using GamesElement;
 using GameMechanism;
+using Infrastructure;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace GameBoard
 {
     public class SpawnRepository
     {
         private int _high;
-        private int _width; 
+        private int _width;
+        private static SimpleInjector.Container _container;
+
         public List<IOrganism> organisms = new List<IOrganism>
         {
             new Grass(),
@@ -33,18 +37,20 @@ namespace GameBoard
             new Sheep(),
             new Fox(),
             new Fox(),
-/*            new Turtle(),
-            new Turtle(),
-            new Antelope(),
-            new Antelope(),
-            new CyberSheep(),*/
-            new CyberSheep()
+            /*            new Turtle(),
+                        new Turtle(),
+                        new Antelope(),
+                        new Antelope(),
+                        new CyberSheep(),*/
+            _container.GetInstance<IOrganism>()
+            //new CyberSheep()
         };        
 
         public SpawnRepository(Board board)
         {
             _high = board.Height;
             _width = board.Width;
+
             organisms = SetOrderOfMovement();
             IteratingThroughAllOrganisms(board);
         }

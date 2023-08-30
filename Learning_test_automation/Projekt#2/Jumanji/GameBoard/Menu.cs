@@ -4,9 +4,13 @@ using GameMechanism;
 namespace GameBoard
 {
     public class Menu
-    {
+    {        
         GameBoardRepository gameBoardRepository = new GameBoardRepository();
-       
+
+        public Menu(IVerifier verifier)
+        {
+            
+        }
 
         public void StartOfGame()
         {
@@ -14,7 +18,8 @@ namespace GameBoard
             
             SpawnRepository spawnRepository = new SpawnRepository(board);
 
-            foreach(IOrganism item in spawnRepository.organisms)
+
+            foreach (IOrganism item in spawnRepository.organisms)
             {
                 Console.WriteLine(item.ToString());
             }
@@ -25,7 +30,7 @@ namespace GameBoard
 
             move.MakeMove();
 
-            foreach (Organism item in spawnRepository.organisms)
+            foreach (IOrganism item in spawnRepository.organisms)
             {
                 Console.WriteLine(item.ToString());
             }

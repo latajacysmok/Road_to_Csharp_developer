@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Animal\Animal.csproj" />
+    <PackageReference Include="SimpleInjector" Version="5.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GameMechanism\GameMechanism.csproj" />
     <ProjectReference Include="..\GamesElement\GamesElement.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\Plant\Plant.csproj" />
   </ItemGroup>
 
 </Project>

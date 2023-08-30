@@ -1,9 +1,10 @@
 ﻿using Animal;
-using GameBoard;
 using GamesElement;
 using Plant;
 using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Xml.Linq;
 
 namespace GameMechanism
 {
@@ -14,6 +15,8 @@ namespace GameMechanism
         Board _board;
         Collision collision;
         private List<IOrganism> _organismCollection;
+
+
         Verifier verifier = new Verifier();
         Random random = new Random();
         

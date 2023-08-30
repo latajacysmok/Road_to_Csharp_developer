@@ -1,8 +1,8 @@
 ﻿using GamesElement;
 
-namespace GameBoard
+namespace GameMechanism
 {
-    public class Verifier
+    public class Verifier: IVerifier
     {
         public int GetSizeOfPlayField()
         {
@@ -19,7 +19,7 @@ namespace GameBoard
             return amount;
         }
 
-        private bool IsGameBoardRightSize(int size)
+        public bool IsGameBoardRightSize(int size)
         {
             if (0 < size & size < 101) return true;
             else
