@@ -3,15 +3,17 @@ using GameMechanism;
 
 namespace GameBoard
 {
-    public class Menu
+    public class Menu: IMenu
     {        
         GameBoardRepository gameBoardRepository = new GameBoardRepository();
+        private readonly IVerifier _verifier;
+        private readonly IMove _move;
 
-        public Menu(IVerifier verifier)
+        public Menu(IVerifier verifier, IMove move)
         {
-            
+            _verifier = verifier;
+            _move = move;
         }
-
         public void StartOfGame()
         {
             Board board = gameBoardRepository.GameBoardDimensions();
@@ -26,9 +28,7 @@ namespace GameBoard
 
             gameBoardRepository.DrawGameBoard();
 
-            Move move = new Move(board, spawnRepository.organisms);
-
-            move.MakeMove();
+            _move.MakeMove();
 
             foreach (IOrganism item in spawnRepository.organisms)
             {

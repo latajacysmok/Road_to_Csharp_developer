@@ -10,7 +10,6 @@
     <ProjectReference Include="..\Animal\Animal.csproj" />
     <ProjectReference Include="..\GameMechanism\GameMechanism.csproj" />
     <ProjectReference Include="..\GamesElement\GamesElement.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Plant\Plant.csproj" />
   </ItemGroup>
 

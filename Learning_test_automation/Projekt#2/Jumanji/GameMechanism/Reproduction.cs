@@ -1,25 +1,20 @@
 ﻿using Animal;
 using GamesElement;
 using Plant;
-using System;
 using System.Drawing;
-using System.Net.NetworkInformation;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Xml;
 
 namespace GameMechanism
 {
-    public class Reproduction
+    public class Reproduction : IReproduction
     {
         IOrganism _organism;
         Point _oranismLocation;
         Point _spawnPlaceForNewOrganism;
         private List<IOrganism> _organismCollection;
-        private Board _board;
+        private IBoard _board;
 
 
-        public Reproduction(IOrganism organism, List<IOrganism> organismCollection, Board board, Point spawnPlaceForNewOrganism)
+        public Reproduction(IOrganism organism, List<IOrganism> organismCollection, IBoard board, Point spawnPlaceForNewOrganism)
         {
             _organism = organism;
             _oranismLocation = organism.Position;
@@ -29,7 +24,7 @@ namespace GameMechanism
             OrganismReproduces();
         }
 
-        private void OrganismReproduces()
+        public void OrganismReproduces()
         {       
             switch (_organism)
             {

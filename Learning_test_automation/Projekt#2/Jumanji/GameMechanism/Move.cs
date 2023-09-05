@@ -1,32 +1,35 @@
-﻿using Animal;
-using GamesElement;
-using Plant;
-using System;
+﻿using GamesElement;
 using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
 
 namespace GameMechanism
 {
-    public class Move
+    public class Move : IMove
     {
         private int _height;
         private int _width;
-        Board _board;
-        Collision collision;
+        private IBoard _board;
+        public IBoard Board 
+        {
+            get { return _board; }
+        }
+
         private List<IOrganism> _organismCollection;
 
-
-        Verifier verifier = new Verifier();
         Random random = new Random();
-        
-        public Move(Board board, List<IOrganism> organismCollection)
+        private readonly ICollision _collision;
+
+        private readonly IVerifier _verifier;
+
+        public Move(IBoard board, List<IOrganism> organismCollection, IVerifier verifier)
         {
             _board = board;
             _height = board.Height;
             _width = board.Width;
             _organismCollection = organismCollection;
-            collision = new Collision(_board, this);
+            _verifier = verifier;
+            _collision = new Collision(board, this);
         }
 
         public void MakeMove()
@@ -34,12 +37,12 @@ namespace GameMechanism
             ChangingStatusFromNewToOld();
             for (int i = 0; i < _organismCollection.Count; i++)
             {
-                if (verifier.IfAnimal(_organismCollection[i]) && _organismCollection[i].IfNew == false) { AnimalMove(_organismCollection[i]); }
+                if (_verifier.IfAnimal(_organismCollection[i]) && _organismCollection[i].IfNew == false) { AnimalMove(_organismCollection[i]); }
                 else if (_organismCollection[i].IfNew == false) { PlantMove(_organismCollection[i]); }
             }
         }
 
-        private void AnimalMove(IOrganism organism)
+        public void AnimalMove(IOrganism organism)
         {
             Point oranismLocation = FindOrganismAvailableLocation(organism);
 
@@ -50,7 +53,7 @@ namespace GameMechanism
             _board.GameBoard[organism.Position.X, organism.Position.Y] = organism.Id;           
         }
 
-        private void PlantMove(IOrganism organism)
+        public void PlantMove(IOrganism organism)
         {
             WhetherToReproducePlant(organism); 
         }
@@ -59,10 +62,10 @@ namespace GameMechanism
         {
             Point newPosition = SelectNewPosition(organism);
 
-            return collision.HandleCollision(newPosition, _organismCollection, organism);
+            return _collision.HandleCollision(newPosition, _organismCollection, organism);
         }
 
-        private Point SelectNewPosition(IOrganism organism) 
+        public Point SelectNewPosition(IOrganism organism) 
         {
             List<Point> selectAvailableField = SelectAvailableField(organism);
             Point availableField = ChoosingPlace(selectAvailableField);
@@ -70,9 +73,9 @@ namespace GameMechanism
         }
 
 
-        
 
-        private List<Point> SelectAvailableField(IOrganism organism)
+
+        public List<Point> SelectAvailableField(IOrganism organism)
         {
             List<Point> availableField = new List<Point>();
             
@@ -87,7 +90,7 @@ namespace GameMechanism
             return availableField;
         }
 
-        private List<Point> SelectFieldsOnGameBoard(IOrganism organism)//tutaj
+        public List<Point> SelectFieldsOnGameBoard(IOrganism organism)//tutaj
         {
             List<Point> allPossiblePlayingFieldsToMakeMove = new List<Point>();
 
@@ -108,12 +111,12 @@ namespace GameMechanism
             return allPossiblePlayingFieldsToMakeMove;
         }
 
-        private bool IfOrganismOffBoard(int rowValue = 0, int columnValue = 0)
+        public bool IfOrganismOffBoard(int rowValue = 0, int columnValue = 0)
         {
             return 0 <= rowValue && rowValue < _width && 0 <= columnValue && columnValue < _height;
         }
 
-        private Point ChoosingPlace(List<Point> availableField)
+        public Point ChoosingPlace(List<Point> availableField)
         {         
             int placeDraw = random.Next(availableField.Count);
             return availableField[placeDraw];//tutaj błąd!
@@ -124,7 +127,7 @@ namespace GameMechanism
             if (random.Next(2) == 1) { new Reproduction(organism, _organismCollection, _board, FindOrganismAvailableLocation(organism)); }
         }
 
-        private void ChangingStatusFromNewToOld()
+        public void ChangingStatusFromNewToOld()
         {
             foreach (var organism in _organismCollection)
             {

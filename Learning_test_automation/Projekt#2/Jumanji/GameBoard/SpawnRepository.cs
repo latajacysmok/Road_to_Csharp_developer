@@ -2,7 +2,6 @@
 using Animal;
 using GamesElement;
 using GameMechanism;
-using Infrastructure;
 using System.Drawing;
 using System.ComponentModel;
 
@@ -12,7 +11,6 @@ namespace GameBoard
     {
         private int _high;
         private int _width;
-        private static SimpleInjector.Container _container;
 
         public List<IOrganism> organisms = new List<IOrganism>
         {
@@ -42,7 +40,7 @@ namespace GameBoard
                         new Antelope(),
                         new Antelope(),
                         new CyberSheep(),*/
-            _container.GetInstance<IOrganism>()
+            //_container.GetInstance<IOrganism>()
             //new CyberSheep()
         };        
 

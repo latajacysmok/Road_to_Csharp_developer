@@ -1,6 +1,6 @@
 ﻿namespace GamesElement
 {
-    public class Board
+    public class Board : IBoard
     {
         public int Height { get; set; }
 

@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace GameMechanism
 {
-    public class Collision
+    public class Collision : ICollision
     {
-        Board _board;
-        Move _move;
+        IBoard _board;
+        IMove _move;
 
-        public Collision(Board board, Move move)
+        public Collision(IBoard board, IMove move)
         {
             _board = board;
-            _move = move;      
+            _move = move;;
         }
 
         public Point HandleCollision(Point newPosition, List<IOrganism> organisms, IOrganism organism)
@@ -28,6 +28,7 @@ namespace GameMechanism
             
             return newPosition;
         }
+
 
         private IOrganism WithWhoBeCollision(Point newPosition, List<IOrganism> organisms)
         {

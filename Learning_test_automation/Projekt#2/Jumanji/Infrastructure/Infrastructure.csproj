@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameBoard\GameBoard.csproj" />
     <ProjectReference Include="..\GameMechanism\GameMechanism.csproj" />
     <ProjectReference Include="..\GamesElement\GamesElement.csproj" />
   </ItemGroup>
