@@ -2,6 +2,7 @@
 using SchoolActivity;
 using SchoolEquipment;
 using FileManager;
+using TestObjects;
 
 namespace BoardConsoleApp
 {
@@ -18,6 +19,22 @@ namespace BoardConsoleApp
 
             while (true)
             {
+                // Do zabawy serializacją
+                SerializeStudent serializeStudent = new SerializeStudent();
+                serializeStudent.PrintOutPersonJson();
+
+                DeserializeStudent deserializeStudent = new DeserializeStudent();
+                Person deserializedPerson = deserializeStudent.DeserializePersonFromJson();
+
+                if (deserializedPerson != null)
+                {
+                    Console.WriteLine("Deserialized Person:");
+                    Console.WriteLine($"Name: {deserializedPerson.Name}");
+                    Console.WriteLine($"Last Name: {deserializedPerson.LastName}");
+                    Console.WriteLine($"Education Year: {deserializedPerson.EducationYear}");
+                    Console.WriteLine($"Id: {deserializedPerson.Id}");
+                }
+
                 PrintMenu();
                 MenuOption menuOption = ChoiceOptionsFromMenu();
                 RunOptionFromMenu(menuOption);

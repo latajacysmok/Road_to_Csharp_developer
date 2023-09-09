@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FileManager\FileManager.csproj" />
     <ProjectReference Include="..\SchoolData\SchoolData.csproj" />
     <ProjectReference Include="..\SchoolEquipment\SchoolEquipment.csproj" />
+    <ProjectReference Include="..\TestObjects\TestObjects.csproj" />
   </ItemGroup>
 
 </Project>
