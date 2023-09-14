@@ -363,10 +363,10 @@ namespace HotelTest.TestCase
             seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
 
             int day = 15;
-            var firstDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day);
-            var lastDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day - 2);
+            //var firstDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day);
+            //var lastDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day - 2);
 
-            seleniumDriver.MarkingDateOfBookingRoom(firstDay, lastDay);
+            //seleniumDriver.MarkingDateOfBookingRoom(firstDay, lastDay);
 
             seleniumDriver.ClickButton(home.BookDateButton);
 

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlowProjectTest", "Spec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumDriver", "WrapSeleniumMethod\SeleniumDriver.csproj", "{5BB58506-2C9F-4B0B-B20A-0F46208B8237}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{33AC966E-7D8C-4214-A3B8-896A134A61DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BB58506-2C9F-4B0B-B20A-0F46208B8237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33AC966E-7D8C-4214-A3B8-896A134A61DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33AC966E-7D8C-4214-A3B8-896A134A61DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33AC966E-7D8C-4214-A3B8-896A134A61DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33AC966E-7D8C-4214-A3B8-896A134A61DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

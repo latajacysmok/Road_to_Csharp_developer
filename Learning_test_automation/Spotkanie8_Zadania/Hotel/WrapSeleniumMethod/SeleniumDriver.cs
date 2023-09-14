@@ -3,34 +3,49 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using FluentAssertions;
-using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Interactions;
-using System;
-using System.Security.Cryptography;
-using System.Xml.XPath;
 using System.Drawing;
+using Logger;
 
 namespace SeleniumDriver
 {
+    
     public class SeleniumDriver : ISeleniumDriver
     {
         public readonly IWebDriver driver;
+        //public readonly NLogger nLogger;
+        NLogger nLogger = new NLogger();
+
 
         public SeleniumDriver(IWebDriver webDriver)
         {
             driver = webDriver;
+            //NLogger nLogger = new NLogger();
         }
 
         public void OpenHomePageWebSite(string webUrlAdress)
         {
-            var home = new HomePageBookRoomSection(driver);
-            home.driver.Navigate().GoToUrl(webUrlAdress);
+            try
+            {
+                nLogger.Info($"Opening the website: {webUrlAdress}");
 
-            string homeUrl = new WebDriverWait(driver, TimeSpan.FromSeconds(5))
-                                .Until(_ => _.Url);
+                var home = new HomePageBookRoomSection(driver);
+                home.driver.Navigate().GoToUrl(webUrlAdress);
 
-            homeUrl.Should().Be(webUrlAdress);
+                string homeUrl = new WebDriverWait(driver, TimeSpan.FromSeconds(5))
+                                    .Until(_ => _.Url);
+
+                homeUrl.Should().Be(webUrlAdress);
+
+                nLogger.Info("Website opened successfully.");
+            }
+            catch (Exception ex)
+            {
+                nLogger.Error($"An error occurred while opening the website: {ex.Message}");
+                throw; // Rethrow the exception to maintain the test's error status.
+            }
+            Console.WriteLine($"Current Directory: {Environment.CurrentDirectory}");
         }
 
         public void CountElementsOfGivenCollection(ReadOnlyCollection<IWebElement> collection, int amount)
