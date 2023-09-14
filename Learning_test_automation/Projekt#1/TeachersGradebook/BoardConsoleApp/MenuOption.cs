@@ -6,6 +6,7 @@
         AddDegree = 2,
         ViewRatings = 3,
         AverageOfGradesInGivenSubject = 4,
-        FinishProgram = 5,
+        SerializeDeserializeStudent = 5,
+        FinishProgram = 6,
     }
 }

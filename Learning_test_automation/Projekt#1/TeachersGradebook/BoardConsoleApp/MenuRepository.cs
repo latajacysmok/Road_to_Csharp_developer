@@ -1,9 +1,7 @@
 ﻿using SchoolActivity;
 using SchoolData;
 using SchoolEquipment;
-using FileManager;
-using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
+using TestObjects;
 
 namespace BoardConsoleApp
 {
@@ -51,5 +49,24 @@ namespace BoardConsoleApp
             if (student is null) { Console.WriteLine("You currently don't have any students, so you can't add a grade."); }
             else { teachersDiary.ShowSchoolSubjects(student, verifier, avg); }
         }
+        
+        public void SerializeDeserializeStudentInMenu()
+        {
+            // Do zabawy serializacją
+            SerializeStudent serializeStudent = new SerializeStudent();
+            serializeStudent.PrintOutPersonJson();
+
+            DeserializeStudent deserializeStudent = new DeserializeStudent();
+            Person deserializedPerson = deserializeStudent.DeserializePersonFromJson();
+
+            if (deserializedPerson != null)
+            {
+                Console.WriteLine("Deserialized Person:");
+                Console.WriteLine($"Name: {deserializedPerson.Name}");
+                Console.WriteLine($"Last Name: {deserializedPerson.LastName}");
+                Console.WriteLine($"Education Year: {deserializedPerson.EducationYear}");
+                Console.WriteLine($"Id: {deserializedPerson.Id}");
+            }
+        }    
     }
 }
