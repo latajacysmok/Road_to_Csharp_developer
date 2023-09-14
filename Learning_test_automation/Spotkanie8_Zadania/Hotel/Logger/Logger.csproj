@@ -11,9 +11,11 @@
     <None Include="NLogger.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-	  <Page Include="C:\Users\lemk\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config" />
-  </ItemGroup>
+	<ItemGroup>
+	<Content Include="NLog.config">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="5.2.4" />
