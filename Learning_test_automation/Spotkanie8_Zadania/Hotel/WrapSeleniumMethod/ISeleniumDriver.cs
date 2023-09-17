@@ -17,6 +17,10 @@ namespace SeleniumDriver
 
         void ComparingTexts(IWebElement lookForItem, string searchText);
 
-        void WaitFor(int amount); 
+        void WaitFor(int amount);
+
+        IWebElement DayOfMonthSelection(IWebElement packingForNumberOfDayAndAvailability, int numberDayOfMonth);
+
+        void MarkingDateOfBookingRoom(IWebElement firstDay, IWebElement lastDay);
     }
 }

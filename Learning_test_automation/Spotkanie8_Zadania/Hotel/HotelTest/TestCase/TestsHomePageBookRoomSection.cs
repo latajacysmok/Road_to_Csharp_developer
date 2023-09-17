@@ -23,7 +23,7 @@ namespace HotelTest.TestCase
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             home = new HomePageBookRoomSection(driver);
-            seleniumDriver = new SeleniumDriver.SeleniumDriver(driver);
+            seleniumDriver = new SeleniumDriver.WrappedSeleniumMethod(driver);
         }
 
         [Test]
@@ -363,10 +363,10 @@ namespace HotelTest.TestCase
             seleniumDriver.EnteringDataIntoField(home.PhoneNumberFieldFromRoomSection, "07008889101");
 
             int day = 15;
-            //var firstDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day);
-            //var lastDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day - 2);
+            var firstDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day);
+            var lastDay = seleniumDriver.DayOfMonthSelection(home.PackingForNumberOfDayAndAvailability, day - 2);
 
-            //seleniumDriver.MarkingDateOfBookingRoom(firstDay, lastDay);
+            seleniumDriver.MarkingDateOfBookingRoom(firstDay, lastDay);
 
             seleniumDriver.ClickButton(home.BookDateButton);
 
