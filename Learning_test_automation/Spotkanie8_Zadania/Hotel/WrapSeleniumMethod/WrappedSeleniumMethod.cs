@@ -168,7 +168,9 @@ namespace SeleniumDriver
         {
             IWebElement specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[@class='rbc-date-cell']/button[@class='rbc-button-link' and text()='{numberDayOfMonth}']"));
 
-            while (IsDayAvailable(specificDay, By.XPath(".//div[@class='rbc-event-content']")))
+            IWebElement unavailableDay = driver.FindElement(By.XPath(@"//div[@class='rbc-event-content']"));
+
+            while (IsDayAvailable(specificDay, unavailableDay))
             {
                 specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[@class='rbc-date-cell']/button[@class='rbc-button-link' and text()='{numberDayOfMonth + 1}']"));
             }
@@ -176,21 +178,25 @@ namespace SeleniumDriver
             return specificDay;
         }
 
-        private bool IsDayAvailable(IWebElement day, By unavailableDays)
+        private bool IsDayAvailable(IWebElement day, IWebElement unavailableDays)
         {
-            try
-            {
-                nLogger.Info("Searching for an available day.");
-                day.FindElement(unavailableDays);
-                nLogger.Info($"The available day: {day} found successfully.");
+            //try
+            //{
+            //nLogger.Info("Searching for an available day.");
+            var dayAvailable = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                                .Until(_ => unavailableDays);
+            ItemShouldBeEnabled(dayAvailable);
+            if (day.FindElement(unavailableDays)) { return true; }
+            else { return false; }//title="Unavailable"
+                                                                  //nLogger.Info($"The available day: {day} found successfully.");
 
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                nLogger.Error($"Day: {day}, is not available.");
-                return false;
-            }
+
+            //}
+            //catch (NoSuchElementException)
+            //{
+            //nLogger.Error($"Day: {day}, is not available.");
+            
+            //}
         }
 
 
