@@ -25,7 +25,7 @@
         {
             while (true)
             {
-                if (0 < number && number < 6) return true;
+                if (0 < number && number < 7) return true;
                 else
                 {
                     Console.WriteLine($"Your choice: {number} is incorrect. It has to be equal: 1 - 5");

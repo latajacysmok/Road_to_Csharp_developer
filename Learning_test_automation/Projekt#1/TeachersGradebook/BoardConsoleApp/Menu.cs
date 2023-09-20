@@ -1,7 +1,5 @@
-﻿using SchoolData;
-using SchoolActivity;
-using SchoolEquipment;
-using FileManager;
+﻿using SchoolEquipment;
+
 
 namespace BoardConsoleApp
 {
@@ -31,7 +29,8 @@ namespace BoardConsoleApp
             Console.WriteLine("2 - Add a degree.");
             Console.WriteLine("3 - View ratings.");
             Console.WriteLine("4 - View the average grade in a given subject.");
-            Console.WriteLine("5 - Finish the program.\n");
+            Console.WriteLine("5 - Make serialize and deserialize of student.");
+            Console.WriteLine("6 - Finish the program.\n");
         }
 
         private void RunOptionFromMenu(MenuOption menuOption)
@@ -49,6 +48,9 @@ namespace BoardConsoleApp
                     break;
                 case MenuOption.AverageOfGradesInGivenSubject:
                     menuRepository.AverageOfGradesInGivenSubjectInMenu(option, verifier);
+                    break;
+                case MenuOption.SerializeDeserializeStudent:
+                    menuRepository.SerializeDeserializeStudentInMenu();
                     break;
                 case MenuOption.FinishProgram:
                     option.LeaveProgramme();
@@ -70,10 +72,12 @@ namespace BoardConsoleApp
                         return MenuOption.ViewRatings;
                     case (int)MenuOption.AverageOfGradesInGivenSubject:
                         return MenuOption.AverageOfGradesInGivenSubject;
+                    case (int)MenuOption.SerializeDeserializeStudent:
+                        return MenuOption.SerializeDeserializeStudent;
                     case (int)MenuOption.FinishProgram:
                         return MenuOption.FinishProgram;
                     default:
-                        Console.WriteLine("\nThe given number must equal 1, 2, 3, 4 or 5. Try again.");
+                        Console.WriteLine("\nThe given number must equal 1, 2, 3, 4, 5 or 6. Try again.");
                         break;
                 }
             }
