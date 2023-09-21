@@ -63,3 +63,84 @@ Scenario: Check if calendar disappear from the room book section when click canc
 	And Calendar should appear
 	And Click book date cancel button
 	Then Calendar disappear
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the name field to short name
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "name" field with data "St"
+	And Click book date button
+	Then Appear alert book notification with 8 alerts
+
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the name field correctly
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "name" field with data "Stefek"
+	And Click book date button
+	Then Appear alert book notification with 7 alerts
+
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the lastname field to short name
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "lastname" field with data "Pi"
+	And Click book date button
+	Then Appear alert book notification with 8 alerts
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the lastname field correctly
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "lastname" field with data "PierdziBący"
+	And Click book date button
+	Then Appear alert book notification with 7 alerts
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the email field incorrectly
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "email" field with data "hWDPna50%BoTrocheSieBoje"
+	And Click book date button
+	Then Appear alert book notification with 9 alerts
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the email field correctly
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "email" field with data "spokoAdres@giewno.com"
+	And Click book date button
+	Then Appear alert book notification with 9 alerts
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the phone number field to short number
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "phone" field with data "070088891"
+	And Click book date button
+	Then Appear alert book notification with 8 alerts
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the phone number field to long number
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "phone" field with data "070088891070088891070088891"
+	And Click book date button
+	Then Appear alert book notification with 8 alerts
+	
+@bookRoomSection
+Scenario: Check if alert book notification appear when fills in the phone number field correctly
+	Given Go to the home page of the hotel website
+	When Click book this room button from room section
+	And Calendar should appear
+	And Fill in the "phone" field with data "07008889101"
+	And Click book date button
+	Then Appear alert book notification with 8 alerts

@@ -38,6 +38,9 @@ namespace Locators.HomePage.BookRoomSection
         public ReadOnlyCollection <IWebElement> RoomInfoSection => driver.FindElements(By.XPath(@"//div[@class= 'row hotel-room-info']"));
         public IWebElement EmailFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'email']"));
         public IWebElement PhoneNumberFieldFromRoomSection => driver.FindElement(By.XPath(@"//input[@name= 'phone']"));
+        public IWebElement UnavailableDays => driver.FindElement(By.XPath(@"//div[@class='rbc-event-content']"));
+        public IWebElement PackingForNumberOfDayAndAvailability => driver.FindElement(By.XPath(@"//div[@class='rbc-row-content']"));
+        public IWebElement BookingSuccessfulWindow => driver.FindElement(By.XPath(@"//div[@class='ReactModal__Content ReactModal__Content--after-open confirmation-modal']"));
     }
 }
 
