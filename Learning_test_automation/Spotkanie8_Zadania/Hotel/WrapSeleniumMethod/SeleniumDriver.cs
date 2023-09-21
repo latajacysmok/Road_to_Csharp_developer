@@ -1,4 +1,4 @@
- using Locators.HomePage.BookRoomSection;
+﻿ using Locators.HomePage.BookRoomSection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -7,22 +7,19 @@ using System.Collections.ObjectModel;
 using OpenQA.Selenium.Interactions;
 using System.Drawing;
 using Logger;
-using Microsoft.VisualBasic;
 
 namespace SeleniumDriver
 {
     
-    public class WrappedSeleniumMethod : ISeleniumDriver
+    public class SeleniumDriver : ISeleniumDriver
     {
         public readonly IWebDriver driver;
-        //public readonly NLogger nLogger;
-        NLogger nLogger = new NLogger();
+        ILogger nLogger = new NLogger();
 
 
-        public WrappedSeleniumMethod(IWebDriver webDriver)
+        public SeleniumDriver(IWebDriver webDriver)
         {
             driver = webDriver;
-            //NLogger nLogger = new NLogger();
         }
 
         public void OpenHomePageWebSite(string webUrlAdress)
@@ -49,7 +46,7 @@ namespace SeleniumDriver
             Console.WriteLine($"Current Directory: {Environment.CurrentDirectory}");
         }
 
-        public void CountElementsOfGivenCollection(ReadOnlyCollection<IWebElement> collection, int amount)
+        public void CheckNumberOfItemsInCollection(ReadOnlyCollection<IWebElement> collection, int amount)
         {
             try
             {
@@ -94,19 +91,19 @@ namespace SeleniumDriver
             }            
         }
 
-        public void ItemShouldBeEnabled(IWebElement lookForItem)
+        public void ItemShouldBeEnabled(IWebElement element)
         {
             try
             {
-                nLogger.Info($"Lookinng for element: {lookForItem}");
+                nLogger.Info($"Lookinng for element: {element}");
 
 
                 var alertBookNotification = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
-                            .Until(_ => lookForItem);
+                            .Until(_ => element);
 
                 alertBookNotification.Enabled.Should().BeTrue("The notification alert should be enabled.");
 
-                nLogger.Info("The element was clicked successfully.");
+                nLogger.Info("The element was found successfully.");
             }
             catch (Exception ex)
             {
@@ -115,7 +112,7 @@ namespace SeleniumDriver
             }       
         }
         
-        public void EnteringDataIntoField(IWebElement lookForField, string inputText)
+        public void EnterDataIntoField(IWebElement lookForField, string inputText)
         {
             try
             {
@@ -143,7 +140,7 @@ namespace SeleniumDriver
             }            
         }
 
-        public void ComparingTexts(IWebElement lookForItem, string searchText)
+        public void CompareTexts(IWebElement lookForItem, string searchText)
         {
             try
             {
@@ -166,41 +163,12 @@ namespace SeleniumDriver
 
         public IWebElement DayOfMonthSelection(IWebElement packingForNumberOfDayAndAvailability, int numberDayOfMonth)
         {
-            IWebElement specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[@class='rbc-date-cell']/button[@class='rbc-button-link' and text()='{numberDayOfMonth}']"));
-
-            IWebElement unavailableDay = driver.FindElement(By.XPath(@"//div[@class='rbc-event-content']"));
-
-            while (IsDayAvailable(specificDay, unavailableDay))
-            {
-                specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[@class='rbc-date-cell']/button[@class='rbc-button-link' and text()='{numberDayOfMonth + 1}']"));
-            }
+            IWebElement specificDay = packingForNumberOfDayAndAvailability.FindElement(By.XPath($"//div[contains(@class, 'rbc-date-cell')]/button[@class='rbc-button-link' and text()='{numberDayOfMonth}']"));
             
             return specificDay;
         }
 
-        private bool IsDayAvailable(IWebElement day, IWebElement unavailableDays)
-        {
-            //try
-            //{
-            //nLogger.Info("Searching for an available day.");
-            var dayAvailable = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
-                                .Until(_ => unavailableDays);
-            ItemShouldBeEnabled(dayAvailable);
-            if (day.FindElement(unavailableDays)) { return true; }
-            else { return false; }//title="Unavailable"
-                                                                  //nLogger.Info($"The available day: {day} found successfully.");
-
-
-            //}
-            //catch (NoSuchElementException)
-            //{
-            //nLogger.Error($"Day: {day}, is not available.");
-            
-            //}
-        }
-
-
-        public void MarkingDateOfBookingRoom(IWebElement firstDay, IWebElement lastDay)
+        public void MarkDateOfBookRoom(IWebElement firstDay, IWebElement lastDay)
         {
             try
             {
