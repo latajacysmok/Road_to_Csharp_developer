@@ -111,12 +111,9 @@ namespace SchoolActivity
         private void PrintPossibleSchoolGrades(double[] ratings)
         {
             Console.WriteLine("\nList of school grades to choose from: ");
-            foreach (double grade in ratings)
-            {
-                Console.Write(grade + " ");
-            }
+            Console.Write(string.Join(" ", ratings));
         }
-        private void PrintSubjectGrades(List<Grade> grades)
+        private void PrintSubjectGrades(List<IGrade> grades)
         {
             int index = 0;
             int totalCount = grades.Count;
@@ -141,19 +138,16 @@ namespace SchoolActivity
             }       
         }
         
-        private void PrintSubjectAverage(List<Grade> grades)
+        private void PrintSubjectAverage(List<IGrade> grades)
         {
             int index = 0;
             int totalCount = grades.Count;
-            List<double> gradeAVG = new List<double>();
 
             if (totalCount == 0) Console.WriteLine("\nYour list is empty, You add the first item to your list.");
             else
             {
-                foreach (Grade grade in grades)
-                {
-                    gradeAVG.Add(grade.Value);
-                }
+                List<double> gradeAVG = grades.Select(grade => grade.Value).ToList();
+
                 Console.WriteLine(degree.CalculationOfAverageDegree(gradeAVG));
                 Console.WriteLine("");
             }       

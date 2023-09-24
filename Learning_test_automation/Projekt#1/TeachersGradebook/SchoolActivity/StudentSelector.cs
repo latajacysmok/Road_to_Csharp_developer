@@ -34,10 +34,8 @@ namespace SchoolActivity
         {
             Console.WriteLine("\nHere is a list of our students: ");
 
-            foreach (IStudent student in students)
-            {
-                Console.WriteLine(student.ToString());
-            }
+            Console.Write(string.Join("\n" ,students));
+
             Console.WriteLine("");
         }
     }
