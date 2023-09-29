@@ -146,9 +146,9 @@ namespace SchoolActivity
             if (totalCount == 0) Console.WriteLine("\nYour list is empty, You add the first item to your list.");
             else
             {
-                List<double> gradeAVG = grades.Select(grade => grade.Value).ToList();
+                List<double> averageGrade = grades.Select(grade => grade.Value).ToList();
 
-                Console.WriteLine(degree.CalculationOfAverageDegree(gradeAVG));
+                Console.WriteLine(degree.CalculationOfAverageDegree(averageGrade));
                 Console.WriteLine("");
             }       
         }

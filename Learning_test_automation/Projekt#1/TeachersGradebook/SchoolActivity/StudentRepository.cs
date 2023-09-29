@@ -18,8 +18,6 @@ namespace SchoolActivity
         public IStudent GetStudent(int id)
         {
             return students.FirstOrDefault(student => student.Id.Equals(id));
-
-            throw new NullReferenceException("We do not have a student with this id.");
         }
 
         public int GetUniqueStudentId(Verifier verifier)
