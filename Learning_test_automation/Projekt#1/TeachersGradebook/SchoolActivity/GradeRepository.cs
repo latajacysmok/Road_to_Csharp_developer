@@ -33,22 +33,14 @@ namespace SchoolActivity
             }
             else
             {
-                foreach (Grade grade in grades)
-                {
-                    if (grade.Id > id) id = grade.Id;
-                }
+                id = grades.Max(grade => grade.Id);
                 return id + 1;
             }
         }
 
-        public List<Grade> GetStudentGradesBySchoolSubject(int idSearchedStudent, SchoolSubjects schoolSubject)
+        public List<IGrade> GetStudentGradesBySchoolSubject(int idSearchedStudent, SchoolSubjects schoolSubject)
         {
-            List<Grade> studentGrades = new List<Grade>();
-            foreach (Grade grade in grades)
-            {
-                if (grade.StudentID.Equals(idSearchedStudent) && grade.SchoolSubject == schoolSubject) studentGrades.Add(grade);
-            }
-            return studentGrades;
+            return grades.Where(grade => grade.StudentID.Equals(idSearchedStudent) && grade.SchoolSubject == schoolSubject).ToList();
         }
     }
 }

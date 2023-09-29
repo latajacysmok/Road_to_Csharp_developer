@@ -52,7 +52,7 @@ namespace SchoolActivity
 
         private void ExtractingStudentInformationFromFile(string[] allStudentsFromFile)
         {
-            foreach (var lineWithStudentDate in allStudentsFromFile)
+            /*foreach (var lineWithStudentDate in allStudentsFromFile)
             {
                 string[] fields = lineWithStudentDate.Split(';');
 
@@ -62,7 +62,20 @@ namespace SchoolActivity
                 }
                 IStudent student = new Student(id, name, lastname, educationYear);
                 StudentRepository.students.Add(student);
-            }
+            }*/
+
+            var students = allStudentsFromFile
+                .SelectMany(line => line.Split(';'))
+                .Select(field =>
+                {
+                    GetStudentData(field);
+                    return new { id, name, lastname, educationYear };
+                })
+                .Where(studentData => !string.IsNullOrWhiteSpace(studentData.name)) // Assuming name is required
+                .Select(studentData => new Student(studentData.id, studentData.name, studentData.lastname, studentData.educationYear))
+                .ToList();
+
+            StudentRepository.students.AddRange(students);
         }
 
         private void GetStudentData(string field)
