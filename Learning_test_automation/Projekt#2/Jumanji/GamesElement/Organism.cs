@@ -1,39 +1,16 @@
-﻿namespace GamesElement
+﻿using System.Drawing;
+
+namespace GamesElement
 {
-    public abstract class Organism
+    public abstract class Organism : IOrganism
     {
-        protected int strength;
-        public  int Strength 
-        { 
-            get { return strength; }
-            set { strength = value; }
-        }
+        public  int Strength { get; set; }
+        public  string Id { get; set; }
 
-        protected string id;
-        public  string Id 
-        {
-            get { return id; } 
-            set { id = value; }
-        }
-
-        protected int[] position;
-
-        public int[] Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
-
-        public abstract void OrganismAction();
-        public abstract void OrganismCollision();
-        public int[] GetPosition()
-        {
-            return position;
-        }
-        public void SetPosition(int x, int y)
-        {
-            int[] newPosition = new int[] { x, y };
-            Position = newPosition;
-        }
+        protected Point position;
+        public Point Position { get; set; }
+        public bool IfNew { get; set; }
+        public abstract void PerformAction();
+        public abstract void Interact();
     }
 }

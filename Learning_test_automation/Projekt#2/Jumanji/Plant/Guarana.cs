@@ -6,16 +6,17 @@ namespace Plant
     {
         public Guarana()
         {
-            strength = 0;
-            id = "P3";
+            Strength = 0;
+            Id = "P3";
             getPlantType = PlantType.Guarana;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             //Console.WriteLine("Guarana doesn't take any action.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             Console.WriteLine("Increases the power of the animal that ate this plant by 3.");
         }

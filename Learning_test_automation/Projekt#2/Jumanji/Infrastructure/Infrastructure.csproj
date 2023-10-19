@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -13,7 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameBoard\GameBoard.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\GameMechanism\GameMechanism.csproj" />
+    <ProjectReference Include="..\GamesElement\GamesElement.csproj" />
   </ItemGroup>
 
 </Project>

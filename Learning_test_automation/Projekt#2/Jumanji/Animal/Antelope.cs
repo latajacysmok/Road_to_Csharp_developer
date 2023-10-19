@@ -10,17 +10,18 @@ namespace Animal
 
         public Antelope()
         {
-            strength = 4;
+            Strength = 4;
             initiative = 4;
-            id = "A5";
+            Id = "A5";
             getAnimalType = AnimalType.Antelope;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             Console.WriteLine("Movement range is 2 squares.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             Console.WriteLine("50% chance to flee from combat. It then moves to an unoccupied adjacent space");
         }

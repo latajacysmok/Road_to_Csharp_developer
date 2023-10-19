@@ -1,33 +1,24 @@
 ﻿namespace GamesElement
 {
-    public class Board
+    public class Board : IBoard
     {
-        private int _height;
-        public int Height
-        {
-            get { return _height; }
-        }
+        public int Height { get; set; }
 
-        private int _width;
+        public int Width { get; set; }
 
-        public int Width
+        private string[,] gameBoard;
+        public string[,] GameBoard
         {
-            get { return _width; }
-        }
-
-        private string[,] emptyGameBoard;
-        public string[,] EmptyGameBoard
-        {
-            get { return emptyGameBoard; }
+            get { return gameBoard; }
         }
 
         public Board(int height, int width)
         {
-            _height = height;
-            _width = width;
-            emptyGameBoard = CreatingEmptyGameBoard(_height, _width);
+            Height = height;
+            Width = width;
+            gameBoard = CreateEmptyGameBoard(Height, Width);
         }
-        public string[,] CreatingEmptyGameBoard(int height, int width)
+        public string[,] CreateEmptyGameBoard(int height, int width)
         {
             string[,] emptyGameBoard = new string[height, width];
             for (int i = 0; i < height; i++)

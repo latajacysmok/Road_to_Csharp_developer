@@ -1,4 +1,5 @@
 ﻿using GamesElement;
+using GameMechanism;
 
 namespace GameBoard
 {
@@ -31,7 +32,7 @@ namespace GameBoard
             {
                 for (int j = 0; j < colLength; j++)
                 {
-                    Console.Write(string.Format("{0} ", gameWorld.EmptyGameBoard[i, j]));
+                    Console.Write(string.Format("{0} ", gameWorld.GameBoard[i, j]));
                 }
                 Console.Write(Environment.NewLine);
             }

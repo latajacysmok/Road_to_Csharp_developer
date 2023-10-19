@@ -6,16 +6,17 @@ namespace Plant
     {
         public PineBorscht()
         {
-            strength = 10;
-            id = "P5";
+            Strength = 10;
+            Id = "P5";
             getPlantType = PlantType.Pine_borscht;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             Console.WriteLine("He kills all animals in his neighborhood except for the cyber-sheep.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             Console.WriteLine("The animal that ate the plant dies. Only the cyber-hero is immune.");
         }

@@ -9,17 +9,18 @@ namespace Animal
 
         public CyberSheep()
         {
-            strength = 11;
+            Strength = 11;
             initiative = 4;
-            id = "A6";
+            Id = "A6";
             getAnimalType = AnimalType.Cyber_Sheep;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             Console.WriteLine("Its primary goal is the extermination of pine borscht. He always heads towards the nearest borscht and tries to eat it. If there is no borscht on the board, it pretends to be ordinary sheep.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             Console.WriteLine("He eats borscht sosnowski.");
         }

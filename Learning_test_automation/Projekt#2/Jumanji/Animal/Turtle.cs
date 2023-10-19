@@ -9,17 +9,18 @@ namespace Animal
 
         public Turtle()
         {
-            strength = 2;
+            Strength = 2;
             initiative = 1;
-            id = "A4";
+            Id = "A4";
             getAnimalType = AnimalType.Turtle;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             Console.WriteLine("In 75% of cases, it does not change its position.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             Console.WriteLine("Repels attacks from <5 strength animals. The striker must return to his previous square.");
         }

@@ -9,17 +9,18 @@ namespace Animal
 
         public Wolf()
         {
-            strength = 9;
+            Strength = 9;
             initiative = 5;
-            id = "A1";
+            Id = "A1";
             getAnimalType = AnimalType.Wolf;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             //Console.WriteLine("Wolf doesn't take any action.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             //Console.WriteLine("Wolf does nothing during the collision.");
         }

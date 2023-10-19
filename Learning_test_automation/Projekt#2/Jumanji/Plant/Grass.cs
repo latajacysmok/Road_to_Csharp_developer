@@ -3,19 +3,20 @@
 namespace Plant
 {
     public class Grass : PlantOrganism
-    {
+    { 
         public Grass()
         {
-            strength = 0;
-            id = "P1";
+            Strength = 0;
+            Id = "P1";
             getPlantType = PlantType.Grass;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             //Console.WriteLine("Grass doesn't take any action.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             //Console.WriteLine("Grass does nothing during the collision.");
         }

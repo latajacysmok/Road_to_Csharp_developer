@@ -9,17 +9,18 @@ namespace Animal
 
         public Fox()
         {
-            strength = 3;
+            Strength = 3;
             initiative = 7;
-            id = "A3";
+            Id = "A3";
             getAnimalType = AnimalType.Fox;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             Console.WriteLine("Good sense of smell: a fox will never move into a field occupied by an organism stronger than it.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             //Console.WriteLine("Fox does nothing during the collision.");
         }

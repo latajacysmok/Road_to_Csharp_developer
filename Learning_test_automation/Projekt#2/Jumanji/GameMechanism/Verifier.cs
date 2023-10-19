@@ -1,6 +1,8 @@
-﻿namespace GameBoard
+﻿using GamesElement;
+
+namespace GameMechanism
 {
-    public class Verifier
+    public class Verifier: IVerifier
     {
         public int GetSizeOfPlayField()
         {
@@ -17,7 +19,7 @@
             return amount;
         }
 
-        private bool IsGameBoardRightSize(int size)
+        public bool IsGameBoardRightSize(int size)
         {
             if (0 < size & size < 101) return true;
             else
@@ -27,5 +29,10 @@
             }
         }
 
+        public bool IfAnimal(IOrganism organism)
+        {
+            if (organism is AnimalOrganism) { return true; }
+            else { return false; }
+        }
     }
 }

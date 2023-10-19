@@ -6,16 +6,17 @@ namespace Plant
     {
         public Nightshade()
         {
-            strength =99;
-            id = "P4";
+            Strength =99;
+            Id = "P4";
             getPlantType = PlantType.Nightshade;
+            IfNew = true;
         }
-        public override void OrganismAction()
+        public override void PerformAction()
         {
             //Console.WriteLine("Nightshade doesn't take any action.");
         }
 
-        public override void OrganismCollision()
+        public override void Interact()
         {
             Console.WriteLine("The animal that ate the plant dies.");
         }
